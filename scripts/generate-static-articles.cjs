@@ -517,7 +517,7 @@ function renderFullHtml(art, lang) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <!-- SEO Meta Tags -->
-    <title>${art.title[lang]} — Temp Mail</title>
+    <title>${art.title[lang]} — FreeTemp.email</title>
     <meta name="description" content="${art.metaDesc[lang]}" id="meta-description" />
     <meta name="keywords" content="${art.keywords && art.keywords[lang] ? art.keywords[lang] : ''}" />
     <link rel="canonical" href="https://freetemp.email/${lang}/articles/${art.slug}.html" />
@@ -549,8 +549,8 @@ function renderFullHtml(art, lang) {
 
     <!-- Open Graph -->
     <meta property="og:type" content="article" />
-    <meta property="og:site_name" content="Temp Mail" />
-    <meta property="og:title" content="${art.title[lang]} — Temp Mail" />
+    <meta property="og:site_name" content="FreeTemp.email" />
+    <meta property="og:title" content="${art.title[lang]} — FreeTemp.email" />
     <meta property="og:description" content="${art.metaDesc[lang]}" />
     <meta property="og:url" content="https://freetemp.email/${lang}/articles/${art.slug}.html" />
     <meta property="og:image" content="https://freetemp.email/og-image.png" />
@@ -558,7 +558,7 @@ function renderFullHtml(art, lang) {
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="${art.title[lang]} — Temp Mail" />
+    <meta name="twitter:title" content="${art.title[lang]} — FreeTemp.email" />
     <meta name="twitter:description" content="${art.metaDesc[lang]}" />
     <meta name="twitter:image" content="https://freetemp.email/og-image.png" />
 
@@ -580,12 +580,12 @@ function renderFullHtml(art, lang) {
         "inLanguage": "${lang}",
         "author": {
           "@type": "Organization",
-          "name": "Temp Mail Security Engineering Team",
+          "name": "FreeTemp.email Security Engineering Team",
           "url": "https://freetemp.email"
         },
         "publisher": {
           "@type": "Organization",
-          "name": "Temp Mail",
+          "name": "FreeTemp.email",
           "logo": {
             "@type": "ImageObject",
             "url": "https://freetemp.email/logo.svg"
@@ -621,9 +621,17 @@ function renderFullHtml(art, lang) {
     <header class="border-b border-neutral-200 dark:border-neutral-800 bg-white/95 dark:bg-[#0D0D0D]/95 backdrop-blur-md sticky top-0 z-30 transition-colors">
       <div class="max-w-4xl mx-auto px-4 h-16 flex items-center justify-between gap-4">
         <div class="flex items-center gap-6">
-          <a href="/${lang}/" class="text-xl font-bold tracking-tight text-black dark:text-white hover:opacity-80 transition-opacity flex items-center gap-2">
-            <span class="w-6 h-6 rounded bg-black dark:bg-white text-white dark:text-black flex items-center justify-center text-xs font-mono font-extrabold">T</span>
-            <span data-i18n="brand">Temp Mail</span>
+          <a href="/${lang}/" class="text-lg sm:text-xl font-bold tracking-tight text-black dark:text-white hover:opacity-90 transition-opacity flex items-center gap-2.5">
+            <span class="w-7 h-7 rounded-lg bg-black dark:bg-white text-white dark:text-black flex items-center justify-center text-xs font-mono font-extrabold shadow-sm shrink-0">
+              <svg class="w-4 h-4 fill-none stroke-current" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75"/></svg>
+            </span>
+            <span class="flex items-center gap-1 font-sans">
+              <span class="font-extrabold tracking-tight">FreeTemp</span><span class="text-[11px] font-mono font-bold px-1.5 py-0.5 rounded-md bg-neutral-100 dark:bg-neutral-800 text-neutral-600 dark:text-neutral-300 border border-neutral-200 dark:border-neutral-700">.email</span>
+            </span>
+            <span class="hidden md:inline-flex items-center text-xs text-neutral-400 dark:text-neutral-500 font-normal mr-1">
+              <span class="mx-1.5 opacity-40">|</span>
+              <span data-i18n="brand">${isAr ? "بريد مؤقت" : "Temp Mail"}</span>
+            </span>
           </a>
 
           <nav class="hidden md:flex items-center gap-4 text-xs font-medium">
@@ -687,7 +695,7 @@ function renderFullHtml(art, lang) {
                   <span>${isAr ? 'فريق أبحاث الأمان والشبكات' : 'Security & Architecture Team'}</span>
                   <svg class="w-3.5 h-3.5 text-blue-500 fill-current" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
                 </div>
-                <div class="text-[11px] text-neutral-500 dark:text-neutral-400 font-mono">Temp Mail Engineering Group</div>
+                <div class="text-[11px] text-neutral-500 dark:text-neutral-400 font-mono">FreeTemp Engineering Group</div>
               </div>
             </div>
 
@@ -813,8 +821,8 @@ function renderFullHtml(art, lang) {
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 mb-12">
           <div class="sm:col-span-2 md:col-span-1">
             <div class="flex items-center gap-2 mb-3">
-              <span class="w-6 h-6 rounded bg-black dark:bg-white text-white dark:text-black flex items-center justify-center text-xs font-mono font-extrabold">T</span>
-              <span class="font-bold text-sm tracking-tight text-black dark:text-white">Temp Mail</span>
+              <span class="w-6 h-6 rounded bg-black dark:bg-white text-white dark:text-black flex items-center justify-center text-xs font-mono font-extrabold shadow-sm">FT</span>
+              <span class="font-extrabold tracking-tight text-sm text-black dark:text-white font-sans">FreeTemp<span class="text-[10px] font-mono font-bold px-1 py-0.5 ml-1 rounded bg-neutral-100 dark:bg-neutral-800 text-neutral-600 dark:text-neutral-300 border border-neutral-200 dark:border-neutral-700">.email</span></span>
             </div>
             <p class="text-neutral-500 leading-relaxed text-[11px] mb-4">
               ${isAr ? 'منصة بريد مؤقت سريعة وفورية توفر حماية استباقية للخصوصية واستخراجاً ذكياً لأكواد التحقق.' : 'Fast, secure ephemeral email service for instant verification codes and spam-free privacy.'}
@@ -863,7 +871,7 @@ function renderFullHtml(art, lang) {
         </div>
 
         <div class="pt-8 border-t border-neutral-100 dark:border-neutral-800/80 flex flex-col sm:flex-row items-center justify-between gap-4 text-[11px] text-neutral-500">
-          <p>© 2026 Temp Mail. All rights reserved.</p>
+          <p>© 2026 FreeTemp.email. All rights reserved.</p>
           <div class="flex items-center gap-4">
             <a href="/${lang}/articles/index.html" class="hover:underline">${isAr ? 'فهرس المقالات' : 'Articles Index'}</a>
             <span>•</span>
@@ -988,7 +996,7 @@ function renderArticlesIndexHtml(lang) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <!-- SEO Meta Tags -->
-    <title>${isAr ? 'فهرس ودليل المقالات التقنية (22 دليلاً) — بريد مؤقت' : 'Technical Articles Index (22 Guides) — Temp Mail'}</title>
+    <title>${isAr ? 'فهرس ودليل المقالات التقنية (22 دليلاً) — FreeTemp.email' : 'Technical Articles Index (22 Guides) — FreeTemp.email'}</title>
     <meta name="description" content="${isAr ? 'فهرس المقالات التقنية للبريد المؤقت: 22 مقالاً يغطي التغطية الشاملة لرسائل التحقق، البث الحي، معايير SPF/DKIM، واختبارات البرمجيات.' : 'Comprehensive index of 22 technical articles covering OTP parsing, WebSocket live streaming, email protocols, and privacy architecture.'}" />
     <link rel="canonical" href="https://freetemp.email/${lang}/articles/index.html" />
 
@@ -999,8 +1007,8 @@ function renderArticlesIndexHtml(lang) {
 
     <!-- Open Graph -->
     <meta property="og:type" content="website" />
-    <meta property="og:site_name" content="Temp Mail" />
-    <meta property="og:title" content="${isAr ? 'فهرس ودليل المقالات التقنية (22 دليلاً) — بريد مؤقت' : 'Technical Articles Index (22 Guides) — Temp Mail'}" />
+    <meta property="og:site_name" content="FreeTemp.email" />
+    <meta property="og:title" content="${isAr ? 'فهرس ودليل المقالات التقنية (22 دليلاً) — FreeTemp.email' : 'Technical Articles Index (22 Guides) — FreeTemp.email'}" />
     <meta property="og:description" content="${isAr ? 'استكشف 22 مقالاً معمارياً وتقنياً يشرح كافة ميزات البريد المؤقت والخصوصية الرقمية.' : 'Explore 22 technical architecture articles explaining temp mail features, OTP heuristics, and privacy.'}" />
     <meta property="og:url" content="https://freetemp.email/${lang}/articles/index.html" />
     <meta property="og:image" content="https://freetemp.email/og-image.png" />
@@ -1028,9 +1036,17 @@ function renderArticlesIndexHtml(lang) {
     <header class="border-b border-neutral-200 dark:border-neutral-800 bg-white/95 dark:bg-[#0D0D0D]/95 backdrop-blur-md sticky top-0 z-30 transition-colors">
       <div class="max-w-4xl mx-auto px-4 h-16 flex items-center justify-between gap-4">
         <div class="flex items-center gap-6">
-          <a href="/${lang}/" class="text-xl font-bold tracking-tight text-black dark:text-white hover:opacity-80 transition-opacity flex items-center gap-2">
-            <span class="w-6 h-6 rounded bg-black dark:bg-white text-white dark:text-black flex items-center justify-center text-xs font-mono font-extrabold">T</span>
-            <span data-i18n="brand">Temp Mail</span>
+          <a href="/${lang}/" class="text-lg sm:text-xl font-bold tracking-tight text-black dark:text-white hover:opacity-90 transition-opacity flex items-center gap-2.5">
+            <span class="w-7 h-7 rounded-lg bg-black dark:bg-white text-white dark:text-black flex items-center justify-center text-xs font-mono font-extrabold shadow-sm shrink-0">
+              <svg class="w-4 h-4 fill-none stroke-current" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75"/></svg>
+            </span>
+            <span class="flex items-center gap-1 font-sans">
+              <span class="font-extrabold tracking-tight">FreeTemp</span><span class="text-[11px] font-mono font-bold px-1.5 py-0.5 rounded-md bg-neutral-100 dark:bg-neutral-800 text-neutral-600 dark:text-neutral-300 border border-neutral-200 dark:border-neutral-700">.email</span>
+            </span>
+            <span class="hidden md:inline-flex items-center text-xs text-neutral-400 dark:text-neutral-500 font-normal mr-1">
+              <span class="mx-1.5 opacity-40">|</span>
+              <span data-i18n="brand">${isAr ? "بريد مؤقت" : "Temp Mail"}</span>
+            </span>
           </a>
 
           <nav class="hidden md:flex items-center gap-4 text-xs font-medium">
@@ -1099,8 +1115,8 @@ function renderArticlesIndexHtml(lang) {
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 mb-12">
           <div class="sm:col-span-2 md:col-span-1">
             <div class="flex items-center gap-2 mb-3">
-              <span class="w-6 h-6 rounded bg-black dark:bg-white text-white dark:text-black flex items-center justify-center text-xs font-mono font-extrabold">T</span>
-              <span class="font-bold text-sm tracking-tight text-black dark:text-white">Temp Mail</span>
+              <span class="w-6 h-6 rounded bg-black dark:bg-white text-white dark:text-black flex items-center justify-center text-xs font-mono font-extrabold shadow-sm">FT</span>
+              <span class="font-extrabold tracking-tight text-sm text-black dark:text-white font-sans">FreeTemp<span class="text-[10px] font-mono font-bold px-1 py-0.5 ml-1 rounded bg-neutral-100 dark:bg-neutral-800 text-neutral-600 dark:text-neutral-300 border border-neutral-200 dark:border-neutral-700">.email</span></span>
             </div>
             <p class="text-neutral-500 leading-relaxed text-[11px] mb-4">
               ${isAr ? 'منصة بريد مؤقت سريعة وفورية توفر حماية استباقية للخصوصية واستخراجاً ذكياً لأكواد التحقق.' : 'Fast, secure ephemeral email service for instant verification codes and spam-free privacy.'}
@@ -1145,7 +1161,7 @@ function renderArticlesIndexHtml(lang) {
         </div>
 
         <div class="pt-8 border-t border-neutral-100 dark:border-neutral-800/80 flex flex-col sm:flex-row items-center justify-between gap-4 text-[11px] text-neutral-500">
-          <p>© 2026 Temp Mail. All rights reserved.</p>
+          <p>© 2026 FreeTemp.email. All rights reserved.</p>
           <div class="flex items-center gap-4">
             <a href="/${lang}/articles/index.html" class="hover:underline">${isAr ? 'فهرس المقالات' : 'Articles Index'}</a>
             <span>•</span>
@@ -1280,7 +1296,7 @@ function renderBlogPageHtml(lang) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <!-- SEO Meta Tags -->
-    <title>${isAr ? 'أرشيف المدونة والأدلة الهندسية (22 مقالاً) — بريد مؤقت' : 'Blog Archive & Engineering Guides (22 Articles) — Temp Mail'}</title>
+    <title>${isAr ? 'أرشيف المدونة والأدلة الهندسية (22 مقالاً) — FreeTemp.email' : 'Blog Archive & Engineering Guides (22 Articles) — FreeTemp.email'}</title>
     <meta name="description" content="${isAr ? 'استكشف كافة المقالات والأبحاث المعمارية الـ 22 حول أمان البريد المؤقت وتجاوز حجب أكواد التحقق.' : 'Explore all 22 technical and architectural guides on temporary email security, OTP parsing, and privacy.'}" />
     <link rel="canonical" href="https://freetemp.email/${lang}/blog.html" />
 
@@ -1291,8 +1307,8 @@ function renderBlogPageHtml(lang) {
 
     <!-- Open Graph -->
     <meta property="og:type" content="website" />
-    <meta property="og:site_name" content="Temp Mail" />
-    <meta property="og:title" content="${isAr ? 'أرشيف المدونة والأدلة الهندسية — بريد مؤقت' : 'Blog Archive & Engineering Guides — Temp Mail'}" />
+    <meta property="og:site_name" content="FreeTemp.email" />
+    <meta property="og:title" content="${isAr ? 'أرشيف المدونة والأدلة الهندسية — FreeTemp.email' : 'Blog Archive & Engineering Guides — FreeTemp.email'}" />
     <meta property="og:description" content="${isAr ? 'استكشف كافة المقالات والأبحاث المعمارية الـ 22 حول أمان البريد المؤقت وتجاوز حجب أكواد التحقق.' : 'Explore all 22 technical guides on disposable email security and OTP parsing.'}" />
     <meta property="og:url" content="https://freetemp.email/${lang}/blog.html" />
     <meta property="og:image" content="https://freetemp.email/og-image.png" />
@@ -1320,9 +1336,17 @@ function renderBlogPageHtml(lang) {
     <header class="border-b border-neutral-200 dark:border-neutral-800 bg-white/95 dark:bg-[#0D0D0D]/95 backdrop-blur-md sticky top-0 z-30 transition-colors">
       <div class="max-w-4xl mx-auto px-4 h-16 flex items-center justify-between gap-4">
         <div class="flex items-center gap-6">
-          <a href="/${lang}/" class="text-xl font-bold tracking-tight text-black dark:text-white hover:opacity-80 transition-opacity flex items-center gap-2">
-            <span class="w-6 h-6 rounded bg-black dark:bg-white text-white dark:text-black flex items-center justify-center text-xs font-mono font-extrabold">T</span>
-            <span data-i18n="brand">Temp Mail</span>
+          <a href="/${lang}/" class="text-lg sm:text-xl font-bold tracking-tight text-black dark:text-white hover:opacity-90 transition-opacity flex items-center gap-2.5">
+            <span class="w-7 h-7 rounded-lg bg-black dark:bg-white text-white dark:text-black flex items-center justify-center text-xs font-mono font-extrabold shadow-sm shrink-0">
+              <svg class="w-4 h-4 fill-none stroke-current" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75"/></svg>
+            </span>
+            <span class="flex items-center gap-1 font-sans">
+              <span class="font-extrabold tracking-tight">FreeTemp</span><span class="text-[11px] font-mono font-bold px-1.5 py-0.5 rounded-md bg-neutral-100 dark:bg-neutral-800 text-neutral-600 dark:text-neutral-300 border border-neutral-200 dark:border-neutral-700">.email</span>
+            </span>
+            <span class="hidden md:inline-flex items-center text-xs text-neutral-400 dark:text-neutral-500 font-normal mr-1">
+              <span class="mx-1.5 opacity-40">|</span>
+              <span data-i18n="brand">${isAr ? "بريد مؤقت" : "Temp Mail"}</span>
+            </span>
           </a>
 
           <nav class="hidden md:flex items-center gap-4 text-xs font-medium">
@@ -1415,8 +1439,8 @@ function renderBlogPageHtml(lang) {
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 mb-12">
           <div class="sm:col-span-2 md:col-span-1">
             <div class="flex items-center gap-2 mb-3">
-              <span class="w-6 h-6 rounded bg-black dark:bg-white text-white dark:text-black flex items-center justify-center text-xs font-mono font-extrabold">T</span>
-              <span class="font-bold text-sm tracking-tight text-black dark:text-white">Temp Mail</span>
+              <span class="w-6 h-6 rounded bg-black dark:bg-white text-white dark:text-black flex items-center justify-center text-xs font-mono font-extrabold shadow-sm">FT</span>
+              <span class="font-extrabold tracking-tight text-sm text-black dark:text-white font-sans">FreeTemp<span class="text-[10px] font-mono font-bold px-1 py-0.5 ml-1 rounded bg-neutral-100 dark:bg-neutral-800 text-neutral-600 dark:text-neutral-300 border border-neutral-200 dark:border-neutral-700">.email</span></span>
             </div>
             <p class="text-neutral-500 leading-relaxed text-[11px] mb-4">
               ${isAr ? 'منصة بريد مؤقت سريعة وفورية توفر حماية استباقية للخصوصية واستخراجاً ذكياً لأكواد التحقق.' : 'Fast, secure ephemeral email service for instant verification codes and spam-free privacy.'}
@@ -1461,7 +1485,7 @@ function renderBlogPageHtml(lang) {
         </div>
 
         <div class="pt-8 border-t border-neutral-100 dark:border-neutral-800/80 flex flex-col sm:flex-row items-center justify-between gap-4 text-[11px] text-neutral-500">
-          <p>© 2026 Temp Mail. All rights reserved.</p>
+          <p>© 2026 FreeTemp.email. All rights reserved.</p>
           <div class="flex items-center gap-4">
             <a href="/${lang}/articles/index.html" class="hover:underline">${isAr ? 'فهرس المقالات' : 'Articles Index'}</a>
             <span>•</span>
