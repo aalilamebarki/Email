@@ -386,7 +386,7 @@
               <span>تسلسل الحذف المشفر والتطهير الرقمي للبيانات (Data Sanitization)</span>
             </h2>
             <div class="text-[15px] sm:text-[16px] text-neutral-700 dark:text-neutral-300 leading-[1.9] space-y-4">
-              <p>عندما يقرر المستخدم إنهاء جلسته بالضغط على زر "حذف البريد" أو عندما ينتهي المؤقت الزمني المخصص للصندوق، يتم تفعيل بروتوكول التطهير الرقمي المشدد المتوافق مع <a href="/ar/articles/cryptographic-media-sanitization-nist-800-88.html" class="text-blue-600 dark:text-blue-400 font-medium underline decoration-blue-300 dark:decoration-blue-700 underline-offset-4 hover:decoration-blue-600 hover:text-blue-800 dark:hover:text-blue-200 transition-colors" title="معايير NIST SP 800-88">معايير NIST SP 800-88</a>:</p>
+              <p>عندما يقرر المستخدم إنهاء جلسته بالضغط على زر "حذف البريد" أو عندما ينتهي المؤقت الزمني المخصص للصندوق، يتم تفعيل بروتوكول التطهير الرقمي المشدد المتوافق مع معايير NIST SP 800-88:</p>
 <ol class="list-decimal pr-6 space-y-2 my-3 text-neutral-700 dark:text-neutral-300">
   <li><strong>إغلاق قنوات البث:</strong> يتم إنهاء <a href="/ar/articles/real-time-websocket-streaming.html" class="text-blue-600 dark:text-blue-400 font-medium underline decoration-blue-300 dark:decoration-blue-700 underline-offset-4 hover:decoration-blue-600 hover:text-blue-800 dark:hover:text-blue-200 transition-colors" title="اتصال WebSocket">اتصال WebSocket</a> النشط فوراً وإلغاء تسجيل الجلسة في موجه الأحداث.</li>
   <li><strong>طمس مصفوفات الذاكرة:</strong> يتم استبدال كافة البايتات المحجوزة للرسائل ومحتوياتها بأصفار عشوائية (Zeroization) قبل تحرير مساحة الذاكرة لمنع أي هجمات استرجاع ذاكرة (Memory Scraping).</li>
@@ -415,7 +415,7 @@
               <span>أفضل ممارسات تجديد الجلسة واستقبال رسائل متعددة</span>
             </h2>
             <div class="text-[15px] sm:text-[16px] text-neutral-700 dark:text-neutral-300 leading-[1.9] space-y-4">
-              <p>إذا كنت بحاجة إلى استمرار استقبال رسائل التأكيد لنفس الخدمة لفترة أطول (مثلاً عند استكمال عدة خطوات تسجيل معقدة)، يمكنك ببساطة النقر على زر "تمديد الوقت" لإعادة ضبط عداد الجلسة دون فقدان الرسائل المستلمة سابقاً، حتى تكمل كافة مهامك براحة وأمان.</p><p>للمستخدمين الذين يقومون بعمليات فحص واختبار طويلة المدى، يتيح نظامنا إمكانية تجديد مؤقت الجلسة بضغطة زر واحدة قبل انقضاء الوقت، مما يمدد فترة صلاحية الذاكرة الحية لـ 10 أو 20 دقيقة إضافية دون أي انقطاع في الاتصال أو فقدان للرسائل المستلمة.</p>
+              <p>إذا كنت بحاجة إلى استمرار استقبال رسائل التأكيد لنفس الخدمة لفترة أطول (مثلاً عند استكمال عدة خطوات تسجيل معقدة)، يمكنك ببساطة النقر على زر "تمديد الوقت" لإعادة ضبط عداد الجلسة دون فقدان الرسائل المستلمة سابقاً، حتى تكمل كافة مهامك براحة وأمان.</p><p>للمستخدمين الذين يقومون بعمليات فحص واختبار طويلة المدى، يتيح نظامنا إمكانية تجديد مؤقت الجلسة بضغطة زر واحدة قبل انقضاء الوقت، مما يمدد فترة صلاحية <a href="/ar/articles/zero-knowledge-inbox-architecture.html" class="text-blue-600 dark:text-blue-400 font-medium underline decoration-blue-300 dark:decoration-blue-700 underline-offset-4 hover:decoration-blue-600 hover:text-blue-800 dark:hover:text-blue-200 transition-colors" title="الذاكرة الحية">الذاكرة الحية</a> لـ 10 أو 20 دقيقة إضافية دون أي انقطاع في الاتصال أو فقدان للرسائل المستلمة.</p>
             </div>
             
             

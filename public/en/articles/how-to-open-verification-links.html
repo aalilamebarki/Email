@@ -374,7 +374,7 @@
             </h2>
             <div class="text-[15px] sm:text-[16px] text-neutral-700 dark:text-neutral-300 leading-[1.9] space-y-4">
               <p>When clicking a standard "Confirm Your Email" button, the link rarely routes directly to the application. Commercial email service providers (such as SendGrid or Mailgun) route traffic through tracking proxies that capture your real IP address, browser user-agent, and precise timestamps via embedded telemetry tokens.</p>
-<p>Furthermore, malicious phishing emails often employ open redirects or homograph domains to redirect unsuspecting users toward credential-harvesting landing pages.</p>
+<p>Furthermore, malicious <a href="/en/articles/phishing-defense-and-safe-previews.html" class="text-blue-600 dark:text-blue-400 font-medium underline decoration-blue-300 dark:decoration-blue-700 underline-offset-4 hover:decoration-blue-600 hover:text-blue-800 dark:hover:text-blue-200 transition-colors" title="phishing emails">phishing emails</a> often employ open redirects or homograph domains to redirect unsuspecting users toward credential-harvesting landing pages.</p>
 <p>Our link inspection engine dissects the HTML payload, unpacks nested redirect chains, and displays the genuine destination domain in high contrast so you can verify authenticity before navigation.</p><p>Modern marketing delivery ecosystems also leverage canvas fingerprinting techniques and dynamic redirection wrappers that interrogate display pixel density and installed client font lists to bind device fingerprints across advertising exchanges. Furthermore, untrusted services occasionally bundle unwanted telemetry payloads inside deceptive activation buttons. Our link dissector unpacks these complex nested structures, isolating the clean target URL without payload distortion.</p>
             </div>
             
@@ -403,7 +403,7 @@
               <span>Preserving Single-Use Tokens Against Crawler Burn</span>
             </h2>
             <div class="text-[15px] sm:text-[16px] text-neutral-700 dark:text-neutral-300 leading-[1.9] space-y-4">
-              <p>Many digital services issue single-use activation tokens that expire immediately after the first HTTP GET request. Automated email scanning bots frequently pre-fetch links, inadvertently exhausting the token before the human recipient clicks it.</p>
+              <p>Many digital services issue single-use activation tokens that <a href="/en/articles/what-happens-when-address-expires.html" class="text-blue-600 dark:text-blue-400 font-medium underline decoration-blue-300 dark:decoration-blue-700 underline-offset-4 hover:decoration-blue-600 hover:text-blue-800 dark:hover:text-blue-200 transition-colors" title="expire">expire</a> immediately after the first HTTP GET request. Automated email scanning bots frequently pre-fetch links, inadvertently exhausting the token before the human recipient clicks it.</p>
 <p>Our platform architecture strictly prohibits background automated requests to incoming URLs, ensuring that single-use cryptographic tokens remain 100% intact for your manual execution.</p><p>This protection mechanism also validates link parameters against known open-redirect signatures. If our engine detects a suspicious mismatch between the displayed brand name and the actual HTTP destination host, a prominent security warning highlights the anomaly before navigation.</p>
             </div>
             

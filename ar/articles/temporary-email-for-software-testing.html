@@ -377,7 +377,7 @@
 <ul class="list-disc pr-6 space-y-2 my-3 text-neutral-700 dark:text-neutral-300">
   <li><strong>قيود تفرد البريد في قاعدة البيانات:</strong> تتطلب النماذج عنوان بريد فريد لكل عملية تسجيل، واستخدام نفس البريد يتطلب مسح قاعدة البيانات يدوياً قبل كل اختبار أو تعديل الشيفرة البرمجية.</li>
   <li><strong>تأخر وصول الرسائل:</strong> تعتمد خوادم البريد التقليدية على قوائم انتظار قد تؤخر الرسالة لدقائق، مما يتسبب في فشل الاختبار بسبب انتهاء المهلة المحددة (Assertion Timeouts).</li>
-  <li><strong>حظر عناوين IP وقيود المعدل (<a href="/ar/articles/api-rate-limiting-abuse-prevention-temp-mail.html" class="text-blue-600 dark:text-blue-400 font-medium underline decoration-blue-300 dark:decoration-blue-700 underline-offset-4 hover:decoration-blue-600 hover:text-blue-800 dark:hover:text-blue-200 transition-colors" title="Rate Limiting">Rate Limiting</a>):</strong> تفرض الخدمات قيوداً صارمة على إرسال مئات الرسائل التجريبية لنفس النطاق في فترة زمنية وجيزة.</li>
+  <li><strong>حظر عناوين IP وقيود المعدل (Rate Limiting):</strong> تفرض الخدمات قيوداً صارمة على إرسال مئات الرسائل التجريبية لنفس النطاق في فترة زمنية وجيزة.</li>
 </ul>
 <p>تؤدي هذه العوائق إلى تعطيل خطوط النشر الآلي وتأخر تسليم الميزات البرمجية الجديدة لفرق الإنتاج.</p><p>تساعد أتمتة البريد المؤقت أيضاً في فحص توافق الرسائل مع برامج قراءة الشاشة (Screen Readers) ومعايير إمكانية الوصول (Accessibility Standards WCAG)، بالإضافة إلى التحقق من سلامة نصوص التذييل القانونية وإشعارات الأمان التلقائية.</p>
             </div>
@@ -456,7 +456,7 @@ test('automated user registration with ephemeral email', async ({ page }) =&gt; 
   <li><strong>تعيين مهلة زمنية واقعية (Timeouts):</strong> ضبط مهلة انتظار الرسالة على 10-15 ثانية لمراعاة أي تأخير في خوادم الإرسال.</li>
   <li><strong>تنظيف بيئة الاختبار:</strong> الاعتماد على معمارية البريد المؤقت المتطايرة التي تمسح الرسائل تلقائياً دون الحاجة لكتابة دوال تفريغ يدوية.</li>
 </ol>
-<p>تطبيق هذه الممارسات يضمن خلو الاختبارات من الأخطاء العرضية (Flaky Tests) وتسريع عمليات الدمج المستمر.</p><p>كما يمكن دمج هذه الصناديق في خطوط <a href="/ar/articles/ci-cd-pipeline-automated-email-verification.html" class="text-blue-600 dark:text-blue-400 font-medium underline decoration-blue-300 dark:decoration-blue-700 underline-offset-4 hover:decoration-blue-600 hover:text-blue-800 dark:hover:text-blue-200 transition-colors" title="GitHub Actions">GitHub Actions</a> و GitLab CI و Jenkins بسهولة تامة وبدون الحاجة لتثبيت أي برامج وسيطة أو تشغيل خوادم بريد محلية ثقيلة مثل <a href="/ar/articles/mock-smtp-vs-real-disposable-email-testing.html" class="text-blue-600 dark:text-blue-400 font-medium underline decoration-blue-300 dark:decoration-blue-700 underline-offset-4 hover:decoration-blue-600 hover:text-blue-800 dark:hover:text-blue-200 transition-colors" title="MailHog">MailHog</a>.</p>
+<p>تطبيق هذه الممارسات يضمن خلو الاختبارات من الأخطاء العرضية (Flaky Tests) وتسريع عمليات الدمج المستمر.</p><p>كما يمكن دمج هذه الصناديق في خطوط GitHub Actions و GitLab CI و Jenkins بسهولة تامة وبدون الحاجة لتثبيت أي برامج وسيطة أو تشغيل خوادم بريد محلية ثقيلة مثل MailHog.</p>
             </div>
             
             

@@ -391,10 +391,10 @@
               <span>كيف يحجب عارض البريد في منصتنا بكسلات التجسس والتتبع؟</span>
             </h2>
             <div class="text-[15px] sm:text-[16px] text-neutral-700 dark:text-neutral-300 leading-[1.9] space-y-4">
-              <p>لمكافحة هذه الظاهرة، صممنا عارض البريد في منصتنا ليعمل داخل بيئة عزل أمني محكمة (Sandboxed DOM Reader):</p>
+              <p>لمكافحة هذه الظاهرة، صممنا عارض البريد في منصتنا ليعمل داخل <a href="/ar/articles/zero-knowledge-inbox-architecture.html" class="text-blue-600 dark:text-blue-400 font-medium underline decoration-blue-300 dark:decoration-blue-700 underline-offset-4 hover:decoration-blue-600 hover:text-blue-800 dark:hover:text-blue-200 transition-colors" title="بيئة عزل أمني محكمة">بيئة عزل أمني محكمة</a> (Sandboxed DOM Reader):</p>
 <ol class="list-decimal pr-6 space-y-2 my-3 text-neutral-700 dark:text-neutral-300">
   <li><strong>حظر الصور الخارجية افتراضياً:</strong> يتم تعطيل تحميل الصور المستضافة على خوادم طرف ثالث تلقائياً لمنع أي اتصال بخوادم التتبع.</li>
-  <li><strong>تعقيم وسوم HTML:</strong> تمر الرسالة عبر محلل أمني يزيل وسوم <code>&lt;script&gt;</code> و <code>&lt;iframe&gt;</code> <a href="/ar/articles/disposable-email-vs-marketing-trackers.html" class="text-blue-600 dark:text-blue-400 font-medium underline decoration-blue-300 dark:decoration-blue-700 underline-offset-4 hover:decoration-blue-600 hover:text-blue-800 dark:hover:text-blue-200 transition-colors" title="وروابط التتبع">وروابط التتبع</a> المشبوهة.</li>
+  <li><strong>تعقيم وسوم HTML:</strong> تمر الرسالة عبر محلل أمني يزيل وسوم <code>&lt;script&gt;</code> و <code>&lt;iframe&gt;</code> وروابط التتبع المشبوهة.</li>
   <li><strong>تجريد الترويسات الحساسة:</strong> في حال طلب تحميل صورة بإذن المستخدم، تمر عبر وسيط أمني يطمس عنوان IP الحقيقي ويرسل ترويسات عامة ومحايدة.</li>
 </ol>
 <p>تضمن هذه الحواجز المتعددة قراءة الرسالة بأمان تام ودون إرسال أي إشعار أو بيانات تفيد بأنك فتحت البريد.</p>
@@ -408,7 +408,7 @@
               <span>قراءة أكواد التحقق دون إرسال إشعارات القراءة للمرسل</span>
             </h2>
             <div class="text-[15px] sm:text-[16px] text-neutral-700 dark:text-neutral-300 leading-[1.9] space-y-4">
-              <p>بفضل <a href="/ar/articles/universal-verification-coverage.html" class="text-blue-600 dark:text-blue-400 font-medium underline decoration-blue-300 dark:decoration-blue-700 underline-offset-4 hover:decoration-blue-600 hover:text-blue-800 dark:hover:text-blue-200 transition-colors" title="محرك الاستخراج الذكي">محرك الاستخراج الذكي</a> للأكواد (UVC)، يتم استخراج <a href="/ar/articles/how-to-receive-otp.html" class="text-blue-600 dark:text-blue-400 font-medium underline decoration-blue-300 dark:decoration-blue-700 underline-offset-4 hover:decoration-blue-600 hover:text-blue-800 dark:hover:text-blue-200 transition-colors" title="كود التحقق">كود التحقق</a> وعرضه لك في البطاقة العلوية الصافية دون الحاجة حتى لتحميل محتوى الرسالة الغني بالصور، مما يضمن حصولك على الرمز في أمان تام وسرعة خارقة.</p><p>تتضمن هذه الحماية أيضاً حجب خطوط الويب الخارجية (Custom Web Fonts) وروابط الوسائط غير الآمنة التي قد تحاول الاتصال بخوادم إعلانية لتحديد بصمة المتصفح (Font Fingerprinting)، مما يوفر عزلاً شاملاً لكافة عناصر الرسالة.</p>
+              <p>بفضل محرك الاستخراج الذكي للأكواد (UVC)، يتم استخراج <a href="/ar/articles/how-to-receive-otp.html" class="text-blue-600 dark:text-blue-400 font-medium underline decoration-blue-300 dark:decoration-blue-700 underline-offset-4 hover:decoration-blue-600 hover:text-blue-800 dark:hover:text-blue-200 transition-colors" title="كود التحقق">كود التحقق</a> وعرضه لك في البطاقة العلوية الصافية دون الحاجة حتى لتحميل محتوى الرسالة الغني بالصور، مما يضمن حصولك على الرمز في أمان تام وسرعة خارقة.</p><p>تتضمن هذه الحماية أيضاً حجب خطوط الويب الخارجية (Custom Web Fonts) وروابط الوسائط غير الآمنة التي قد تحاول الاتصال بخوادم إعلانية لتحديد بصمة المتصفح (Font Fingerprinting)، مما يوفر عزلاً شاملاً لكافة عناصر الرسالة.</p>
             </div>
             
             
@@ -419,7 +419,7 @@
               <span>توصيات إضافية لحماية خصوصية البريد الإلكتروني</span>
             </h2>
             <div class="text-[15px] sm:text-[16px] text-neutral-700 dark:text-neutral-300 leading-[1.9] space-y-4">
-              <p>لحماية بريدك الشخصي اليومي، ننصح بتعطيل ميزة 'التحميل التلقائي للصور' في إعدادات تطبيق البريد الخاص بك على هاتفك أو حاسوبك، واستخدام البريد المؤقت دائماً لأي رسائل واردة من مصادر غير موثوقة.</p><p>كما يمكنك استخدام وضع 'النص الصافي' (Plaintext Mode) لقراءة الرسائل بتجريد كامل من أي تنسيقات رسومية، وهو الخيار الأفضل والأكثر أماناً عند الشك في موثوقية الرسالة الواردة.</p>
+              <p>لحماية بريدك الشخصي اليومي، ننصح بتعطيل ميزة 'التحميل التلقائي للصور' في إعدادات <a href="/ar/articles/pwa-desktop-mobile-guide.html" class="text-blue-600 dark:text-blue-400 font-medium underline decoration-blue-300 dark:decoration-blue-700 underline-offset-4 hover:decoration-blue-600 hover:text-blue-800 dark:hover:text-blue-200 transition-colors" title="تطبيق البريد">تطبيق البريد</a> الخاص بك على هاتفك أو حاسوبك، واستخدام البريد المؤقت دائماً لأي رسائل واردة من مصادر غير موثوقة.</p><p>كما يمكنك استخدام وضع 'النص الصافي' (Plaintext Mode) لقراءة الرسائل بتجريد كامل من أي تنسيقات رسومية، وهو الخيار الأفضل والأكثر أماناً عند الشك في موثوقية الرسالة الواردة.</p>
             </div>
             
             

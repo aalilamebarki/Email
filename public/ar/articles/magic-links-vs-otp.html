@@ -386,7 +386,7 @@
               <span>ميكانيكية أكواد OTP: التشفير الزمني وحدود الأمان الرقمي</span>
             </h2>
             <div class="text-[15px] sm:text-[16px] text-neutral-700 dark:text-neutral-300 leading-[1.9] space-y-4">
-              <p>على الجانب الآخر، تعتمد <a href="/ar/articles/how-to-receive-otp.html" class="text-blue-600 dark:text-blue-400 font-medium underline decoration-blue-300 dark:decoration-blue-700 underline-offset-4 hover:decoration-blue-600 hover:text-blue-800 dark:hover:text-blue-200 transition-colors" title="رموز OTP">رموز OTP</a> الرقمية (One-Time Passwords) على خوارزميات التشفير الزمني (<a href="/ar/articles/universal-verification-coverage.html" class="text-blue-600 dark:text-blue-400 font-medium underline decoration-blue-300 dark:decoration-blue-700 underline-offset-4 hover:decoration-blue-600 hover:text-blue-800 dark:hover:text-blue-200 transition-colors" title="TOTP">TOTP</a> - RFC 6238) أو التشفير القائم على العداد (HOTP). تتكون هذه الأكواد عادة من 6 إلى 8 خانات رقمية، وتتميز بعمر افتراضي قصير جداً (Time-To-Live) يتراوح في الغالب بين 60 ثانية إلى 5 دقائق كحد أقصى.</p>
+              <p>على الجانب الآخر، تعتمد <a href="/ar/articles/how-to-receive-otp.html" class="text-blue-600 dark:text-blue-400 font-medium underline decoration-blue-300 dark:decoration-blue-700 underline-offset-4 hover:decoration-blue-600 hover:text-blue-800 dark:hover:text-blue-200 transition-colors" title="رموز OTP">رموز OTP</a> الرقمية (One-Time Passwords) على خوارزميات التشفير الزمني (TOTP - RFC 6238) أو التشفير القائم على العداد (HOTP). تتكون هذه الأكواد عادة من 6 إلى 8 خانات رقمية، وتتميز بعمر افتراضي قصير جداً (Time-To-Live) يتراوح في الغالب بين 60 ثانية إلى 5 دقائق كحد أقصى.</p>
 <p>يوفر هذا النموذج ميزة أمنية جوهرية؛ إذ لا يمكن لروبوتات فحص الروابط استهلاك الكود عن طريق الخطأ لأنه يتطلب إدخالاً يدوياً داخل تطبيق أو موقع الخدمة. كما أن قصر فترة الصلاحية يقلل بشكل هائل من فرص اعتراض الكود أو استغلاله عبر هجمات إعادة التشغيل (Replay Attacks).</p>
 <p>يقوم محركنا باستخراج هذه الأكواد فور وصولها وعرضها بحجم خط كبير ومريح للعين مع توفير زر نسخ فوري، مما يساعد المستخدم على نسخ الرمز وإدخاله في ثوانٍ معدودة قبل انقضاء فترة الصلاحية الزمنية.</p>
             </div>
@@ -399,7 +399,7 @@
               <span>تجريد الروابط من بكسلات التتبع ومحددات الهوية الإعلانية</span>
             </h2>
             <div class="text-[15px] sm:text-[16px] text-neutral-700 dark:text-neutral-300 leading-[1.9] space-y-4">
-              <p>تكمن المشكلة الكبرى في الروابط السحرية في قيام منصات البريد التسويقي بتضمين وسوم التتبع الإعلاني ومعرفات الحملات (مثل معلمات UTM و Click Identifiers) داخل الرابط. عند النقر على الرابط التقليدي، يتم ربط عنوان IP الحقيقي للمستخدم بملفه التعريفي لدى شبكات الإعلانات.</p>
+              <p>تكمن المشكلة الكبرى في الروابط السحرية في قيام منصات البريد التسويقي بتضمين وسوم <a href="/ar/articles/disposable-email-vs-marketing-trackers.html" class="text-blue-600 dark:text-blue-400 font-medium underline decoration-blue-300 dark:decoration-blue-700 underline-offset-4 hover:decoration-blue-600 hover:text-blue-800 dark:hover:text-blue-200 transition-colors" title="التتبع الإعلاني">التتبع الإعلاني</a> ومعرفات الحملات (مثل معلمات UTM و Click Identifiers) داخل الرابط. عند النقر على الرابط التقليدي، يتم ربط عنوان IP الحقيقي للمستخدم بملفه التعريفي لدى شبكات الإعلانات.</p>
 <p>يقوم نظامنا بتفكيك الرابط وفصل معلمات التتبع غير الضرورية مع الحفاظ الحصري على التوكن الأمني المطلوب للمصادقة، مما يتيح للمستخدم إتمام عملية تسجيل الدخول بنجاح مع الحفاظ على سرية هويته وعزل نشاطه عن رادارات التتبع الرقمي.</p>
             </div>
             
