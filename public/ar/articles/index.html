@@ -1,0 +1,2231 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <script>
+      (function () {
+        try {
+          var t = localStorage.getItem('theme') || (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+          document.documentElement.setAttribute('data-theme', t);
+          if (t === 'dark') document.documentElement.classList.add('dark');
+          else document.documentElement.classList.remove('dark');
+        } catch (e) {}
+      })();
+    </script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- SEO Meta Tags -->
+    <title>فهرس ودليل المقالات التقنية (22 دليلاً) — بريد مؤقت</title>
+    <meta name="description" content="فهرس المقالات التقنية للبريد المؤقت: 22 مقالاً يغطي التغطية الشاملة لرسائل التحقق، البث الحي، معايير SPF/DKIM، واختبارات البرمجيات." />
+    <link rel="canonical" href="https://freetemp.email/ar/articles/index.html" />
+
+    <!-- Multilingual Alternates -->
+    <link rel="alternate" hreflang="ar" href="https://freetemp.email/ar/articles/index.html" />
+    <link rel="alternate" hreflang="en" href="https://freetemp.email/en/articles/index.html" />
+    <link rel="alternate" hreflang="x-default" href="https://freetemp.email/en/articles/index.html" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Temp Mail" />
+    <meta property="og:title" content="فهرس ودليل المقالات التقنية (22 دليلاً) — بريد مؤقت" />
+    <meta property="og:description" content="استكشف 22 مقالاً معمارياً وتقنياً يشرح كافة ميزات البريد المؤقت والخصوصية الرقمية." />
+    <meta property="og:url" content="https://freetemp.email/ar/articles/index.html" />
+    <meta property="og:image" content="https://freetemp.email/og-image.png" />
+
+    <meta name="theme-color" content="#ffffff" id="meta-theme-color" />
+    <link rel="icon" type="image/svg+xml" href="/logo.svg" />
+    <link rel="apple-touch-icon" href="/logo.svg" />
+
+    <!-- Stylesheets & Fonts -->
+    <link rel="stylesheet" href="/fonts/fonts.css" />
+    <link rel="stylesheet" href="/shared/style.css" />
+
+    <!-- Scripts -->
+    <script src="/shared/theme.js" defer></script>
+    <script src="/shared/i18n.js" defer></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        darkMode: 'class',
+      };
+    </script>
+  </head>
+  <body class="min-h-screen bg-white text-black dark:bg-[#0D0D0D] dark:text-[#F5F5F5] flex flex-col transition-colors duration-200 font-['Cairo',sans-serif]">
+    <!-- Master Header -->
+    <header class="border-b border-neutral-200 dark:border-neutral-800 bg-white/95 dark:bg-[#0D0D0D]/95 backdrop-blur-md sticky top-0 z-30 transition-colors">
+      <div class="max-w-4xl mx-auto px-4 h-16 flex items-center justify-between gap-4">
+        <div class="flex items-center gap-6">
+          <a href="/ar/" class="text-xl font-bold tracking-tight text-black dark:text-white hover:opacity-80 transition-opacity flex items-center gap-2">
+            <span class="w-6 h-6 rounded bg-black dark:bg-white text-white dark:text-black flex items-center justify-center text-xs font-mono font-extrabold">T</span>
+            <span data-i18n="brand">Temp Mail</span>
+          </a>
+
+          <nav class="hidden md:flex items-center gap-4 text-xs font-medium">
+            
+            <a href="/ar/" data-i18n="home" class="text-neutral-600 dark:text-neutral-400 hover:text-black dark:hover:text-white transition-colors">الرئيسية</a>
+            <a href="/ar/blog.html" data-i18n="blog" class="text-neutral-600 dark:text-neutral-400 hover:text-black dark:hover:text-white transition-colors">المدونة</a>
+            <a href="/ar/articles/index.html" class="text-black dark:text-white font-bold transition-colors">المقالات</a>
+            <a href="/ar/guide.html" data-i18n="guide" class="text-neutral-600 dark:text-neutral-400 hover:text-black dark:hover:text-white transition-colors">دليل الاستخدام</a>
+            <a href="/ar/faq.html" data-i18n="faq" class="text-neutral-600 dark:text-neutral-400 hover:text-black dark:hover:text-white transition-colors">الأسئلة الشائعة</a>
+          </nav>
+        </div>
+
+        <div class="flex items-center gap-2 sm:gap-3">
+          <button
+            type="button"
+            id="open-lang-picker"
+            class="open-lang-picker min-h-[38px] px-3 py-1.5 bg-white hover:bg-neutral-50 dark:bg-neutral-900 dark:hover:bg-neutral-800 border border-neutral-200 hover:border-black dark:border-neutral-800 dark:hover:border-neutral-600 rounded-lg text-xs font-semibold text-black dark:text-white transition-all flex items-center gap-1.5 cursor-pointer shadow-sm active:scale-95"
+            aria-label="Change Language"
+          >
+            <svg class="w-3.5 h-3.5 stroke-current fill-none stroke-[2]" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+            <span id="current-lang-label">العربية</span>
+            <svg class="w-3 h-3 stroke-current fill-none stroke-[2] opacity-60" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          </button>
+
+          <button
+            type="button"
+            id="theme-toggle-btn"
+            class="theme-toggle-btn min-h-[38px] min-w-[38px] p-2 bg-white hover:bg-neutral-50 dark:bg-neutral-900 dark:hover:bg-neutral-800 border border-neutral-200 hover:border-black dark:border-neutral-800 dark:hover:border-neutral-600 rounded-lg text-black dark:text-white transition-all flex items-center justify-center cursor-pointer active:scale-95"
+            aria-label="Toggle theme"
+          >
+            <svg class="theme-toggle-icon w-4 h-4 stroke-current fill-none stroke-[2]" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <main class="flex-1 max-w-4xl w-full mx-auto px-4 py-8 sm:py-12">
+      <!-- Header -->
+      <div class="mb-8">
+        <h1 class="text-2xl sm:text-3xl font-extrabold text-black dark:text-white mb-2">
+          فهرس المقالات والأدلة التقنية
+        </h1>
+        <p class="text-sm text-neutral-600 dark:text-neutral-400">
+          دليل شامل يضم 62 مقالاً هندسياً يغطي كافة الميزات والمعايير التقنية للبريد المؤقت
+        </p>
+      </div>
+
+      <!-- Search & Filters -->
+      <div class="mb-8 space-y-3">
+        <input
+          id="article-search-input"
+          type="text"
+          placeholder="ابحث في المقالات..."
+          class="w-full h-10 px-3 bg-white dark:bg-[#121212] border border-neutral-300 dark:border-neutral-700 rounded-lg text-xs text-black dark:text-white placeholder:text-neutral-400 focus:outline-none focus:border-black dark:focus:border-white transition-colors"
+        />
+
+        <div class="flex flex-wrap gap-1.5" id="category-pills">
+          
+          <button
+            type="button"
+            data-cat="all"
+            class="cat-pill px-3 py-1 rounded text-xs font-bold bg-black text-white dark:bg-white dark:text-black cursor-pointer shadow-sm"
+          >
+            الكل (62)
+          </button>
+          
+          <button
+            type="button"
+            data-cat="الأمان والبروتوكولات"
+            class="cat-pill px-3 py-1 rounded text-xs font-semibold bg-neutral-100 dark:bg-neutral-800 text-neutral-700 dark:text-neutral-300 hover:bg-neutral-200 dark:hover:bg-neutral-700 transition-colors cursor-pointer"
+          >
+            الأمان والبروتوكولات
+          </button>
+          <button
+            type="button"
+            data-cat="البنية التحتية والشبكات"
+            class="cat-pill px-3 py-1 rounded text-xs font-semibold bg-neutral-100 dark:bg-neutral-800 text-neutral-700 dark:text-neutral-300 hover:bg-neutral-200 dark:hover:bg-neutral-700 transition-colors cursor-pointer"
+          >
+            البنية التحتية والشبكات
+          </button>
+          <button
+            type="button"
+            data-cat="بروتوكولات البريد"
+            class="cat-pill px-3 py-1 rounded text-xs font-semibold bg-neutral-100 dark:bg-neutral-800 text-neutral-700 dark:text-neutral-300 hover:bg-neutral-200 dark:hover:bg-neutral-700 transition-colors cursor-pointer"
+          >
+            بروتوكولات البريد
+          </button>
+          <button
+            type="button"
+            data-cat="الأمان والمصادقة"
+            class="cat-pill px-3 py-1 rounded text-xs font-semibold bg-neutral-100 dark:bg-neutral-800 text-neutral-700 dark:text-neutral-300 hover:bg-neutral-200 dark:hover:bg-neutral-700 transition-colors cursor-pointer"
+          >
+            الأمان والمصادقة
+          </button>
+          <button
+            type="button"
+            data-cat="الخصوصية وهندسة البيانات"
+            class="cat-pill px-3 py-1 rounded text-xs font-semibold bg-neutral-100 dark:bg-neutral-800 text-neutral-700 dark:text-neutral-300 hover:bg-neutral-200 dark:hover:bg-neutral-700 transition-colors cursor-pointer"
+          >
+            الخصوصية وهندسة البيانات
+          </button>
+          <button
+            type="button"
+            data-cat="دليل الاستخدام"
+            class="cat-pill px-3 py-1 rounded text-xs font-semibold bg-neutral-100 dark:bg-neutral-800 text-neutral-700 dark:text-neutral-300 hover:bg-neutral-200 dark:hover:bg-neutral-700 transition-colors cursor-pointer"
+          >
+            دليل الاستخدام
+          </button>
+          <button
+            type="button"
+            data-cat="الأمن السيبراني"
+            class="cat-pill px-3 py-1 rounded text-xs font-semibold bg-neutral-100 dark:bg-neutral-800 text-neutral-700 dark:text-neutral-300 hover:bg-neutral-200 dark:hover:bg-neutral-700 transition-colors cursor-pointer"
+          >
+            الأمن السيبراني
+          </button>
+          <button
+            type="button"
+            data-cat="الخصوصية الرقمية"
+            class="cat-pill px-3 py-1 rounded text-xs font-semibold bg-neutral-100 dark:bg-neutral-800 text-neutral-700 dark:text-neutral-300 hover:bg-neutral-200 dark:hover:bg-neutral-700 transition-colors cursor-pointer"
+          >
+            الخصوصية الرقمية
+          </button>
+          <button
+            type="button"
+            data-cat="الخصوصية والتشريعات"
+            class="cat-pill px-3 py-1 rounded text-xs font-semibold bg-neutral-100 dark:bg-neutral-800 text-neutral-700 dark:text-neutral-300 hover:bg-neutral-200 dark:hover:bg-neutral-700 transition-colors cursor-pointer"
+          >
+            الخصوصية والتشريعات
+          </button>
+          <button
+            type="button"
+            data-cat="هندسة البرمجيات"
+            class="cat-pill px-3 py-1 rounded text-xs font-semibold bg-neutral-100 dark:bg-neutral-800 text-neutral-700 dark:text-neutral-300 hover:bg-neutral-200 dark:hover:bg-neutral-700 transition-colors cursor-pointer"
+          >
+            هندسة البرمجيات
+          </button>
+          <button
+            type="button"
+            data-cat="الهندسة والمعمارية"
+            class="cat-pill px-3 py-1 rounded text-xs font-semibold bg-neutral-100 dark:bg-neutral-800 text-neutral-700 dark:text-neutral-300 hover:bg-neutral-200 dark:hover:bg-neutral-700 transition-colors cursor-pointer"
+          >
+            الهندسة والمعمارية
+          </button>
+          <button
+            type="button"
+            data-cat="أتمتة الاختبارات والتطوير"
+            class="cat-pill px-3 py-1 rounded text-xs font-semibold bg-neutral-100 dark:bg-neutral-800 text-neutral-700 dark:text-neutral-300 hover:bg-neutral-200 dark:hover:bg-neutral-700 transition-colors cursor-pointer"
+          >
+            أتمتة الاختبارات والتطوير
+          </button>
+          <button
+            type="button"
+            data-cat="الخصوصية والأمان الرقمي"
+            class="cat-pill px-3 py-1 rounded text-xs font-semibold bg-neutral-100 dark:bg-neutral-800 text-neutral-700 dark:text-neutral-300 hover:bg-neutral-200 dark:hover:bg-neutral-700 transition-colors cursor-pointer"
+          >
+            الخصوصية والأمان الرقمي
+          </button>
+          <button
+            type="button"
+            data-cat="البنية التحتية والبروتوكولات"
+            class="cat-pill px-3 py-1 rounded text-xs font-semibold bg-neutral-100 dark:bg-neutral-800 text-neutral-700 dark:text-neutral-300 hover:bg-neutral-200 dark:hover:bg-neutral-700 transition-colors cursor-pointer"
+          >
+            البنية التحتية والبروتوكولات
+          </button>
+          <button
+            type="button"
+            data-cat="الأمان والتشفير"
+            class="cat-pill px-3 py-1 rounded text-xs font-semibold bg-neutral-100 dark:bg-neutral-800 text-neutral-700 dark:text-neutral-300 hover:bg-neutral-200 dark:hover:bg-neutral-700 transition-colors cursor-pointer"
+          >
+            الأمان والتشفير
+          </button>
+          <button
+            type="button"
+            data-cat="التطوير والأتمتة"
+            class="cat-pill px-3 py-1 rounded text-xs font-semibold bg-neutral-100 dark:bg-neutral-800 text-neutral-700 dark:text-neutral-300 hover:bg-neutral-200 dark:hover:bg-neutral-700 transition-colors cursor-pointer"
+          >
+            التطوير والأتمتة
+          </button>
+          <button
+            type="button"
+            data-cat="الحماية ومكافحة الحظر"
+            class="cat-pill px-3 py-1 rounded text-xs font-semibold bg-neutral-100 dark:bg-neutral-800 text-neutral-700 dark:text-neutral-300 hover:bg-neutral-200 dark:hover:bg-neutral-700 transition-colors cursor-pointer"
+          >
+            الحماية ومكافحة الحظر
+          </button>
+          <button
+            type="button"
+            data-cat="الأمان والامتثال"
+            class="cat-pill px-3 py-1 rounded text-xs font-semibold bg-neutral-100 dark:bg-neutral-800 text-neutral-700 dark:text-neutral-300 hover:bg-neutral-200 dark:hover:bg-neutral-700 transition-colors cursor-pointer"
+          >
+            الأمان والامتثال
+          </button>
+        </div>
+      </div>
+
+      <!-- Grid -->
+      <div id="articles-grid" class="grid grid-cols-1 md:grid-cols-2 gap-5 mb-12">
+        
+        <!-- Article Card 1: universal-verification-coverage -->
+        <article
+          class="article-card p-5 sm:p-6 bg-white dark:bg-[#121212] border border-neutral-300 dark:border-neutral-800 rounded-xl shadow-sm hover:border-neutral-400 dark:hover:border-neutral-600 transition-all flex flex-col justify-between"
+          data-title="التغطية الشاملة لرسائل التحقق (universal verification coverage): فك شفرات otp والروابط الخفية بدقة 100%"
+          data-desc="دليل تقني متعمق يوضح هندسة استخراج وفك شفرات رموز التحقق المعقدة مثل أكواد google g-xxxxxx وتوكنات steam guard والروابط المقنعة بدقة تامة ودون أخطاء."
+          data-category="الأمان والبروتوكولات"
+        >
+          <div>
+            <div class="flex items-center gap-2 text-[11px] font-mono text-neutral-500 dark:text-neutral-400 mb-2.5">
+              <span class="font-bold text-black dark:text-white px-2 py-0.5 bg-neutral-100 dark:bg-neutral-800 rounded text-[10px] uppercase">الأمان والبروتوكولات</span>
+              <span>•</span>
+              <time datetime="2026-09-25">2026-09-25</time>
+            </div>
+            <h2 class="text-base font-bold text-black dark:text-white mb-2 leading-snug">
+              <a href="/ar/articles/universal-verification-coverage.html" class="hover:underline">
+                التغطية الشاملة لرسائل التحقق (Universal Verification Coverage): فك شفرات OTP والروابط الخفية بدقة 100%
+              </a>
+            </h2>
+            <p class="text-xs text-neutral-600 dark:text-neutral-400 leading-relaxed mb-4">
+              دليل تقني متعمق يوضح هندسة استخراج وفك شفرات رموز التحقق المعقدة مثل أكواد Google G-XXXXXX وتوكنات Steam Guard والروابط المقنعة بدقة تامة ودون أخطاء.
+            </p>
+          </div>
+          <div class="pt-3 border-t border-neutral-100 dark:border-neutral-800/80 flex items-center justify-between text-xs">
+            <span class="text-neutral-500 font-mono text-[11px]">12 دقائق قراءة</span>
+            <a href="/ar/articles/universal-verification-coverage.html" class="font-bold text-black dark:text-white hover:underline flex items-center gap-1">
+              <span>قراءة المقال</span>
+              <span>←</span>
+            </a>
+          </div>
+        </article>
+        <!-- Article Card 2: real-time-websocket-streaming -->
+        <article
+          class="article-card p-5 sm:p-6 bg-white dark:bg-[#121212] border border-neutral-300 dark:border-neutral-800 rounded-xl shadow-sm hover:border-neutral-400 dark:hover:border-neutral-600 transition-all flex flex-col justify-between"
+          data-title="التحديث اللحظي عبر websocket: كيف تصل الرسائل إلى صندوق البريد في أجزاء من الثانية؟"
+          data-desc="شرح تفصيلي لمعمارية التحديث اللحظي في البريد المؤقت عبر اتصالات websocket وخوادم الحافة لتوصيل رسائل التفعيل فوراً وبدون الحاجة لإعادة تحميل الصفحة."
+          data-category="البنية التحتية والشبكات"
+        >
+          <div>
+            <div class="flex items-center gap-2 text-[11px] font-mono text-neutral-500 dark:text-neutral-400 mb-2.5">
+              <span class="font-bold text-black dark:text-white px-2 py-0.5 bg-neutral-100 dark:bg-neutral-800 rounded text-[10px] uppercase">البنية التحتية والشبكات</span>
+              <span>•</span>
+              <time datetime="2026-09-25">2026-09-25</time>
+            </div>
+            <h2 class="text-base font-bold text-black dark:text-white mb-2 leading-snug">
+              <a href="/ar/articles/real-time-websocket-streaming.html" class="hover:underline">
+                التحديث اللحظي عبر WebSocket: كيف تصل الرسائل إلى صندوق البريد في أجزاء من الثانية؟
+              </a>
+            </h2>
+            <p class="text-xs text-neutral-600 dark:text-neutral-400 leading-relaxed mb-4">
+              شرح تفصيلي لمعمارية التحديث اللحظي في البريد المؤقت عبر اتصالات WebSocket وخوادم الحافة لتوصيل رسائل التفعيل فوراً وبدون الحاجة لإعادة تحميل الصفحة.
+            </p>
+          </div>
+          <div class="pt-3 border-t border-neutral-100 dark:border-neutral-800/80 flex items-center justify-between text-xs">
+            <span class="text-neutral-500 font-mono text-[11px]">12 دقائق قراءة</span>
+            <a href="/ar/articles/real-time-websocket-streaming.html" class="font-bold text-black dark:text-white hover:underline flex items-center gap-1">
+              <span>قراءة المقال</span>
+              <span>←</span>
+            </a>
+          </div>
+        </article>
+        <!-- Article Card 3: temp-mail-vs-spam-filters -->
+        <article
+          class="article-card p-5 sm:p-6 bg-white dark:bg-[#121212] border border-neutral-300 dark:border-neutral-800 rounded-xl shadow-sm hover:border-neutral-400 dark:hover:border-neutral-600 transition-all flex flex-col justify-between"
+          data-title="البريد المؤقت وفلاتر السبام: معايير spf و dkim و dmarc وكيف نتجاوز الحجب الصارم؟"
+          data-desc="تحليل معماري لمطابقة سجلات spf و dkim و dmarc وكيف يضمن نظامنا وصول رسائل التفعيل من البنوك والمواقع العالمية دون تصنيفها كسبام."
+          data-category="بروتوكولات البريد"
+        >
+          <div>
+            <div class="flex items-center gap-2 text-[11px] font-mono text-neutral-500 dark:text-neutral-400 mb-2.5">
+              <span class="font-bold text-black dark:text-white px-2 py-0.5 bg-neutral-100 dark:bg-neutral-800 rounded text-[10px] uppercase">بروتوكولات البريد</span>
+              <span>•</span>
+              <time datetime="2026-09-25">2026-09-25</time>
+            </div>
+            <h2 class="text-base font-bold text-black dark:text-white mb-2 leading-snug">
+              <a href="/ar/articles/temp-mail-vs-spam-filters.html" class="hover:underline">
+                البريد المؤقت وفلاتر السبام: معايير SPF و DKIM و DMARC وكيف نتجاوز الحجب الصارم؟
+              </a>
+            </h2>
+            <p class="text-xs text-neutral-600 dark:text-neutral-400 leading-relaxed mb-4">
+              تحليل معماري لمطابقة سجلات SPF و DKIM و DMARC وكيف يضمن نظامنا وصول رسائل التفعيل من البنوك والمواقع العالمية دون تصنيفها كسبام.
+            </p>
+          </div>
+          <div class="pt-3 border-t border-neutral-100 dark:border-neutral-800/80 flex items-center justify-between text-xs">
+            <span class="text-neutral-500 font-mono text-[11px]">12 دقائق قراءة</span>
+            <a href="/ar/articles/temp-mail-vs-spam-filters.html" class="font-bold text-black dark:text-white hover:underline flex items-center gap-1">
+              <span>قراءة المقال</span>
+              <span>←</span>
+            </a>
+          </div>
+        </article>
+        <!-- Article Card 4: magic-links-vs-otp -->
+        <article
+          class="article-card p-5 sm:p-6 bg-white dark:bg-[#121212] border border-neutral-300 dark:border-neutral-800 rounded-xl shadow-sm hover:border-neutral-400 dark:hover:border-neutral-600 transition-all flex flex-col justify-between"
+          data-title="روابط التفعيل السحرية (magic links) مقابل رموز otp: مقارنة الأمان وعمر الرموز المشفرة"
+          data-desc="مقارنة معمارية دقيقة بين روابط تسجيل الدخول السحرية ورموز otp الرقمية، توضح مخاطر بكسلات التتبع وهجمات إعادة التشغيل وكيف يتعامل البريد المؤقت مع كل نوع بأمان."
+          data-category="الأمان والمصادقة"
+        >
+          <div>
+            <div class="flex items-center gap-2 text-[11px] font-mono text-neutral-500 dark:text-neutral-400 mb-2.5">
+              <span class="font-bold text-black dark:text-white px-2 py-0.5 bg-neutral-100 dark:bg-neutral-800 rounded text-[10px] uppercase">الأمان والمصادقة</span>
+              <span>•</span>
+              <time datetime="2026-09-25">2026-09-25</time>
+            </div>
+            <h2 class="text-base font-bold text-black dark:text-white mb-2 leading-snug">
+              <a href="/ar/articles/magic-links-vs-otp.html" class="hover:underline">
+                روابط التفعيل السحرية (Magic Links) مقابل رموز OTP: مقارنة الأمان وعمر الرموز المشفرة
+              </a>
+            </h2>
+            <p class="text-xs text-neutral-600 dark:text-neutral-400 leading-relaxed mb-4">
+              مقارنة معمارية دقيقة بين روابط تسجيل الدخول السحرية ورموز OTP الرقمية، توضح مخاطر بكسلات التتبع وهجمات إعادة التشغيل وكيف يتعامل البريد المؤقت مع كل نوع بأمان.
+            </p>
+          </div>
+          <div class="pt-3 border-t border-neutral-100 dark:border-neutral-800/80 flex items-center justify-between text-xs">
+            <span class="text-neutral-500 font-mono text-[11px]">12 دقائق قراءة</span>
+            <a href="/ar/articles/magic-links-vs-otp.html" class="font-bold text-black dark:text-white hover:underline flex items-center gap-1">
+              <span>قراءة المقال</span>
+              <span>←</span>
+            </a>
+          </div>
+        </article>
+        <!-- Article Card 5: what-happens-when-address-expires -->
+        <article
+          class="article-card p-5 sm:p-6 bg-white dark:bg-[#121212] border border-neutral-300 dark:border-neutral-800 rounded-xl shadow-sm hover:border-neutral-400 dark:hover:border-neutral-600 transition-all flex flex-col justify-between"
+          data-title="دورة حياة البريد المؤقت: ماذا يحدث للبيانات عند انتهاء الصلاحية والحذف التام؟"
+          data-desc="شرح تفصيلي لدورة حياة صندوق البريد المؤقت، وكيف يتم طمس البيانات في الذاكرة العشوائية وتطبيق سياسة عدم إعادة التدوير لضمان الخصوصية المطلقة."
+          data-category="الخصوصية وهندسة البيانات"
+        >
+          <div>
+            <div class="flex items-center gap-2 text-[11px] font-mono text-neutral-500 dark:text-neutral-400 mb-2.5">
+              <span class="font-bold text-black dark:text-white px-2 py-0.5 bg-neutral-100 dark:bg-neutral-800 rounded text-[10px] uppercase">الخصوصية وهندسة البيانات</span>
+              <span>•</span>
+              <time datetime="2026-09-25">2026-09-25</time>
+            </div>
+            <h2 class="text-base font-bold text-black dark:text-white mb-2 leading-snug">
+              <a href="/ar/articles/what-happens-when-address-expires.html" class="hover:underline">
+                دورة حياة البريد المؤقت: ماذا يحدث للبيانات عند انتهاء الصلاحية والحذف التام؟
+              </a>
+            </h2>
+            <p class="text-xs text-neutral-600 dark:text-neutral-400 leading-relaxed mb-4">
+              شرح تفصيلي لدورة حياة صندوق البريد المؤقت، وكيف يتم طمس البيانات في الذاكرة العشوائية وتطبيق سياسة عدم إعادة التدوير لضمان الخصوصية المطلقة.
+            </p>
+          </div>
+          <div class="pt-3 border-t border-neutral-100 dark:border-neutral-800/80 flex items-center justify-between text-xs">
+            <span class="text-neutral-500 font-mono text-[11px]">12 دقائق قراءة</span>
+            <a href="/ar/articles/what-happens-when-address-expires.html" class="font-bold text-black dark:text-white hover:underline flex items-center gap-1">
+              <span>قراءة المقال</span>
+              <span>←</span>
+            </a>
+          </div>
+        </article>
+        <!-- Article Card 6: how-to-generate-address -->
+        <article
+          class="article-card p-5 sm:p-6 bg-white dark:bg-[#121212] border border-neutral-300 dark:border-neutral-800 rounded-xl shadow-sm hover:border-neutral-400 dark:hover:border-neutral-600 transition-all flex flex-col justify-between"
+          data-title="كيفية توليد عنوان بريد مؤقت جديد عالي العشوائية وتغييره بنقرة واحدة"
+          data-desc="تعلم كيفية إنشاء عناوين بريد إلكتروني مؤقتة ومعزولة مشفرة فورياً، وتغيير الصندوق بنقرة واحدة لفصل الهويات الرقمية ومنع التتبع عبر المواقع."
+          data-category="دليل الاستخدام"
+        >
+          <div>
+            <div class="flex items-center gap-2 text-[11px] font-mono text-neutral-500 dark:text-neutral-400 mb-2.5">
+              <span class="font-bold text-black dark:text-white px-2 py-0.5 bg-neutral-100 dark:bg-neutral-800 rounded text-[10px] uppercase">دليل الاستخدام</span>
+              <span>•</span>
+              <time datetime="2026-09-25">2026-09-25</time>
+            </div>
+            <h2 class="text-base font-bold text-black dark:text-white mb-2 leading-snug">
+              <a href="/ar/articles/how-to-generate-address.html" class="hover:underline">
+                كيفية توليد عنوان بريد مؤقت جديد عالي العشوائية وتغييره بنقرة واحدة
+              </a>
+            </h2>
+            <p class="text-xs text-neutral-600 dark:text-neutral-400 leading-relaxed mb-4">
+              تعلم كيفية إنشاء عناوين بريد إلكتروني مؤقتة ومعزولة مشفرة فورياً، وتغيير الصندوق بنقرة واحدة لفصل الهويات الرقمية ومنع التتبع عبر المواقع.
+            </p>
+          </div>
+          <div class="pt-3 border-t border-neutral-100 dark:border-neutral-800/80 flex items-center justify-between text-xs">
+            <span class="text-neutral-500 font-mono text-[11px]">12 دقائق قراءة</span>
+            <a href="/ar/articles/how-to-generate-address.html" class="font-bold text-black dark:text-white hover:underline flex items-center gap-1">
+              <span>قراءة المقال</span>
+              <span>←</span>
+            </a>
+          </div>
+        </article>
+        <!-- Article Card 7: how-to-copy-address -->
+        <article
+          class="article-card p-5 sm:p-6 bg-white dark:bg-[#121212] border border-neutral-300 dark:border-neutral-800 rounded-xl shadow-sm hover:border-neutral-400 dark:hover:border-neutral-600 transition-all flex flex-col justify-between"
+          data-title="نسخ عنوان البريد المؤقت بدقة وبدون مسافات خفية: تجنب أخطاء النماذج الإلكترونية"
+          data-desc="تعلم كيف تضمن نسخ عنوان البريد المؤقت بنقرة واحدة بدون مسافات خفية أو محارف غير مرئية تسبب فشل التسجيل في المواقع والتطبيقات."
+          data-category="دليل الاستخدام"
+        >
+          <div>
+            <div class="flex items-center gap-2 text-[11px] font-mono text-neutral-500 dark:text-neutral-400 mb-2.5">
+              <span class="font-bold text-black dark:text-white px-2 py-0.5 bg-neutral-100 dark:bg-neutral-800 rounded text-[10px] uppercase">دليل الاستخدام</span>
+              <span>•</span>
+              <time datetime="2026-09-25">2026-09-25</time>
+            </div>
+            <h2 class="text-base font-bold text-black dark:text-white mb-2 leading-snug">
+              <a href="/ar/articles/how-to-copy-address.html" class="hover:underline">
+                نسخ عنوان البريد المؤقت بدقة وبدون مسافات خفية: تجنب أخطاء النماذج الإلكترونية
+              </a>
+            </h2>
+            <p class="text-xs text-neutral-600 dark:text-neutral-400 leading-relaxed mb-4">
+              تعلم كيف تضمن نسخ عنوان البريد المؤقت بنقرة واحدة بدون مسافات خفية أو محارف غير مرئية تسبب فشل التسجيل في المواقع والتطبيقات.
+            </p>
+          </div>
+          <div class="pt-3 border-t border-neutral-100 dark:border-neutral-800/80 flex items-center justify-between text-xs">
+            <span class="text-neutral-500 font-mono text-[11px]">12 دقائق قراءة</span>
+            <a href="/ar/articles/how-to-copy-address.html" class="font-bold text-black dark:text-white hover:underline flex items-center gap-1">
+              <span>قراءة المقال</span>
+              <span>←</span>
+            </a>
+          </div>
+        </article>
+        <!-- Article Card 8: how-to-receive-otp -->
+        <article
+          class="article-card p-5 sm:p-6 bg-white dark:bg-[#121212] border border-neutral-300 dark:border-neutral-800 rounded-xl shadow-sm hover:border-neutral-400 dark:hover:border-neutral-600 transition-all flex flex-col justify-between"
+          data-title="كيفية استقبال واستخراج أكواد التحقق (otp) بنقرة واحدة وبدون أخطاء"
+          data-desc="تعلم كيف تستقبل أكواد التفعيل ورموز otp فور وصولها وتنسخها بنقرة واحدة، وتفادي أخطاء الإدخال وانتهاء الصلاحية في مختلف المنصات."
+          data-category="دليل الاستخدام"
+        >
+          <div>
+            <div class="flex items-center gap-2 text-[11px] font-mono text-neutral-500 dark:text-neutral-400 mb-2.5">
+              <span class="font-bold text-black dark:text-white px-2 py-0.5 bg-neutral-100 dark:bg-neutral-800 rounded text-[10px] uppercase">دليل الاستخدام</span>
+              <span>•</span>
+              <time datetime="2026-09-25">2026-09-25</time>
+            </div>
+            <h2 class="text-base font-bold text-black dark:text-white mb-2 leading-snug">
+              <a href="/ar/articles/how-to-receive-otp.html" class="hover:underline">
+                كيفية استقبال واستخراج أكواد التحقق (OTP) بنقرة واحدة وبدون أخطاء
+              </a>
+            </h2>
+            <p class="text-xs text-neutral-600 dark:text-neutral-400 leading-relaxed mb-4">
+              تعلم كيف تستقبل أكواد التفعيل ورموز OTP فور وصولها وتنسخها بنقرة واحدة، وتفادي أخطاء الإدخال وانتهاء الصلاحية في مختلف المنصات.
+            </p>
+          </div>
+          <div class="pt-3 border-t border-neutral-100 dark:border-neutral-800/80 flex items-center justify-between text-xs">
+            <span class="text-neutral-500 font-mono text-[11px]">12 دقائق قراءة</span>
+            <a href="/ar/articles/how-to-receive-otp.html" class="font-bold text-black dark:text-white hover:underline flex items-center gap-1">
+              <span>قراءة المقال</span>
+              <span>←</span>
+            </a>
+          </div>
+        </article>
+        <!-- Article Card 9: how-to-open-verification-links -->
+        <article
+          class="article-card p-5 sm:p-6 bg-white dark:bg-[#121212] border border-neutral-300 dark:border-neutral-800 rounded-xl shadow-sm hover:border-neutral-400 dark:hover:border-neutral-600 transition-all flex flex-col justify-between"
+          data-title="كيفية فتح روابط التفعيل والتأكيد بأمان وعزل تام عن جهازك"
+          data-desc="دليل شامل لكيفية فحص ومعاينة روابط التفعيل الواردة في البريد المؤقت، وتجريدها من بكسلات التتبع والروابط المشبوهة لفتحها بأمان تام."
+          data-category="دليل الاستخدام"
+        >
+          <div>
+            <div class="flex items-center gap-2 text-[11px] font-mono text-neutral-500 dark:text-neutral-400 mb-2.5">
+              <span class="font-bold text-black dark:text-white px-2 py-0.5 bg-neutral-100 dark:bg-neutral-800 rounded text-[10px] uppercase">دليل الاستخدام</span>
+              <span>•</span>
+              <time datetime="2026-09-25">2026-09-25</time>
+            </div>
+            <h2 class="text-base font-bold text-black dark:text-white mb-2 leading-snug">
+              <a href="/ar/articles/how-to-open-verification-links.html" class="hover:underline">
+                كيفية فتح روابط التفعيل والتأكيد بأمان وعزل تام عن جهازك
+              </a>
+            </h2>
+            <p class="text-xs text-neutral-600 dark:text-neutral-400 leading-relaxed mb-4">
+              دليل شامل لكيفية فحص ومعاينة روابط التفعيل الواردة في البريد المؤقت، وتجريدها من بكسلات التتبع والروابط المشبوهة لفتحها بأمان تام.
+            </p>
+          </div>
+          <div class="pt-3 border-t border-neutral-100 dark:border-neutral-800/80 flex items-center justify-between text-xs">
+            <span class="text-neutral-500 font-mono text-[11px]">12 دقائق قراءة</span>
+            <a href="/ar/articles/how-to-open-verification-links.html" class="font-bold text-black dark:text-white hover:underline flex items-center gap-1">
+              <span>قراءة المقال</span>
+              <span>←</span>
+            </a>
+          </div>
+        </article>
+        <!-- Article Card 10: how-inbox-updates-live -->
+        <article
+          class="article-card p-5 sm:p-6 bg-white dark:bg-[#121212] border border-neutral-300 dark:border-neutral-800 rounded-xl shadow-sm hover:border-neutral-400 dark:hover:border-neutral-600 transition-all flex flex-col justify-between"
+          data-title="كيف يتحدث صندوق البريد لحظياً دون إعادة تحميل الصفحة؟ كواليس المعمارية التفاعلية"
+          data-desc="كشف معماري عن كيفية تحديث واجهة صندوق البريد المؤقت لحظياً عبر اتصالات websocket التفاعلية وإدارة نبضات الاتصال دون وميض أو استنزاف للبطارية."
+          data-category="البنية التحتية والشبكات"
+        >
+          <div>
+            <div class="flex items-center gap-2 text-[11px] font-mono text-neutral-500 dark:text-neutral-400 mb-2.5">
+              <span class="font-bold text-black dark:text-white px-2 py-0.5 bg-neutral-100 dark:bg-neutral-800 rounded text-[10px] uppercase">البنية التحتية والشبكات</span>
+              <span>•</span>
+              <time datetime="2026-09-25">2026-09-25</time>
+            </div>
+            <h2 class="text-base font-bold text-black dark:text-white mb-2 leading-snug">
+              <a href="/ar/articles/how-inbox-updates-live.html" class="hover:underline">
+                كيف يتحدث صندوق البريد لحظياً دون إعادة تحميل الصفحة؟ كواليس المعمارية التفاعلية
+              </a>
+            </h2>
+            <p class="text-xs text-neutral-600 dark:text-neutral-400 leading-relaxed mb-4">
+              كشف معماري عن كيفية تحديث واجهة صندوق البريد المؤقت لحظياً عبر اتصالات WebSocket التفاعلية وإدارة نبضات الاتصال دون وميض أو استنزاف للبطارية.
+            </p>
+          </div>
+          <div class="pt-3 border-t border-neutral-100 dark:border-neutral-800/80 flex items-center justify-between text-xs">
+            <span class="text-neutral-500 font-mono text-[11px]">12 دقائق قراءة</span>
+            <a href="/ar/articles/how-inbox-updates-live.html" class="font-bold text-black dark:text-white hover:underline flex items-center gap-1">
+              <span>قراءة المقال</span>
+              <span>←</span>
+            </a>
+          </div>
+        </article>
+        <!-- Article Card 11: managing-multiple-temp-addresses -->
+        <article
+          class="article-card p-5 sm:p-6 bg-white dark:bg-[#121212] border border-neutral-300 dark:border-neutral-800 rounded-xl shadow-sm hover:border-neutral-400 dark:hover:border-neutral-600 transition-all flex flex-col justify-between"
+          data-title="إدارة عناوين بريد مؤقتة متعددة: استراتيجيات العزل والتنقل السلس للمطورين والمختبرين"
+          data-desc="دليل عملي لإدارة عناوين بريد مؤقتة متعددة في وقت واحد، وتطبيق العزل التام بين جلسات الاختبار والتسجيلات المتزامنة دون تداخل في البيانات."
+          data-category="دليل الاستخدام"
+        >
+          <div>
+            <div class="flex items-center gap-2 text-[11px] font-mono text-neutral-500 dark:text-neutral-400 mb-2.5">
+              <span class="font-bold text-black dark:text-white px-2 py-0.5 bg-neutral-100 dark:bg-neutral-800 rounded text-[10px] uppercase">دليل الاستخدام</span>
+              <span>•</span>
+              <time datetime="2026-09-25">2026-09-25</time>
+            </div>
+            <h2 class="text-base font-bold text-black dark:text-white mb-2 leading-snug">
+              <a href="/ar/articles/managing-multiple-temp-addresses.html" class="hover:underline">
+                إدارة عناوين بريد مؤقتة متعددة: استراتيجيات العزل والتنقل السلس للمطورين والمختبرين
+              </a>
+            </h2>
+            <p class="text-xs text-neutral-600 dark:text-neutral-400 leading-relaxed mb-4">
+              دليل عملي لإدارة عناوين بريد مؤقتة متعددة في وقت واحد، وتطبيق العزل التام بين جلسات الاختبار والتسجيلات المتزامنة دون تداخل في البيانات.
+            </p>
+          </div>
+          <div class="pt-3 border-t border-neutral-100 dark:border-neutral-800/80 flex items-center justify-between text-xs">
+            <span class="text-neutral-500 font-mono text-[11px]">12 دقائق قراءة</span>
+            <a href="/ar/articles/managing-multiple-temp-addresses.html" class="font-bold text-black dark:text-white hover:underline flex items-center gap-1">
+              <span>قراءة المقال</span>
+              <span>←</span>
+            </a>
+          </div>
+        </article>
+        <!-- Article Card 12: pwa-desktop-mobile-guide -->
+        <article
+          class="article-card p-5 sm:p-6 bg-white dark:bg-[#121212] border border-neutral-300 dark:border-neutral-800 rounded-xl shadow-sm hover:border-neutral-400 dark:hover:border-neutral-600 transition-all flex flex-col justify-between"
+          data-title="تثبيت واستخدام تطبيق الويب التقدمي (pwa) للبريد المؤقت على الحاسوب والهاتف"
+          data-desc="دليل شامل لتثبيت البريد المؤقت كتطبيق pwa خفيف ومستقل على نظامي android و ios وأجهزة الكمبيوتر (windows و mac) لتوليد واستقبال الرسائل بنقرة واحدة من شاشتك الرئيسية."
+          data-category="دليل الاستخدام"
+        >
+          <div>
+            <div class="flex items-center gap-2 text-[11px] font-mono text-neutral-500 dark:text-neutral-400 mb-2.5">
+              <span class="font-bold text-black dark:text-white px-2 py-0.5 bg-neutral-100 dark:bg-neutral-800 rounded text-[10px] uppercase">دليل الاستخدام</span>
+              <span>•</span>
+              <time datetime="2026-09-25">2026-09-25</time>
+            </div>
+            <h2 class="text-base font-bold text-black dark:text-white mb-2 leading-snug">
+              <a href="/ar/articles/pwa-desktop-mobile-guide.html" class="hover:underline">
+                تثبيت واستخدام تطبيق الويب التقدمي (PWA) للبريد المؤقت على الحاسوب والهاتف
+              </a>
+            </h2>
+            <p class="text-xs text-neutral-600 dark:text-neutral-400 leading-relaxed mb-4">
+              دليل شامل لتثبيت البريد المؤقت كتطبيق PWA خفيف ومستقل على نظامي Android و iOS وأجهزة الكمبيوتر (Windows و Mac) لتوليد واستقبال الرسائل بنقرة واحدة من شاشتك الرئيسية.
+            </p>
+          </div>
+          <div class="pt-3 border-t border-neutral-100 dark:border-neutral-800/80 flex items-center justify-between text-xs">
+            <span class="text-neutral-500 font-mono text-[11px]">12 دقائق قراءة</span>
+            <a href="/ar/articles/pwa-desktop-mobile-guide.html" class="font-bold text-black dark:text-white hover:underline flex items-center gap-1">
+              <span>قراءة المقال</span>
+              <span>←</span>
+            </a>
+          </div>
+        </article>
+        <!-- Article Card 13: preventing-credential-stuffing-and-data-breaches -->
+        <article
+          class="article-card p-5 sm:p-6 bg-white dark:bg-[#121212] border border-neutral-300 dark:border-neutral-800 rounded-xl shadow-sm hover:border-neutral-400 dark:hover:border-neutral-600 transition-all flex flex-col justify-between"
+          data-title="الوقاية من هجمات حشو بيانات الاعتماد (credential stuffing) وتداعيات تسريب البيانات"
+          data-desc="شرح مفصل لكيفية حدوث هجمات حشو بيانات الاعتماد، وكيف يحميك استخدام البريد المؤقت من تسريب كلمات المرور وربط الحسابات عند اختراق المواقع."
+          data-category="الأمن السيبراني"
+        >
+          <div>
+            <div class="flex items-center gap-2 text-[11px] font-mono text-neutral-500 dark:text-neutral-400 mb-2.5">
+              <span class="font-bold text-black dark:text-white px-2 py-0.5 bg-neutral-100 dark:bg-neutral-800 rounded text-[10px] uppercase">الأمن السيبراني</span>
+              <span>•</span>
+              <time datetime="2026-09-25">2026-09-25</time>
+            </div>
+            <h2 class="text-base font-bold text-black dark:text-white mb-2 leading-snug">
+              <a href="/ar/articles/preventing-credential-stuffing-and-data-breaches.html" class="hover:underline">
+                الوقاية من هجمات حشو بيانات الاعتماد (Credential Stuffing) وتداعيات تسريب البيانات
+              </a>
+            </h2>
+            <p class="text-xs text-neutral-600 dark:text-neutral-400 leading-relaxed mb-4">
+              شرح مفصل لكيفية حدوث هجمات حشو بيانات الاعتماد، وكيف يحميك استخدام البريد المؤقت من تسريب كلمات المرور وربط الحسابات عند اختراق المواقع.
+            </p>
+          </div>
+          <div class="pt-3 border-t border-neutral-100 dark:border-neutral-800/80 flex items-center justify-between text-xs">
+            <span class="text-neutral-500 font-mono text-[11px]">12 دقائق قراءة</span>
+            <a href="/ar/articles/preventing-credential-stuffing-and-data-breaches.html" class="font-bold text-black dark:text-white hover:underline flex items-center gap-1">
+              <span>قراءة المقال</span>
+              <span>←</span>
+            </a>
+          </div>
+        </article>
+        <!-- Article Card 14: disposable-email-vs-marketing-trackers -->
+        <article
+          class="article-card p-5 sm:p-6 bg-white dark:bg-[#121212] border border-neutral-300 dark:border-neutral-800 rounded-xl shadow-sm hover:border-neutral-400 dark:hover:border-neutral-600 transition-all flex flex-col justify-between"
+          data-title="البريد المؤقت مقابل متتبعات التسويق: كيف تحمي هويتك من وسطاء البيانات (data brokers)؟"
+          data-desc="تحليل لكيفية قيام شركات الإعلانات ووسطاء البيانات بجمع وبناء ملفات شخصية عبر بريدك الدائم، وكيف يقضي البريد المؤقت على هذه الممارسات."
+          data-category="الخصوصية الرقمية"
+        >
+          <div>
+            <div class="flex items-center gap-2 text-[11px] font-mono text-neutral-500 dark:text-neutral-400 mb-2.5">
+              <span class="font-bold text-black dark:text-white px-2 py-0.5 bg-neutral-100 dark:bg-neutral-800 rounded text-[10px] uppercase">الخصوصية الرقمية</span>
+              <span>•</span>
+              <time datetime="2026-09-25">2026-09-25</time>
+            </div>
+            <h2 class="text-base font-bold text-black dark:text-white mb-2 leading-snug">
+              <a href="/ar/articles/disposable-email-vs-marketing-trackers.html" class="hover:underline">
+                البريد المؤقت مقابل متتبعات التسويق: كيف تحمي هويتك من وسطاء البيانات (Data Brokers)؟
+              </a>
+            </h2>
+            <p class="text-xs text-neutral-600 dark:text-neutral-400 leading-relaxed mb-4">
+              تحليل لكيفية قيام شركات الإعلانات ووسطاء البيانات بجمع وبناء ملفات شخصية عبر بريدك الدائم، وكيف يقضي البريد المؤقت على هذه الممارسات.
+            </p>
+          </div>
+          <div class="pt-3 border-t border-neutral-100 dark:border-neutral-800/80 flex items-center justify-between text-xs">
+            <span class="text-neutral-500 font-mono text-[11px]">12 دقائق قراءة</span>
+            <a href="/ar/articles/disposable-email-vs-marketing-trackers.html" class="font-bold text-black dark:text-white hover:underline flex items-center gap-1">
+              <span>قراءة المقال</span>
+              <span>←</span>
+            </a>
+          </div>
+        </article>
+        <!-- Article Card 15: gdpr-ccpa-compliance-ephemeral-data -->
+        <article
+          class="article-card p-5 sm:p-6 bg-white dark:bg-[#121212] border border-neutral-300 dark:border-neutral-800 rounded-xl shadow-sm hover:border-neutral-400 dark:hover:border-neutral-600 transition-all flex flex-col justify-between"
+          data-title="البريد المؤقت وقوانين الخصوصية العالمية: التوافق مع معايير gdpr و ccpa ومبدأ الحق في النسيان"
+          data-desc="شرح قانوني وتقني لكيفية توافق معمارية البريد المؤقت مع تشريعات حماية البيانات العالمية (gdpr و ccpa) ومبدأ تقليل جمع البيانات وتصفير السجلات."
+          data-category="الخصوصية والتشريعات"
+        >
+          <div>
+            <div class="flex items-center gap-2 text-[11px] font-mono text-neutral-500 dark:text-neutral-400 mb-2.5">
+              <span class="font-bold text-black dark:text-white px-2 py-0.5 bg-neutral-100 dark:bg-neutral-800 rounded text-[10px] uppercase">الخصوصية والتشريعات</span>
+              <span>•</span>
+              <time datetime="2026-09-25">2026-09-25</time>
+            </div>
+            <h2 class="text-base font-bold text-black dark:text-white mb-2 leading-snug">
+              <a href="/ar/articles/gdpr-ccpa-compliance-ephemeral-data.html" class="hover:underline">
+                البريد المؤقت وقوانين الخصوصية العالمية: التوافق مع معايير GDPR و CCPA ومبدأ الحق في النسيان
+              </a>
+            </h2>
+            <p class="text-xs text-neutral-600 dark:text-neutral-400 leading-relaxed mb-4">
+              شرح قانوني وتقني لكيفية توافق معمارية البريد المؤقت مع تشريعات حماية البيانات العالمية (GDPR و CCPA) ومبدأ تقليل جمع البيانات وتصفير السجلات.
+            </p>
+          </div>
+          <div class="pt-3 border-t border-neutral-100 dark:border-neutral-800/80 flex items-center justify-between text-xs">
+            <span class="text-neutral-500 font-mono text-[11px]">12 دقائق قراءة</span>
+            <a href="/ar/articles/gdpr-ccpa-compliance-ephemeral-data.html" class="font-bold text-black dark:text-white hover:underline flex items-center gap-1">
+              <span>قراءة المقال</span>
+              <span>←</span>
+            </a>
+          </div>
+        </article>
+        <!-- Article Card 16: combating-marketing-trackers-and-spy-pixels -->
+        <article
+          class="article-card p-5 sm:p-6 bg-white dark:bg-[#121212] border border-neutral-300 dark:border-neutral-800 rounded-xl shadow-sm hover:border-neutral-400 dark:hover:border-neutral-600 transition-all flex flex-col justify-between"
+          data-title="مكافحة بكسلات التجسس (spy pixels) وتتبع فتح الرسائل في البريد المؤقت"
+          data-desc="دليل تقني يكشف كيف تعمل بكسلات التجسس الخفية (1x1 pixels) في رسائل البريد، وكيف يحجبها عارض البريد الآمن لدينا لحماية موقعك وهوية جهازك."
+          data-category="الأمن السيبراني"
+        >
+          <div>
+            <div class="flex items-center gap-2 text-[11px] font-mono text-neutral-500 dark:text-neutral-400 mb-2.5">
+              <span class="font-bold text-black dark:text-white px-2 py-0.5 bg-neutral-100 dark:bg-neutral-800 rounded text-[10px] uppercase">الأمن السيبراني</span>
+              <span>•</span>
+              <time datetime="2026-09-25">2026-09-25</time>
+            </div>
+            <h2 class="text-base font-bold text-black dark:text-white mb-2 leading-snug">
+              <a href="/ar/articles/combating-marketing-trackers-and-spy-pixels.html" class="hover:underline">
+                مكافحة بكسلات التجسس (Spy Pixels) وتتبع فتح الرسائل في البريد المؤقت
+              </a>
+            </h2>
+            <p class="text-xs text-neutral-600 dark:text-neutral-400 leading-relaxed mb-4">
+              دليل تقني يكشف كيف تعمل بكسلات التجسس الخفية (1x1 Pixels) في رسائل البريد، وكيف يحجبها عارض البريد الآمن لدينا لحماية موقعك وهوية جهازك.
+            </p>
+          </div>
+          <div class="pt-3 border-t border-neutral-100 dark:border-neutral-800/80 flex items-center justify-between text-xs">
+            <span class="text-neutral-500 font-mono text-[11px]">12 دقائق قراءة</span>
+            <a href="/ar/articles/combating-marketing-trackers-and-spy-pixels.html" class="font-bold text-black dark:text-white hover:underline flex items-center gap-1">
+              <span>قراءة المقال</span>
+              <span>←</span>
+            </a>
+          </div>
+        </article>
+        <!-- Article Card 17: phishing-defense-and-safe-previews -->
+        <article
+          class="article-card p-5 sm:p-6 bg-white dark:bg-[#121212] border border-neutral-300 dark:border-neutral-800 rounded-xl shadow-sm hover:border-neutral-400 dark:hover:border-neutral-600 transition-all flex flex-col justify-between"
+          data-title="الدفاع ضد هجمات التصيد الاحتيالي والمعاينة الآمنة للرسائل في البريد المؤقت"
+          data-desc="تعلم كيف تكشف رسائل التصيد الاحتيالي والروابط المزيفة، وكيف توفر معمارية المعاينة المعزولة في البريد المؤقت حماية مطلقة ضد البرمجيات الخبيثة."
+          data-category="الأمن السيبراني"
+        >
+          <div>
+            <div class="flex items-center gap-2 text-[11px] font-mono text-neutral-500 dark:text-neutral-400 mb-2.5">
+              <span class="font-bold text-black dark:text-white px-2 py-0.5 bg-neutral-100 dark:bg-neutral-800 rounded text-[10px] uppercase">الأمن السيبراني</span>
+              <span>•</span>
+              <time datetime="2026-09-25">2026-09-25</time>
+            </div>
+            <h2 class="text-base font-bold text-black dark:text-white mb-2 leading-snug">
+              <a href="/ar/articles/phishing-defense-and-safe-previews.html" class="hover:underline">
+                الدفاع ضد هجمات التصيد الاحتيالي والمعاينة الآمنة للرسائل في البريد المؤقت
+              </a>
+            </h2>
+            <p class="text-xs text-neutral-600 dark:text-neutral-400 leading-relaxed mb-4">
+              تعلم كيف تكشف رسائل التصيد الاحتيالي والروابط المزيفة، وكيف توفر معمارية المعاينة المعزولة في البريد المؤقت حماية مطلقة ضد البرمجيات الخبيثة.
+            </p>
+          </div>
+          <div class="pt-3 border-t border-neutral-100 dark:border-neutral-800/80 flex items-center justify-between text-xs">
+            <span class="text-neutral-500 font-mono text-[11px]">12 دقائق قراءة</span>
+            <a href="/ar/articles/phishing-defense-and-safe-previews.html" class="font-bold text-black dark:text-white hover:underline flex items-center gap-1">
+              <span>قراءة المقال</span>
+              <span>←</span>
+            </a>
+          </div>
+        </article>
+        <!-- Article Card 18: temporary-email-for-software-testing -->
+        <article
+          class="article-card p-5 sm:p-6 bg-white dark:bg-[#121212] border border-neutral-300 dark:border-neutral-800 rounded-xl shadow-sm hover:border-neutral-400 dark:hover:border-neutral-600 transition-all flex flex-col justify-between"
+          data-title="استخدام البريد المؤقت في اختبار البرمجيات والتحقق الآلي (qa & ci/cd)"
+          data-desc="دليل المطورين وفرق جودة البرمجيات (qa) لأتمتة اختبارات التسجيل وتفعيل الحسابات باستخدام البريد المؤقت في بيئات ci/cd مع playwright و cypress."
+          data-category="هندسة البرمجيات"
+        >
+          <div>
+            <div class="flex items-center gap-2 text-[11px] font-mono text-neutral-500 dark:text-neutral-400 mb-2.5">
+              <span class="font-bold text-black dark:text-white px-2 py-0.5 bg-neutral-100 dark:bg-neutral-800 rounded text-[10px] uppercase">هندسة البرمجيات</span>
+              <span>•</span>
+              <time datetime="2026-09-25">2026-09-25</time>
+            </div>
+            <h2 class="text-base font-bold text-black dark:text-white mb-2 leading-snug">
+              <a href="/ar/articles/temporary-email-for-software-testing.html" class="hover:underline">
+                استخدام البريد المؤقت في اختبار البرمجيات والتحقق الآلي (QA & CI/CD)
+              </a>
+            </h2>
+            <p class="text-xs text-neutral-600 dark:text-neutral-400 leading-relaxed mb-4">
+              دليل المطورين وفرق جودة البرمجيات (QA) لأتمتة اختبارات التسجيل وتفعيل الحسابات باستخدام البريد المؤقت في بيئات CI/CD مع Playwright و Cypress.
+            </p>
+          </div>
+          <div class="pt-3 border-t border-neutral-100 dark:border-neutral-800/80 flex items-center justify-between text-xs">
+            <span class="text-neutral-500 font-mono text-[11px]">12 دقائق قراءة</span>
+            <a href="/ar/articles/temporary-email-for-software-testing.html" class="font-bold text-black dark:text-white hover:underline flex items-center gap-1">
+              <span>قراءة المقال</span>
+              <span>←</span>
+            </a>
+          </div>
+        </article>
+        <!-- Article Card 19: zero-knowledge-inbox-architecture -->
+        <article
+          class="article-card p-5 sm:p-6 bg-white dark:bg-[#121212] border border-neutral-300 dark:border-neutral-800 rounded-xl shadow-sm hover:border-neutral-400 dark:hover:border-neutral-600 transition-all flex flex-col justify-between"
+          data-title="معمارية عدم المعرفة (zero-knowledge): كيف نعالج رسائل البريد المؤقت في الذاكرة الحية دون حفظها؟"
+          data-desc="نظرة هندسية عميقة على معمارية المعرفة الصفرية (zero-knowledge) في معالجة البريد المؤقت في الذاكرة الحية (ram) دون كتابة أي بايت على الأقراص الدائمة."
+          data-category="الهندسة والمعمارية"
+        >
+          <div>
+            <div class="flex items-center gap-2 text-[11px] font-mono text-neutral-500 dark:text-neutral-400 mb-2.5">
+              <span class="font-bold text-black dark:text-white px-2 py-0.5 bg-neutral-100 dark:bg-neutral-800 rounded text-[10px] uppercase">الهندسة والمعمارية</span>
+              <span>•</span>
+              <time datetime="2026-09-25">2026-09-25</time>
+            </div>
+            <h2 class="text-base font-bold text-black dark:text-white mb-2 leading-snug">
+              <a href="/ar/articles/zero-knowledge-inbox-architecture.html" class="hover:underline">
+                معمارية عدم المعرفة (Zero-Knowledge): كيف نعالج رسائل البريد المؤقت في الذاكرة الحية دون حفظها؟
+              </a>
+            </h2>
+            <p class="text-xs text-neutral-600 dark:text-neutral-400 leading-relaxed mb-4">
+              نظرة هندسية عميقة على معمارية المعرفة الصفرية (Zero-Knowledge) في معالجة البريد المؤقت في الذاكرة الحية (RAM) دون كتابة أي بايت على الأقراص الدائمة.
+            </p>
+          </div>
+          <div class="pt-3 border-t border-neutral-100 dark:border-neutral-800/80 flex items-center justify-between text-xs">
+            <span class="text-neutral-500 font-mono text-[11px]">12 دقائق قراءة</span>
+            <a href="/ar/articles/zero-knowledge-inbox-architecture.html" class="font-bold text-black dark:text-white hover:underline flex items-center gap-1">
+              <span>قراءة المقال</span>
+              <span>←</span>
+            </a>
+          </div>
+        </article>
+        <!-- Article Card 20: bypass-email-verification-paywalls -->
+        <article
+          class="article-card p-5 sm:p-6 bg-white dark:bg-[#121212] border border-neutral-300 dark:border-neutral-800 rounded-xl shadow-sm hover:border-neutral-400 dark:hover:border-neutral-600 transition-all flex flex-col justify-between"
+          data-title="الوصول إلى المحتوى المحجوب بالبريد الإلكتروني (gated content) بأمان وتفادي الرسائل المزعجة"
+          data-desc="تعلم كيفية استخدام البريد المؤقت للوصول إلى الكتب الإلكترونية والأبحاث والمحتوى المحجوب بالبريد (gated content) دون تعريض بريدك الدائم لحملات التسويق المزعجة."
+          data-category="دليل الاستخدام"
+        >
+          <div>
+            <div class="flex items-center gap-2 text-[11px] font-mono text-neutral-500 dark:text-neutral-400 mb-2.5">
+              <span class="font-bold text-black dark:text-white px-2 py-0.5 bg-neutral-100 dark:bg-neutral-800 rounded text-[10px] uppercase">دليل الاستخدام</span>
+              <span>•</span>
+              <time datetime="2026-09-25">2026-09-25</time>
+            </div>
+            <h2 class="text-base font-bold text-black dark:text-white mb-2 leading-snug">
+              <a href="/ar/articles/bypass-email-verification-paywalls.html" class="hover:underline">
+                الوصول إلى المحتوى المحجوب بالبريد الإلكتروني (Gated Content) بأمان وتفادي الرسائل المزعجة
+              </a>
+            </h2>
+            <p class="text-xs text-neutral-600 dark:text-neutral-400 leading-relaxed mb-4">
+              تعلم كيفية استخدام البريد المؤقت للوصول إلى الكتب الإلكترونية والأبحاث والمحتوى المحجوب بالبريد (Gated Content) دون تعريض بريدك الدائم لحملات التسويق المزعجة.
+            </p>
+          </div>
+          <div class="pt-3 border-t border-neutral-100 dark:border-neutral-800/80 flex items-center justify-between text-xs">
+            <span class="text-neutral-500 font-mono text-[11px]">12 دقائق قراءة</span>
+            <a href="/ar/articles/bypass-email-verification-paywalls.html" class="font-bold text-black dark:text-white hover:underline flex items-center gap-1">
+              <span>قراءة المقال</span>
+              <span>←</span>
+            </a>
+          </div>
+        </article>
+        <!-- Article Card 21: temp-mail-for-newsletter-safety -->
+        <article
+          class="article-card p-5 sm:p-6 bg-white dark:bg-[#121212] border border-neutral-300 dark:border-neutral-800 rounded-xl shadow-sm hover:border-neutral-400 dark:hover:border-neutral-600 transition-all flex flex-col justify-between"
+          data-title="تجربة النشرات الإخبارية وقوائم البريد بأمان: كيف تفحص المحتوى قبل الالتزام؟"
+          data-desc="دليل عملي لاستخدام البريد المؤقت كبيئة اختبار آمنة لفحص جودة النشرات الإخبارية واكتشاف بكسلات التتبع قبل الاشتراك ببريدك الشخصي الدائم."
+          data-category="الخصوصية الرقمية"
+        >
+          <div>
+            <div class="flex items-center gap-2 text-[11px] font-mono text-neutral-500 dark:text-neutral-400 mb-2.5">
+              <span class="font-bold text-black dark:text-white px-2 py-0.5 bg-neutral-100 dark:bg-neutral-800 rounded text-[10px] uppercase">الخصوصية الرقمية</span>
+              <span>•</span>
+              <time datetime="2026-09-25">2026-09-25</time>
+            </div>
+            <h2 class="text-base font-bold text-black dark:text-white mb-2 leading-snug">
+              <a href="/ar/articles/temp-mail-for-newsletter-safety.html" class="hover:underline">
+                تجربة النشرات الإخبارية وقوائم البريد بأمان: كيف تفحص المحتوى قبل الالتزام؟
+              </a>
+            </h2>
+            <p class="text-xs text-neutral-600 dark:text-neutral-400 leading-relaxed mb-4">
+              دليل عملي لاستخدام البريد المؤقت كبيئة اختبار آمنة لفحص جودة النشرات الإخبارية واكتشاف بكسلات التتبع قبل الاشتراك ببريدك الشخصي الدائم.
+            </p>
+          </div>
+          <div class="pt-3 border-t border-neutral-100 dark:border-neutral-800/80 flex items-center justify-between text-xs">
+            <span class="text-neutral-500 font-mono text-[11px]">12 دقائق قراءة</span>
+            <a href="/ar/articles/temp-mail-for-newsletter-safety.html" class="font-bold text-black dark:text-white hover:underline flex items-center gap-1">
+              <span>قراءة المقال</span>
+              <span>←</span>
+            </a>
+          </div>
+        </article>
+        <!-- Article Card 22: temporary-sms-vs-temporary-email -->
+        <article
+          class="article-card p-5 sm:p-6 bg-white dark:bg-[#121212] border border-neutral-300 dark:border-neutral-800 rounded-xl shadow-sm hover:border-neutral-400 dark:hover:border-neutral-600 transition-all flex flex-col justify-between"
+          data-title="مقارنة شاملة: أرقام sms المؤقتة مقابل البريد المؤقت — أيهما أكثر أماناً وخصوصية؟"
+          data-desc="مقارنة تقنية معمارية تكشف المخاطر الأمنية الجسيمة لأرقام sms المؤقتة العامة، وتوضح لماذا يعد البريد المؤقت المعزول الخيار الأكثر أماناً وحماية لخصوصيتك."
+          data-category="الأمن السيبراني"
+        >
+          <div>
+            <div class="flex items-center gap-2 text-[11px] font-mono text-neutral-500 dark:text-neutral-400 mb-2.5">
+              <span class="font-bold text-black dark:text-white px-2 py-0.5 bg-neutral-100 dark:bg-neutral-800 rounded text-[10px] uppercase">الأمن السيبراني</span>
+              <span>•</span>
+              <time datetime="2026-09-25">2026-09-25</time>
+            </div>
+            <h2 class="text-base font-bold text-black dark:text-white mb-2 leading-snug">
+              <a href="/ar/articles/temporary-sms-vs-temporary-email.html" class="hover:underline">
+                مقارنة شاملة: أرقام SMS المؤقتة مقابل البريد المؤقت — أيهما أكثر أماناً وخصوصية؟
+              </a>
+            </h2>
+            <p class="text-xs text-neutral-600 dark:text-neutral-400 leading-relaxed mb-4">
+              مقارنة تقنية معمارية تكشف المخاطر الأمنية الجسيمة لأرقام SMS المؤقتة العامة، وتوضح لماذا يعد البريد المؤقت المعزول الخيار الأكثر أماناً وحماية لخصوصيتك.
+            </p>
+          </div>
+          <div class="pt-3 border-t border-neutral-100 dark:border-neutral-800/80 flex items-center justify-between text-xs">
+            <span class="text-neutral-500 font-mono text-[11px]">12 دقائق قراءة</span>
+            <a href="/ar/articles/temporary-sms-vs-temporary-email.html" class="font-bold text-black dark:text-white hover:underline flex items-center gap-1">
+              <span>قراءة المقال</span>
+              <span>←</span>
+            </a>
+          </div>
+        </article>
+        <!-- Article Card 23: python-automated-email-testing-tutorial -->
+        <article
+          class="article-card p-5 sm:p-6 bg-white dark:bg-[#121212] border border-neutral-300 dark:border-neutral-800 rounded-xl shadow-sm hover:border-neutral-400 dark:hover:border-neutral-600 transition-all flex flex-col justify-between"
+          data-title="أتمتة فحص وتأكيد البريد الإلكتروني بلغة بايثون: دليل شامل لمطوري pytest و selenium"
+          data-desc="تعلم كيفية أتمتة اختبارات التسجيل وتأكيد البريد الإلكتروني بلغة بايثون باستخدام pytest و selenium ومكتبات http لاستخراج أكواد التحقق تلقائيا دون تدخل بشري."
+          data-category="أتمتة الاختبارات والتطوير"
+        >
+          <div>
+            <div class="flex items-center gap-2 text-[11px] font-mono text-neutral-500 dark:text-neutral-400 mb-2.5">
+              <span class="font-bold text-black dark:text-white px-2 py-0.5 bg-neutral-100 dark:bg-neutral-800 rounded text-[10px] uppercase">أتمتة الاختبارات والتطوير</span>
+              <span>•</span>
+              <time datetime="2026-09-26">2026-09-26</time>
+            </div>
+            <h2 class="text-base font-bold text-black dark:text-white mb-2 leading-snug">
+              <a href="/ar/articles/python-automated-email-testing-tutorial.html" class="hover:underline">
+                أتمتة فحص وتأكيد البريد الإلكتروني بلغة بايثون: دليل شامل لمطوري PyTest و Selenium
+              </a>
+            </h2>
+            <p class="text-xs text-neutral-600 dark:text-neutral-400 leading-relaxed mb-4">
+              تعلم كيفية أتمتة اختبارات التسجيل وتأكيد البريد الإلكتروني بلغة بايثون باستخدام PyTest و Selenium ومكتبات HTTP لاستخراج أكواد التحقق تلقائيا دون تدخل بشري.
+            </p>
+          </div>
+          <div class="pt-3 border-t border-neutral-100 dark:border-neutral-800/80 flex items-center justify-between text-xs">
+            <span class="text-neutral-500 font-mono text-[11px]">11 دقائق قراءة</span>
+            <a href="/ar/articles/python-automated-email-testing-tutorial.html" class="font-bold text-black dark:text-white hover:underline flex items-center gap-1">
+              <span>قراءة المقال</span>
+              <span>←</span>
+            </a>
+          </div>
+        </article>
+        <!-- Article Card 24: cypress-playwright-temp-mail-e2e-testing -->
+        <article
+          class="article-card p-5 sm:p-6 bg-white dark:bg-[#121212] border border-neutral-300 dark:border-neutral-800 rounded-xl shadow-sm hover:border-neutral-400 dark:hover:border-neutral-600 transition-all flex flex-col justify-between"
+          data-title="اختبارات e2e للبريد الإلكتروني باستخدام cypress و playwright: مقارنة المحاكاة بالصناديق الحقيقية"
+          data-desc="دليل معماري للمطورين حول اختبار مسارات المصادقة وتأكيد البريد في cypress و playwright مع مقارنة عملية بين تقنيات mocking واستخدام الصناديق المؤقتة الحقيقية."
+          data-category="أتمتة الاختبارات والتطوير"
+        >
+          <div>
+            <div class="flex items-center gap-2 text-[11px] font-mono text-neutral-500 dark:text-neutral-400 mb-2.5">
+              <span class="font-bold text-black dark:text-white px-2 py-0.5 bg-neutral-100 dark:bg-neutral-800 rounded text-[10px] uppercase">أتمتة الاختبارات والتطوير</span>
+              <span>•</span>
+              <time datetime="2026-09-26">2026-09-26</time>
+            </div>
+            <h2 class="text-base font-bold text-black dark:text-white mb-2 leading-snug">
+              <a href="/ar/articles/cypress-playwright-temp-mail-e2e-testing.html" class="hover:underline">
+                اختبارات E2E للبريد الإلكتروني باستخدام Cypress و Playwright: مقارنة المحاكاة بالصناديق الحقيقية
+              </a>
+            </h2>
+            <p class="text-xs text-neutral-600 dark:text-neutral-400 leading-relaxed mb-4">
+              دليل معماري للمطورين حول اختبار مسارات المصادقة وتأكيد البريد في Cypress و Playwright مع مقارنة عملية بين تقنيات Mocking واستخدام الصناديق المؤقتة الحقيقية.
+            </p>
+          </div>
+          <div class="pt-3 border-t border-neutral-100 dark:border-neutral-800/80 flex items-center justify-between text-xs">
+            <span class="text-neutral-500 font-mono text-[11px]">10 دقائق قراءة</span>
+            <a href="/ar/articles/cypress-playwright-temp-mail-e2e-testing.html" class="font-bold text-black dark:text-white hover:underline flex items-center gap-1">
+              <span>قراءة المقال</span>
+              <span>←</span>
+            </a>
+          </div>
+        </article>
+        <!-- Article Card 25: node-js-disposable-email-api-integration -->
+        <article
+          class="article-card p-5 sm:p-6 bg-white dark:bg-[#121212] border border-neutral-300 dark:border-neutral-800 rounded-xl shadow-sm hover:border-neutral-400 dark:hover:border-neutral-600 transition-all flex flex-col justify-between"
+          data-title="دمج واجهات برمجة تطبيقات البريد المؤقت في تطبيقات node.js و typescript"
+          data-desc="تعلم كيفية دمج وإدارة واجهات برمجة البريد المؤقت في بيئات node.js و typescript لبناء أدوات أتمتة خفيفة وسريعة للتحقق من الرسائل الواردة."
+          data-category="أتمتة الاختبارات والتطوير"
+        >
+          <div>
+            <div class="flex items-center gap-2 text-[11px] font-mono text-neutral-500 dark:text-neutral-400 mb-2.5">
+              <span class="font-bold text-black dark:text-white px-2 py-0.5 bg-neutral-100 dark:bg-neutral-800 rounded text-[10px] uppercase">أتمتة الاختبارات والتطوير</span>
+              <span>•</span>
+              <time datetime="2026-09-26">2026-09-26</time>
+            </div>
+            <h2 class="text-base font-bold text-black dark:text-white mb-2 leading-snug">
+              <a href="/ar/articles/node-js-disposable-email-api-integration.html" class="hover:underline">
+                دمج واجهات برمجة تطبيقات البريد المؤقت في تطبيقات Node.js و TypeScript
+              </a>
+            </h2>
+            <p class="text-xs text-neutral-600 dark:text-neutral-400 leading-relaxed mb-4">
+              تعلم كيفية دمج وإدارة واجهات برمجة البريد المؤقت في بيئات Node.js و TypeScript لبناء أدوات أتمتة خفيفة وسريعة للتحقق من الرسائل الواردة.
+            </p>
+          </div>
+          <div class="pt-3 border-t border-neutral-100 dark:border-neutral-800/80 flex items-center justify-between text-xs">
+            <span class="text-neutral-500 font-mono text-[11px]">9 دقائق قراءة</span>
+            <a href="/ar/articles/node-js-disposable-email-api-integration.html" class="font-bold text-black dark:text-white hover:underline flex items-center gap-1">
+              <span>قراءة المقال</span>
+              <span>←</span>
+            </a>
+          </div>
+        </article>
+        <!-- Article Card 26: webhook-triggers-realtime-email-processing -->
+        <article
+          class="article-card p-5 sm:p-6 bg-white dark:bg-[#121212] border border-neutral-300 dark:border-neutral-800 rounded-xl shadow-sm hover:border-neutral-400 dark:hover:border-neutral-600 transition-all flex flex-col justify-between"
+          data-title="بناء مشغلات webhook لمعالجة رسائل البريد الإلكتروني الواردة لحظيا"
+          data-desc="دليل هندسي يوضح كيفية إعداد مشغلات webhook لاستقبال إشعارات وصول رسائل البريد المؤقت وتحويلها إلى أحداث برمجية لحظية في تطبيقاتك."
+          data-category="أتمتة الاختبارات والتطوير"
+        >
+          <div>
+            <div class="flex items-center gap-2 text-[11px] font-mono text-neutral-500 dark:text-neutral-400 mb-2.5">
+              <span class="font-bold text-black dark:text-white px-2 py-0.5 bg-neutral-100 dark:bg-neutral-800 rounded text-[10px] uppercase">أتمتة الاختبارات والتطوير</span>
+              <span>•</span>
+              <time datetime="2026-09-26">2026-09-26</time>
+            </div>
+            <h2 class="text-base font-bold text-black dark:text-white mb-2 leading-snug">
+              <a href="/ar/articles/webhook-triggers-realtime-email-processing.html" class="hover:underline">
+                بناء مشغلات Webhook لمعالجة رسائل البريد الإلكتروني الواردة لحظيا
+              </a>
+            </h2>
+            <p class="text-xs text-neutral-600 dark:text-neutral-400 leading-relaxed mb-4">
+              دليل هندسي يوضح كيفية إعداد مشغلات Webhook لاستقبال إشعارات وصول رسائل البريد المؤقت وتحويلها إلى أحداث برمجية لحظية في تطبيقاتك.
+            </p>
+          </div>
+          <div class="pt-3 border-t border-neutral-100 dark:border-neutral-800/80 flex items-center justify-between text-xs">
+            <span class="text-neutral-500 font-mono text-[11px]">10 دقائق قراءة</span>
+            <a href="/ar/articles/webhook-triggers-realtime-email-processing.html" class="font-bold text-black dark:text-white hover:underline flex items-center gap-1">
+              <span>قراءة المقال</span>
+              <span>←</span>
+            </a>
+          </div>
+        </article>
+        <!-- Article Card 27: staging-environment-email-sandboxing -->
+        <article
+          class="article-card p-5 sm:p-6 bg-white dark:bg-[#121212] border border-neutral-300 dark:border-neutral-800 rounded-xl shadow-sm hover:border-neutral-400 dark:hover:border-neutral-600 transition-all flex flex-col justify-between"
+          data-title="استراتيجيات عزل البريد الإلكتروني في بيئات التجربة وما قبل الإنتاج (staging sandboxing)"
+          data-desc="دليل هندسي يوضح استراتيجيات عزل رسائل البريد في بيئات التجربة staging لمنع تسريب الرسائل للمستخدمين الحقيقيين وتوفير بيئة فحص آمنة 100%."
+          data-category="أتمتة الاختبارات والتطوير"
+        >
+          <div>
+            <div class="flex items-center gap-2 text-[11px] font-mono text-neutral-500 dark:text-neutral-400 mb-2.5">
+              <span class="font-bold text-black dark:text-white px-2 py-0.5 bg-neutral-100 dark:bg-neutral-800 rounded text-[10px] uppercase">أتمتة الاختبارات والتطوير</span>
+              <span>•</span>
+              <time datetime="2026-09-26">2026-09-26</time>
+            </div>
+            <h2 class="text-base font-bold text-black dark:text-white mb-2 leading-snug">
+              <a href="/ar/articles/staging-environment-email-sandboxing.html" class="hover:underline">
+                استراتيجيات عزل البريد الإلكتروني في بيئات التجربة وما قبل الإنتاج (Staging Sandboxing)
+              </a>
+            </h2>
+            <p class="text-xs text-neutral-600 dark:text-neutral-400 leading-relaxed mb-4">
+              دليل هندسي يوضح استراتيجيات عزل رسائل البريد في بيئات التجربة Staging لمنع تسريب الرسائل للمستخدمين الحقيقيين وتوفير بيئة فحص آمنة 100%.
+            </p>
+          </div>
+          <div class="pt-3 border-t border-neutral-100 dark:border-neutral-800/80 flex items-center justify-between text-xs">
+            <span class="text-neutral-500 font-mono text-[11px]">11 دقائق قراءة</span>
+            <a href="/ar/articles/staging-environment-email-sandboxing.html" class="font-bold text-black dark:text-white hover:underline flex items-center gap-1">
+              <span>قراءة المقال</span>
+              <span>←</span>
+            </a>
+          </div>
+        </article>
+        <!-- Article Card 28: postman-automated-api-email-verification -->
+        <article
+          class="article-card p-5 sm:p-6 bg-white dark:bg-[#121212] border border-neutral-300 dark:border-neutral-800 rounded-xl shadow-sm hover:border-neutral-400 dark:hover:border-neutral-600 transition-all flex flex-col justify-between"
+          data-title="اختبار واجهات برمجة التسجيل والمصادقة في postman باستخدام البريد المؤقت"
+          data-desc="دليل عملي لاختبار تدفقات التسجيل والمصادقة في postman و newman باستخدام البريد المؤقت الديناميكي والتحقق الآلي من الأكواد عبر البرمجة النصية."
+          data-category="أتمتة الاختبارات والتطوير"
+        >
+          <div>
+            <div class="flex items-center gap-2 text-[11px] font-mono text-neutral-500 dark:text-neutral-400 mb-2.5">
+              <span class="font-bold text-black dark:text-white px-2 py-0.5 bg-neutral-100 dark:bg-neutral-800 rounded text-[10px] uppercase">أتمتة الاختبارات والتطوير</span>
+              <span>•</span>
+              <time datetime="2026-09-26">2026-09-26</time>
+            </div>
+            <h2 class="text-base font-bold text-black dark:text-white mb-2 leading-snug">
+              <a href="/ar/articles/postman-automated-api-email-verification.html" class="hover:underline">
+                اختبار واجهات برمجة التسجيل والمصادقة في Postman باستخدام البريد المؤقت
+              </a>
+            </h2>
+            <p class="text-xs text-neutral-600 dark:text-neutral-400 leading-relaxed mb-4">
+              دليل عملي لاختبار تدفقات التسجيل والمصادقة في Postman و Newman باستخدام البريد المؤقت الديناميكي والتحقق الآلي من الأكواد عبر البرمجة النصية.
+            </p>
+          </div>
+          <div class="pt-3 border-t border-neutral-100 dark:border-neutral-800/80 flex items-center justify-between text-xs">
+            <span class="text-neutral-500 font-mono text-[11px]">9 دقائق قراءة</span>
+            <a href="/ar/articles/postman-automated-api-email-verification.html" class="font-bold text-black dark:text-white hover:underline flex items-center gap-1">
+              <span>قراءة المقال</span>
+              <span>←</span>
+            </a>
+          </div>
+        </article>
+        <!-- Article Card 29: ci-cd-pipeline-signup-flow-testing -->
+        <article
+          class="article-card p-5 sm:p-6 bg-white dark:bg-[#121212] border border-neutral-300 dark:border-neutral-800 rounded-xl shadow-sm hover:border-neutral-400 dark:hover:border-neutral-600 transition-all flex flex-col justify-between"
+          data-title="منع تراجع تدفقات التسجيل في مسارات العمل github actions و gitlab ci/cd"
+          data-desc="دليل متقدم لهندسة مسارات ci/cd لمنع أخطاء التسجيل وتأكيد البريد قبل وصولها لبيئات الإنتاج عبر الاختبارات الآلية المستمرة."
+          data-category="أتمتة الاختبارات والتطوير"
+        >
+          <div>
+            <div class="flex items-center gap-2 text-[11px] font-mono text-neutral-500 dark:text-neutral-400 mb-2.5">
+              <span class="font-bold text-black dark:text-white px-2 py-0.5 bg-neutral-100 dark:bg-neutral-800 rounded text-[10px] uppercase">أتمتة الاختبارات والتطوير</span>
+              <span>•</span>
+              <time datetime="2026-09-26">2026-09-26</time>
+            </div>
+            <h2 class="text-base font-bold text-black dark:text-white mb-2 leading-snug">
+              <a href="/ar/articles/ci-cd-pipeline-signup-flow-testing.html" class="hover:underline">
+                منع تراجع تدفقات التسجيل في مسارات العمل GitHub Actions و GitLab CI/CD
+              </a>
+            </h2>
+            <p class="text-xs text-neutral-600 dark:text-neutral-400 leading-relaxed mb-4">
+              دليل متقدم لهندسة مسارات CI/CD لمنع أخطاء التسجيل وتأكيد البريد قبل وصولها لبيئات الإنتاج عبر الاختبارات الآلية المستمرة.
+            </p>
+          </div>
+          <div class="pt-3 border-t border-neutral-100 dark:border-neutral-800/80 flex items-center justify-between text-xs">
+            <span class="text-neutral-500 font-mono text-[11px]">10 دقائق قراءة</span>
+            <a href="/ar/articles/ci-cd-pipeline-signup-flow-testing.html" class="font-bold text-black dark:text-white hover:underline flex items-center gap-1">
+              <span>قراءة المقال</span>
+              <span>←</span>
+            </a>
+          </div>
+        </article>
+        <!-- Article Card 30: mocking-smtp-servers-vs-ephemeral-inboxes -->
+        <article
+          class="article-card p-5 sm:p-6 bg-white dark:bg-[#121212] border border-neutral-300 dark:border-neutral-800 rounded-xl shadow-sm hover:border-neutral-400 dark:hover:border-neutral-600 transition-all flex flex-col justify-between"
+          data-title="مقارنة خوادم smtp الوهمية بصناديق البريد المؤقتة الحقيقية: تقييم معماري شامل"
+          data-desc="تحليل تقني يقارن بين أدوات محاكاة خوادم smtp المحلية (مثل mailhog و mailpit) واستخدام واجهات البريد المؤقت الحقيقية في اختبارات التطوير والإنتاج."
+          data-category="أتمتة الاختبارات والتطوير"
+        >
+          <div>
+            <div class="flex items-center gap-2 text-[11px] font-mono text-neutral-500 dark:text-neutral-400 mb-2.5">
+              <span class="font-bold text-black dark:text-white px-2 py-0.5 bg-neutral-100 dark:bg-neutral-800 rounded text-[10px] uppercase">أتمتة الاختبارات والتطوير</span>
+              <span>•</span>
+              <time datetime="2026-09-26">2026-09-26</time>
+            </div>
+            <h2 class="text-base font-bold text-black dark:text-white mb-2 leading-snug">
+              <a href="/ar/articles/mocking-smtp-servers-vs-ephemeral-inboxes.html" class="hover:underline">
+                مقارنة خوادم SMTP الوهمية بصناديق البريد المؤقتة الحقيقية: تقييم معماري شامل
+              </a>
+            </h2>
+            <p class="text-xs text-neutral-600 dark:text-neutral-400 leading-relaxed mb-4">
+              تحليل تقني يقارن بين أدوات محاكاة خوادم SMTP المحلية (مثل MailHog و Mailpit) واستخدام واجهات البريد المؤقت الحقيقية في اختبارات التطوير والإنتاج.
+            </p>
+          </div>
+          <div class="pt-3 border-t border-neutral-100 dark:border-neutral-800/80 flex items-center justify-between text-xs">
+            <span class="text-neutral-500 font-mono text-[11px]">11 دقائق قراءة</span>
+            <a href="/ar/articles/mocking-smtp-servers-vs-ephemeral-inboxes.html" class="font-bold text-black dark:text-white hover:underline flex items-center gap-1">
+              <span>قراءة المقال</span>
+              <span>←</span>
+            </a>
+          </div>
+        </article>
+        <!-- Article Card 31: burner-email-vs-email-alias-forwarding -->
+        <article
+          class="article-card p-5 sm:p-6 bg-white dark:bg-[#121212] border border-neutral-300 dark:border-neutral-800 rounded-xl shadow-sm hover:border-neutral-400 dark:hover:border-neutral-600 transition-all flex flex-col justify-between"
+          data-title="البريد المستهلك المؤقت مقابل إعادة توجيه الأسماء المستعارة: مقارنة معمارية الخصوصية"
+          data-desc="مقارنة تقنية متعمقة بين خدمات البريد المستهلك المؤقت (burner mail) وخدمات إعادة توجيه الأسماء المستعارة (alias forwarding) وكيف تؤثر على حماية هويتك الرقمية."
+          data-category="الخصوصية والأمان الرقمي"
+        >
+          <div>
+            <div class="flex items-center gap-2 text-[11px] font-mono text-neutral-500 dark:text-neutral-400 mb-2.5">
+              <span class="font-bold text-black dark:text-white px-2 py-0.5 bg-neutral-100 dark:bg-neutral-800 rounded text-[10px] uppercase">الخصوصية والأمان الرقمي</span>
+              <span>•</span>
+              <time datetime="2026-09-26">2026-09-26</time>
+            </div>
+            <h2 class="text-base font-bold text-black dark:text-white mb-2 leading-snug">
+              <a href="/ar/articles/burner-email-vs-email-alias-forwarding.html" class="hover:underline">
+                البريد المستهلك المؤقت مقابل إعادة توجيه الأسماء المستعارة: مقارنة معمارية الخصوصية
+              </a>
+            </h2>
+            <p class="text-xs text-neutral-600 dark:text-neutral-400 leading-relaxed mb-4">
+              مقارنة تقنية متعمقة بين خدمات البريد المستهلك المؤقت (Burner Mail) وخدمات إعادة توجيه الأسماء المستعارة (Alias Forwarding) وكيف تؤثر على حماية هويتك الرقمية.
+            </p>
+          </div>
+          <div class="pt-3 border-t border-neutral-100 dark:border-neutral-800/80 flex items-center justify-between text-xs">
+            <span class="text-neutral-500 font-mono text-[11px]">10 دقائق قراءة</span>
+            <a href="/ar/articles/burner-email-vs-email-alias-forwarding.html" class="font-bold text-black dark:text-white hover:underline flex items-center gap-1">
+              <span>قراءة المقال</span>
+              <span>←</span>
+            </a>
+          </div>
+        </article>
+        <!-- Article Card 32: public-wifi-hotspots-email-privacy-risks -->
+        <article
+          class="article-card p-5 sm:p-6 bg-white dark:bg-[#121212] border border-neutral-300 dark:border-neutral-800 rounded-xl shadow-sm hover:border-neutral-400 dark:hover:border-neutral-600 transition-all flex flex-col justify-between"
+          data-title="أمان شبكات واي فاي العامة: حماية بيانات البريد من التنصت وهجمات رجل في المنتصف"
+          data-desc="دليل حماية الخصوصية على شبكات الواي فاي العامة في المقاهي والمطارات لمنع سرقة بيانات تسجيل الدخول وتجنب بوابات الدخول الخادعة بالبريد المؤقت."
+          data-category="الخصوصية والأمان الرقمي"
+        >
+          <div>
+            <div class="flex items-center gap-2 text-[11px] font-mono text-neutral-500 dark:text-neutral-400 mb-2.5">
+              <span class="font-bold text-black dark:text-white px-2 py-0.5 bg-neutral-100 dark:bg-neutral-800 rounded text-[10px] uppercase">الخصوصية والأمان الرقمي</span>
+              <span>•</span>
+              <time datetime="2026-09-26">2026-09-26</time>
+            </div>
+            <h2 class="text-base font-bold text-black dark:text-white mb-2 leading-snug">
+              <a href="/ar/articles/public-wifi-hotspots-email-privacy-risks.html" class="hover:underline">
+                أمان شبكات واي فاي العامة: حماية بيانات البريد من التنصت وهجمات رجل في المنتصف
+              </a>
+            </h2>
+            <p class="text-xs text-neutral-600 dark:text-neutral-400 leading-relaxed mb-4">
+              دليل حماية الخصوصية على شبكات الواي فاي العامة في المقاهي والمطارات لمنع سرقة بيانات تسجيل الدخول وتجنب بوابات الدخول الخادعة بالبريد المؤقت.
+            </p>
+          </div>
+          <div class="pt-3 border-t border-neutral-100 dark:border-neutral-800/80 flex items-center justify-between text-xs">
+            <span class="text-neutral-500 font-mono text-[11px]">9 دقائق قراءة</span>
+            <a href="/ar/articles/public-wifi-hotspots-email-privacy-risks.html" class="font-bold text-black dark:text-white hover:underline flex items-center gap-1">
+              <span>قراءة المقال</span>
+              <span>←</span>
+            </a>
+          </div>
+        </article>
+        <!-- Article Card 33: ecommerce-guest-checkout-spam-prevention -->
+        <article
+          class="article-card p-5 sm:p-6 bg-white dark:bg-[#121212] border border-neutral-300 dark:border-neutral-800 rounded-xl shadow-sm hover:border-neutral-400 dark:hover:border-neutral-600 transition-all flex flex-col justify-between"
+          data-title="خصوصية التسوق الإلكتروني: استخدام البريد المؤقت للشراء كزائر دون رسائل ترويجية"
+          data-desc="تعلم كيفية حماية صندوق بريدك من مئات العروض الترويجية ورسائل سلة التسوق المتروكة عند الشراء من المتاجر الإلكترونية باستخدام ميزة الشراء كزائر والبريد المؤقت."
+          data-category="الخصوصية والأمان الرقمي"
+        >
+          <div>
+            <div class="flex items-center gap-2 text-[11px] font-mono text-neutral-500 dark:text-neutral-400 mb-2.5">
+              <span class="font-bold text-black dark:text-white px-2 py-0.5 bg-neutral-100 dark:bg-neutral-800 rounded text-[10px] uppercase">الخصوصية والأمان الرقمي</span>
+              <span>•</span>
+              <time datetime="2026-09-26">2026-09-26</time>
+            </div>
+            <h2 class="text-base font-bold text-black dark:text-white mb-2 leading-snug">
+              <a href="/ar/articles/ecommerce-guest-checkout-spam-prevention.html" class="hover:underline">
+                خصوصية التسوق الإلكتروني: استخدام البريد المؤقت للشراء كزائر دون رسائل ترويجية
+              </a>
+            </h2>
+            <p class="text-xs text-neutral-600 dark:text-neutral-400 leading-relaxed mb-4">
+              تعلم كيفية حماية صندوق بريدك من مئات العروض الترويجية ورسائل سلة التسوق المتروكة عند الشراء من المتاجر الإلكترونية باستخدام ميزة الشراء كزائر والبريد المؤقت.
+            </p>
+          </div>
+          <div class="pt-3 border-t border-neutral-100 dark:border-neutral-800/80 flex items-center justify-between text-xs">
+            <span class="text-neutral-500 font-mono text-[11px]">9 دقائق قراءة</span>
+            <a href="/ar/articles/ecommerce-guest-checkout-spam-prevention.html" class="font-bold text-black dark:text-white hover:underline flex items-center gap-1">
+              <span>قراءة المقال</span>
+              <span>←</span>
+            </a>
+          </div>
+        </article>
+        <!-- Article Card 34: data-brokers-opt-out-ephemeral-identities -->
+        <article
+          class="article-card p-5 sm:p-6 bg-white dark:bg-[#121212] border border-neutral-300 dark:border-neutral-800 rounded-xl shadow-sm hover:border-neutral-400 dark:hover:border-neutral-600 transition-all flex flex-col justify-between"
+          data-title="تجويع سماسرة البيانات: كيف يمنع البريد المؤقت بناء الملفات الخفية والتعقب الإعلاني"
+          data-desc="اكتشف كيف يجمع سماسرة البيانات ملفات شخصية عنك عبر بريدك الإلكتروني، وكيف يمكنك تجويع هذه الشركات وحماية خصوصيتك باستخدام الهويات الرقمية المؤقتة."
+          data-category="الخصوصية والأمان الرقمي"
+        >
+          <div>
+            <div class="flex items-center gap-2 text-[11px] font-mono text-neutral-500 dark:text-neutral-400 mb-2.5">
+              <span class="font-bold text-black dark:text-white px-2 py-0.5 bg-neutral-100 dark:bg-neutral-800 rounded text-[10px] uppercase">الخصوصية والأمان الرقمي</span>
+              <span>•</span>
+              <time datetime="2026-09-26">2026-09-26</time>
+            </div>
+            <h2 class="text-base font-bold text-black dark:text-white mb-2 leading-snug">
+              <a href="/ar/articles/data-brokers-opt-out-ephemeral-identities.html" class="hover:underline">
+                تجويع سماسرة البيانات: كيف يمنع البريد المؤقت بناء الملفات الخفية والتعقب الإعلاني
+              </a>
+            </h2>
+            <p class="text-xs text-neutral-600 dark:text-neutral-400 leading-relaxed mb-4">
+              اكتشف كيف يجمع سماسرة البيانات ملفات شخصية عنك عبر بريدك الإلكتروني، وكيف يمكنك تجويع هذه الشركات وحماية خصوصيتك باستخدام الهويات الرقمية المؤقتة.
+            </p>
+          </div>
+          <div class="pt-3 border-t border-neutral-100 dark:border-neutral-800/80 flex items-center justify-between text-xs">
+            <span class="text-neutral-500 font-mono text-[11px]">11 دقائق قراءة</span>
+            <a href="/ar/articles/data-brokers-opt-out-ephemeral-identities.html" class="font-bold text-black dark:text-white hover:underline flex items-center gap-1">
+              <span>قراءة المقال</span>
+              <span>←</span>
+            </a>
+          </div>
+        </article>
+        <!-- Article Card 35: throwaway-email-for-social-media-research -->
+        <article
+          class="article-card p-5 sm:p-6 bg-white dark:bg-[#121212] border border-neutral-300 dark:border-neutral-800 rounded-xl shadow-sm hover:border-neutral-400 dark:hover:border-neutral-600 transition-all flex flex-col justify-between"
+          data-title="استخدام البريد المؤقت في أبحاث المصادر المفتوحة osint وتجنب مخاطر كشف الهوية"
+          data-desc="دليل متخصص للمحققين الرقميين والباحثين في أمن المعلومات لاستخدام البريد المؤقت في استطلاع شبكات التواصل ومنصات osint بأمان تام دون كشف الهوية."
+          data-category="الخصوصية والأمان الرقمي"
+        >
+          <div>
+            <div class="flex items-center gap-2 text-[11px] font-mono text-neutral-500 dark:text-neutral-400 mb-2.5">
+              <span class="font-bold text-black dark:text-white px-2 py-0.5 bg-neutral-100 dark:bg-neutral-800 rounded text-[10px] uppercase">الخصوصية والأمان الرقمي</span>
+              <span>•</span>
+              <time datetime="2026-09-26">2026-09-26</time>
+            </div>
+            <h2 class="text-base font-bold text-black dark:text-white mb-2 leading-snug">
+              <a href="/ar/articles/throwaway-email-for-social-media-research.html" class="hover:underline">
+                استخدام البريد المؤقت في أبحاث المصادر المفتوحة OSINT وتجنب مخاطر كشف الهوية
+              </a>
+            </h2>
+            <p class="text-xs text-neutral-600 dark:text-neutral-400 leading-relaxed mb-4">
+              دليل متخصص للمحققين الرقميين والباحثين في أمن المعلومات لاستخدام البريد المؤقت في استطلاع شبكات التواصل ومنصات OSINT بأمان تام دون كشف الهوية.
+            </p>
+          </div>
+          <div class="pt-3 border-t border-neutral-100 dark:border-neutral-800/80 flex items-center justify-between text-xs">
+            <span class="text-neutral-500 font-mono text-[11px]">10 دقائق قراءة</span>
+            <a href="/ar/articles/throwaway-email-for-social-media-research.html" class="font-bold text-black dark:text-white hover:underline flex items-center gap-1">
+              <span>قراءة المقال</span>
+              <span>←</span>
+            </a>
+          </div>
+        </article>
+        <!-- Article Card 36: job-hunting-privacy-temporary-email-strategy -->
+        <article
+          class="article-card p-5 sm:p-6 bg-white dark:bg-[#121212] border border-neutral-300 dark:border-neutral-800 rounded-xl shadow-sm hover:border-neutral-400 dark:hover:border-neutral-600 transition-all flex flex-col justify-between"
+          data-title="خصوصية البحث عن عمل: حماية صندوق بريدك الشخصي من رسائل التوظيف العشوائية والاحتيال"
+          data-desc="دليل لحماية بياناتك الشخصية عند التقديم على الوظائف عبر الإنترنت واستخدام البريد المؤقت لفحص بوابات التوظيف غير الموثوقة وتجنب رسائل العمل الوهمية."
+          data-category="الخصوصية والأمان الرقمي"
+        >
+          <div>
+            <div class="flex items-center gap-2 text-[11px] font-mono text-neutral-500 dark:text-neutral-400 mb-2.5">
+              <span class="font-bold text-black dark:text-white px-2 py-0.5 bg-neutral-100 dark:bg-neutral-800 rounded text-[10px] uppercase">الخصوصية والأمان الرقمي</span>
+              <span>•</span>
+              <time datetime="2026-09-26">2026-09-26</time>
+            </div>
+            <h2 class="text-base font-bold text-black dark:text-white mb-2 leading-snug">
+              <a href="/ar/articles/job-hunting-privacy-temporary-email-strategy.html" class="hover:underline">
+                خصوصية البحث عن عمل: حماية صندوق بريدك الشخصي من رسائل التوظيف العشوائية والاحتيال
+              </a>
+            </h2>
+            <p class="text-xs text-neutral-600 dark:text-neutral-400 leading-relaxed mb-4">
+              دليل لحماية بياناتك الشخصية عند التقديم على الوظائف عبر الإنترنت واستخدام البريد المؤقت لفحص بوابات التوظيف غير الموثوقة وتجنب رسائل العمل الوهمية.
+            </p>
+          </div>
+          <div class="pt-3 border-t border-neutral-100 dark:border-neutral-800/80 flex items-center justify-between text-xs">
+            <span class="text-neutral-500 font-mono text-[11px]">9 دقائق قراءة</span>
+            <a href="/ar/articles/job-hunting-privacy-temporary-email-strategy.html" class="font-bold text-black dark:text-white hover:underline flex items-center gap-1">
+              <span>قراءة المقال</span>
+              <span>←</span>
+            </a>
+          </div>
+        </article>
+        <!-- Article Card 37: travel-booking-wifi-portals-email-safety -->
+        <article
+          class="article-card p-5 sm:p-6 bg-white dark:bg-[#121212] border border-neutral-300 dark:border-neutral-800 rounded-xl shadow-sm hover:border-neutral-400 dark:hover:border-neutral-600 transition-all flex flex-col justify-between"
+          data-title="بوابات تسجيل الدخول في المطارات والفنادق: حماية البريد الشخصي على شبكات السفر"
+          data-desc="دليل المسافر الذكي لحماية البريد الإلكتروني من بوابات الواي فاي الإجبارية في الفنادق والمطارات العالمية وتفادي مئات الرسائل السياحية الترويجية."
+          data-category="الخصوصية والأمان الرقمي"
+        >
+          <div>
+            <div class="flex items-center gap-2 text-[11px] font-mono text-neutral-500 dark:text-neutral-400 mb-2.5">
+              <span class="font-bold text-black dark:text-white px-2 py-0.5 bg-neutral-100 dark:bg-neutral-800 rounded text-[10px] uppercase">الخصوصية والأمان الرقمي</span>
+              <span>•</span>
+              <time datetime="2026-09-26">2026-09-26</time>
+            </div>
+            <h2 class="text-base font-bold text-black dark:text-white mb-2 leading-snug">
+              <a href="/ar/articles/travel-booking-wifi-portals-email-safety.html" class="hover:underline">
+                بوابات تسجيل الدخول في المطارات والفنادق: حماية البريد الشخصي على شبكات السفر
+              </a>
+            </h2>
+            <p class="text-xs text-neutral-600 dark:text-neutral-400 leading-relaxed mb-4">
+              دليل المسافر الذكي لحماية البريد الإلكتروني من بوابات الواي فاي الإجبارية في الفنادق والمطارات العالمية وتفادي مئات الرسائل السياحية الترويجية.
+            </p>
+          </div>
+          <div class="pt-3 border-t border-neutral-100 dark:border-neutral-800/80 flex items-center justify-between text-xs">
+            <span class="text-neutral-500 font-mono text-[11px]">9 دقائق قراءة</span>
+            <a href="/ar/articles/travel-booking-wifi-portals-email-safety.html" class="font-bold text-black dark:text-white hover:underline flex items-center gap-1">
+              <span>قراءة المقال</span>
+              <span>←</span>
+            </a>
+          </div>
+        </article>
+        <!-- Article Card 38: preventing-online-harassment-doxxing-email-hygiene -->
+        <article
+          class="article-card p-5 sm:p-6 bg-white dark:bg-[#121212] border border-neutral-300 dark:border-neutral-800 rounded-xl shadow-sm hover:border-neutral-400 dark:hover:border-neutral-600 transition-all flex flex-col justify-between"
+          data-title="النظافة الرقمية للبريد لصناع المحتوى والصحفيين: الحد من كشف البيانات والمضايقات الموجهة"
+          data-desc="دليل أمني شامل لصناع المحتوى والصحفيين لتطبيق قواعد النظافة الرقمية للبريد ومنع هجمات كشف البيانات doxxing والمضايقات عبر الإنترنت باستخدام البريد المؤقت."
+          data-category="الخصوصية والأمان الرقمي"
+        >
+          <div>
+            <div class="flex items-center gap-2 text-[11px] font-mono text-neutral-500 dark:text-neutral-400 mb-2.5">
+              <span class="font-bold text-black dark:text-white px-2 py-0.5 bg-neutral-100 dark:bg-neutral-800 rounded text-[10px] uppercase">الخصوصية والأمان الرقمي</span>
+              <span>•</span>
+              <time datetime="2026-09-26">2026-09-26</time>
+            </div>
+            <h2 class="text-base font-bold text-black dark:text-white mb-2 leading-snug">
+              <a href="/ar/articles/preventing-online-harassment-doxxing-email-hygiene.html" class="hover:underline">
+                النظافة الرقمية للبريد لصناع المحتوى والصحفيين: الحد من كشف البيانات والمضايقات الموجهة
+              </a>
+            </h2>
+            <p class="text-xs text-neutral-600 dark:text-neutral-400 leading-relaxed mb-4">
+              دليل أمني شامل لصناع المحتوى والصحفيين لتطبيق قواعد النظافة الرقمية للبريد ومنع هجمات كشف البيانات Doxxing والمضايقات عبر الإنترنت باستخدام البريد المؤقت.
+            </p>
+          </div>
+          <div class="pt-3 border-t border-neutral-100 dark:border-neutral-800/80 flex items-center justify-between text-xs">
+            <span class="text-neutral-500 font-mono text-[11px]">11 دقائق قراءة</span>
+            <a href="/ar/articles/preventing-online-harassment-doxxing-email-hygiene.html" class="font-bold text-black dark:text-white hover:underline flex items-center gap-1">
+              <span>قراءة المقال</span>
+              <span>←</span>
+            </a>
+          </div>
+        </article>
+        <!-- Article Card 39: dns-mx-records-temporary-mail-delivery -->
+        <article
+          class="article-card p-5 sm:p-6 bg-white dark:bg-[#121212] border border-neutral-300 dark:border-neutral-800 rounded-xl shadow-sm hover:border-neutral-400 dark:hover:border-neutral-600 transition-all flex flex-col justify-between"
+          data-title="سجلات dns mx وتوجيه البريد: كيف تستقبل خوادم البريد المؤقت آلاف الرسائل في الثانية؟"
+          data-desc="دليل هندسي متقدم يشرح سجلات mx والأولويات وتوزيع الأحمال dns load balancing لاستقبال رسائل البريد المؤقت بسرعة البرق دون تأخير."
+          data-category="البنية التحتية والبروتوكولات"
+        >
+          <div>
+            <div class="flex items-center gap-2 text-[11px] font-mono text-neutral-500 dark:text-neutral-400 mb-2.5">
+              <span class="font-bold text-black dark:text-white px-2 py-0.5 bg-neutral-100 dark:bg-neutral-800 rounded text-[10px] uppercase">البنية التحتية والبروتوكولات</span>
+              <span>•</span>
+              <time datetime="2026-03-24">2026-03-24</time>
+            </div>
+            <h2 class="text-base font-bold text-black dark:text-white mb-2 leading-snug">
+              <a href="/ar/articles/dns-mx-records-temporary-mail-delivery.html" class="hover:underline">
+                سجلات DNS MX وتوجيه البريد: كيف تستقبل خوادم البريد المؤقت آلاف الرسائل في الثانية؟
+              </a>
+            </h2>
+            <p class="text-xs text-neutral-600 dark:text-neutral-400 leading-relaxed mb-4">
+              دليل هندسي متقدم يشرح سجلات MX والأولويات وتوزيع الأحمال DNS Load Balancing لاستقبال رسائل البريد المؤقت بسرعة البرق دون تأخير.
+            </p>
+          </div>
+          <div class="pt-3 border-t border-neutral-100 dark:border-neutral-800/80 flex items-center justify-between text-xs">
+            <span class="text-neutral-500 font-mono text-[11px]">7 دقائق قراءة</span>
+            <a href="/ar/articles/dns-mx-records-temporary-mail-delivery.html" class="font-bold text-black dark:text-white hover:underline flex items-center gap-1">
+              <span>قراءة المقال</span>
+              <span>←</span>
+            </a>
+          </div>
+        </article>
+        <!-- Article Card 40: smtp-handshake-protocol-inbox-architecture -->
+        <article
+          class="article-card p-5 sm:p-6 bg-white dark:bg-[#121212] border border-neutral-300 dark:border-neutral-800 rounded-xl shadow-sm hover:border-neutral-400 dark:hover:border-neutral-600 transition-all flex flex-col justify-between"
+          data-title="تشريح مصافحة smtp: دورة حياة رسالة البريد المؤقت من الاتصال إلى واجهة المستخدم"
+          data-desc="شرح تفصيلي لأوامر helo و mail from و rcpt to و data وكيفية معالجة التدفقات في الذاكرة العشوائية لتسليم رسائل التفعيل فورا."
+          data-category="البنية التحتية والبروتوكولات"
+        >
+          <div>
+            <div class="flex items-center gap-2 text-[11px] font-mono text-neutral-500 dark:text-neutral-400 mb-2.5">
+              <span class="font-bold text-black dark:text-white px-2 py-0.5 bg-neutral-100 dark:bg-neutral-800 rounded text-[10px] uppercase">البنية التحتية والبروتوكولات</span>
+              <span>•</span>
+              <time datetime="2026-03-24">2026-03-24</time>
+            </div>
+            <h2 class="text-base font-bold text-black dark:text-white mb-2 leading-snug">
+              <a href="/ar/articles/smtp-handshake-protocol-inbox-architecture.html" class="hover:underline">
+                تشريح مصافحة SMTP: دورة حياة رسالة البريد المؤقت من الاتصال إلى واجهة المستخدم
+              </a>
+            </h2>
+            <p class="text-xs text-neutral-600 dark:text-neutral-400 leading-relaxed mb-4">
+              شرح تفصيلي لأوامر HELO و MAIL FROM و RCPT TO و DATA وكيفية معالجة التدفقات في الذاكرة العشوائية لتسليم رسائل التفعيل فورا.
+            </p>
+          </div>
+          <div class="pt-3 border-t border-neutral-100 dark:border-neutral-800/80 flex items-center justify-between text-xs">
+            <span class="text-neutral-500 font-mono text-[11px]">7 دقائق قراءة</span>
+            <a href="/ar/articles/smtp-handshake-protocol-inbox-architecture.html" class="font-bold text-black dark:text-white hover:underline flex items-center gap-1">
+              <span>قراءة المقال</span>
+              <span>←</span>
+            </a>
+          </div>
+        </article>
+        <!-- Article Card 41: tls-starttls-in-transit-encryption-temp-mail -->
+        <article
+          class="article-card p-5 sm:p-6 bg-white dark:bg-[#121212] border border-neutral-300 dark:border-neutral-800 rounded-xl shadow-sm hover:border-neutral-400 dark:hover:border-neutral-600 transition-all flex flex-col justify-between"
+          data-title="تشفير tls و starttls: كيف نضمن حماية رسائل التفعيل أثناء انتقالها عبر الإنترنت؟"
+          data-desc="تعرف على آليات تشفير النقل عبر بروتوكولات tls 1.3 ومنع هجمات التنصت man-in-the-middle على روابط ورموز التحقق الحساسة."
+          data-category="الأمان والتشفير"
+        >
+          <div>
+            <div class="flex items-center gap-2 text-[11px] font-mono text-neutral-500 dark:text-neutral-400 mb-2.5">
+              <span class="font-bold text-black dark:text-white px-2 py-0.5 bg-neutral-100 dark:bg-neutral-800 rounded text-[10px] uppercase">الأمان والتشفير</span>
+              <span>•</span>
+              <time datetime="2026-03-24">2026-03-24</time>
+            </div>
+            <h2 class="text-base font-bold text-black dark:text-white mb-2 leading-snug">
+              <a href="/ar/articles/tls-starttls-in-transit-encryption-temp-mail.html" class="hover:underline">
+                تشفير TLS و STARTTLS: كيف نضمن حماية رسائل التفعيل أثناء انتقالها عبر الإنترنت؟
+              </a>
+            </h2>
+            <p class="text-xs text-neutral-600 dark:text-neutral-400 leading-relaxed mb-4">
+              تعرف على آليات تشفير النقل عبر بروتوكولات TLS 1.3 ومنع هجمات التنصت Man-In-The-Middle على روابط ورموز التحقق الحساسة.
+            </p>
+          </div>
+          <div class="pt-3 border-t border-neutral-100 dark:border-neutral-800/80 flex items-center justify-between text-xs">
+            <span class="text-neutral-500 font-mono text-[11px]">7 دقائق قراءة</span>
+            <a href="/ar/articles/tls-starttls-in-transit-encryption-temp-mail.html" class="font-bold text-black dark:text-white hover:underline flex items-center gap-1">
+              <span>قراءة المقال</span>
+              <span>←</span>
+            </a>
+          </div>
+        </article>
+        <!-- Article Card 42: in-memory-ephemeral-storage-redis-ramdisk -->
+        <article
+          class="article-card p-5 sm:p-6 bg-white dark:bg-[#121212] border border-neutral-300 dark:border-neutral-800 rounded-xl shadow-sm hover:border-neutral-400 dark:hover:border-neutral-600 transition-all flex flex-col justify-between"
+          data-title="التخزين العابر في الذاكرة العشوائية: كيف تعمل صناديق البريد باستخدام redis و ramdisk؟"
+          data-desc="استكشف الهندسة المعمارية خلف صناديق البريد فائقة السرعة التي تنعدم فيها أقراص التخزين الدائمة عبر تقنيات التدمير الذاتي للبيانات."
+          data-category="البنية التحتية والبروتوكولات"
+        >
+          <div>
+            <div class="flex items-center gap-2 text-[11px] font-mono text-neutral-500 dark:text-neutral-400 mb-2.5">
+              <span class="font-bold text-black dark:text-white px-2 py-0.5 bg-neutral-100 dark:bg-neutral-800 rounded text-[10px] uppercase">البنية التحتية والبروتوكولات</span>
+              <span>•</span>
+              <time datetime="2026-03-24">2026-03-24</time>
+            </div>
+            <h2 class="text-base font-bold text-black dark:text-white mb-2 leading-snug">
+              <a href="/ar/articles/in-memory-ephemeral-storage-redis-ramdisk.html" class="hover:underline">
+                التخزين العابر في الذاكرة العشوائية: كيف تعمل صناديق البريد باستخدام Redis و RAMDisk؟
+              </a>
+            </h2>
+            <p class="text-xs text-neutral-600 dark:text-neutral-400 leading-relaxed mb-4">
+              استكشف الهندسة المعمارية خلف صناديق البريد فائقة السرعة التي تنعدم فيها أقراص التخزين الدائمة عبر تقنيات التدمير الذاتي للبيانات.
+            </p>
+          </div>
+          <div class="pt-3 border-t border-neutral-100 dark:border-neutral-800/80 flex items-center justify-between text-xs">
+            <span class="text-neutral-500 font-mono text-[11px]">7 دقائق قراءة</span>
+            <a href="/ar/articles/in-memory-ephemeral-storage-redis-ramdisk.html" class="font-bold text-black dark:text-white hover:underline flex items-center gap-1">
+              <span>قراءة المقال</span>
+              <span>←</span>
+            </a>
+          </div>
+        </article>
+        <!-- Article Card 43: webhook-event-driven-email-notifications -->
+        <article
+          class="article-card p-5 sm:p-6 bg-white dark:bg-[#121212] border border-neutral-300 dark:border-neutral-800 rounded-xl shadow-sm hover:border-neutral-400 dark:hover:border-neutral-600 transition-all flex flex-col justify-between"
+          data-title="إشعارات البريد المؤقت التفاعلية: استقبال الرسائل فورا عبر webhooks و server-sent events"
+          data-desc="دليل المطورين لربط صناديق البريد المؤقت مع خطوط الإنتاج عبر webhooks وتقنيات البث اللحظي sse لاستلام إشعارات التحقق دون طلبات دورية متكررة."
+          data-category="التطوير والأتمتة"
+        >
+          <div>
+            <div class="flex items-center gap-2 text-[11px] font-mono text-neutral-500 dark:text-neutral-400 mb-2.5">
+              <span class="font-bold text-black dark:text-white px-2 py-0.5 bg-neutral-100 dark:bg-neutral-800 rounded text-[10px] uppercase">التطوير والأتمتة</span>
+              <span>•</span>
+              <time datetime="2026-03-24">2026-03-24</time>
+            </div>
+            <h2 class="text-base font-bold text-black dark:text-white mb-2 leading-snug">
+              <a href="/ar/articles/webhook-event-driven-email-notifications.html" class="hover:underline">
+                إشعارات البريد المؤقت التفاعلية: استقبال الرسائل فورا عبر Webhooks و Server-Sent Events
+              </a>
+            </h2>
+            <p class="text-xs text-neutral-600 dark:text-neutral-400 leading-relaxed mb-4">
+              دليل المطورين لربط صناديق البريد المؤقت مع خطوط الإنتاج عبر Webhooks وتقنيات البث اللحظي SSE لاستلام إشعارات التحقق دون طلبات دورية متكررة.
+            </p>
+          </div>
+          <div class="pt-3 border-t border-neutral-100 dark:border-neutral-800/80 flex items-center justify-between text-xs">
+            <span class="text-neutral-500 font-mono text-[11px]">7 دقائق قراءة</span>
+            <a href="/ar/articles/webhook-event-driven-email-notifications.html" class="font-bold text-black dark:text-white hover:underline flex items-center gap-1">
+              <span>قراءة المقال</span>
+              <span>←</span>
+            </a>
+          </div>
+        </article>
+        <!-- Article Card 44: bypassing-greylisting-delays-temp-inboxes -->
+        <article
+          class="article-card p-5 sm:p-6 bg-white dark:bg-[#121212] border border-neutral-300 dark:border-neutral-800 rounded-xl shadow-sm hover:border-neutral-400 dark:hover:border-neutral-600 transition-all flex flex-col justify-between"
+          data-title="تجاوز تأخير القوائم الرمادية (greylisting): كيف تضمن وصول رسائل التفعيل دون انتظار؟"
+          data-desc="كيف تؤثر القوائم الرمادية على سرعة استلام رموز التحقق، وما هي الاستراتيجيات الهندسية المتبعة لتفادي التأخيرات واستقبال البريد فورا."
+          data-category="البنية التحتية والبروتوكولات"
+        >
+          <div>
+            <div class="flex items-center gap-2 text-[11px] font-mono text-neutral-500 dark:text-neutral-400 mb-2.5">
+              <span class="font-bold text-black dark:text-white px-2 py-0.5 bg-neutral-100 dark:bg-neutral-800 rounded text-[10px] uppercase">البنية التحتية والبروتوكولات</span>
+              <span>•</span>
+              <time datetime="2026-03-24">2026-03-24</time>
+            </div>
+            <h2 class="text-base font-bold text-black dark:text-white mb-2 leading-snug">
+              <a href="/ar/articles/bypassing-greylisting-delays-temp-inboxes.html" class="hover:underline">
+                تجاوز تأخير القوائم الرمادية (Greylisting): كيف تضمن وصول رسائل التفعيل دون انتظار؟
+              </a>
+            </h2>
+            <p class="text-xs text-neutral-600 dark:text-neutral-400 leading-relaxed mb-4">
+              كيف تؤثر القوائم الرمادية على سرعة استلام رموز التحقق، وما هي الاستراتيجيات الهندسية المتبعة لتفادي التأخيرات واستقبال البريد فورا.
+            </p>
+          </div>
+          <div class="pt-3 border-t border-neutral-100 dark:border-neutral-800/80 flex items-center justify-between text-xs">
+            <span class="text-neutral-500 font-mono text-[11px]">7 دقائق قراءة</span>
+            <a href="/ar/articles/bypassing-greylisting-delays-temp-inboxes.html" class="font-bold text-black dark:text-white hover:underline flex items-center gap-1">
+              <span>قراءة المقال</span>
+              <span>←</span>
+            </a>
+          </div>
+        </article>
+        <!-- Article Card 45: mime-multipart-parsing-raw-eml-extraction -->
+        <article
+          class="article-card p-5 sm:p-6 bg-white dark:bg-[#121212] border border-neutral-300 dark:border-neutral-800 rounded-xl shadow-sm hover:border-neutral-400 dark:hover:border-neutral-600 transition-all flex flex-col justify-between"
+          data-title="تحليل رسائل mime واستخراج محتوى eml: كيف نعزل البرمجيات الخبيثة ونعرض البريد بأمان؟"
+          data-desc="شرح هندسي لطريقة تفكيك أجزاء رسائل البريد متعددة الوسائط وتطهير محتوى html وعزل الروابط التتبعية لضمان تجربة تصفح آمنة."
+          data-category="البنية التحتية والبروتوكولات"
+        >
+          <div>
+            <div class="flex items-center gap-2 text-[11px] font-mono text-neutral-500 dark:text-neutral-400 mb-2.5">
+              <span class="font-bold text-black dark:text-white px-2 py-0.5 bg-neutral-100 dark:bg-neutral-800 rounded text-[10px] uppercase">البنية التحتية والبروتوكولات</span>
+              <span>•</span>
+              <time datetime="2026-03-24">2026-03-24</time>
+            </div>
+            <h2 class="text-base font-bold text-black dark:text-white mb-2 leading-snug">
+              <a href="/ar/articles/mime-multipart-parsing-raw-eml-extraction.html" class="hover:underline">
+                تحليل رسائل MIME واستخراج محتوى EML: كيف نعزل البرمجيات الخبيثة ونعرض البريد بأمان؟
+              </a>
+            </h2>
+            <p class="text-xs text-neutral-600 dark:text-neutral-400 leading-relaxed mb-4">
+              شرح هندسي لطريقة تفكيك أجزاء رسائل البريد متعددة الوسائط وتطهير محتوى HTML وعزل الروابط التتبعية لضمان تجربة تصفح آمنة.
+            </p>
+          </div>
+          <div class="pt-3 border-t border-neutral-100 dark:border-neutral-800/80 flex items-center justify-between text-xs">
+            <span class="text-neutral-500 font-mono text-[11px]">7 دقائق قراءة</span>
+            <a href="/ar/articles/mime-multipart-parsing-raw-eml-extraction.html" class="font-bold text-black dark:text-white hover:underline flex items-center gap-1">
+              <span>قراءة المقال</span>
+              <span>←</span>
+            </a>
+          </div>
+        </article>
+        <!-- Article Card 46: zero-log-stateless-mail-server-architecture -->
+        <article
+          class="article-card p-5 sm:p-6 bg-white dark:bg-[#121212] border border-neutral-300 dark:border-neutral-800 rounded-xl shadow-sm hover:border-neutral-400 dark:hover:border-neutral-600 transition-all flex flex-col justify-between"
+          data-title="هندسة الخوادم عديمة الحالة (stateless architecture): المبدأ التقني للبريد الخالي من السجلات"
+          data-desc="تعرف على كيفية بناء خوادم بريد مؤقت تعمل بدون أقراص صلبة ولا تحتفظ بسجلات عناوين ip لضمان الخصوصية التقنية المطلقة."
+          data-category="الأمان والتشفير"
+        >
+          <div>
+            <div class="flex items-center gap-2 text-[11px] font-mono text-neutral-500 dark:text-neutral-400 mb-2.5">
+              <span class="font-bold text-black dark:text-white px-2 py-0.5 bg-neutral-100 dark:bg-neutral-800 rounded text-[10px] uppercase">الأمان والتشفير</span>
+              <span>•</span>
+              <time datetime="2026-03-24">2026-03-24</time>
+            </div>
+            <h2 class="text-base font-bold text-black dark:text-white mb-2 leading-snug">
+              <a href="/ar/articles/zero-log-stateless-mail-server-architecture.html" class="hover:underline">
+                هندسة الخوادم عديمة الحالة (Stateless Architecture): المبدأ التقني للبريد الخالي من السجلات
+              </a>
+            </h2>
+            <p class="text-xs text-neutral-600 dark:text-neutral-400 leading-relaxed mb-4">
+              تعرف على كيفية بناء خوادم بريد مؤقت تعمل بدون أقراص صلبة ولا تحتفظ بسجلات عناوين IP لضمان الخصوصية التقنية المطلقة.
+            </p>
+          </div>
+          <div class="pt-3 border-t border-neutral-100 dark:border-neutral-800/80 flex items-center justify-between text-xs">
+            <span class="text-neutral-500 font-mono text-[11px]">7 دقائق قراءة</span>
+            <a href="/ar/articles/zero-log-stateless-mail-server-architecture.html" class="font-bold text-black dark:text-white hover:underline flex items-center gap-1">
+              <span>قراءة المقال</span>
+              <span>←</span>
+            </a>
+          </div>
+        </article>
+        <!-- Article Card 47: disposable-email-blocklist-mechanisms-explained -->
+        <article
+          class="article-card p-5 sm:p-6 bg-white dark:bg-[#121212] border border-neutral-300 dark:border-neutral-800 rounded-xl shadow-sm hover:border-neutral-400 dark:hover:border-neutral-600 transition-all flex flex-col justify-between"
+          data-title="آليات حظر البريد المؤقت: كيف تعمل قواعد بيانات التحقق وكيف تحافظ المنصات على نطاقات صالحة؟"
+          data-desc="استكشف كيف تكتشف قواعد بيانات التحقق خوادم البريد العابر عبر سجلات mx و dns، وكيف تحافظ خدمات النخبة على نطاقات نقية غير محظورة."
+          data-category="الحماية ومكافحة الحظر"
+        >
+          <div>
+            <div class="flex items-center gap-2 text-[11px] font-mono text-neutral-500 dark:text-neutral-400 mb-2.5">
+              <span class="font-bold text-black dark:text-white px-2 py-0.5 bg-neutral-100 dark:bg-neutral-800 rounded text-[10px] uppercase">الحماية ومكافحة الحظر</span>
+              <span>•</span>
+              <time datetime="2026-03-24">2026-03-24</time>
+            </div>
+            <h2 class="text-base font-bold text-black dark:text-white mb-2 leading-snug">
+              <a href="/ar/articles/disposable-email-blocklist-mechanisms-explained.html" class="hover:underline">
+                آليات حظر البريد المؤقت: كيف تعمل قواعد بيانات التحقق وكيف تحافظ المنصات على نطاقات صالحة؟
+              </a>
+            </h2>
+            <p class="text-xs text-neutral-600 dark:text-neutral-400 leading-relaxed mb-4">
+              استكشف كيف تكتشف قواعد بيانات التحقق خوادم البريد العابر عبر سجلات MX و DNS، وكيف تحافظ خدمات النخبة على نطاقات نقية غير محظورة.
+            </p>
+          </div>
+          <div class="pt-3 border-t border-neutral-100 dark:border-neutral-800/80 flex items-center justify-between text-xs">
+            <span class="text-neutral-500 font-mono text-[11px]">7 دقائق قراءة</span>
+            <a href="/ar/articles/disposable-email-blocklist-mechanisms-explained.html" class="font-bold text-black dark:text-white hover:underline flex items-center gap-1">
+              <span>قراءة المقال</span>
+              <span>←</span>
+            </a>
+          </div>
+        </article>
+        <!-- Article Card 48: clean-ip-reputation-for-transient-inboxes -->
+        <article
+          class="article-card p-5 sm:p-6 bg-white dark:bg-[#121212] border border-neutral-300 dark:border-neutral-800 rounded-xl shadow-sm hover:border-neutral-400 dark:hover:border-neutral-600 transition-all flex flex-col justify-between"
+          data-title="سمعة عناوين ip واستقبال البريد: كيف تضمن الخوادم استلام رسائل التفعيل دون تصنيفها كبريد مزعج؟"
+          data-desc="دليل هندسي حول أهمية سمعة ip ونظافة الشبكة في منع فقدان الرسائل وضمان استلام أكواد otp في أجزاء من الثانية."
+          data-category="البنية التحتية والبروتوكولات"
+        >
+          <div>
+            <div class="flex items-center gap-2 text-[11px] font-mono text-neutral-500 dark:text-neutral-400 mb-2.5">
+              <span class="font-bold text-black dark:text-white px-2 py-0.5 bg-neutral-100 dark:bg-neutral-800 rounded text-[10px] uppercase">البنية التحتية والبروتوكولات</span>
+              <span>•</span>
+              <time datetime="2026-03-24">2026-03-24</time>
+            </div>
+            <h2 class="text-base font-bold text-black dark:text-white mb-2 leading-snug">
+              <a href="/ar/articles/clean-ip-reputation-for-transient-inboxes.html" class="hover:underline">
+                سمعة عناوين IP واستقبال البريد: كيف تضمن الخوادم استلام رسائل التفعيل دون تصنيفها كبريد مزعج؟
+              </a>
+            </h2>
+            <p class="text-xs text-neutral-600 dark:text-neutral-400 leading-relaxed mb-4">
+              دليل هندسي حول أهمية سمعة IP ونظافة الشبكة في منع فقدان الرسائل وضمان استلام أكواد OTP في أجزاء من الثانية.
+            </p>
+          </div>
+          <div class="pt-3 border-t border-neutral-100 dark:border-neutral-800/80 flex items-center justify-between text-xs">
+            <span class="text-neutral-500 font-mono text-[11px]">7 دقائق قراءة</span>
+            <a href="/ar/articles/clean-ip-reputation-for-transient-inboxes.html" class="font-bold text-black dark:text-white hover:underline flex items-center gap-1">
+              <span>قراءة المقال</span>
+              <span>←</span>
+            </a>
+          </div>
+        </article>
+        <!-- Article Card 49: protecting-online-accounts-with-sub-addresses-and-catchall -->
+        <article
+          class="article-card p-5 sm:p-6 bg-white dark:bg-[#121212] border border-neutral-300 dark:border-neutral-800 rounded-xl shadow-sm hover:border-neutral-400 dark:hover:border-neutral-600 transition-all flex flex-col justify-between"
+          data-title="حماية الحسابات بالعناوين الفرعية والمجال الشامل (catch-all): عزل الهوية الرقمية"
+          data-desc="تعلم كيفية استخدام تقنيات plus-addressing ونطاقات catch-all لتتبع تسريبات البيانات وعزل الحسابات الفردية بأمان."
+          data-category="الخصوصية والأمان الرقمي"
+        >
+          <div>
+            <div class="flex items-center gap-2 text-[11px] font-mono text-neutral-500 dark:text-neutral-400 mb-2.5">
+              <span class="font-bold text-black dark:text-white px-2 py-0.5 bg-neutral-100 dark:bg-neutral-800 rounded text-[10px] uppercase">الخصوصية والأمان الرقمي</span>
+              <span>•</span>
+              <time datetime="2026-03-24">2026-03-24</time>
+            </div>
+            <h2 class="text-base font-bold text-black dark:text-white mb-2 leading-snug">
+              <a href="/ar/articles/protecting-online-accounts-with-sub-addresses-and-catchall.html" class="hover:underline">
+                حماية الحسابات بالعناوين الفرعية والمجال الشامل (Catch-All): عزل الهوية الرقمية
+              </a>
+            </h2>
+            <p class="text-xs text-neutral-600 dark:text-neutral-400 leading-relaxed mb-4">
+              تعلم كيفية استخدام تقنيات Plus-Addressing ونطاقات Catch-All لتتبع تسريبات البيانات وعزل الحسابات الفردية بأمان.
+            </p>
+          </div>
+          <div class="pt-3 border-t border-neutral-100 dark:border-neutral-800/80 flex items-center justify-between text-xs">
+            <span class="text-neutral-500 font-mono text-[11px]">7 دقائق قراءة</span>
+            <a href="/ar/articles/protecting-online-accounts-with-sub-addresses-and-catchall.html" class="font-bold text-black dark:text-white hover:underline flex items-center gap-1">
+              <span>قراءة المقال</span>
+              <span>←</span>
+            </a>
+          </div>
+        </article>
+        <!-- Article Card 50: stopping-email-scraping-and-harvesting-bots -->
+        <article
+          class="article-card p-5 sm:p-6 bg-white dark:bg-[#121212] border border-neutral-300 dark:border-neutral-800 rounded-xl shadow-sm hover:border-neutral-400 dark:hover:border-neutral-600 transition-all flex flex-col justify-between"
+          data-title="التصدي لبرمجيات حصد البريد: كيف تمنع الروبوتات من سحب عنوانك الشخصي من الإنترنت؟"
+          data-desc="كيف تمسح روبوتات الإنترنت العناوين العامة من المنتديات وصفحات الويب، وكيف يحميك استخدام البريد المؤقت من الوقوع في شباك المخترقين."
+          data-category="الخصوصية والأمان الرقمي"
+        >
+          <div>
+            <div class="flex items-center gap-2 text-[11px] font-mono text-neutral-500 dark:text-neutral-400 mb-2.5">
+              <span class="font-bold text-black dark:text-white px-2 py-0.5 bg-neutral-100 dark:bg-neutral-800 rounded text-[10px] uppercase">الخصوصية والأمان الرقمي</span>
+              <span>•</span>
+              <time datetime="2026-03-24">2026-03-24</time>
+            </div>
+            <h2 class="text-base font-bold text-black dark:text-white mb-2 leading-snug">
+              <a href="/ar/articles/stopping-email-scraping-and-harvesting-bots.html" class="hover:underline">
+                التصدي لبرمجيات حصد البريد: كيف تمنع الروبوتات من سحب عنوانك الشخصي من الإنترنت؟
+              </a>
+            </h2>
+            <p class="text-xs text-neutral-600 dark:text-neutral-400 leading-relaxed mb-4">
+              كيف تمسح روبوتات الإنترنت العناوين العامة من المنتديات وصفحات الويب، وكيف يحميك استخدام البريد المؤقت من الوقوع في شباك المخترقين.
+            </p>
+          </div>
+          <div class="pt-3 border-t border-neutral-100 dark:border-neutral-800/80 flex items-center justify-between text-xs">
+            <span class="text-neutral-500 font-mono text-[11px]">7 دقائق قراءة</span>
+            <a href="/ar/articles/stopping-email-scraping-and-harvesting-bots.html" class="font-bold text-black dark:text-white hover:underline flex items-center gap-1">
+              <span>قراءة المقال</span>
+              <span>←</span>
+            </a>
+          </div>
+        </article>
+        <!-- Article Card 51: safe-api-key-generation-and-ephemeral-tokens -->
+        <article
+          class="article-card p-5 sm:p-6 bg-white dark:bg-[#121212] border border-neutral-300 dark:border-neutral-800 rounded-xl shadow-sm hover:border-neutral-400 dark:hover:border-neutral-600 transition-all flex flex-col justify-between"
+          data-title="إدارة مفاتيح api والرموز العابرة: تأمين بيئات التطوير والاختبار ضد التسريب"
+          data-desc="أفضل الممارسات الأمنية للتعامل مع رموز التحقق المؤقتة واستدعاءات api في بيئات التطوير دون تسريب الاعتمادات الحساسة."
+          data-category="التطوير والأتمتة"
+        >
+          <div>
+            <div class="flex items-center gap-2 text-[11px] font-mono text-neutral-500 dark:text-neutral-400 mb-2.5">
+              <span class="font-bold text-black dark:text-white px-2 py-0.5 bg-neutral-100 dark:bg-neutral-800 rounded text-[10px] uppercase">التطوير والأتمتة</span>
+              <span>•</span>
+              <time datetime="2026-03-24">2026-03-24</time>
+            </div>
+            <h2 class="text-base font-bold text-black dark:text-white mb-2 leading-snug">
+              <a href="/ar/articles/safe-api-key-generation-and-ephemeral-tokens.html" class="hover:underline">
+                إدارة مفاتيح API والرموز العابرة: تأمين بيئات التطوير والاختبار ضد التسريب
+              </a>
+            </h2>
+            <p class="text-xs text-neutral-600 dark:text-neutral-400 leading-relaxed mb-4">
+              أفضل الممارسات الأمنية للتعامل مع رموز التحقق المؤقتة واستدعاءات API في بيئات التطوير دون تسريب الاعتمادات الحساسة.
+            </p>
+          </div>
+          <div class="pt-3 border-t border-neutral-100 dark:border-neutral-800/80 flex items-center justify-between text-xs">
+            <span class="text-neutral-500 font-mono text-[11px]">7 دقائق قراءة</span>
+            <a href="/ar/articles/safe-api-key-generation-and-ephemeral-tokens.html" class="font-bold text-black dark:text-white hover:underline flex items-center gap-1">
+              <span>قراءة المقال</span>
+              <span>←</span>
+            </a>
+          </div>
+        </article>
+        <!-- Article Card 52: privacy-first-form-submissions-and-web-testing -->
+        <article
+          class="article-card p-5 sm:p-6 bg-white dark:bg-[#121212] border border-neutral-300 dark:border-neutral-800 rounded-xl shadow-sm hover:border-neutral-400 dark:hover:border-neutral-600 transition-all flex flex-col justify-between"
+          data-title="إرسال النماذج باحترام الخصوصية: كيف تختبر المواقع والاستبيانات دون التضحية بهويتك؟"
+          data-desc="طرق ذكية لتعبئة استبيانات الويب وتحميل الدراسات التسويقية وتجربة النماذج المعقدة دون تعريض بريدك الرئيسي لرسائل المتابعة المتكررة."
+          data-category="الخصوصية والأمان الرقمي"
+        >
+          <div>
+            <div class="flex items-center gap-2 text-[11px] font-mono text-neutral-500 dark:text-neutral-400 mb-2.5">
+              <span class="font-bold text-black dark:text-white px-2 py-0.5 bg-neutral-100 dark:bg-neutral-800 rounded text-[10px] uppercase">الخصوصية والأمان الرقمي</span>
+              <span>•</span>
+              <time datetime="2026-03-24">2026-03-24</time>
+            </div>
+            <h2 class="text-base font-bold text-black dark:text-white mb-2 leading-snug">
+              <a href="/ar/articles/privacy-first-form-submissions-and-web-testing.html" class="hover:underline">
+                إرسال النماذج باحترام الخصوصية: كيف تختبر المواقع والاستبيانات دون التضحية بهويتك؟
+              </a>
+            </h2>
+            <p class="text-xs text-neutral-600 dark:text-neutral-400 leading-relaxed mb-4">
+              طرق ذكية لتعبئة استبيانات الويب وتحميل الدراسات التسويقية وتجربة النماذج المعقدة دون تعريض بريدك الرئيسي لرسائل المتابعة المتكررة.
+            </p>
+          </div>
+          <div class="pt-3 border-t border-neutral-100 dark:border-neutral-800/80 flex items-center justify-between text-xs">
+            <span class="text-neutral-500 font-mono text-[11px]">7 دقائق قراءة</span>
+            <a href="/ar/articles/privacy-first-form-submissions-and-web-testing.html" class="font-bold text-black dark:text-white hover:underline flex items-center gap-1">
+              <span>قراءة المقال</span>
+              <span>←</span>
+            </a>
+          </div>
+        </article>
+        <!-- Article Card 53: temporary-email-for-open-source-software-contributions -->
+        <article
+          class="article-card p-5 sm:p-6 bg-white dark:bg-[#121212] border border-neutral-300 dark:border-neutral-800 rounded-xl shadow-sm hover:border-neutral-400 dark:hover:border-neutral-600 transition-all flex flex-col justify-between"
+          data-title="البريد المؤقت والمشاريع مفتوحة المصدر: حماية بريد المطور من السجلات العامة وقوائم المراسلة"
+          data-desc="كيف تحافظ على سرية بريدك الشخصي عند إرسال patch أو الاشتراك في قوائم المناقشة المفتوحة دون التعرض لحملات الإزعاج."
+          data-category="التطوير والأتمتة"
+        >
+          <div>
+            <div class="flex items-center gap-2 text-[11px] font-mono text-neutral-500 dark:text-neutral-400 mb-2.5">
+              <span class="font-bold text-black dark:text-white px-2 py-0.5 bg-neutral-100 dark:bg-neutral-800 rounded text-[10px] uppercase">التطوير والأتمتة</span>
+              <span>•</span>
+              <time datetime="2026-03-24">2026-03-24</time>
+            </div>
+            <h2 class="text-base font-bold text-black dark:text-white mb-2 leading-snug">
+              <a href="/ar/articles/temporary-email-for-open-source-software-contributions.html" class="hover:underline">
+                البريد المؤقت والمشاريع مفتوحة المصدر: حماية بريد المطور من السجلات العامة وقوائم المراسلة
+              </a>
+            </h2>
+            <p class="text-xs text-neutral-600 dark:text-neutral-400 leading-relaxed mb-4">
+              كيف تحافظ على سرية بريدك الشخصي عند إرسال Patch أو الاشتراك في قوائم المناقشة المفتوحة دون التعرض لحملات الإزعاج.
+            </p>
+          </div>
+          <div class="pt-3 border-t border-neutral-100 dark:border-neutral-800/80 flex items-center justify-between text-xs">
+            <span class="text-neutral-500 font-mono text-[11px]">7 دقائق قراءة</span>
+            <a href="/ar/articles/temporary-email-for-open-source-software-contributions.html" class="font-bold text-black dark:text-white hover:underline flex items-center gap-1">
+              <span>قراءة المقال</span>
+              <span>←</span>
+            </a>
+          </div>
+        </article>
+        <!-- Article Card 54: multi-domain-rotation-strategies-for-high-availability -->
+        <article
+          class="article-card p-5 sm:p-6 bg-white dark:bg-[#121212] border border-neutral-300 dark:border-neutral-800 rounded-xl shadow-sm hover:border-neutral-400 dark:hover:border-neutral-600 transition-all flex flex-col justify-between"
+          data-title="استراتيجيات تدوير النطاقات المتعددة: ضمان التوفر العالي وتجاوز قيود التسجيل"
+          data-desc="نظرة عميقة في الخوارزميات المستخدمة لإدارة وتدوير مئات النطاقات التلقائية لتحقيق أعلى معدل نجاح لتسليم رسائل التفعيل."
+          data-category="البنية التحتية والبروتوكولات"
+        >
+          <div>
+            <div class="flex items-center gap-2 text-[11px] font-mono text-neutral-500 dark:text-neutral-400 mb-2.5">
+              <span class="font-bold text-black dark:text-white px-2 py-0.5 bg-neutral-100 dark:bg-neutral-800 rounded text-[10px] uppercase">البنية التحتية والبروتوكولات</span>
+              <span>•</span>
+              <time datetime="2026-03-24">2026-03-24</time>
+            </div>
+            <h2 class="text-base font-bold text-black dark:text-white mb-2 leading-snug">
+              <a href="/ar/articles/multi-domain-rotation-strategies-for-high-availability.html" class="hover:underline">
+                استراتيجيات تدوير النطاقات المتعددة: ضمان التوفر العالي وتجاوز قيود التسجيل
+              </a>
+            </h2>
+            <p class="text-xs text-neutral-600 dark:text-neutral-400 leading-relaxed mb-4">
+              نظرة عميقة في الخوارزميات المستخدمة لإدارة وتدوير مئات النطاقات التلقائية لتحقيق أعلى معدل نجاح لتسليم رسائل التفعيل.
+            </p>
+          </div>
+          <div class="pt-3 border-t border-neutral-100 dark:border-neutral-800/80 flex items-center justify-between text-xs">
+            <span class="text-neutral-500 font-mono text-[11px]">7 دقائق قراءة</span>
+            <a href="/ar/articles/multi-domain-rotation-strategies-for-high-availability.html" class="font-bold text-black dark:text-white hover:underline flex items-center gap-1">
+              <span>قراءة المقال</span>
+              <span>←</span>
+            </a>
+          </div>
+        </article>
+        <!-- Article Card 55: soc2-type-2-compliance-ephemeral-systems -->
+        <article
+          class="article-card p-5 sm:p-6 bg-white dark:bg-[#121212] border border-neutral-300 dark:border-neutral-800 rounded-xl shadow-sm hover:border-neutral-400 dark:hover:border-neutral-600 transition-all flex flex-col justify-between"
+          data-title="معايير الامتثال soc 2 type ii والأنظمة العابرة: كيف يحقق انعدام التخزين أعلى درجات الأمان؟"
+          data-desc="تحليل أمني عميق لمبادئ trust services criteria لشهادة soc 2 وكيف تضمن الأنظمة العابرة حماية بيانات المستخدمين بعدم تخزينها أصلا."
+          data-category="الأمان والامتثال"
+        >
+          <div>
+            <div class="flex items-center gap-2 text-[11px] font-mono text-neutral-500 dark:text-neutral-400 mb-2.5">
+              <span class="font-bold text-black dark:text-white px-2 py-0.5 bg-neutral-100 dark:bg-neutral-800 rounded text-[10px] uppercase">الأمان والامتثال</span>
+              <span>•</span>
+              <time datetime="2026-03-24">2026-03-24</time>
+            </div>
+            <h2 class="text-base font-bold text-black dark:text-white mb-2 leading-snug">
+              <a href="/ar/articles/soc2-type-2-compliance-ephemeral-systems.html" class="hover:underline">
+                معايير الامتثال SOC 2 Type II والأنظمة العابرة: كيف يحقق انعدام التخزين أعلى درجات الأمان؟
+              </a>
+            </h2>
+            <p class="text-xs text-neutral-600 dark:text-neutral-400 leading-relaxed mb-4">
+              تحليل أمني عميق لمبادئ Trust Services Criteria لشهادة SOC 2 وكيف تضمن الأنظمة العابرة حماية بيانات المستخدمين بعدم تخزينها أصلا.
+            </p>
+          </div>
+          <div class="pt-3 border-t border-neutral-100 dark:border-neutral-800/80 flex items-center justify-between text-xs">
+            <span class="text-neutral-500 font-mono text-[11px]">7 دقائق قراءة</span>
+            <a href="/ar/articles/soc2-type-2-compliance-ephemeral-systems.html" class="font-bold text-black dark:text-white hover:underline flex items-center gap-1">
+              <span>قراءة المقال</span>
+              <span>←</span>
+            </a>
+          </div>
+        </article>
+        <!-- Article Card 56: owasp-top-10-email-vulnerabilities-mitigation -->
+        <article
+          class="article-card p-5 sm:p-6 bg-white dark:bg-[#121212] border border-neutral-300 dark:border-neutral-800 rounded-xl shadow-sm hover:border-neutral-400 dark:hover:border-neutral-600 transition-all flex flex-col justify-between"
+          data-title="معالجة ثغرات owasp top 10 في أنظمة البريد والتحقق: تأمين قنوات المصادقة"
+          data-desc="دليل متخصص في سد ثغرات الحقن وتزوير الطلبات ssrf وتسميم روابط إعادة تعيين كلمة المرور في تدفقات البريد الإلكتروني."
+          data-category="الأمان والامتثال"
+        >
+          <div>
+            <div class="flex items-center gap-2 text-[11px] font-mono text-neutral-500 dark:text-neutral-400 mb-2.5">
+              <span class="font-bold text-black dark:text-white px-2 py-0.5 bg-neutral-100 dark:bg-neutral-800 rounded text-[10px] uppercase">الأمان والامتثال</span>
+              <span>•</span>
+              <time datetime="2026-03-24">2026-03-24</time>
+            </div>
+            <h2 class="text-base font-bold text-black dark:text-white mb-2 leading-snug">
+              <a href="/ar/articles/owasp-top-10-email-vulnerabilities-mitigation.html" class="hover:underline">
+                معالجة ثغرات OWASP Top 10 في أنظمة البريد والتحقق: تأمين قنوات المصادقة
+              </a>
+            </h2>
+            <p class="text-xs text-neutral-600 dark:text-neutral-400 leading-relaxed mb-4">
+              دليل متخصص في سد ثغرات الحقن وتزوير الطلبات SSRF وتسميم روابط إعادة تعيين كلمة المرور في تدفقات البريد الإلكتروني.
+            </p>
+          </div>
+          <div class="pt-3 border-t border-neutral-100 dark:border-neutral-800/80 flex items-center justify-between text-xs">
+            <span class="text-neutral-500 font-mono text-[11px]">7 دقائق قراءة</span>
+            <a href="/ar/articles/owasp-top-10-email-vulnerabilities-mitigation.html" class="font-bold text-black dark:text-white hover:underline flex items-center gap-1">
+              <span>قراءة المقال</span>
+              <span>←</span>
+            </a>
+          </div>
+        </article>
+        <!-- Article Card 57: zero-trust-architecture-for-email-security -->
+        <article
+          class="article-card p-5 sm:p-6 bg-white dark:bg-[#121212] border border-neutral-300 dark:border-neutral-800 rounded-xl shadow-sm hover:border-neutral-400 dark:hover:border-neutral-600 transition-all flex flex-col justify-between"
+          data-title="بنية الثقة المعدومة (zero-trust) في أمان البريد: لا تثق بأي شيء، وتحقق دائما"
+          data-desc="كيف تعيد مبادئ zero-trust صياغة التعامل مع الرسائل الواردة عبر العزل الكامل، والتطهير الإجباري، والتحقق المشفر من كافة الأطراف."
+          data-category="الأمان والامتثال"
+        >
+          <div>
+            <div class="flex items-center gap-2 text-[11px] font-mono text-neutral-500 dark:text-neutral-400 mb-2.5">
+              <span class="font-bold text-black dark:text-white px-2 py-0.5 bg-neutral-100 dark:bg-neutral-800 rounded text-[10px] uppercase">الأمان والامتثال</span>
+              <span>•</span>
+              <time datetime="2026-03-24">2026-03-24</time>
+            </div>
+            <h2 class="text-base font-bold text-black dark:text-white mb-2 leading-snug">
+              <a href="/ar/articles/zero-trust-architecture-for-email-security.html" class="hover:underline">
+                بنية الثقة المعدومة (Zero-Trust) في أمان البريد: لا تثق بأي شيء، وتحقق دائما
+              </a>
+            </h2>
+            <p class="text-xs text-neutral-600 dark:text-neutral-400 leading-relaxed mb-4">
+              كيف تعيد مبادئ Zero-Trust صياغة التعامل مع الرسائل الواردة عبر العزل الكامل، والتطهير الإجباري، والتحقق المشفر من كافة الأطراف.
+            </p>
+          </div>
+          <div class="pt-3 border-t border-neutral-100 dark:border-neutral-800/80 flex items-center justify-between text-xs">
+            <span class="text-neutral-500 font-mono text-[11px]">7 دقائق قراءة</span>
+            <a href="/ar/articles/zero-trust-architecture-for-email-security.html" class="font-bold text-black dark:text-white hover:underline flex items-center gap-1">
+              <span>قراءة المقال</span>
+              <span>←</span>
+            </a>
+          </div>
+        </article>
+        <!-- Article Card 58: cryptographic-media-sanitization-nist-800-88 -->
+        <article
+          class="article-card p-5 sm:p-6 bg-white dark:bg-[#121212] border border-neutral-300 dark:border-neutral-800 rounded-xl shadow-sm hover:border-neutral-400 dark:hover:border-neutral-600 transition-all flex flex-col justify-between"
+          data-title="التطهير المشفر للبيانات ومعايير nist sp 800-88: كيف نضمن تدمير البيانات في الذاكرة؟"
+          data-desc="استكشف آليات تدمير البيانات الرقمية في الذاكرة الحية وتطبيق معايير المعهد الوطني للمعايير والتقنية nist للتخلص من الرسائل دون رجعة."
+          data-category="الأمان والامتثال"
+        >
+          <div>
+            <div class="flex items-center gap-2 text-[11px] font-mono text-neutral-500 dark:text-neutral-400 mb-2.5">
+              <span class="font-bold text-black dark:text-white px-2 py-0.5 bg-neutral-100 dark:bg-neutral-800 rounded text-[10px] uppercase">الأمان والامتثال</span>
+              <span>•</span>
+              <time datetime="2026-03-24">2026-03-24</time>
+            </div>
+            <h2 class="text-base font-bold text-black dark:text-white mb-2 leading-snug">
+              <a href="/ar/articles/cryptographic-media-sanitization-nist-800-88.html" class="hover:underline">
+                التطهير المشفر للبيانات ومعايير NIST SP 800-88: كيف نضمن تدمير البيانات في الذاكرة؟
+              </a>
+            </h2>
+            <p class="text-xs text-neutral-600 dark:text-neutral-400 leading-relaxed mb-4">
+              استكشف آليات تدمير البيانات الرقمية في الذاكرة الحية وتطبيق معايير المعهد الوطني للمعايير والتقنية NIST للتخلص من الرسائل دون رجعة.
+            </p>
+          </div>
+          <div class="pt-3 border-t border-neutral-100 dark:border-neutral-800/80 flex items-center justify-between text-xs">
+            <span class="text-neutral-500 font-mono text-[11px]">7 دقائق قراءة</span>
+            <a href="/ar/articles/cryptographic-media-sanitization-nist-800-88.html" class="font-bold text-black dark:text-white hover:underline flex items-center gap-1">
+              <span>قراءة المقال</span>
+              <span>←</span>
+            </a>
+          </div>
+        </article>
+        <!-- Article Card 59: threat-modeling-for-disposable-email-infrastructure -->
+        <article
+          class="article-card p-5 sm:p-6 bg-white dark:bg-[#121212] border border-neutral-300 dark:border-neutral-800 rounded-xl shadow-sm hover:border-neutral-400 dark:hover:border-neutral-600 transition-all flex flex-col justify-between"
+          data-title="نمذجة التهديدات السيبرانية (stride): كيف نصمم بنية تحتية مقاومة للاختراق للبريد المؤقت؟"
+          data-desc="تحليل شامل لمخاطر الانتحال والتلاعب ورفض الخدمة وكيفية تحصين خوادم البريد المؤقت وفق منهجية stride الأمنية المتقدمة."
+          data-category="الأمان والامتثال"
+        >
+          <div>
+            <div class="flex items-center gap-2 text-[11px] font-mono text-neutral-500 dark:text-neutral-400 mb-2.5">
+              <span class="font-bold text-black dark:text-white px-2 py-0.5 bg-neutral-100 dark:bg-neutral-800 rounded text-[10px] uppercase">الأمان والامتثال</span>
+              <span>•</span>
+              <time datetime="2026-03-24">2026-03-24</time>
+            </div>
+            <h2 class="text-base font-bold text-black dark:text-white mb-2 leading-snug">
+              <a href="/ar/articles/threat-modeling-for-disposable-email-infrastructure.html" class="hover:underline">
+                نمذجة التهديدات السيبرانية (STRIDE): كيف نصمم بنية تحتية مقاومة للاختراق للبريد المؤقت؟
+              </a>
+            </h2>
+            <p class="text-xs text-neutral-600 dark:text-neutral-400 leading-relaxed mb-4">
+              تحليل شامل لمخاطر الانتحال والتلاعب ورفض الخدمة وكيفية تحصين خوادم البريد المؤقت وفق منهجية STRIDE الأمنية المتقدمة.
+            </p>
+          </div>
+          <div class="pt-3 border-t border-neutral-100 dark:border-neutral-800/80 flex items-center justify-between text-xs">
+            <span class="text-neutral-500 font-mono text-[11px]">7 دقائق قراءة</span>
+            <a href="/ar/articles/threat-modeling-for-disposable-email-infrastructure.html" class="font-bold text-black dark:text-white hover:underline flex items-center gap-1">
+              <span>قراءة المقال</span>
+              <span>←</span>
+            </a>
+          </div>
+        </article>
+        <!-- Article Card 60: anti-phishing-defense-in-depth-ephemeral-mail -->
+        <article
+          class="article-card p-5 sm:p-6 bg-white dark:bg-[#121212] border border-neutral-300 dark:border-neutral-800 rounded-xl shadow-sm hover:border-neutral-400 dark:hover:border-neutral-600 transition-all flex flex-col justify-between"
+          data-title="الدفاع المعمق ضد التصيد الاحتيالي: كيف تحمي نفسك من الصفحات المزورة والروابط المفخخة؟"
+          data-desc="تعرف على أساليب كشف هجمات التصيد الاحتيالي، وتحليل الروابط المشبوهة، واستخدام البريد المؤقت كجدار حماية أول لعزل هويتك الرقمية."
+          data-category="الخصوصية والأمان الرقمي"
+        >
+          <div>
+            <div class="flex items-center gap-2 text-[11px] font-mono text-neutral-500 dark:text-neutral-400 mb-2.5">
+              <span class="font-bold text-black dark:text-white px-2 py-0.5 bg-neutral-100 dark:bg-neutral-800 rounded text-[10px] uppercase">الخصوصية والأمان الرقمي</span>
+              <span>•</span>
+              <time datetime="2026-03-24">2026-03-24</time>
+            </div>
+            <h2 class="text-base font-bold text-black dark:text-white mb-2 leading-snug">
+              <a href="/ar/articles/anti-phishing-defense-in-depth-ephemeral-mail.html" class="hover:underline">
+                الدفاع المعمق ضد التصيد الاحتيالي: كيف تحمي نفسك من الصفحات المزورة والروابط المفخخة؟
+              </a>
+            </h2>
+            <p class="text-xs text-neutral-600 dark:text-neutral-400 leading-relaxed mb-4">
+              تعرف على أساليب كشف هجمات التصيد الاحتيالي، وتحليل الروابط المشبوهة، واستخدام البريد المؤقت كجدار حماية أول لعزل هويتك الرقمية.
+            </p>
+          </div>
+          <div class="pt-3 border-t border-neutral-100 dark:border-neutral-800/80 flex items-center justify-between text-xs">
+            <span class="text-neutral-500 font-mono text-[11px]">7 دقائق قراءة</span>
+            <a href="/ar/articles/anti-phishing-defense-in-depth-ephemeral-mail.html" class="font-bold text-black dark:text-white hover:underline flex items-center gap-1">
+              <span>قراءة المقال</span>
+              <span>←</span>
+            </a>
+          </div>
+        </article>
+        <!-- Article Card 61: email-deliverability-mechanics-bounces-and-dmarc -->
+        <article
+          class="article-card p-5 sm:p-6 bg-white dark:bg-[#121212] border border-neutral-300 dark:border-neutral-800 rounded-xl shadow-sm hover:border-neutral-400 dark:hover:border-neutral-600 transition-all flex flex-col justify-between"
+          data-title="ميكانيكا تسليم البريد: إدارة الارتداد (bounces) وتوافق سياسات dmarc المتقدمة"
+          data-desc="فهم هندسي لفئات الارتداد الصلب والناعم (hard & soft bounces) وتوافق سياسات dmarc p=reject لضمان استقبال موثوق بنسبة 100%."
+          data-category="البنية التحتية والبروتوكولات"
+        >
+          <div>
+            <div class="flex items-center gap-2 text-[11px] font-mono text-neutral-500 dark:text-neutral-400 mb-2.5">
+              <span class="font-bold text-black dark:text-white px-2 py-0.5 bg-neutral-100 dark:bg-neutral-800 rounded text-[10px] uppercase">البنية التحتية والبروتوكولات</span>
+              <span>•</span>
+              <time datetime="2026-03-24">2026-03-24</time>
+            </div>
+            <h2 class="text-base font-bold text-black dark:text-white mb-2 leading-snug">
+              <a href="/ar/articles/email-deliverability-mechanics-bounces-and-dmarc.html" class="hover:underline">
+                ميكانيكا تسليم البريد: إدارة الارتداد (Bounces) وتوافق سياسات DMARC المتقدمة
+              </a>
+            </h2>
+            <p class="text-xs text-neutral-600 dark:text-neutral-400 leading-relaxed mb-4">
+              فهم هندسي لفئات الارتداد الصلب والناعم (Hard & Soft Bounces) وتوافق سياسات DMARC p=reject لضمان استقبال موثوق بنسبة 100%.
+            </p>
+          </div>
+          <div class="pt-3 border-t border-neutral-100 dark:border-neutral-800/80 flex items-center justify-between text-xs">
+            <span class="text-neutral-500 font-mono text-[11px]">7 دقائق قراءة</span>
+            <a href="/ar/articles/email-deliverability-mechanics-bounces-and-dmarc.html" class="font-bold text-black dark:text-white hover:underline flex items-center gap-1">
+              <span>قراءة المقال</span>
+              <span>←</span>
+            </a>
+          </div>
+        </article>
+        <!-- Article Card 62: future-of-digital-identity-passkeys-vs-burner-emails -->
+        <article
+          class="article-card p-5 sm:p-6 bg-white dark:bg-[#121212] border border-neutral-300 dark:border-neutral-800 rounded-xl shadow-sm hover:border-neutral-400 dark:hover:border-neutral-600 transition-all flex flex-col justify-between"
+          data-title="مستقبل الهوية الرقمية: هل تحل مفاتيح المرور (passkeys) محل البريد المؤقت؟"
+          data-desc="تحليل استشرافي لمعايير fido2 و webauthn ومفاتيح المرور passkeys ولماذا سيبقى البريد المؤقت الأداة الأساسية للخصوصية وتجنب التتبع."
+          data-category="الخصوصية والأمان الرقمي"
+        >
+          <div>
+            <div class="flex items-center gap-2 text-[11px] font-mono text-neutral-500 dark:text-neutral-400 mb-2.5">
+              <span class="font-bold text-black dark:text-white px-2 py-0.5 bg-neutral-100 dark:bg-neutral-800 rounded text-[10px] uppercase">الخصوصية والأمان الرقمي</span>
+              <span>•</span>
+              <time datetime="2026-03-24">2026-03-24</time>
+            </div>
+            <h2 class="text-base font-bold text-black dark:text-white mb-2 leading-snug">
+              <a href="/ar/articles/future-of-digital-identity-passkeys-vs-burner-emails.html" class="hover:underline">
+                مستقبل الهوية الرقمية: هل تحل مفاتيح المرور (Passkeys) محل البريد المؤقت؟
+              </a>
+            </h2>
+            <p class="text-xs text-neutral-600 dark:text-neutral-400 leading-relaxed mb-4">
+              تحليل استشرافي لمعايير FIDO2 و WebAuthn ومفاتيح المرور Passkeys ولماذا سيبقى البريد المؤقت الأداة الأساسية للخصوصية وتجنب التتبع.
+            </p>
+          </div>
+          <div class="pt-3 border-t border-neutral-100 dark:border-neutral-800/80 flex items-center justify-between text-xs">
+            <span class="text-neutral-500 font-mono text-[11px]">7 دقائق قراءة</span>
+            <a href="/ar/articles/future-of-digital-identity-passkeys-vs-burner-emails.html" class="font-bold text-black dark:text-white hover:underline flex items-center gap-1">
+              <span>قراءة المقال</span>
+              <span>←</span>
+            </a>
+          </div>
+        </article>
+      </div>
+    </main>
+
+    <!-- Master Footer -->
+    <footer class="border-t border-neutral-200 dark:border-neutral-800 bg-white dark:bg-[#0D0D0D] py-12 text-xs transition-colors">
+      <div class="max-w-4xl mx-auto px-4">
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 mb-12">
+          <div class="sm:col-span-2 md:col-span-1">
+            <div class="flex items-center gap-2 mb-3">
+              <span class="w-6 h-6 rounded bg-black dark:bg-white text-white dark:text-black flex items-center justify-center text-xs font-mono font-extrabold">T</span>
+              <span class="font-bold text-sm tracking-tight text-black dark:text-white">Temp Mail</span>
+            </div>
+            <p class="text-neutral-500 leading-relaxed text-[11px] mb-4">
+              منصة بريد مؤقت سريعة وفورية توفر حماية استباقية للخصوصية واستخراجاً ذكياً لأكواد التحقق.
+            </p>
+          </div>
+
+          <div>
+            <div class="font-bold text-black dark:text-white mb-3 uppercase tracking-wider text-[11px]">
+              التنقل
+            </div>
+            <ul class="space-y-2">
+              <li><a href="/ar/" class="text-neutral-600 dark:text-neutral-400 hover:text-black dark:hover:text-white transition-colors">الرئيسية</a></li>
+              <li><a href="/ar/blog.html" class="text-neutral-600 dark:text-neutral-400 hover:text-black dark:hover:text-white transition-colors">المدونة</a></li>
+              <li><a href="/ar/guide.html" class="text-neutral-600 dark:text-neutral-400 hover:text-black dark:hover:text-white transition-colors">دليل الاستخدام</a></li>
+              <li><a href="/ar/faq.html" class="text-neutral-600 dark:text-neutral-400 hover:text-black dark:hover:text-white transition-colors">الأسئلة الشائعة</a></li>
+              <li><a href="/ar/articles/index.html" class="text-neutral-600 dark:text-neutral-400 hover:text-black dark:hover:text-white transition-colors">المقالات</a></li>
+            </ul>
+          </div>
+
+          <div>
+            <div class="font-bold text-black dark:text-white mb-3 uppercase tracking-wider text-[11px]">
+              الشفافية والأمان
+            </div>
+            <ul class="space-y-2">
+              <li><a href="/ar/about.html" class="text-neutral-600 dark:text-neutral-400 hover:text-black dark:hover:text-white transition-colors">من نحن</a></li>
+              <li><a href="/ar/privacy.html" class="text-neutral-600 dark:text-neutral-400 hover:text-black dark:hover:text-white transition-colors">سياسة الخصوصية</a></li>
+              <li><a href="/ar/privacy.html#terms" class="text-neutral-600 dark:text-neutral-400 hover:text-black dark:hover:text-white transition-colors">شروط الاستخدام</a></li>
+            </ul>
+          </div>
+
+          <div>
+            <div class="font-bold text-black dark:text-white mb-3 uppercase tracking-wider text-[11px]">
+              معايير الأمان
+            </div>
+            <ul class="space-y-2 text-neutral-600 dark:text-neutral-400">
+              <li class="flex items-center gap-1.5"><span class="text-black dark:text-white font-bold">✓</span><span>إتلاف تلقائي بعد 20 دقيقة</span></li>
+              <li class="flex items-center gap-1.5"><span class="text-black dark:text-white font-bold">✓</span><span>صفر سجلات تتبع</span></li>
+              <li class="flex items-center gap-1.5"><span class="text-black dark:text-white font-bold">✓</span><span>عزل تام للذاكرة العشوائية</span></li>
+              <li class="flex items-center gap-1.5"><span class="text-black dark:text-white font-bold">✓</span><span>تشفير كامل للاتصال TLS</span></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="pt-8 border-t border-neutral-100 dark:border-neutral-800/80 flex flex-col sm:flex-row items-center justify-between gap-4 text-[11px] text-neutral-500">
+          <p>© 2026 Temp Mail. All rights reserved.</p>
+          <div class="flex items-center gap-4">
+            <a href="/ar/articles/index.html" class="hover:underline">فهرس المقالات</a>
+            <span>•</span>
+            <a href="/ar/privacy.html" class="hover:underline">Privacy Policy</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Interactive Filter & Search Script -->
+    <script>
+      document.addEventListener('DOMContentLoaded', function () {
+        var searchInput = document.getElementById('article-search-input');
+        var pills = document.querySelectorAll('.cat-pill');
+        var cards = document.querySelectorAll('.article-card');
+        var currentCategory = 'all';
+
+        function filterArticles() {
+          var query = (searchInput ? searchInput.value : '').toLowerCase().trim();
+
+          cards.forEach(function (card) {
+            var title = card.getAttribute('data-title') || '';
+            var desc = card.getAttribute('data-desc') || '';
+            var cat = card.getAttribute('data-category') || '';
+
+            var matchesCategory = currentCategory === 'all' || cat === currentCategory;
+            var matchesSearch = !query || title.indexOf(query) !== -1 || desc.indexOf(query) !== -1 || cat.toLowerCase().indexOf(query) !== -1;
+
+            if (matchesCategory && matchesSearch) {
+              card.style.display = 'flex';
+            } else {
+              card.style.display = 'none';
+            }
+          });
+        }
+
+        if (searchInput) {
+          searchInput.addEventListener('input', filterArticles);
+        }
+
+        pills.forEach(function (btn) {
+          btn.addEventListener('click', function () {
+            pills.forEach(function (p) {
+              p.classList.remove('bg-black', 'text-white', 'dark:bg-white', 'dark:text-black', 'font-bold');
+              p.classList.add('bg-neutral-100', 'dark:bg-neutral-800', 'text-neutral-700', 'dark:text-neutral-300', 'font-semibold');
+            });
+            btn.classList.remove('bg-neutral-100', 'dark:bg-neutral-800', 'text-neutral-700', 'dark:text-neutral-300', 'font-semibold');
+            btn.classList.add('bg-black', 'text-white', 'dark:bg-white', 'dark:text-black', 'font-bold');
+
+            currentCategory = btn.getAttribute('data-cat') || 'all';
+            filterArticles();
+          });
+        });
+      });
+    </script>
+  </body>
+</html>

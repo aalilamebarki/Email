@@ -1,0 +1,288 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://freetemp.email/schemas/articles.schema.json",
+  "title": "ArticlesCatalogSchema",
+  "description": "Centralized JSON Schema for storing multi-lingual technical articles, metadata, SEO hreflang relationships, topic clusters, and structured content.",
+  "type": "array",
+  "items": {
+    "$ref": "#/definitions/Article"
+  },
+  "definitions": {
+    "LanguageCode": {
+      "type": "string",
+      "enum": [
+        "ar", "en", "es", "fr", "de", "pt", "it", "ru", "tr", "zh",
+        "ja", "ko", "nl", "pl", "id", "vi", "hi", "fa", "ur", "uk",
+        "sv", "el"
+      ]
+    },
+    "LocalizedString": {
+      "type": "object",
+      "description": "Key-value pair mapping ISO language codes to translated string values.",
+      "properties": {
+        "ar": { "type": "string" },
+        "en": { "type": "string" },
+        "es": { "type": "string" },
+        "fr": { "type": "string" },
+        "de": { "type": "string" },
+        "pt": { "type": "string" },
+        "it": { "type": "string" },
+        "ru": { "type": "string" },
+        "tr": { "type": "string" },
+        "zh": { "type": "string" },
+        "ja": { "type": "string" },
+        "ko": { "type": "string" },
+        "nl": { "type": "string" },
+        "pl": { "type": "string" },
+        "id": { "type": "string" },
+        "vi": { "type": "string" },
+        "hi": { "type": "string" },
+        "fa": { "type": "string" },
+        "ur": { "type": "string" },
+        "uk": { "type": "string" },
+        "sv": { "type": "string" },
+        "el": { "type": "string" }
+      },
+      "required": ["ar", "en"],
+      "additionalProperties": { "type": "string" }
+    },
+    "LocalizedStringArray": {
+      "type": "object",
+      "description": "Key-value pair mapping ISO language codes to arrays of translated strings.",
+      "properties": {
+        "ar": { "type": "array", "items": { "type": "string" } },
+        "en": { "type": "array", "items": { "type": "string" } },
+        "es": { "type": "array", "items": { "type": "string" } },
+        "fr": { "type": "array", "items": { "type": "string" } },
+        "de": { "type": "array", "items": { "type": "string" } },
+        "pt": { "type": "array", "items": { "type": "string" } },
+        "it": { "type": "array", "items": { "type": "string" } },
+        "ru": { "type": "array", "items": { "type": "string" } },
+        "tr": { "type": "array", "items": { "type": "string" } },
+        "zh": { "type": "array", "items": { "type": "string" } },
+        "ja": { "type": "array", "items": { "type": "string" } },
+        "ko": { "type": "array", "items": { "type": "string" } },
+        "nl": { "type": "array", "items": { "type": "string" } },
+        "pl": { "type": "array", "items": { "type": "string" } },
+        "id": { "type": "array", "items": { "type": "string" } },
+        "vi": { "type": "array", "items": { "type": "string" } },
+        "hi": { "type": "array", "items": { "type": "string" } },
+        "fa": { "type": "array", "items": { "type": "string" } },
+        "ur": { "type": "array", "items": { "type": "string" } },
+        "uk": { "type": "array", "items": { "type": "string" } },
+        "sv": { "type": "array", "items": { "type": "string" } },
+        "el": { "type": "array", "items": { "type": "string" } }
+      },
+      "required": ["ar", "en"],
+      "additionalProperties": { "type": "array", "items": { "type": "string" } }
+    },
+    "Author": {
+      "type": "object",
+      "description": "Author, organization, and editorial attribution.",
+      "properties": {
+        "name": { "type": "string" },
+        "url": { "type": "string", "format": "uri" },
+        "role": { "type": "string" },
+        "avatar": { "type": "string" }
+      },
+      "required": ["name", "url"]
+    },
+    "SourceCitation": {
+      "type": "object",
+      "description": "Authoritative RFC, standard, or research citation.",
+      "properties": {
+        "title": { "type": "string" },
+        "url": { "type": "string", "format": "uri" },
+        "standard": { "type": "string" }
+      },
+      "required": ["title", "url"]
+    },
+    "CodeSnippet": {
+      "type": "object",
+      "description": "Interactive, syntax-highlighted code block.",
+      "properties": {
+        "language": { "type": "string" },
+        "filename": { "type": "string" },
+        "code": { "type": "string" }
+      },
+      "required": ["code"]
+    },
+    "Callout": {
+      "type": "object",
+      "description": "Important notice, warning, or security takeaway inside an article section.",
+      "properties": {
+        "type": { "type": "string", "enum": ["info", "warning", "success", "security", "tip"] },
+        "title": { "$ref": "#/definitions/LocalizedString" },
+        "text": { "$ref": "#/definitions/LocalizedString" }
+      },
+      "required": ["title", "text"]
+    },
+    "ArticleSection": {
+      "type": "object",
+      "description": "Content block with title, prose content, and optional code or callout.",
+      "properties": {
+        "id": { "type": "string", "pattern": "^[a-z0-9-]+$" },
+        "title": { "$ref": "#/definitions/LocalizedString" },
+        "content": { "$ref": "#/definitions/LocalizedString" },
+        "callout": { "$ref": "#/definitions/Callout" },
+        "codeSnippet": { "$ref": "#/definitions/CodeSnippet" }
+      },
+      "required": ["id", "title", "content"]
+    },
+    "ComparisonRow": {
+      "type": "object",
+      "properties": {
+        "feature": { "$ref": "#/definitions/LocalizedString" },
+        "legacy": { "$ref": "#/definitions/LocalizedString" },
+        "advanced": { "$ref": "#/definitions/LocalizedString" }
+      },
+      "required": ["feature", "legacy", "advanced"]
+    },
+    "ComparisonTable": {
+      "type": "object",
+      "description": "Structured matrix comparing legacy vs modern architecture.",
+      "properties": {
+        "title": { "$ref": "#/definitions/LocalizedString" },
+        "headers": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/LocalizedString" },
+          "minItems": 3,
+          "maxItems": 3
+        },
+        "rows": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/ComparisonRow" },
+          "minItems": 1
+        }
+      },
+      "required": ["title", "headers", "rows"]
+    },
+    "FAQItem": {
+      "type": "object",
+      "description": "Frequently asked question entry with localized Q&A.",
+      "properties": {
+        "id": { "type": "string" },
+        "q": { "$ref": "#/definitions/LocalizedString" },
+        "a": { "$ref": "#/definitions/LocalizedString" }
+      },
+      "required": ["q", "a"]
+    },
+    "HreflangMapping": {
+      "type": "object",
+      "description": "Mapping of language code to URL / relative path for multi-lingual SEO hreflang tags.",
+      "patternProperties": {
+        "^[a-z]{2}(-[A-Z]{2})?$": { "type": "string" }
+      },
+      "additionalProperties": { "type": "string" }
+    },
+    "Relationships": {
+      "type": "object",
+      "description": "Graph relations: hreflang alternates, hub-and-spoke related posts, and topic clusters.",
+      "properties": {
+        "hreflang": { "$ref": "#/definitions/HreflangMapping" },
+        "relatedSlugs": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Array of referenced article slugs for topic clusters and cross-linking."
+        },
+        "topicCluster": {
+          "type": "string",
+          "description": "Semantic parent category or topic silo (e.g. security-protocols, infrastructure, user-guides)."
+        },
+        "seriesOrder": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "prevSlug": { "type": ["string", "null"] },
+        "nextSlug": { "type": ["string", "null"] }
+      },
+      "required": ["relatedSlugs"]
+    },
+    "QuickSpecs": {
+      "type": "object",
+      "description": "Key architectural metrics displayed in the modern specs bar.",
+      "properties": {
+        "storageTier": { "$ref": "#/definitions/LocalizedString" },
+        "protocol": { "$ref": "#/definitions/LocalizedString" },
+        "latency": { "$ref": "#/definitions/LocalizedString" },
+        "retentionPolicy": { "$ref": "#/definitions/LocalizedString" }
+      }
+    },
+    "Article": {
+      "type": "object",
+      "description": "Complete centralized article model.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique immutable article identifier (e.g. art-01)."
+        },
+        "slug": {
+          "type": "string",
+          "pattern": "^[a-z0-9-]+$",
+          "description": "URL-safe permalink slug."
+        },
+        "schemaType": {
+          "type": "string",
+          "enum": ["TechArticle", "Article", "HowTo", "BlogPosting"],
+          "default": "TechArticle"
+        },
+        "category": { "$ref": "#/definitions/LocalizedString" },
+        "badge": { "$ref": "#/definitions/LocalizedString" },
+        "readTimeMin": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 60
+        },
+        "icon": {
+          "type": "string",
+          "description": "Lucide icon identifier."
+        },
+        "publishedAt": {
+          "type": "string",
+          "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
+        },
+        "updatedAt": {
+          "type": "string",
+          "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
+        },
+        "author": { "$ref": "#/definitions/Author" },
+        "title": { "$ref": "#/definitions/LocalizedString" },
+        "metaDesc": { "$ref": "#/definitions/LocalizedString" },
+        "lead": { "$ref": "#/definitions/LocalizedString" },
+        "takeaways": { "$ref": "#/definitions/LocalizedStringArray" },
+        "quickSpecs": { "$ref": "#/definitions/QuickSpecs" },
+        "sections": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/ArticleSection" },
+          "minItems": 1
+        },
+        "comparisonTable": { "$ref": "#/definitions/ComparisonTable" },
+        "sources": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/SourceCitation" }
+        },
+        "faqs": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/FAQItem" }
+        },
+        "relatedSlugs": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "relationships": { "$ref": "#/definitions/Relationships" }
+      },
+      "required": [
+        "id",
+        "slug",
+        "category",
+        "badge",
+        "readTimeMin",
+        "publishedAt",
+        "title",
+        "metaDesc",
+        "lead",
+        "sections"
+      ]
+    }
+  }
+}

@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title id="doc-title">المقالات والأدلة التقنية — Temp Mail</title>
+    <meta name="description" content="أدلة معمارية وأمنية موثوقة حول بروتوكولات البريد المؤقت، وفك شفرات OTP، وحماية الخصوصية الرقمية." id="meta-description" />
+    <link rel="canonical" href="https://freetemp.email/article-template.html" id="canonical-link" />
+
+    <!-- OpenGraph & Twitter Social Cards -->
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="المقالات والأدلة التقنية — Temp Mail" id="og-title" />
+    <meta property="og:description" content="أدلة معمارية وأمنية موثوقة حول بروتوكولات البريد المؤقت، وفك شفرات OTP، وحماية الخصوصية الرقمية." id="og-description" />
+    <meta property="og:url" content="https://freetemp.email/article-template.html" id="og-url" />
+    <meta property="og:site_name" content="Temp Mail" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="المقالات والأدلة التقنية — Temp Mail" id="tw-title" />
+    <meta name="twitter:description" content="أدلة معمارية وأمنية موثوقة حول بروتوكولات البريد المؤقت، وفك شفرات OTP، وحماية الخصوصية الرقمية." id="tw-description" />
+
+    <!-- Tailwind CSS & Shared Styles -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        darkMode: 'class'
+      }
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+
+    <script src="/shared/theme.js"></script>
+    <script src="/shared/i18n.js"></script>
+    <script src="/shared/articles-data.js"></script>
+
+    <style>
+      :root {
+        --font-main: 'Cairo', sans-serif;
+      }
+      [dir="ltr"] {
+        --font-main: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      }
+      body {
+        font-family: var(--font-main);
+      }
+      .line-clamp-2 {
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+      }
+    </style>
+  </head>
+  <body class="min-h-screen bg-white text-black dark:bg-[#0D0D0D] dark:text-[#F5F5F5] flex flex-col transition-colors duration-200 antialiased selection:bg-neutral-200 dark:selection:bg-neutral-800">
+    <!-- Reading Progress Bar -->
+    <div id="reading-progress" class="fixed top-0 left-0 right-0 h-[2.5px] bg-black dark:bg-white z-50 transform origin-left scale-x-0 transition-transform duration-75"></div>
+
+    <!-- Master Header -->
+    <header class="border-b border-neutral-200 dark:border-neutral-800 bg-white/95 dark:bg-[#0D0D0D]/95 backdrop-blur-md sticky top-0 z-30 transition-colors">
+      <div class="max-w-4xl mx-auto px-4 h-16 flex items-center justify-between gap-4">
+        <div class="flex items-center gap-6">
+          <a href="/" id="brand-link" class="text-xl font-bold tracking-tight text-black dark:text-white hover:opacity-80 transition-opacity flex items-center gap-2">
+            <span class="w-6 h-6 rounded bg-black dark:bg-white text-white dark:text-black flex items-center justify-center text-xs font-mono font-extrabold">T</span>
+            <span data-i18n="brand">Temp Mail</span>
+          </a>
+
+          <nav class="hidden md:flex items-center gap-4 text-xs font-medium" id="header-nav">
+            <a href="/" data-i18n="home" class="text-neutral-600 dark:text-neutral-400 hover:text-black dark:hover:text-white transition-colors">الرئيسية</a>
+            <a href="/blog.html" data-i18n="blog" class="text-neutral-600 dark:text-neutral-400 hover:text-black dark:hover:text-white transition-colors">المدونة</a>
+            <a href="/articles/index.html" class="text-black dark:text-white font-bold transition-colors" data-i18n="articles">المقالات</a>
+            <a href="/guide.html" data-i18n="guide" class="text-neutral-600 dark:text-neutral-400 hover:text-black dark:hover:text-white transition-colors">دليل الاستخدام</a>
+            <a href="/faq.html" data-i18n="faq" class="text-neutral-600 dark:text-neutral-400 hover:text-black dark:hover:text-white transition-colors">الأسئلة الشائعة</a>
+          </nav>
+        </div>
+
+        <div class="flex items-center gap-2 sm:gap-3">
+          <!-- Language Selector Button -->
+          <button
+            type="button"
+            id="open-lang-picker"
+            class="open-lang-picker min-h-[38px] px-3 py-1.5 bg-white hover:bg-neutral-50 dark:bg-neutral-900 dark:hover:bg-neutral-800 border border-neutral-200 hover:border-black dark:border-neutral-800 dark:hover:border-neutral-600 rounded-lg text-xs font-semibold text-black dark:text-white transition-all flex items-center gap-1.5 cursor-pointer shadow-sm active:scale-95"
+            aria-label="Change Language"
+          >
+            <svg class="w-3.5 h-3.5 stroke-current fill-none stroke-[2]" viewBox="0 0 24 24" aria-hidden="true">
+              <circle cx="12" cy="12" r="10"></circle>
+              <line x1="2" y1="12" x2="22" y2="12"></line>
+              <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+            </svg>
+            <span id="current-lang-label">العربية</span>
+            <svg class="w-3 h-3 stroke-current fill-none stroke-[2] opacity-60" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          </button>
+
+          <!-- Dark/Light Theme Toggle Button -->
+          <button
+            type="button"
+            id="theme-toggle-btn"
+            class="theme-toggle-btn min-h-[38px] min-w-[38px] p-2 bg-white hover:bg-neutral-50 dark:bg-neutral-900 dark:hover:bg-neutral-800 border border-neutral-200 hover:border-black dark:border-neutral-800 dark:hover:border-neutral-600 rounded-lg text-black dark:text-white transition-all flex items-center justify-center cursor-pointer active:scale-95"
+            aria-label="Toggle theme"
+          >
+            <svg class="theme-toggle-icon w-4 h-4 stroke-current fill-none stroke-[2]" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Content Container -->
+    <main class="flex-1 max-w-3xl w-full mx-auto px-4 py-8 sm:py-12">
+      <!-- Breadcrumbs -->
+      <nav class="flex items-center gap-2 text-xs text-neutral-500 dark:text-neutral-400 mb-6 font-mono" id="article-breadcrumbs" aria-label="Breadcrumb">
+        <a href="/" class="hover:text-black dark:hover:text-white transition-colors" id="bc-home" data-i18n="artNavHome">الرئيسية</a>
+        <span class="opacity-40">/</span>
+        <a href="/blog.html" class="hover:text-black dark:hover:text-white transition-colors" id="bc-blog" data-i18n="artNavBlog">المدونة</a>
+        <span class="opacity-40">/</span>
+        <a href="/articles/index.html" class="hover:text-black dark:hover:text-white transition-colors" id="bc-articles">المقالات</a>
+        <span class="opacity-40">/</span>
+        <span class="text-black dark:text-white font-medium truncate max-w-[220px]" id="breadcrumb-current-title">الدليل التقني</span>
+      </nav>
+
+      <!-- Article Header (Google Blog / Security Engineering Style) -->
+      <header class="mb-10 pb-8 border-b border-neutral-200 dark:border-neutral-800">
+        <div class="flex items-center gap-2 mb-4">
+          <span class="px-2.5 py-0.5 rounded text-[11px] font-mono font-bold uppercase tracking-wide bg-blue-50 text-blue-700 dark:bg-blue-950/60 dark:text-blue-300 border border-blue-200 dark:border-blue-800/60" id="article-category-badge">
+            الأمان والبروتوكولات
+          </span>
+          <span class="text-xs text-neutral-400 font-mono">•</span>
+          <span class="text-xs text-neutral-500 dark:text-neutral-400 font-mono" id="article-badge-text">دليل تقني متقدم</span>
+        </div>
+
+        <h1 class="text-2xl sm:text-3xl lg:text-[2.35rem] font-extrabold text-black dark:text-white mb-5 leading-tight tracking-tight" id="article-main-title">
+          عنوان الدليل
+        </h1>
+
+        <!-- Author Byline & Meta Info -->
+        <div class="flex flex-wrap items-center justify-between gap-4 py-3.5 px-4 bg-neutral-50 dark:bg-neutral-900/60 rounded-xl border border-neutral-200 dark:border-neutral-800 mb-6">
+          <div class="flex items-center gap-3">
+            <div class="w-9 h-9 rounded-full bg-gradient-to-tr from-blue-600 to-indigo-600 text-white flex items-center justify-center font-bold text-xs shadow-sm shrink-0">
+              TM
+            </div>
+            <div>
+              <div class="font-bold text-xs sm:text-sm text-black dark:text-white flex items-center gap-1.5">
+                <span id="article-author-tag">فريق أبحاث الأمان والشبكات</span>
+                <svg class="w-3.5 h-3.5 text-blue-500 fill-current" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+              </div>
+              <div class="text-[11px] text-neutral-500 dark:text-neutral-400 font-mono">Temp Mail Engineering Group</div>
+            </div>
+          </div>
+
+          <div class="flex items-center gap-3 text-xs text-neutral-500 dark:text-neutral-400 font-mono">
+            <div class="flex items-center gap-1">
+              <svg class="w-3.5 h-3.5 text-neutral-400 stroke-current fill-none stroke-[2]" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+              <span id="article-readtime">12 دقيقة قراءة</span>
+            </div>
+            <span>•</span>
+            <span id="article-updated-date">تحديث: سبتمبر 2026</span>
+          </div>
+        </div>
+
+        <!-- Share Toolbar -->
+        <div class="flex items-center justify-between py-2.5 border-y border-neutral-100 dark:border-neutral-800/80 mb-6 text-xs text-neutral-600 dark:text-neutral-400">
+          <span class="font-mono text-[11px] font-medium" id="share-label">مشاركة هذا الدليل:</span>
+          <div class="flex items-center gap-2">
+            <!-- Copy Link -->
+            <button
+              type="button"
+              id="copy-article-link-btn"
+              onclick="navigator.clipboard.writeText(window.location.href); const label = this.querySelector('span'); const orig = label.textContent; label.textContent='تم النسخ ✓'; setTimeout(() => label.textContent=orig, 1800);"
+              class="px-2.5 py-1 rounded-md bg-neutral-100 dark:bg-neutral-800 hover:bg-neutral-200 dark:hover:bg-neutral-700 text-black dark:text-white transition-colors cursor-pointer flex items-center gap-1.5 font-mono text-[11px]"
+            >
+              <svg class="w-3.5 h-3.5 stroke-current fill-none stroke-[2]" viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg>
+              <span id="copy-btn-text">نسخ الرابط</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Lead Paragraph -->
+        <p class="text-base sm:text-lg text-neutral-700 dark:text-neutral-300 leading-relaxed mb-6" id="article-lead-text">
+          المقدمة الشاملة للدليل...
+        </p>
+
+        <!-- Modern Quick Specs Indicator Strip -->
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 p-3.5 bg-neutral-50 dark:bg-neutral-900/70 border border-neutral-200 dark:border-neutral-800 rounded-xl text-xs font-mono mb-2" id="article-quick-specs">
+          <div class="p-2 bg-white dark:bg-neutral-800/60 rounded-lg border border-neutral-100 dark:border-neutral-800 flex flex-col">
+            <span class="text-neutral-400 text-[10px] uppercase" id="spec-storage-label">بيئة التخزين</span>
+            <span class="font-bold text-black dark:text-white truncate">In-Memory RAM</span>
+          </div>
+          <div class="p-2 bg-white dark:bg-neutral-800/60 rounded-lg border border-neutral-100 dark:border-neutral-800 flex flex-col">
+            <span class="text-neutral-400 text-[10px] uppercase" id="spec-protocol-label">بروتوكول النقل</span>
+            <span class="font-bold text-black dark:text-white truncate">TLS 1.3 / RFC 5322</span>
+          </div>
+          <div class="p-2 bg-white dark:bg-neutral-800/60 rounded-lg border border-neutral-100 dark:border-neutral-800 flex flex-col">
+            <span class="text-neutral-400 text-[10px] uppercase" id="spec-latency-label">زمن المعالجة</span>
+            <span class="font-bold text-emerald-600 dark:text-emerald-400">&lt; 500ms Instant</span>
+          </div>
+          <div class="p-2 bg-white dark:bg-neutral-800/60 rounded-lg border border-neutral-100 dark:border-neutral-800 flex flex-col">
+            <span class="text-neutral-400 text-[10px] uppercase" id="spec-policy-label">سياسة البيانات</span>
+            <span class="font-bold text-blue-600 dark:text-blue-400">Zero Retention</span>
+          </div>
+        </div>
+      </header>
+
+      <!-- Table of Contents Container -->
+      <div id="article-toc-container" class="mb-10 p-5 bg-neutral-50/80 dark:bg-neutral-900/60 border border-neutral-200 dark:border-neutral-800 rounded-xl"></div>
+
+      <!-- Key Takeaways Box -->
+      <div class="mb-10 p-5 sm:p-6 bg-neutral-50 dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 rounded-xl shadow-sm" id="article-takeaways-box">
+        <h2 class="text-xs sm:text-sm font-bold text-black dark:text-white uppercase tracking-wider mb-4 flex items-center gap-2 font-mono">
+          <svg class="w-4 h-4 text-emerald-500 stroke-current fill-none stroke-[2.5]" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>
+          <span id="takeaways-heading">أبرز النقاط والنتائج في هذا الدليل</span>
+        </h2>
+        <ul class="space-y-3 text-xs sm:text-sm text-neutral-700 dark:text-neutral-300" id="article-takeaways-list"></ul>
+      </div>
+
+      <!-- Article Sections Dynamic Container -->
+      <div id="article-sections-container"></div>
+
+      <!-- Deep Dive Container -->
+      <div id="article-deepdive-container"></div>
+
+      <!-- Comparison Table Dynamic Container -->
+      <div id="article-table-container"></div>
+
+      <!-- Verified Sources & Citations -->
+      <section class="mb-10 p-5 bg-neutral-50 dark:bg-neutral-900/50 border border-neutral-200 dark:border-neutral-800 rounded-xl" id="article-sources-section">
+        <h3 class="text-xs font-bold uppercase tracking-wider text-neutral-500 dark:text-neutral-400 mb-3 flex items-center gap-1.5 font-mono">
+          <svg class="w-3.5 h-3.5 stroke-current fill-none stroke-[2]" viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
+          <span id="sources-heading">المراجع والمعايير القياسية المعتمدة</span>
+        </h3>
+        <ul class="space-y-2 text-xs text-neutral-600 dark:text-neutral-400" id="article-sources-list"></ul>
+      </section>
+
+      <!-- FAQ Accordion -->
+      <section class="mb-12 pt-6 border-t border-neutral-200 dark:border-neutral-800" id="article-faqs-section">
+        <h2 class="text-xl sm:text-2xl font-bold text-black dark:text-white mb-6" id="faqs-heading">
+          الأسئلة الشائعة والأمان
+        </h2>
+        <div class="space-y-3" id="article-faqs-list"></div>
+      </section>
+
+      <!-- Related Guides Cards -->
+      <section class="mb-12 pt-8 border-t border-neutral-200 dark:border-neutral-800" id="article-related-section">
+        <div class="flex items-center justify-between mb-6">
+          <h2 class="text-lg sm:text-xl font-bold text-black dark:text-white" id="related-heading">
+            أدلة ومقالات هندسية ذات صلة
+          </h2>
+          <a href="/articles/index.html" class="text-xs font-bold text-black dark:text-white hover:underline flex items-center gap-1 font-mono" id="view-all-articles-link">
+            <span id="view-all-text">تصفح كافة المقالات</span>
+            <span id="view-all-arrow">←</span>
+          </a>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4" id="article-related-list"></div>
+      </section>
+
+      <!-- Floating Action Bottom CTA -->
+      <div class="p-6 sm:p-8 bg-neutral-100 dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 rounded-2xl flex flex-col sm:flex-row items-center justify-between gap-6 shadow-sm">
+        <div class="text-center sm:text-start">
+          <h3 class="text-base sm:text-lg font-bold text-black dark:text-white mb-2" id="cta-title" data-i18n="blogCtaTitle">
+            جاهز لتجربة البريد المؤقت؟
+          </h3>
+          <p class="text-xs sm:text-sm text-neutral-600 dark:text-neutral-400 leading-relaxed" id="cta-desc" data-i18n="blogCtaDesc">
+            أنشئ بريداً مؤقتاً مجانياً في ثانية واحدة وابدأ استقبال رسائل التفعيل ورموز التحقق بأمان فوري.
+          </p>
+        </div>
+        <a
+          href="/"
+          id="cta-button"
+          class="shrink-0 px-6 py-3 bg-black dark:bg-white text-white dark:text-black text-xs sm:text-sm font-bold rounded-xl hover:opacity-90 transition-opacity shadow-sm flex items-center gap-2"
+        >
+          <span data-i18n="blogCtaBtn">إنشاء بريد مؤقت الآن</span>
+          <span id="cta-arrow">←</span>
+        </a>
+      </div>
+    </main>
+
+    <!-- Master Footer -->
+    <footer class="border-t border-neutral-200 dark:border-neutral-800 bg-neutral-50/50 dark:bg-[#080808] text-neutral-600 dark:text-neutral-400 text-xs py-10 transition-colors">
+      <div class="max-w-4xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div class="flex items-center gap-2">
+          <span class="w-5 h-5 rounded bg-black dark:bg-white text-white dark:text-black flex items-center justify-center text-[10px] font-mono font-extrabold">T</span>
+          <span class="font-bold text-black dark:text-white" data-i18n="brand">Temp Mail</span>
+          <span class="opacity-40">—</span>
+          <span>© 2026 Temp Mail. All rights reserved.</span>
+        </div>
+        <div class="flex items-center gap-4 text-xs font-medium" id="footer-links">
+          <a href="/privacy.html" data-i18n="privacy" class="hover:text-black dark:hover:text-white transition-colors">سياسة الخصوصية</a>
+          <a href="/guide.html" data-i18n="guide" class="hover:text-black dark:hover:text-white transition-colors">دليل الاستخدام</a>
+          <a href="/faq.html" data-i18n="faq" class="hover:text-black dark:hover:text-white transition-colors">الأسئلة الشائعة</a>
+          <a href="/about.html" data-i18n="about" class="hover:text-black dark:hover:text-white transition-colors">عن الخدمة</a>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Client-Side Hydration Script -->
+    <script>
+      (function () {
+        'use strict';
+
+        function getLang() {
+          var params = new URLSearchParams(window.location.search);
+          var pLang = params.get('lang');
+          if (pLang && (pLang === 'ar' || pLang === 'en')) return pLang;
+          var stored = localStorage.getItem('preferredLang');
+          if (stored === 'en' || stored === 'ar') return stored;
+          var docLang = document.documentElement.getAttribute('lang');
+          if (docLang === 'en' || docLang === 'ar') return docLang;
+          return 'ar';
+        }
+
+        function getSlug() {
+          var params = new URLSearchParams(window.location.search);
+          var s = params.get('slug');
+          if (s) return s.replace(/\.html$/, '');
+          var pathParts = window.location.pathname.split('/').filter(Boolean);
+          var last = pathParts[pathParts.length - 1] || '';
+          if (last && last.endsWith('.html') && last !== 'article-template.html' && last !== 'article.html' && last !== 'index.html') {
+            return last.replace(/\.html$/, '');
+          }
+          return 'universal-verification-coverage';
+        }
+
+        var lang = getLang();
+        var isAr = lang === 'ar';
+        var slug = getSlug();
+
+        document.documentElement.setAttribute('lang', lang);
+        document.documentElement.setAttribute('dir', isAr ? 'rtl' : 'ltr');
+
+        // Update Nav Paths based on language
+        var prefix = '/' + lang;
+        var brandLink = document.getElementById('brand-link');
+        if (brandLink) brandLink.setAttribute('href', prefix + '/');
+        var ctaBtn = document.getElementById('cta-button');
+        if (ctaBtn) ctaBtn.setAttribute('href', prefix + '/');
+        var bcHome = document.getElementById('bc-home');
+        if (bcHome) bcHome.setAttribute('href', prefix + '/');
+        var bcBlog = document.getElementById('bc-blog');
+        if (bcBlog) bcBlog.setAttribute('href', prefix + '/blog.html');
+        var bcArticles = document.getElementById('bc-articles');
+        if (bcArticles) bcArticles.setAttribute('href', prefix + '/articles/index.html');
+        var viewAll = document.getElementById('view-all-articles-link');
+        if (viewAll) viewAll.setAttribute('href', prefix + '/articles/index.html');
+
+        var currentLangLabel = document.getElementById('current-lang-label');
+        if (currentLangLabel) currentLangLabel.textContent = isAr ? 'العربية' : 'English';
+
+        // Reading Progress Bar
+        window.addEventListener('scroll', function () {
+          var progress = document.getElementById('reading-progress');
+          if (progress) {
+            var total = document.documentElement.scrollHeight - window.innerHeight;
+            var current = window.scrollY;
+            var pct = total > 0 ? (current / total) : 0;
+            progress.style.transform = 'scaleX(' + Math.min(Math.max(pct, 0), 1) + ')';
+          }
+        }, { passive: true });
+
+        function renderArticle() {
+          var data = window.ARTICLES_DATA || [];
+          var art = data.find(function (a) { return a.slug === slug; });
+          if (!art && data.length > 0) art = data[0];
+          if (!art) return;
+
+          var l = lang;
+          var title = (art.title && (art.title[l] || art.title.ar || art.title.en)) || '';
+          var metaDesc = (art.metaDesc && (art.metaDesc[l] || art.metaDesc.ar || art.metaDesc.en)) || '';
+          var lead = (art.lead && (art.lead[l] || art.lead.ar || art.lead.en)) || '';
+          var category = (art.category && (art.category[l] || art.category.ar || art.category.en)) || '';
+          var badge = (art.badge && (art.badge[l] || art.badge.ar || art.badge.en)) || (isAr ? 'دليل تقني' : 'Technical Guide');
+
+          // Set Title & Meta
+          document.title = title + ' — Temp Mail';
+          var metaD = document.getElementById('meta-description');
+          if (metaD) metaD.setAttribute('content', metaDesc);
+          var ogT = document.getElementById('og-title');
+          if (ogT) ogT.setAttribute('content', title);
+          var ogD = document.getElementById('og-description');
+          if (ogD) ogD.setAttribute('content', metaDesc);
+          var can = document.getElementById('canonical-link');
+          if (can) can.setAttribute('href', 'https://freetemp.email/' + l + '/articles/' + art.slug + '.html');
+
+          // Breadcrumb Title
+          var bcTitle = document.getElementById('breadcrumb-current-title');
+          if (bcTitle) bcTitle.textContent = title;
+
+          // Header
+          var catBadge = document.getElementById('article-category-badge');
+          if (catBadge) catBadge.textContent = category;
+          var bText = document.getElementById('article-badge-text');
+          if (bText) bText.textContent = badge;
+          var mainTitle = document.getElementById('article-main-title');
+          if (mainTitle) mainTitle.textContent = title;
+          var leadEl = document.getElementById('article-lead-text');
+          if (leadEl) leadEl.textContent = lead;
+
+          var readTime = document.getElementById('article-readtime');
+          if (readTime) readTime.textContent = (art.readTimeMin || 10) + ' ' + (isAr ? 'دقيقة قراءة' : 'min read');
+          var updateDate = document.getElementById('article-updated-date');
+          if (updateDate) updateDate.textContent = (isAr ? 'تحديث: سبتمبر 2026' : 'Updated: Sep 2026');
+          var authorTag = document.getElementById('article-author-tag');
+          if (authorTag) authorTag.textContent = isAr ? 'فريق هندسة الأمان' : 'Security Engineering Team';
+
+          // Table of Contents
+          var tocContainer = document.getElementById('article-toc-container');
+          if (tocContainer && art.sections && art.sections.length > 0) {
+            var tocItems = art.sections.map(function (sec, idx) {
+              var sTitle = (sec.title && (sec.title[l] || sec.title.ar || sec.title.en)) || '';
+              return '<li><a href="#' + sec.id + '" class="group flex items-start gap-2 text-neutral-600 dark:text-neutral-400 hover:text-black dark:hover:text-white transition-colors text-xs sm:text-sm"><span class="font-mono text-neutral-400 dark:text-neutral-500 shrink-0 font-medium">' + (idx + 1) + '.0</span><span class="group-hover:underline">' + sTitle + '</span></a></li>';
+            }).join('');
+
+            tocContainer.innerHTML = '<div class="flex items-center justify-between mb-3 text-xs font-bold text-neutral-500 dark:text-neutral-400 uppercase tracking-wider font-mono"><span class="flex items-center gap-1.5"><svg class="w-3.5 h-3.5 stroke-current fill-none stroke-[2]" viewBox="0 0 24 24"><line x1="8" y1="6" x2="21" y2="6"></line><line x1="8" y1="12" x2="21" y2="12"></line><line x1="8" y1="18" x2="21" y2="18"></line><line x1="3" y1="6" x2="3.01" y2="6"></line><line x1="3" y1="12" x2="3.01" y2="12"></line><line x1="3" y1="18" x2="3.01" y2="18"></line></svg><span>' + (isAr ? 'فهرس المحتويات' : 'Table of Contents') + '</span></span><span class="text-[11px] text-neutral-400">' + art.sections.length + ' ' + (isAr ? 'أقسام' : 'sections') + '</span></div><ul class="space-y-2.5">' + tocItems + '</ul>';
+          } else if (tocContainer) {
+            tocContainer.style.display = 'none';
+          }
+
+          // Takeaways
+          var takeList = document.getElementById('article-takeaways-list');
+          var takeHead = document.getElementById('takeaways-heading');
+          if (takeHead) takeHead.textContent = isAr ? 'أبرز النقاط والنتائج في هذا الدليل' : 'Key Takeaways & Core Concepts';
+          if (takeList && art.takeaways) {
+            var takeawaysArr = art.takeaways[l] || art.takeaways.ar || art.takeaways.en || [];
+            takeList.innerHTML = takeawaysArr.map(function (t) {
+              return '<li class="flex items-start gap-3"><span class="text-black dark:text-white font-bold shrink-0 mt-0.5 text-xs">✓</span><span class="leading-relaxed">' + t + '</span></li>';
+            }).join('');
+          }
+
+          // Sections
+          var secContainer = document.getElementById('article-sections-container');
+          if (secContainer && art.sections) {
+            secContainer.innerHTML = art.sections.map(function (sec, idx) {
+              var sTitle = (sec.title && (sec.title[l] || sec.title.ar || sec.title.en)) || '';
+              var sContent = (sec.content && (sec.content[l] || sec.content.ar || sec.content.en)) || '';
+
+              var calloutHtml = '';
+              if (sec.callout && sec.callout.title && sec.callout.text) {
+                var cTitle = (sec.callout.title[l] || sec.callout.title.ar || sec.callout.title.en) || '';
+                var cText = (sec.callout.text[l] || sec.callout.text.ar || sec.callout.text.en) || '';
+                calloutHtml = '<div class="my-6 p-4 sm:p-5 bg-neutral-50 dark:bg-neutral-900/90 border-s-4 border-black dark:border-white rounded-e-xl text-xs sm:text-sm text-neutral-800 dark:text-neutral-200 shadow-sm"><div class="font-bold mb-1.5 flex items-center gap-1.5 text-black dark:text-white"><svg class="w-4 h-4 stroke-current fill-none stroke-[2]" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg><span>' + cTitle + '</span></div><p class="leading-relaxed text-neutral-600 dark:text-neutral-300">' + cText + '</p></div>';
+              }
+
+              var codeHtml = '';
+              if (sec.codeSnippet && sec.codeSnippet.code) {
+                var escaped = sec.codeSnippet.code.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+                codeHtml = '<div class="my-6 rounded-xl overflow-hidden border border-neutral-200 dark:border-neutral-800 bg-[#0d1117] text-left shadow-sm" dir="ltr"><div class="bg-[#161b22] px-4 py-2.5 flex items-center justify-between border-b border-neutral-800 text-[11px] text-neutral-400 font-mono"><div class="flex items-center gap-2"><span class="w-2.5 h-2.5 rounded-full bg-neutral-700 inline-block"></span><span>' + (sec.codeSnippet.filename || 'snippet.ts') + '</span></div><button type="button" class="copy-code-btn hover:text-white text-neutral-400 transition-colors flex items-center gap-1 text-[10px] font-mono cursor-pointer" onclick="navigator.clipboard.writeText(this.closest(\'.rounded-xl\').querySelector(\'code\').innerText); this.textContent=\'Copied!\'; setTimeout(()=>this.textContent=\'Copy\', 1500);"><span>Copy</span></button></div><pre class="p-4 text-xs font-mono text-neutral-200 overflow-x-auto leading-relaxed"><code>' + escaped + '</code></pre></div>';
+              }
+
+              return '<section class="mb-10 pt-2" id="' + sec.id + '"><h2 class="text-xl sm:text-2xl font-bold text-black dark:text-white mb-4 leading-snug flex items-baseline gap-2"><span class="font-mono text-sm sm:text-base text-neutral-400 dark:text-neutral-500 font-normal shrink-0">' + (idx + 1) + '.0</span><span>' + sTitle + '</span></h2><div class="text-[15px] sm:text-[16px] text-neutral-700 dark:text-neutral-300 leading-[1.85] space-y-4">' + sContent + '</div>' + calloutHtml + codeHtml + '</section>';
+            }).join('');
+          }
+
+          // Comparison Table
+          var tableContainer = document.getElementById('article-table-container');
+          if (tableContainer) {
+            if (art.comparisonTable) {
+              var table = art.comparisonTable;
+              var tTitle = (table.title && (table.title[l] || table.title.ar || table.title.en)) || '';
+              var h0 = (table.headers[0] && (table.headers[0][l] || table.headers[0].ar || table.headers[0].en)) || '';
+              var h1 = (table.headers[1] && (table.headers[1][l] || table.headers[1].ar || table.headers[1].en)) || '';
+              var h2 = (table.headers[2] && (table.headers[2][l] || table.headers[2].ar || table.headers[2].en)) || '';
+
+              var rowsHtml = table.rows.map(function (r, i) {
+                var feat = (r.feature && (r.feature[l] || r.feature.ar || r.feature.en)) || '';
+                var leg = (r.legacy && (r.legacy[l] || r.legacy.ar || r.legacy.en)) || '';
+                var adv = (r.advanced && (r.advanced[l] || r.advanced.ar || r.advanced.en)) || '';
+                return '<tr class="' + (i % 2 === 1 ? 'bg-neutral-50/50 dark:bg-neutral-900/40' : '') + '"><td class="p-3.5 sm:p-4 font-semibold text-black dark:text-white">' + feat + '</td><td class="p-3.5 sm:p-4 text-neutral-500">' + leg + '</td><td class="p-3.5 sm:p-4 font-semibold text-emerald-600 dark:text-emerald-400">' + adv + '</td></tr>';
+              }).join('');
+
+              tableContainer.innerHTML = '<section class="mb-10" id="comparison-table-section"><h2 class="text-xl sm:text-2xl font-bold text-black dark:text-white mb-4">' + tTitle + '</h2><div class="overflow-x-auto rounded-xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-[#121212]"><table class="w-full text-xs sm:text-sm ' + (isAr ? 'text-right' : 'text-left') + '"><thead class="bg-neutral-100 dark:bg-neutral-800 text-black dark:text-white font-bold border-b border-neutral-200 dark:border-neutral-800"><tr><th class="p-3.5 sm:p-4">' + h0 + '</th><th class="p-3.5 sm:p-4 text-neutral-500">' + h1 + '</th><th class="p-3.5 sm:p-4 text-black dark:text-white">' + h2 + '</th></tr></thead><tbody class="divide-y divide-neutral-200 dark:divide-neutral-800">' + rowsHtml + '</tbody></table></div></section>';
+            } else {
+              tableContainer.innerHTML = '';
+            }
+          }
+
+          // Sources
+          var srcHead = document.getElementById('sources-heading');
+          if (srcHead) srcHead.textContent = isAr ? 'المراجع والمعايير القياسية المعتمدة' : 'Verified Standards & Citations';
+          var srcList = document.getElementById('article-sources-list');
+          if (srcList && art.sources && art.sources.length > 0) {
+            srcList.innerHTML = art.sources.map(function (s) {
+              return '<li class="flex items-center gap-2"><span class="text-neutral-400">•</span><a href="' + s.url + '" target="_blank" rel="noopener noreferrer" class="hover:underline text-black dark:text-white font-medium flex items-center gap-1.5"><span>' + s.title + '</span><svg class="w-3 h-3 opacity-60 stroke-current fill-none stroke-[2]" viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg></a></li>';
+            }).join('');
+          } else {
+            var srcSec = document.getElementById('article-sources-section');
+            if (srcSec) srcSec.style.display = 'none';
+          }
+
+          // FAQs
+          var faqHead = document.getElementById('faqs-heading');
+          if (faqHead) faqHead.textContent = isAr ? 'الأسئلة الشائعة والأمان' : 'Frequently Asked Questions';
+          var faqList = document.getElementById('article-faqs-list');
+          if (faqList && art.faqs && art.faqs.length > 0) {
+            faqList.innerHTML = art.faqs.map(function (faq) {
+              var q = (faq.q && (faq.q[l] || faq.q.ar || faq.q.en)) || '';
+              var a = (faq.a && (faq.a[l] || faq.a.ar || faq.a.en)) || '';
+              return '<div class="faq-item rounded-xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-[#121212] overflow-hidden"><button type="button" class="faq-toggle w-full p-4 ' + (isAr ? 'text-right' : 'text-left') + ' font-semibold text-sm sm:text-base text-black dark:text-white flex items-center justify-between gap-4 cursor-pointer hover:bg-neutral-50 dark:hover:bg-neutral-900/50 transition-colors" aria-expanded="true"><span>' + q + '</span><svg class="faq-chevron w-4 h-4 stroke-current fill-none stroke-[2] text-neutral-400 transition-transform duration-200 rotate-180" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg></button><div class="faq-content p-4 pt-0 text-xs sm:text-sm text-neutral-600 dark:text-neutral-400 leading-relaxed border-t border-neutral-100 dark:border-neutral-800/60 "><p class="mt-3">' + a + '</p></div></div>';
+            }).join('');
+
+            // Bind FAQ expand/collapse
+            var toggles = faqList.querySelectorAll('.faq-toggle');
+            toggles.forEach(function (btn) {
+              btn.addEventListener('click', function () {
+                var content = btn.nextElementSibling;
+                var chevron = btn.querySelector('.faq-chevron');
+                var isExpanded = btn.getAttribute('aria-expanded') === 'true';
+
+                if (isExpanded) {
+                  btn.setAttribute('aria-expanded', 'false');
+                  if (content) content.style.display = 'none';
+                  if (chevron) chevron.classList.remove('rotate-180');
+                } else {
+                  btn.setAttribute('aria-expanded', 'true');
+                  if (content) content.style.display = 'block';
+                  if (chevron) chevron.classList.add('rotate-180');
+                }
+              });
+            });
+          }
+
+          // Related Articles
+          var relHead = document.getElementById('related-heading');
+          if (relHead) relHead.textContent = isAr ? 'أدلة ومقالات هندسية ذات صلة' : 'Related Engineering Guides';
+          var vAllText = document.getElementById('view-all-text');
+          if (vAllText) vAllText.textContent = isAr ? 'تصفح كافة المقالات' : 'Browse All Articles';
+          var vAllArr = document.getElementById('view-all-arrow');
+          if (vAllArr) vAllArr.textContent = isAr ? '←' : '→';
+          var ctaArr = document.getElementById('cta-arrow');
+          if (ctaArr) ctaArr.textContent = isAr ? '←' : '→';
+
+          var relList = document.getElementById('article-related-list');
+          if (relList) {
+            var relSlugs = art.relatedSlugs || [];
+            var relItems = relSlugs.map(function (rSlug) {
+              var r = data.find(function (x) { return x.slug === rSlug; });
+              if (!r) return '';
+              var rTitle = (r.title && (r.title[l] || r.title.ar || r.title.en)) || '';
+              var rDesc = (r.metaDesc && (r.metaDesc[l] || r.metaDesc.ar || r.metaDesc.en)) || '';
+              var rCat = (r.category && (r.category[l] || r.category.ar || r.category.en)) || '';
+              return '<article class="p-4 bg-white dark:bg-[#121212] border border-neutral-200 dark:border-neutral-800 rounded-xl hover:border-black dark:hover:border-white transition-all flex flex-col justify-between shadow-sm"><div><span class="text-[10px] font-mono uppercase px-2 py-0.5 bg-neutral-100 dark:bg-neutral-800 rounded text-neutral-600 dark:text-neutral-400 font-bold mb-2 inline-block">' + rCat + '</span><h3 class="font-bold text-sm text-black dark:text-white mb-1.5 line-clamp-2"><a href="/article-template.html?slug=' + r.slug + '&lang=' + l + '" class="hover:underline">' + rTitle + '</a></h3><p class="text-xs text-neutral-600 dark:text-neutral-400 leading-relaxed mb-4 line-clamp-2">' + rDesc + '</p></div><a href="/article-template.html?slug=' + r.slug + '&lang=' + l + '" class="text-xs font-bold text-black dark:text-white hover:underline flex items-center gap-1 pt-2 border-t border-neutral-100 dark:border-neutral-800"><span>' + (isAr ? 'قراءة الدليل' : 'Read Guide') + '</span><span>' + (isAr ? '←' : '→') + '</span></a></article>';
+            }).join('');
+            relList.innerHTML = relItems;
+          }
+        }
+
+        if (document.readyState === 'loading') {
+          document.addEventListener('DOMContentLoaded', renderArticle);
+        } else {
+          renderArticle();
+        }
+      })();
+    </script>
+  </body>
+</html>

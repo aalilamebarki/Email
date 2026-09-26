@@ -1,0 +1,22 @@
+name = "temp-mail"
+main = "src/index.ts"
+compatibility_date = "2024-09-23"
+compatibility_flags = ["nodejs_compat"]
+
+[vars]
+DOMAIN = "freetemp.email"
+EXPIRY_MINUTES = "20"
+# Turnstile secret key (for production, set via: wrangler secret put TURNSTILE_SECRET_KEY)
+# TURNSTILE_SECRET_KEY = ""
+
+[[durable_objects.bindings]]
+name = "MAILBOX"
+class_name = "MailboxDO"
+
+# SQLite-backed Durable Objects (متوافق بالكامل مع خطة Cloudflare المجانية والمدفوعة)
+[[migrations]]
+tag = "v1"
+new_sqlite_classes = ["MailboxDO"]
+
+[build]
+command = ""

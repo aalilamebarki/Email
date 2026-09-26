@@ -1,0 +1,758 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <script>
+      (function () {
+        try {
+          var t = localStorage.getItem('theme') || (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+          document.documentElement.setAttribute('data-theme', t);
+          if (t === 'dark') document.documentElement.classList.add('dark');
+          else document.documentElement.classList.remove('dark');
+        } catch (e) {}
+      })();
+    </script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- SEO Meta Tags -->
+    <title id="page-title">التغطية الشاملة لرسائل التحقق (Universal Verification Coverage): فك شفرات OTP والروابط الخفية بدقة 100% — Temp Mail</title>
+    <meta name="description" id="meta-description" content="دليل معماري وتقني يوضح كيف يتفوق محركنا في فك شفرات رموز التحقق المعقدة مثل أكواد Google G-XXXXXX وتوكنات Steam Guard والروابط المقنعة بدقة 100%." />
+    <meta name="author" content="Temp Mail Security Engineering Team" />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" id="canonical-link" href="https://freetemp.email/ar/articles/universal-verification-coverage.html" />
+
+    <!-- Multilingual Alternates -->
+    <link rel="alternate" hreflang="ar" href="https://freetemp.email/ar/articles/universal-verification-coverage.html" />
+    <link rel="alternate" hreflang="en" href="https://freetemp.email/en/articles/universal-verification-coverage.html" />
+    <link rel="alternate" hreflang="es" href="https://freetemp.email/en/articles/universal-verification-coverage.html" />
+    <link rel="alternate" hreflang="fr" href="https://freetemp.email/en/articles/universal-verification-coverage.html" />
+    <link rel="alternate" hreflang="de" href="https://freetemp.email/en/articles/universal-verification-coverage.html" />
+    <link rel="alternate" hreflang="pt" href="https://freetemp.email/en/articles/universal-verification-coverage.html" />
+    <link rel="alternate" hreflang="it" href="https://freetemp.email/en/articles/universal-verification-coverage.html" />
+    <link rel="alternate" hreflang="ru" href="https://freetemp.email/en/articles/universal-verification-coverage.html" />
+    <link rel="alternate" hreflang="tr" href="https://freetemp.email/en/articles/universal-verification-coverage.html" />
+    <link rel="alternate" hreflang="zh" href="https://freetemp.email/en/articles/universal-verification-coverage.html" />
+    <link rel="alternate" hreflang="ja" href="https://freetemp.email/en/articles/universal-verification-coverage.html" />
+    <link rel="alternate" hreflang="ko" href="https://freetemp.email/en/articles/universal-verification-coverage.html" />
+    <link rel="alternate" hreflang="nl" href="https://freetemp.email/en/articles/universal-verification-coverage.html" />
+    <link rel="alternate" hreflang="pl" href="https://freetemp.email/en/articles/universal-verification-coverage.html" />
+    <link rel="alternate" hreflang="id" href="https://freetemp.email/en/articles/universal-verification-coverage.html" />
+    <link rel="alternate" hreflang="vi" href="https://freetemp.email/en/articles/universal-verification-coverage.html" />
+    <link rel="alternate" hreflang="hi" href="https://freetemp.email/en/articles/universal-verification-coverage.html" />
+    <link rel="alternate" hreflang="fa" href="https://freetemp.email/ar/articles/universal-verification-coverage.html" />
+    <link rel="alternate" hreflang="ur" href="https://freetemp.email/ar/articles/universal-verification-coverage.html" />
+    <link rel="alternate" hreflang="uk" href="https://freetemp.email/en/articles/universal-verification-coverage.html" />
+    <link rel="alternate" hreflang="sv" href="https://freetemp.email/en/articles/universal-verification-coverage.html" />
+    <link rel="alternate" hreflang="el" href="https://freetemp.email/en/articles/universal-verification-coverage.html" />
+    <link rel="alternate" hreflang="x-default" href="https://freetemp.email/en/articles/universal-verification-coverage.html" />
+
+    <!-- Open Graph Tags -->
+    <meta property="og:type" content="article" />
+    <meta property="og:site_name" content="Temp Mail" />
+    <meta property="og:title" id="og-title" content="التغطية الشاملة لرسائل التحقق (Universal Verification Coverage): فك شفرات OTP والروابط الخفية بدقة 100%" />
+    <meta property="og:description" id="og-desc" content="دليل معماري وتقني يوضح كيف يتفوق محركنا في فك شفرات رموز التحقق المعقدة مثل أكواد Google G-XXXXXX وتوكنات Steam Guard والروابط المقنعة بدقة 100%." />
+    <meta property="og:url" id="og-url" content="https://freetemp.email/ar/articles/universal-verification-coverage.html" />
+    <meta property="og:image" content="https://freetemp.email/og-image.png" />
+    <meta property="og:locale" content="ar_AR" />
+
+    <!-- Twitter Cards -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" id="twitter-title" content="التغطية الشاملة لرسائل التحقق (Universal Verification Coverage): فك شفرات OTP والروابط الخفية بدقة 100%" />
+    <meta name="twitter:description" id="twitter-desc" content="دليل معماري وتقني يوضح كيف يتفوق محركنا في فك شفرات رموز التحقق المعقدة مثل أكواد Google G-XXXXXX وتوكنات Steam Guard والروابط المقنعة بدقة 100%." />
+    <meta name="twitter:image" content="https://freetemp.email/og-image.png" />
+
+    <meta name="theme-color" content="#ffffff" id="meta-theme-color" />
+    <link rel="icon" type="image/svg+xml" href="/logo.svg" />
+    <link rel="apple-touch-icon" href="/logo.svg" />
+
+    <!-- Stylesheets & Fonts -->
+    <link rel="stylesheet" href="/fonts/fonts.css" />
+    <link rel="stylesheet" href="/shared/style.css" />
+
+    <!-- Scripts -->
+    <script src="/shared/theme.js" defer></script>
+    <script src="/shared/i18n.js" defer></script>
+    <script src="/shared/articles-data.js" defer></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        darkMode: 'class',
+      };
+    </script>
+
+    <!-- Schema.org JSON-LD -->
+    <script type="application/ld+json" id="schema-json-ld">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "TechArticle",
+      "@id": "https://freetemp.email/ar/articles/universal-verification-coverage.html#article",
+      "headline": "التغطية الشاملة لرسائل التحقق (Universal Verification Coverage): فك شفرات OTP والروابط الخفية بدقة 100%",
+      "description": "دليل معماري وتقني يوضح كيف يتفوق محركنا في فك شفرات رموز التحقق المعقدة مثل أكواد Google G-XXXXXX وتوكنات Steam Guard والروابط المقنعة بدقة 100%.",
+      "inLanguage": "ar",
+      "datePublished": "2026-09-25T08:00:00+00:00",
+      "dateModified": "2026-09-25T10:00:00+00:00",
+      "author": {
+        "@type": "Organization",
+        "name": "Temp Mail Security Engineering Team",
+        "url": "https://freetemp.email/"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Temp Mail",
+        "url": "https://freetemp.email/",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://freetemp.email/logo.svg"
+        }
+      },
+      "mainEntityOfPage": "https://freetemp.email/ar/articles/universal-verification-coverage.html"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://freetemp.email/ar/articles/universal-verification-coverage.html#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "الرئيسية",
+          "item": "https://freetemp.email/ar/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "المدونة",
+          "item": "https://freetemp.email/ar/blog.html"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "التغطية الشاملة لرسائل التحقق (Universal Verification Coverage): فك شفرات OTP والروابط الخفية بدقة 100%",
+          "item": "https://freetemp.email/ar/articles/universal-verification-coverage.html"
+        }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://freetemp.email/ar/articles/universal-verification-coverage.html#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "لماذا تفشل معظم خدمات البريد المؤقت في قراءة رسائل جوجل وأبل؟",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "لأن جوجل ترسل أكوادها مسبوقة بحرف G وعلامة شرطة (مثل G-849201)، وأبل ترسل أرقاما مقسمة بمسافات. الفلاتر القديمة تبحث فقط عن أرقام متصلة وتتجاهل هذه الصيغ المعقدة."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "هل يقوم نظامكم بفتح روابط التفعيل تلقائيا؟",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "كلا، نحن لا نفتح الرابط تلقائيا حتى لا نحرق روابط التفعيل أحادية الاستخدام، بل نستخرج الرابط ونقدمه لك لتفتحه بإرادتك بأمان تام."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "كيف يتجنب محرك UVC تسجيل أو تخزين رسائل المستخدمين؟",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "تتم كافة عمليات الفحص في الذاكرة الحية (RAM) داخل كائنات الحافة، وتتلف نهائيا بمجرد إغلاق الجلسة وفقا لسياسة التخزين الصفري."
+          }
+        }
+      ]
+    }
+  ]
+}
+    </script>
+  </head>
+  <body class="min-h-screen bg-white text-black dark:bg-[#0D0D0D] dark:text-[#F5F5F5] flex flex-col transition-colors duration-200 font-['Cairo',sans-serif]">
+    <!-- Master Header -->
+    <header class="border-b border-neutral-200 dark:border-neutral-800 bg-white/95 dark:bg-[#0D0D0D]/95 backdrop-blur-md sticky top-0 z-30 transition-colors">
+      <div class="max-w-4xl mx-auto px-4 h-16 flex items-center justify-between gap-4">
+        <div class="flex items-center gap-6">
+          <a href="/ar/" class="text-xl font-bold tracking-tight text-black dark:text-white hover:opacity-80 transition-opacity flex items-center gap-2">
+            <span class="w-6 h-6 rounded bg-black dark:bg-white text-white dark:text-black flex items-center justify-center text-xs font-mono font-extrabold">T</span>
+            <span data-i18n="brand">Temp Mail</span>
+          </a>
+
+          <nav class="hidden md:flex items-center gap-4 text-xs font-medium">
+            <a href="/ar/" data-i18n="home" class="text-neutral-600 dark:text-neutral-400 hover:text-black dark:hover:text-white transition-colors">الرئيسية</a>
+            <a href="/ar/blog.html" data-i18n="blog" class="text-neutral-600 dark:text-neutral-400 hover:text-black dark:hover:text-white transition-colors">المدونة</a>
+            <a href="/ar/articles/index.html" class="text-black dark:text-white font-bold transition-colors">المقالات</a>
+            <a href="/ar/guide.html" data-i18n="guide" class="text-neutral-600 dark:text-neutral-400 hover:text-black dark:hover:text-white transition-colors">دليل الاستخدام</a>
+            <a href="/ar/faq.html" data-i18n="faq" class="text-neutral-600 dark:text-neutral-400 hover:text-black dark:hover:text-white transition-colors">الأسئلة الشائعة</a>
+          </nav>
+        </div>
+
+        <div class="flex items-center gap-2 sm:gap-3">
+          <!-- Language Selector Button (22 World Languages) -->
+          <button
+            type="button"
+            id="open-lang-picker"
+            class="open-lang-picker min-h-[38px] px-3 py-1.5 bg-white hover:bg-neutral-50 dark:bg-neutral-900 dark:hover:bg-neutral-800 border border-neutral-200 hover:border-black dark:border-neutral-800 dark:hover:border-neutral-600 rounded-lg text-xs font-semibold text-black dark:text-white transition-all flex items-center gap-1.5 cursor-pointer shadow-sm active:scale-95"
+            aria-label="Change Language"
+          >
+            <svg class="w-3.5 h-3.5 stroke-current fill-none stroke-[2]" viewBox="0 0 24 24" aria-hidden="true">
+              <circle cx="12" cy="12" r="10"></circle>
+              <line x1="2" y1="12" x2="22" y2="12"></line>
+              <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+            </svg>
+            <span id="current-lang-label">العربية</span>
+            <svg class="w-3 h-3 stroke-current fill-none stroke-[2] opacity-60" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          </button>
+
+          <!-- Dark/Light Theme Toggle Button -->
+          <button
+            type="button"
+            id="theme-toggle-btn"
+            class="theme-toggle-btn min-h-[38px] min-w-[38px] p-2 bg-white hover:bg-neutral-50 dark:bg-neutral-900 dark:hover:bg-neutral-800 border border-neutral-200 hover:border-black dark:border-neutral-800 dark:hover:border-neutral-600 rounded-lg text-black dark:text-white transition-all flex items-center justify-center cursor-pointer active:scale-95"
+            aria-label="Toggle theme"
+          >
+            <svg class="theme-toggle-icon w-4 h-4 stroke-current fill-none stroke-[2]" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Content Container (Exact Original Simple Width & Padding) -->
+    <main class="flex-1 max-w-3xl w-full mx-auto px-4 py-8 sm:py-12">
+      <!-- Breadcrumbs -->
+      <nav class="flex items-center gap-2 text-xs text-neutral-500 dark:text-neutral-400 mb-6 font-mono" id="article-breadcrumbs">
+        <a href="/ar/" class="hover:underline" data-i18n="artNavHome">الرئيسية</a>
+        <span>/</span>
+        <a href="/ar/blog.html" class="hover:underline" data-i18n="artNavBlog">المدونة</a>
+        <span>/</span>
+        <a href="/ar/articles/index.html" class="hover:underline">المقالات</a>
+        <span>/</span>
+        <span class="text-black dark:text-white font-semibold truncate max-w-[200px]" id="breadcrumb-current-title">التغطية الشاملة لرسائل التحقق (Universal Verification Coverage): فك شفرات OTP والروابط الخفية بدقة 100%</span>
+      </nav>
+
+      <!-- Article Header -->
+      <article>
+        <header class="mb-8">
+          <div class="flex flex-wrap items-center gap-2 mb-3 text-[11px] font-mono">
+            <span class="px-2.5 py-0.5 rounded-full bg-black text-white dark:bg-white dark:text-black font-bold uppercase tracking-wider text-[10px]" id="article-badge">
+              الميزة الحصرية 01
+            </span>
+            <span class="text-neutral-400">•</span>
+            <span class="text-neutral-500 font-mono" id="article-readtime">7 دقائق قراءة</span>
+            <span class="text-neutral-400">•</span>
+            <time datetime="2026-09-25" class="text-neutral-500 font-mono" id="article-date">2026-09-25</time>
+          </div>
+
+          <h1 class="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-black dark:text-white mb-4 leading-tight tracking-tight" id="article-h1">
+            التغطية الشاملة لرسائل التحقق (Universal Verification Coverage): فك شفرات OTP والروابط الخفية بدقة 100%
+          </h1>
+
+          <p class="text-base sm:text-lg text-neutral-600 dark:text-neutral-400 leading-relaxed font-normal" id="article-lead">
+            تعتبر رسائل التحقق العصب الحساس لأي تسجيل إلكتروني. في هذا الدليل المعماري، نكشف عن هندسة محرك التحقق الشامل (UVC) الذي يقضي نهائيا على أخطاء مصائد التواريخ وفشل قراءة الأكواد الأبجدية الرقمية.
+          </p>
+        </header>
+
+        <!-- Core Architectural Takeaways (Exact Original Simple Neutral Box) -->
+        <div class="mb-10 p-5 sm:p-6 bg-neutral-50 dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 rounded-xl shadow-sm" id="article-takeaways-box">
+          <h2 class="text-sm font-bold text-black dark:text-white uppercase tracking-wider mb-4 flex items-center gap-2">
+            <svg class="w-4 h-4 text-emerald-500 stroke-current fill-none stroke-[2.5]" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>
+            <span id="takeaways-header-text">أبرز الركائز الهندسية والنتائج في هذا الدليل</span>
+          </h2>
+          <ul class="space-y-3 text-xs sm:text-sm text-neutral-700 dark:text-neutral-300" id="article-takeaways-list">
+            
+              <li class="flex items-start gap-2.5">
+                <span class="text-black dark:text-white font-bold shrink-0 mt-0.5">✓</span>
+                <span>معالجة متقدمة لكافة أنماط أكواد التحقق (Google G-tokens، أكواد Steam Guard، وأرقام 2FA المقسمة شرطيا).</span>
+              </li>
+            
+              <li class="flex items-start gap-2.5">
+                <span class="text-black dark:text-white font-bold shrink-0 mt-0.5">✓</span>
+                <span>استخراج تلقائي لروابط التفعيل المباشرة المعزولة وحجب بكسلات التجسس وإعادة التوجيه الملغومة.</span>
+              </li>
+            
+              <li class="flex items-start gap-2.5">
+                <span class="text-black dark:text-white font-bold shrink-0 mt-0.5">✓</span>
+                <span>فلترة سياقية تقضي على مصائد التواريخ والسنوات (مثل 2026) التي تخدع خوارزميات Regex التقليدية.</span>
+              </li>
+            
+              <li class="flex items-start gap-2.5">
+                <span class="text-black dark:text-white font-bold shrink-0 mt-0.5">✓</span>
+                <span>إبراز الكود فوريا في شريط عالي التباين مع إمكانية النسخ بنقرة واحدة وتأكيد فوري.</span>
+              </li>
+            
+          </ul>
+        </div>
+
+        <!-- Deep-Dive Sections -->
+        <div id="article-sections-container">
+          
+            <section class="mb-10" id="legacy-shortcomings">
+              <h2 class="text-xl sm:text-2xl font-bold text-black dark:text-white mb-4">
+                1.0 المشكلة في المنصات القديمة: مصائد التواريخ وفشل فك الشفرات
+              </h2>
+              <div class="text-sm sm:text-base text-neutral-700 dark:text-neutral-300 leading-relaxed space-y-4">
+                <p>تعتمد معظم خدمات البريد المؤقت التقليدية على تعبيرات نمطية (Regex) بدائية مثل <code>/\\b\\d{4,6}\\b/</code>. هذا التصميم الساذج يقع في فخاخ كارثية: فعندما تحتوي الرسالة على السنة الحالية "2026" أو رمز بريدي أو توقيت الإرسال، يعرض النظام التاريخ للمستخدم بدلا من كود التفعيل الحقيقي! ولحل هذا القصور، صممنا نظامنا ليتكامل مباشرة مع <a href="/ar/articles/how-to-receive-otp.html" class="text-blue-600 dark:text-blue-400 font-semibold underline hover:opacity-80">دليل استقبال واستخراج أكواد التحقق (OTP) بنقرة واحدة</a>.</p><p>علاوة على ذلك، تستخدم كبرى الشركات مثل Google و Steam و Discord تنسيقات غير قياسية مثل "G-849201" أو رموزا خماسية مكونة من حروف وأرقام مختلطة، مما يؤدي إلى فشل المنصات القديمة تماما في قراءتها، وإجبار المستخدم على التنقيب في نصوص HTML الطويلة والمعقدة.</p>
+              </div>
+
+              
+                <div class="mt-5 p-4 bg-neutral-100 dark:bg-neutral-800/70 border-s-4 border-black dark:border-white rounded-e-lg text-xs sm:text-sm text-neutral-800 dark:text-neutral-200">
+                  <div class="font-bold mb-1">تنبيه أمني وعملي</div>
+                  <p class="leading-relaxed">المواقع التي تخلط بين تاريخ الإرسال وكود التحقق تعرض حسابات المستخدمين للإغلاق المؤقت بسبب تجاوز عدد محاولات إدخال الرمز الخاطئ.</p>
+                </div>
+              
+
+              
+            </section>
+          
+            <section class="mb-10" id="dual-layer-architecture">
+              <h2 class="text-xl sm:text-2xl font-bold text-black dark:text-white mb-4">
+                2.0 معمارية المحرك الثنائي: تحليل دلالي متعدد اللغات وفحص الروابط
+              </h2>
+              <div class="text-sm sm:text-base text-neutral-700 dark:text-neutral-300 leading-relaxed space-y-4">
+                <p>يتكون محرك UVC من مرحلتين رئيسيتين تعملان على خوادم الحافة (Cloudflare Workers):</p><p><strong>1. محلل التقارب الدلالي (Semantic Proximity Analyzer):</strong> يقوم بمسح النص بحثا عن الكلمات المفتاحية في 22 لغة عالمية، ثم يقيس المسافة المكانية بين الكلمة والرمز المرشح، مع استبعاد أي أرقام تقع في سياق التواريخ أو حقوق النشر. يمكنك التعرف على بنية خوادمنا في <a href="/ar/articles/how-inbox-updates-live.html" class="text-blue-600 dark:text-blue-400 font-semibold underline hover:opacity-80">دليل التحديث اللحظي عبر WebSocket</a>.</p><p><strong>2. مشرح الروابط الآمنة (Link Dissector):</strong> يقوم بفك شفرات أزرار CTA المعقدة المستضافة عبر مزودي البريد التجاريين دون تنشيط بكسلات التجسس، وهو ما نوضحه بالتفصيل في <a href="/ar/articles/how-to-open-verification-links.html" class="text-blue-600 dark:text-blue-400 font-semibold underline hover:opacity-80">دليل فحص ومعاينة روابط التفعيل بأمان</a>، فضلا عن مقارنة أمان الروابط مع الرموز في <a href="/ar/articles/magic-links-vs-otp.html" class="text-blue-600 dark:text-blue-400 font-semibold underline hover:opacity-80">مقارنة الروابط السحرية مقابل أكواد OTP</a>.</p>
+              </div>
+
+              
+
+              
+                <div class="mt-5 rounded-xl overflow-hidden border border-neutral-200 dark:border-neutral-800 bg-[#0d1117] text-left" dir="ltr">
+                  <div class="bg-[#161b22] px-4 py-2 flex items-center justify-between border-b border-neutral-800 text-[11px] text-neutral-400 font-mono">
+                    <span>uvc-token-extractor.ts</span>
+                    <span class="uppercase">typescript</span>
+                  </div>
+                  <pre class="p-4 text-xs font-mono text-neutral-200 overflow-x-auto"><code>// Edge Token Extraction Heuristic (Multi-Pattern)
+const TOKEN_PATTERNS = [
+  /\\b(G-[0-9]{6})\\b/i,                     // Google Security Token
+  /\\b([0-9]{3}[-\\s][0-9]{3})\\b/,            // Segmented 6-digit (123-456)
+  /\\b([A-Z0-9]{5})\\b/,                     // Steam Guard Alphanumeric
+  /\\b([0-9]{4,8})\\b/                       // Standard Numeric OTP
+];
+
+export function extractSecureToken(body: string, lang: string): string | null {
+  for (const regex of TOKEN_PATTERNS) {
+    const match = body.match(regex);
+    if (match &amp;&amp; !isProhibitedContext(body, match.index!)) {
+      return match[1].replace(/\\s+|-/g, &quot;&quot;);
+    }
+  }
+  return null;
+}</code></pre>
+                </div>
+              
+            </section>
+          
+        </div>
+
+        <!-- Comparison Table (if present) -->
+        
+          <section class="mb-10" id="comparison-table-section">
+            <h2 class="text-xl sm:text-2xl font-bold text-black dark:text-white mb-4">
+              مقارنة دقة فك الشفرات: محرك UVC مقابل الخدمات التقليدية
+            </h2>
+            <div class="overflow-x-auto rounded-xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-[#121212]">
+              <table class="w-full text-xs sm:text-sm text-left text-right">
+                <thead class="bg-neutral-100 dark:bg-neutral-800 text-black dark:text-white font-bold border-b border-neutral-200 dark:border-neutral-800">
+                  <tr>
+                    <th class="p-3 sm:p-4">معيار الاستخراج</th>
+                    <th class="p-3 sm:p-4 text-neutral-500">الخدمات التقليدية</th>
+                    <th class="p-3 sm:p-4 text-black dark:text-white">محركنا المتقدم (Cloudflare Edge)</th>
+                  </tr>
+                </thead>
+                <tbody class="divide-y divide-neutral-200 dark:divide-neutral-800">
+                  
+                    <tr class="">
+                      <td class="p-3 sm:p-4 font-semibold text-black dark:text-white">دعم أكواد Google G-XXXXXX</td>
+                      <td class="p-3 sm:p-4 text-neutral-500">فشل تام (يتجاهل الحرف G)</td>
+                      <td class="p-3 sm:p-4 font-semibold text-emerald-600 dark:text-emerald-400">استخراج فوري مع التوكن الكامل</td>
+                    </tr>
+                  
+                    <tr class="bg-neutral-50/50 dark:bg-neutral-900/40">
+                      <td class="p-3 sm:p-4 font-semibold text-black dark:text-white">الحماية من مصيدة السنة (2026)</td>
+                      <td class="p-3 sm:p-4 text-neutral-500">يعرض السنة كرمز بالخطأ</td>
+                      <td class="p-3 sm:p-4 font-semibold text-emerald-600 dark:text-emerald-400">فلترة سياقية ذكية وتجاهل التواريخ</td>
+                    </tr>
+                  
+                    <tr class="">
+                      <td class="p-3 sm:p-4 font-semibold text-black dark:text-white">أكواد Steam Guard الأبجدية</td>
+                      <td class="p-3 sm:p-4 text-neutral-500">غير مدعومة نهائيا</td>
+                      <td class="p-3 sm:p-4 font-semibold text-emerald-600 dark:text-emerald-400">استخراج دقيق بنسبة 100%</td>
+                    </tr>
+                  
+                    <tr class="bg-neutral-50/50 dark:bg-neutral-900/40">
+                      <td class="p-3 sm:p-4 font-semibold text-black dark:text-white">روابط التفعيل داخل الأزرار</td>
+                      <td class="p-3 sm:p-4 text-neutral-500">تضيع داخل أكواد HTML</td>
+                      <td class="p-3 sm:p-4 font-semibold text-emerald-600 dark:text-emerald-400">عرض في شريط مستقل مع حجب التتبع</td>
+                    </tr>
+                  
+                    <tr class="">
+                      <td class="p-3 sm:p-4 font-semibold text-black dark:text-white">السرعة واستهلاك المعالج</td>
+                      <td class="p-3 sm:p-4 text-neutral-500">تأخير في معالجة السيرفر</td>
+                      <td class="p-3 sm:p-4 font-semibold text-emerald-600 dark:text-emerald-400">معالجة لحظية على الحافة (&lt; 15ms)</td>
+                    </tr>
+                  
+                </tbody>
+              </table>
+            </div>
+          </section>
+        
+
+        <!-- Verified Real Technical Sources Section -->
+        <section class="mb-10 p-5 bg-neutral-50 dark:bg-neutral-900/50 border border-neutral-200 dark:border-neutral-800 rounded-xl" id="article-sources-section">
+          <h3 class="text-xs font-bold uppercase tracking-wider text-neutral-500 dark:text-neutral-400 mb-3 flex items-center gap-1.5 font-mono">
+            <span>المراجع والمعايير القياسية المعتمدة</span>
+          </h3>
+          <ul class="space-y-1.5 text-xs text-neutral-600 dark:text-neutral-400" id="article-sources-list">
+            
+              <li class="flex items-center gap-2">
+                <span>•</span>
+                <a href="https://datatracker.ietf.org/doc/html/rfc5322" target="_blank" rel="noopener noreferrer" class="hover:underline text-black dark:text-white font-medium">
+                  IETF RFC 5322 — Internet Message Format Specification
+                </a>
+              </li>
+            
+              <li class="flex items-center gap-2">
+                <span>•</span>
+                <a href="https://datatracker.ietf.org/doc/html/rfc6238" target="_blank" rel="noopener noreferrer" class="hover:underline text-black dark:text-white font-medium">
+                  IETF RFC 6238 — TOTP: Time-Based One-Time Password Algorithm
+                </a>
+              </li>
+            
+              <li class="flex items-center gap-2">
+                <span>•</span>
+                <a href="https://cheatsheetseries.owasp.org/cheatsheets/Authentication_Cheat_Sheet.html" target="_blank" rel="noopener noreferrer" class="hover:underline text-black dark:text-white font-medium">
+                  OWASP Authentication Verification Guidelines
+                </a>
+              </li>
+            
+          </ul>
+        </section>
+
+        <!-- In-Article FAQ Accordion Section -->
+        <section class="mb-12 pt-6 border-t border-neutral-200 dark:border-neutral-800" id="article-faqs-section">
+          <h2 class="text-xl sm:text-2xl font-bold text-black dark:text-white mb-6">
+            الأسئلة الشائعة والأمان
+          </h2>
+          <div class="space-y-3" id="article-faqs-list">
+            
+              <div class="faq-item rounded-xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-[#121212] overflow-hidden">
+                <button
+                  type="button"
+                  class="faq-toggle w-full p-4 text-left text-right font-semibold text-sm sm:text-base text-black dark:text-white flex items-center justify-between gap-4 cursor-pointer hover:bg-neutral-50 dark:hover:bg-neutral-900/50 transition-colors"
+                  aria-expanded="true"
+                >
+                  <span>لماذا تفشل معظم خدمات البريد المؤقت في قراءة رسائل جوجل وأبل؟</span>
+                  <svg class="faq-chevron w-4 h-4 stroke-current fill-none stroke-[2] text-neutral-400 transition-transform duration-200 rotate-180" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                </button>
+                <div class="faq-content p-4 pt-0 text-xs sm:text-sm text-neutral-600 dark:text-neutral-400 leading-relaxed border-t border-neutral-100 dark:border-neutral-800/60 ">
+                  <p class="mt-3">لأن جوجل ترسل أكوادها مسبوقة بحرف G وعلامة شرطة (مثل G-849201)، وأبل ترسل أرقاما مقسمة بمسافات. الفلاتر القديمة تبحث فقط عن أرقام متصلة وتتجاهل هذه الصيغ المعقدة.</p>
+                </div>
+              </div>
+            
+              <div class="faq-item rounded-xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-[#121212] overflow-hidden">
+                <button
+                  type="button"
+                  class="faq-toggle w-full p-4 text-left text-right font-semibold text-sm sm:text-base text-black dark:text-white flex items-center justify-between gap-4 cursor-pointer hover:bg-neutral-50 dark:hover:bg-neutral-900/50 transition-colors"
+                  aria-expanded="false"
+                >
+                  <span>هل يقوم نظامكم بفتح روابط التفعيل تلقائيا؟</span>
+                  <svg class="faq-chevron w-4 h-4 stroke-current fill-none stroke-[2] text-neutral-400 transition-transform duration-200 " viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                </button>
+                <div class="faq-content p-4 pt-0 text-xs sm:text-sm text-neutral-600 dark:text-neutral-400 leading-relaxed border-t border-neutral-100 dark:border-neutral-800/60 hidden">
+                  <p class="mt-3">كلا، نحن لا نفتح الرابط تلقائيا حتى لا نحرق روابط التفعيل أحادية الاستخدام، بل نستخرج الرابط ونقدمه لك لتفتحه بإرادتك بأمان تام.</p>
+                </div>
+              </div>
+            
+              <div class="faq-item rounded-xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-[#121212] overflow-hidden">
+                <button
+                  type="button"
+                  class="faq-toggle w-full p-4 text-left text-right font-semibold text-sm sm:text-base text-black dark:text-white flex items-center justify-between gap-4 cursor-pointer hover:bg-neutral-50 dark:hover:bg-neutral-900/50 transition-colors"
+                  aria-expanded="false"
+                >
+                  <span>كيف يتجنب محرك UVC تسجيل أو تخزين رسائل المستخدمين؟</span>
+                  <svg class="faq-chevron w-4 h-4 stroke-current fill-none stroke-[2] text-neutral-400 transition-transform duration-200 " viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                </button>
+                <div class="faq-content p-4 pt-0 text-xs sm:text-sm text-neutral-600 dark:text-neutral-400 leading-relaxed border-t border-neutral-100 dark:border-neutral-800/60 hidden">
+                  <p class="mt-3">تتم كافة عمليات الفحص في الذاكرة الحية (RAM) داخل كائنات الحافة، وتتلف نهائيا بمجرد إغلاق الجلسة وفقا لسياسة التخزين الصفري.</p>
+                </div>
+              </div>
+            
+          </div>
+        </section>
+
+        <!-- Related Articles Grid (Exact Original Simple Clean Neutral Box Design) -->
+        
+          <section class="mb-12 pt-8 border-t border-neutral-200 dark:border-neutral-800" id="related-articles-section">
+            <h2 class="text-lg sm:text-xl font-bold text-black dark:text-white mb-2">
+              الأدلة التقنية والمعمارية ذات الصلة
+            </h2>
+            <p class="text-xs text-neutral-500 mb-6">
+              استكشف التحليلات الهندسية المترابطة لفهم أبعاد الأمان والخصوصية
+            </p>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4" id="related-articles-grid">
+              
+                <article class="p-4 bg-white dark:bg-[#121212] border border-neutral-200 dark:border-neutral-800 rounded-xl hover:border-black dark:hover:border-white transition-all flex flex-col justify-between shadow-sm">
+                  <div>
+                    <span class="text-[10px] font-mono uppercase px-2 py-0.5 bg-neutral-100 dark:bg-neutral-800 rounded text-neutral-600 dark:text-neutral-400 font-bold mb-2 inline-block">
+                      أدلة الاستخدام
+                    </span>
+                    <h3 class="font-bold text-sm text-black dark:text-white mb-1.5">
+                      <a href="/ar/articles/how-to-receive-otp.html" class="hover:underline">
+                        كيفية استقبال واستخراج أكواد التحقق (OTP) بنقرة واحدة وتفادي انتهاء مهلة الرمز
+                      </a>
+                    </h3>
+                    <p class="text-xs text-neutral-600 dark:text-neutral-400 leading-relaxed mb-4">
+                      دليل عملي لاستقبال أكواد التحقق OTP واستخراجها تلقائيا في شريط مستقل ونسخها بنقرة واحدة لتسريع عملية التفعيل دون البحث داخل الرسائل.
+                    </p>
+                  </div>
+                  <a href="/ar/articles/how-to-receive-otp.html" class="text-xs font-bold text-black dark:text-white hover:underline flex items-center gap-1 pt-2 border-t border-neutral-100 dark:border-neutral-800">
+                    <span>قراءة الدليل</span>
+                    <span>←</span>
+                  </a>
+                </article>
+              
+                <article class="p-4 bg-white dark:bg-[#121212] border border-neutral-200 dark:border-neutral-800 rounded-xl hover:border-black dark:hover:border-white transition-all flex flex-col justify-between shadow-sm">
+                  <div>
+                    <span class="text-[10px] font-mono uppercase px-2 py-0.5 bg-neutral-100 dark:bg-neutral-800 rounded text-neutral-600 dark:text-neutral-400 font-bold mb-2 inline-block">
+                      الأمان والخصوصية
+                    </span>
+                    <h3 class="font-bold text-sm text-black dark:text-white mb-1.5">
+                      <a href="/ar/articles/how-to-open-verification-links.html" class="hover:underline">
+                        كيفية فتح روابط التحقق بأمان وحجب بكسلات التتبع وإعادة التوجيه الملغومة
+                      </a>
+                    </h3>
+                    <p class="text-xs text-neutral-600 dark:text-neutral-400 leading-relaxed mb-4">
+                      دليل أمني لشرح كيفية استخراج الروابط من رسائل البريد المؤقت بأمان والتأكد من مصداقية النطاق وحجب بكسلات التجسس التي ترصد نشاطك.
+                    </p>
+                  </div>
+                  <a href="/ar/articles/how-to-open-verification-links.html" class="text-xs font-bold text-black dark:text-white hover:underline flex items-center gap-1 pt-2 border-t border-neutral-100 dark:border-neutral-800">
+                    <span>قراءة الدليل</span>
+                    <span>←</span>
+                  </a>
+                </article>
+              
+                <article class="p-4 bg-white dark:bg-[#121212] border border-neutral-200 dark:border-neutral-800 rounded-xl hover:border-black dark:hover:border-white transition-all flex flex-col justify-between shadow-sm">
+                  <div>
+                    <span class="text-[10px] font-mono uppercase px-2 py-0.5 bg-neutral-100 dark:bg-neutral-800 rounded text-neutral-600 dark:text-neutral-400 font-bold mb-2 inline-block">
+                      المصادقة الرقمية
+                    </span>
+                    <h3 class="font-bold text-sm text-black dark:text-white mb-1.5">
+                      <a href="/ar/articles/magic-links-vs-otp.html" class="hover:underline">
+                        روابط التفعيل السحرية (Magic Links) مقابل رموز OTP: أيهما أكثر أمانا وتوافقا مع البريد المؤقت؟
+                      </a>
+                    </h3>
+                    <p class="text-xs text-neutral-600 dark:text-neutral-400 leading-relaxed mb-4">
+                      مقارنة تقنية وأمنية مفصلة بين روابط التفعيل السحرية وأكواد OTP: متى تستخدم كلا منهما، وكيف يعالج بريدنا المؤقت الروابط المشفرة دون الوقوع في التتبع.
+                    </p>
+                  </div>
+                  <a href="/ar/articles/magic-links-vs-otp.html" class="text-xs font-bold text-black dark:text-white hover:underline flex items-center gap-1 pt-2 border-t border-neutral-100 dark:border-neutral-800">
+                    <span>قراءة الدليل</span>
+                    <span>←</span>
+                  </a>
+                </article>
+              
+                <article class="p-4 bg-white dark:bg-[#121212] border border-neutral-200 dark:border-neutral-800 rounded-xl hover:border-black dark:hover:border-white transition-all flex flex-col justify-between shadow-sm">
+                  <div>
+                    <span class="text-[10px] font-mono uppercase px-2 py-0.5 bg-neutral-100 dark:bg-neutral-800 rounded text-neutral-600 dark:text-neutral-400 font-bold mb-2 inline-block">
+                      بروتوكولات البريد
+                    </span>
+                    <h3 class="font-bold text-sm text-black dark:text-white mb-1.5">
+                      <a href="/ar/articles/temp-mail-vs-spam-filters.html" class="hover:underline">
+                        البريد المؤقت وفلاتر السبام: معايير SPF و DKIM و DMARC وكيف نتجاوز الحجب الصارم؟
+                      </a>
+                    </h3>
+                    <p class="text-xs text-neutral-600 dark:text-neutral-400 leading-relaxed mb-4">
+                      تحليل معماري لمطابقة سجلات SPF و DKIM و DMARC وكيف يضمن نظامنا وصول رسائل التفعيل من البنوك والمواقع العالمية دون تصنيفها كسبام.
+                    </p>
+                  </div>
+                  <a href="/ar/articles/temp-mail-vs-spam-filters.html" class="text-xs font-bold text-black dark:text-white hover:underline flex items-center gap-1 pt-2 border-t border-neutral-100 dark:border-neutral-800">
+                    <span>قراءة الدليل</span>
+                    <span>←</span>
+                  </a>
+                </article>
+              
+            </div>
+          </section>
+        
+
+        <!-- Bottom CTA Box (Simple, Clean, Original) -->
+        <div class="p-6 bg-neutral-50 dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 rounded-xl text-center mb-12">
+          <h3 class="text-base font-bold text-black dark:text-white mb-2" data-i18n="blogCtaTitle">جاهز لتجربة البريد المؤقت؟</h3>
+          <p class="text-xs text-neutral-600 dark:text-neutral-400 mb-4 max-w-md mx-auto" data-i18n="blogCtaDesc">
+            احصل على عنوان بريد مؤقت معزول واستقبل كود التحقق في ثوانٍ وبدون تسجيل.
+          </p>
+          <a
+            href="/ar/"
+            class="inline-block px-5 py-2.5 bg-black text-white dark:bg-white dark:text-black rounded-lg text-xs font-bold hover:opacity-90 transition-opacity"
+            data-i18n="goToInbox"
+          >
+            الانتقال إلى صندوق البريد ←
+          </a>
+        </div>
+      </article>
+    </main>
+
+    <!-- Master 4-Column Unified Footer with full data-i18n -->
+    <footer class="border-t border-neutral-200 dark:border-neutral-800 bg-white dark:bg-[#0A0A0A] py-12 transition-colors mt-auto text-xs">
+      <div class="max-w-4xl mx-auto px-4">
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 mb-10 text-right">
+          <!-- Column 1: Brand & Status -->
+          <div>
+            <div class="text-base font-bold text-black dark:text-white mb-2" data-i18n="brand">Temp Mail</div>
+            <p class="text-neutral-600 dark:text-neutral-400 leading-relaxed mb-3" data-i18n="footerDesc">
+              خدمة بريد إلكتروني مؤقت ومعزول تقنياً لحماية خصوصيتك واستقبال رسائل التفعيل وأكواد OTP فوراً دون تسجيل أو تسريب لبياناتك.
+            </p>
+            <div class="inline-flex items-center gap-2 font-mono text-[11px] text-black dark:text-neutral-300 border border-neutral-200 dark:border-neutral-800 rounded-md px-2 py-1 bg-neutral-50 dark:bg-neutral-900">
+              <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+              <span data-i18n="footerNodesStatus">جميع عُقد الحافة تعمل بكفاءة</span>
+            </div>
+          </div>
+
+          <!-- Column 2: Navigation -->
+          <div>
+            <div class="font-bold text-black dark:text-white mb-3 uppercase tracking-wider text-[11px]" data-i18n="footerNav">
+              التنقل
+            </div>
+            <ul class="space-y-2">
+              <li><a href="/ar/" class="text-neutral-600 dark:text-neutral-400 hover:text-black dark:hover:text-white transition-colors" data-i18n="home">الرئيسية</a></li>
+              <li><a href="/ar/blog.html" class="text-neutral-600 dark:text-neutral-400 hover:text-black dark:hover:text-white transition-colors" data-i18n="blog">المدونة</a></li>
+              <li><a href="/ar/guide.html" class="text-neutral-600 dark:text-neutral-400 hover:text-black dark:hover:text-white transition-colors" data-i18n="guide">دليل الاستخدام</a></li>
+              <li><a href="/ar/faq.html" class="text-neutral-600 dark:text-neutral-400 hover:text-black dark:hover:text-white transition-colors" data-i18n="faq">الأسئلة الشائعة</a></li>
+              <li><a href="/ar/articles/index.html" class="text-neutral-600 dark:text-neutral-400 hover:text-black dark:hover:text-white transition-colors" data-i18n="footerArticles">المقالات</a></li>
+            </ul>
+          </div>
+
+          <!-- Column 3: Legal & Transparency -->
+          <div>
+            <div class="font-bold text-black dark:text-white mb-3 uppercase tracking-wider text-[11px]" data-i18n="footerTransparency">
+              الشفافية والأمان
+            </div>
+            <ul class="space-y-2">
+              <li><a href="/ar/about.html" class="text-neutral-600 dark:text-neutral-400 hover:text-black dark:hover:text-white transition-colors" data-i18n="footerAbout">من نحن</a></li>
+              <li><a href="/ar/privacy.html" class="text-neutral-600 dark:text-neutral-400 hover:text-black dark:hover:text-white transition-colors" data-i18n="footerPrivacy">سياسة الخصوصية</a></li>
+              <li><a href="/ar/privacy.html#terms" class="text-neutral-600 dark:text-neutral-400 hover:text-black dark:hover:text-white transition-colors" data-i18n="footerTerms">شروط الاستخدام</a></li>
+            </ul>
+          </div>
+
+          <!-- Column 4: Security Pillars -->
+          <div>
+            <div class="font-bold text-black dark:text-white mb-3 uppercase tracking-wider text-[11px]" data-i18n="footerSecurity">
+              معايير الأمان
+            </div>
+            <ul class="space-y-2 text-neutral-600 dark:text-neutral-400">
+              <li class="flex items-center gap-1.5">
+                <span class="text-black dark:text-white font-bold">✓</span>
+                <span data-i18n="footerSec1">إتلاف تلقائي بعد 20 دقيقة</span>
+              </li>
+              <li class="flex items-center gap-1.5">
+                <span class="text-black dark:text-white font-bold">✓</span>
+                <span data-i18n="footerSec2">صفر سجلات تتبع</span>
+              </li>
+              <li class="flex items-center gap-1.5">
+                <span class="text-black dark:text-white font-bold">✓</span>
+                <span data-i18n="footerSec3">عزل تام للذاكرة العشوائية</span>
+              </li>
+              <li class="flex items-center gap-1.5">
+                <span class="text-black dark:text-white font-bold">✓</span>
+                <span data-i18n="footerSec4">تشفير كامل للاتصال TLS</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="pt-8 border-t border-neutral-100 dark:border-neutral-800/80 flex flex-col sm:flex-row items-center justify-between gap-4 text-[11px] text-neutral-500">
+          <p>© 2026 Temp Mail. All rights reserved.</p>
+          <div class="flex items-center gap-4">
+            <a href="/ar/articles/index.html" class="hover:underline">فهرس المقالات</a>
+            <span>•</span>
+            <a href="/ar/privacy.html" class="hover:underline">Privacy Policy</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Dynamic Article Loader & Interactive Accordion Script -->
+    <script>
+      document.addEventListener('DOMContentLoaded', function () {
+        // 1. Accordion Toggle
+        document.querySelectorAll('.faq-toggle').forEach(function (btn) {
+          btn.addEventListener('click', function () {
+            var item = btn.closest('.faq-item');
+            var content = item.querySelector('.faq-content');
+            var chevron = btn.querySelector('.faq-chevron');
+            var isExpanded = btn.getAttribute('aria-expanded') === 'true';
+
+            if (isExpanded) {
+              btn.setAttribute('aria-expanded', 'false');
+              content.classList.add('hidden');
+              if (chevron) chevron.classList.remove('rotate-180');
+            } else {
+              btn.setAttribute('aria-expanded', 'true');
+              content.classList.remove('hidden');
+              if (chevron) chevron.classList.add('rotate-180');
+            }
+          });
+        });
+
+        // 2. Dynamic Article Loader (Reads ?slug=... from URL)
+        var params = new URLSearchParams(window.location.search);
+        var targetSlug = params.get('slug');
+        if (targetSlug && window.ARTICLES_DATA) {
+          var art = window.ARTICLES_DATA.find(function (a) { return a.slug === targetSlug; });
+          if (art) {
+            var isAr = document.documentElement.lang === 'ar';
+            var l = isAr ? 'ar' : 'en';
+
+            // Title & Meta
+            document.title = art.title[l] + ' — Temp Mail';
+            var metaDescEl = document.getElementById('meta-description');
+            if (metaDescEl) metaDescEl.setAttribute('content', art.metaDesc[l]);
+
+            // Breadcrumbs & Header
+            var bTitle = document.getElementById('breadcrumb-current-title');
+            if (bTitle) bTitle.textContent = art.title[l];
+
+            var badgeEl = document.getElementById('article-badge');
+            if (badgeEl) badgeEl.textContent = art.badge[l];
+
+            var readEl = document.getElementById('article-readtime');
+            if (readEl) readEl.textContent = art.readTimeMin + (isAr ? ' دقائق قراءة' : ' mins read');
+
+            var h1El = document.getElementById('article-h1');
+            if (h1El) h1El.textContent = art.title[l];
+
+            var leadEl = document.getElementById('article-lead');
+            if (leadEl) leadEl.textContent = art.lead[l];
+
+            // Takeaways
+            var takeawaysList = document.getElementById('article-takeaways-list');
+            if (takeawaysList && art.takeaways[l]) {
+              takeawaysList.innerHTML = art.takeaways[l].map(function (t) {
+                return '<li class="flex items-start gap-2.5"><span class="text-black dark:text-white font-bold shrink-0 mt-0.5">✓</span><span>' + t + '</span></li>';
+              }).join('');
+            }
+
+            // Sections
+            var secContainer = document.getElementById('article-sections-container');
+            if (secContainer && art.sections) {
+              secContainer.innerHTML = art.sections.map(function (sec, idx) {
+                var calloutHtml = sec.callout ? '<div class="mt-5 p-4 bg-neutral-100 dark:bg-neutral-800/70 border-s-4 border-black dark:border-white rounded-e-lg text-xs sm:text-sm text-neutral-800 dark:text-neutral-200"><div class="font-bold mb-1">' + sec.callout.title[l] + '</div><p class="leading-relaxed">' + sec.callout.text[l] + '</p></div>' : '';
+                var codeHtml = sec.codeSnippet ? '<div class="mt-5 rounded-xl overflow-hidden border border-neutral-200 dark:border-neutral-800 bg-[#0d1117] text-left" dir="ltr"><div class="bg-[#161b22] px-4 py-2 flex items-center justify-between border-b border-neutral-800 text-[11px] text-neutral-400 font-mono"><span>' + sec.codeSnippet.filename + '</span><span class="uppercase">' + sec.codeSnippet.lang + '</span></div><pre class="p-4 text-xs font-mono text-neutral-200 overflow-x-auto"><code>' + sec.codeSnippet.code + '</code></pre></div>' : '';
+                return '<section class="mb-10" id="' + sec.id + '"><h2 class="text-xl sm:text-2xl font-bold text-black dark:text-white mb-4">' + (idx + 1) + '.0 ' + sec.title[l] + '</h2><div class="text-sm sm:text-base text-neutral-700 dark:text-neutral-300 leading-relaxed space-y-4">' + sec.content[l] + '</div>' + calloutHtml + codeHtml + '</section>';
+              }).join('');
+            }
+
+            // Sources
+            var sourcesList = document.getElementById('article-sources-list');
+            if (sourcesList && art.sources) {
+              sourcesList.innerHTML = art.sources.map(function (s) {
+                return '<li class="flex items-center gap-2"><span>•</span><a href="' + s.url + '" target="_blank" rel="noopener noreferrer" class="hover:underline text-black dark:text-white font-medium">' + s.title + '</a></li>';
+              }).join('');
+            }
+          }
+        }
+      });
+    </script>
+  </body>
+</html>

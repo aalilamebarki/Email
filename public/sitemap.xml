@@ -1,0 +1,1413 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <url>
+    <loc>https://freetemp.email/</loc>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://freetemp.email/ar/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://freetemp.email/en/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://freetemp.email/en/" />
+    <lastmod>2026-09-25</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>1.0</priority>
+  </url>
+
+  <url>
+    <loc>https://freetemp.email/ar/about.html</loc>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://freetemp.email/ar/about.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://freetemp.email/en/about.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://freetemp.email/en/about.html" />
+    <lastmod>2026-09-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://freetemp.email/en/about.html</loc>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://freetemp.email/ar/about.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://freetemp.email/en/about.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://freetemp.email/en/about.html" />
+    <lastmod>2026-09-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://freetemp.email/ar/article.html</loc>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://freetemp.email/ar/article.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://freetemp.email/en/article.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://freetemp.email/en/article.html" />
+    <lastmod>2026-09-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://freetemp.email/en/article.html</loc>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://freetemp.email/ar/article.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://freetemp.email/en/article.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://freetemp.email/en/article.html" />
+    <lastmod>2026-09-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://freetemp.email/ar/articles/anti-phishing-defense-in-depth-ephemeral-mail.html</loc>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://freetemp.email/ar/articles/anti-phishing-defense-in-depth-ephemeral-mail.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://freetemp.email/en/articles/anti-phishing-defense-in-depth-ephemeral-mail.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://freetemp.email/en/articles/anti-phishing-defense-in-depth-ephemeral-mail.html" />
+    <lastmod>2026-09-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://freetemp.email/en/articles/anti-phishing-defense-in-depth-ephemeral-mail.html</loc>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://freetemp.email/ar/articles/anti-phishing-defense-in-depth-ephemeral-mail.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://freetemp.email/en/articles/anti-phishing-defense-in-depth-ephemeral-mail.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://freetemp.email/en/articles/anti-phishing-defense-in-depth-ephemeral-mail.html" />
+    <lastmod>2026-09-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://freetemp.email/ar/articles/burner-email-vs-email-alias-forwarding.html</loc>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://freetemp.email/ar/articles/burner-email-vs-email-alias-forwarding.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://freetemp.email/en/articles/burner-email-vs-email-alias-forwarding.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://freetemp.email/en/articles/burner-email-vs-email-alias-forwarding.html" />
+    <lastmod>2026-09-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://freetemp.email/en/articles/burner-email-vs-email-alias-forwarding.html</loc>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://freetemp.email/ar/articles/burner-email-vs-email-alias-forwarding.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://freetemp.email/en/articles/burner-email-vs-email-alias-forwarding.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://freetemp.email/en/articles/burner-email-vs-email-alias-forwarding.html" />
+    <lastmod>2026-09-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://freetemp.email/ar/articles/bypass-email-verification-paywalls.html</loc>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://freetemp.email/ar/articles/bypass-email-verification-paywalls.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://freetemp.email/en/articles/bypass-email-verification-paywalls.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://freetemp.email/en/articles/bypass-email-verification-paywalls.html" />
+    <lastmod>2026-09-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://freetemp.email/en/articles/bypass-email-verification-paywalls.html</loc>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://freetemp.email/ar/articles/bypass-email-verification-paywalls.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://freetemp.email/en/articles/bypass-email-verification-paywalls.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://freetemp.email/en/articles/bypass-email-verification-paywalls.html" />
+    <lastmod>2026-09-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://freetemp.email/ar/articles/bypassing-greylisting-delays-temp-inboxes.html</loc>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://freetemp.email/ar/articles/bypassing-greylisting-delays-temp-inboxes.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://freetemp.email/en/articles/bypassing-greylisting-delays-temp-inboxes.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://freetemp.email/en/articles/bypassing-greylisting-delays-temp-inboxes.html" />
+    <lastmod>2026-09-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://freetemp.email/en/articles/bypassing-greylisting-delays-temp-inboxes.html</loc>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://freetemp.email/ar/articles/bypassing-greylisting-delays-temp-inboxes.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://freetemp.email/en/articles/bypassing-greylisting-delays-temp-inboxes.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://freetemp.email/en/articles/bypassing-greylisting-delays-temp-inboxes.html" />
+    <lastmod>2026-09-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://freetemp.email/ar/articles/ci-cd-pipeline-signup-flow-testing.html</loc>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://freetemp.email/ar/articles/ci-cd-pipeline-signup-flow-testing.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://freetemp.email/en/articles/ci-cd-pipeline-signup-flow-testing.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://freetemp.email/en/articles/ci-cd-pipeline-signup-flow-testing.html" />
+    <lastmod>2026-09-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://freetemp.email/en/articles/ci-cd-pipeline-signup-flow-testing.html</loc>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://freetemp.email/ar/articles/ci-cd-pipeline-signup-flow-testing.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://freetemp.email/en/articles/ci-cd-pipeline-signup-flow-testing.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://freetemp.email/en/articles/ci-cd-pipeline-signup-flow-testing.html" />
+    <lastmod>2026-09-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://freetemp.email/ar/articles/clean-ip-reputation-for-transient-inboxes.html</loc>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://freetemp.email/ar/articles/clean-ip-reputation-for-transient-inboxes.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://freetemp.email/en/articles/clean-ip-reputation-for-transient-inboxes.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://freetemp.email/en/articles/clean-ip-reputation-for-transient-inboxes.html" />
+    <lastmod>2026-09-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://freetemp.email/en/articles/clean-ip-reputation-for-transient-inboxes.html</loc>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://freetemp.email/ar/articles/clean-ip-reputation-for-transient-inboxes.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://freetemp.email/en/articles/clean-ip-reputation-for-transient-inboxes.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://freetemp.email/en/articles/clean-ip-reputation-for-transient-inboxes.html" />
+    <lastmod>2026-09-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://freetemp.email/ar/articles/combating-marketing-trackers-and-spy-pixels.html</loc>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://freetemp.email/ar/articles/combating-marketing-trackers-and-spy-pixels.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://freetemp.email/en/articles/combating-marketing-trackers-and-spy-pixels.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://freetemp.email/en/articles/combating-marketing-trackers-and-spy-pixels.html" />
+    <lastmod>2026-09-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://freetemp.email/en/articles/combating-marketing-trackers-and-spy-pixels.html</loc>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://freetemp.email/ar/articles/combating-marketing-trackers-and-spy-pixels.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://freetemp.email/en/articles/combating-marketing-trackers-and-spy-pixels.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://freetemp.email/en/articles/combating-marketing-trackers-and-spy-pixels.html" />
+    <lastmod>2026-09-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://freetemp.email/ar/articles/cryptographic-media-sanitization-nist-800-88.html</loc>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://freetemp.email/ar/articles/cryptographic-media-sanitization-nist-800-88.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://freetemp.email/en/articles/cryptographic-media-sanitization-nist-800-88.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://freetemp.email/en/articles/cryptographic-media-sanitization-nist-800-88.html" />
+    <lastmod>2026-09-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://freetemp.email/en/articles/cryptographic-media-sanitization-nist-800-88.html</loc>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://freetemp.email/ar/articles/cryptographic-media-sanitization-nist-800-88.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://freetemp.email/en/articles/cryptographic-media-sanitization-nist-800-88.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://freetemp.email/en/articles/cryptographic-media-sanitization-nist-800-88.html" />
+    <lastmod>2026-09-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://freetemp.email/ar/articles/cypress-playwright-temp-mail-e2e-testing.html</loc>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://freetemp.email/ar/articles/cypress-playwright-temp-mail-e2e-testing.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://freetemp.email/en/articles/cypress-playwright-temp-mail-e2e-testing.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://freetemp.email/en/articles/cypress-playwright-temp-mail-e2e-testing.html" />
+    <lastmod>2026-09-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://freetemp.email/en/articles/cypress-playwright-temp-mail-e2e-testing.html</loc>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://freetemp.email/ar/articles/cypress-playwright-temp-mail-e2e-testing.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://freetemp.email/en/articles/cypress-playwright-temp-mail-e2e-testing.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://freetemp.email/en/articles/cypress-playwright-temp-mail-e2e-testing.html" />
+    <lastmod>2026-09-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://freetemp.email/ar/articles/data-brokers-opt-out-ephemeral-identities.html</loc>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://freetemp.email/ar/articles/data-brokers-opt-out-ephemeral-identities.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://freetemp.email/en/articles/data-brokers-opt-out-ephemeral-identities.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://freetemp.email/en/articles/data-brokers-opt-out-ephemeral-identities.html" />
+    <lastmod>2026-09-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://freetemp.email/en/articles/data-brokers-opt-out-ephemeral-identities.html</loc>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://freetemp.email/ar/articles/data-brokers-opt-out-ephemeral-identities.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://freetemp.email/en/articles/data-brokers-opt-out-ephemeral-identities.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://freetemp.email/en/articles/data-brokers-opt-out-ephemeral-identities.html" />
+    <lastmod>2026-09-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://freetemp.email/ar/articles/disposable-email-blocklist-mechanisms-explained.html</loc>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://freetemp.email/ar/articles/disposable-email-blocklist-mechanisms-explained.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://freetemp.email/en/articles/disposable-email-blocklist-mechanisms-explained.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://freetemp.email/en/articles/disposable-email-blocklist-mechanisms-explained.html" />
+    <lastmod>2026-09-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://freetemp.email/en/articles/disposable-email-blocklist-mechanisms-explained.html</loc>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://freetemp.email/ar/articles/disposable-email-blocklist-mechanisms-explained.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://freetemp.email/en/articles/disposable-email-blocklist-mechanisms-explained.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://freetemp.email/en/articles/disposable-email-blocklist-mechanisms-explained.html" />
+    <lastmod>2026-09-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://freetemp.email/ar/articles/disposable-email-vs-marketing-trackers.html</loc>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://freetemp.email/ar/articles/disposable-email-vs-marketing-trackers.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://freetemp.email/en/articles/disposable-email-vs-marketing-trackers.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://freetemp.email/en/articles/disposable-email-vs-marketing-trackers.html" />
+    <lastmod>2026-09-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://freetemp.email/en/articles/disposable-email-vs-marketing-trackers.html</loc>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://freetemp.email/ar/articles/disposable-email-vs-marketing-trackers.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://freetemp.email/en/articles/disposable-email-vs-marketing-trackers.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://freetemp.email/en/articles/disposable-email-vs-marketing-trackers.html" />
+    <lastmod>2026-09-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://freetemp.email/ar/articles/dns-mx-records-temporary-mail-delivery.html</loc>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://freetemp.email/ar/articles/dns-mx-records-temporary-mail-delivery.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://freetemp.email/en/articles/dns-mx-records-temporary-mail-delivery.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://freetemp.email/en/articles/dns-mx-records-temporary-mail-delivery.html" />
+    <lastmod>2026-09-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://freetemp.email/en/articles/dns-mx-records-temporary-mail-delivery.html</loc>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://freetemp.email/ar/articles/dns-mx-records-temporary-mail-delivery.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://freetemp.email/en/articles/dns-mx-records-temporary-mail-delivery.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://freetemp.email/en/articles/dns-mx-records-temporary-mail-delivery.html" />
+    <lastmod>2026-09-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://freetemp.email/ar/articles/ecommerce-guest-checkout-spam-prevention.html</loc>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://freetemp.email/ar/articles/ecommerce-guest-checkout-spam-prevention.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://freetemp.email/en/articles/ecommerce-guest-checkout-spam-prevention.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://freetemp.email/en/articles/ecommerce-guest-checkout-spam-prevention.html" />
+    <lastmod>2026-09-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://freetemp.email/en/articles/ecommerce-guest-checkout-spam-prevention.html</loc>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://freetemp.email/ar/articles/ecommerce-guest-checkout-spam-prevention.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://freetemp.email/en/articles/ecommerce-guest-checkout-spam-prevention.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://freetemp.email/en/articles/ecommerce-guest-checkout-spam-prevention.html" />
+    <lastmod>2026-09-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://freetemp.email/ar/articles/email-deliverability-mechanics-bounces-and-dmarc.html</loc>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://freetemp.email/ar/articles/email-deliverability-mechanics-bounces-and-dmarc.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://freetemp.email/en/articles/email-deliverability-mechanics-bounces-and-dmarc.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://freetemp.email/en/articles/email-deliverability-mechanics-bounces-and-dmarc.html" />
+    <lastmod>2026-09-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://freetemp.email/en/articles/email-deliverability-mechanics-bounces-and-dmarc.html</loc>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://freetemp.email/ar/articles/email-deliverability-mechanics-bounces-and-dmarc.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://freetemp.email/en/articles/email-deliverability-mechanics-bounces-and-dmarc.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://freetemp.email/en/articles/email-deliverability-mechanics-bounces-and-dmarc.html" />
+    <lastmod>2026-09-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://freetemp.email/ar/articles/future-of-digital-identity-passkeys-vs-burner-emails.html</loc>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://freetemp.email/ar/articles/future-of-digital-identity-passkeys-vs-burner-emails.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://freetemp.email/en/articles/future-of-digital-identity-passkeys-vs-burner-emails.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://freetemp.email/en/articles/future-of-digital-identity-passkeys-vs-burner-emails.html" />
+    <lastmod>2026-09-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://freetemp.email/en/articles/future-of-digital-identity-passkeys-vs-burner-emails.html</loc>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://freetemp.email/ar/articles/future-of-digital-identity-passkeys-vs-burner-emails.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://freetemp.email/en/articles/future-of-digital-identity-passkeys-vs-burner-emails.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://freetemp.email/en/articles/future-of-digital-identity-passkeys-vs-burner-emails.html" />
+    <lastmod>2026-09-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://freetemp.email/ar/articles/gdpr-ccpa-compliance-ephemeral-data.html</loc>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://freetemp.email/ar/articles/gdpr-ccpa-compliance-ephemeral-data.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://freetemp.email/en/articles/gdpr-ccpa-compliance-ephemeral-data.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://freetemp.email/en/articles/gdpr-ccpa-compliance-ephemeral-data.html" />
+    <lastmod>2026-09-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://freetemp.email/en/articles/gdpr-ccpa-compliance-ephemeral-data.html</loc>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://freetemp.email/ar/articles/gdpr-ccpa-compliance-ephemeral-data.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://freetemp.email/en/articles/gdpr-ccpa-compliance-ephemeral-data.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://freetemp.email/en/articles/gdpr-ccpa-compliance-ephemeral-data.html" />
+    <lastmod>2026-09-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://freetemp.email/ar/articles/how-inbox-updates-live.html</loc>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://freetemp.email/ar/articles/how-inbox-updates-live.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://freetemp.email/en/articles/how-inbox-updates-live.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://freetemp.email/en/articles/how-inbox-updates-live.html" />
+    <lastmod>2026-09-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://freetemp.email/en/articles/how-inbox-updates-live.html</loc>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://freetemp.email/ar/articles/how-inbox-updates-live.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://freetemp.email/en/articles/how-inbox-updates-live.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://freetemp.email/en/articles/how-inbox-updates-live.html" />
+    <lastmod>2026-09-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://freetemp.email/ar/articles/how-to-copy-address.html</loc>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://freetemp.email/ar/articles/how-to-copy-address.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://freetemp.email/en/articles/how-to-copy-address.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://freetemp.email/en/articles/how-to-copy-address.html" />
+    <lastmod>2026-09-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://freetemp.email/en/articles/how-to-copy-address.html</loc>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://freetemp.email/ar/articles/how-to-copy-address.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://freetemp.email/en/articles/how-to-copy-address.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://freetemp.email/en/articles/how-to-copy-address.html" />
+    <lastmod>2026-09-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://freetemp.email/ar/articles/how-to-generate-address.html</loc>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://freetemp.email/ar/articles/how-to-generate-address.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://freetemp.email/en/articles/how-to-generate-address.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://freetemp.email/en/articles/how-to-generate-address.html" />
+    <lastmod>2026-09-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://freetemp.email/en/articles/how-to-generate-address.html</loc>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://freetemp.email/ar/articles/how-to-generate-address.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://freetemp.email/en/articles/how-to-generate-address.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://freetemp.email/en/articles/how-to-generate-address.html" />
+    <lastmod>2026-09-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://freetemp.email/ar/articles/how-to-open-verification-links.html</loc>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://freetemp.email/ar/articles/how-to-open-verification-links.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://freetemp.email/en/articles/how-to-open-verification-links.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://freetemp.email/en/articles/how-to-open-verification-links.html" />
+    <lastmod>2026-09-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://freetemp.email/en/articles/how-to-open-verification-links.html</loc>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://freetemp.email/ar/articles/how-to-open-verification-links.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://freetemp.email/en/articles/how-to-open-verification-links.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://freetemp.email/en/articles/how-to-open-verification-links.html" />
+    <lastmod>2026-09-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://freetemp.email/ar/articles/how-to-receive-otp.html</loc>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://freetemp.email/ar/articles/how-to-receive-otp.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://freetemp.email/en/articles/how-to-receive-otp.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://freetemp.email/en/articles/how-to-receive-otp.html" />
+    <lastmod>2026-09-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://freetemp.email/en/articles/how-to-receive-otp.html</loc>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://freetemp.email/ar/articles/how-to-receive-otp.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://freetemp.email/en/articles/how-to-receive-otp.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://freetemp.email/en/articles/how-to-receive-otp.html" />
+    <lastmod>2026-09-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://freetemp.email/ar/articles/in-memory-ephemeral-storage-redis-ramdisk.html</loc>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://freetemp.email/ar/articles/in-memory-ephemeral-storage-redis-ramdisk.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://freetemp.email/en/articles/in-memory-ephemeral-storage-redis-ramdisk.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://freetemp.email/en/articles/in-memory-ephemeral-storage-redis-ramdisk.html" />
+    <lastmod>2026-09-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://freetemp.email/en/articles/in-memory-ephemeral-storage-redis-ramdisk.html</loc>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://freetemp.email/ar/articles/in-memory-ephemeral-storage-redis-ramdisk.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://freetemp.email/en/articles/in-memory-ephemeral-storage-redis-ramdisk.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://freetemp.email/en/articles/in-memory-ephemeral-storage-redis-ramdisk.html" />
+    <lastmod>2026-09-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://freetemp.email/ar/articles/</loc>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://freetemp.email/ar/articles/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://freetemp.email/en/articles/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://freetemp.email/en/articles/" />
+    <lastmod>2026-09-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://freetemp.email/en/articles/</loc>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://freetemp.email/ar/articles/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://freetemp.email/en/articles/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://freetemp.email/en/articles/" />
+    <lastmod>2026-09-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://freetemp.email/ar/articles/job-hunting-privacy-temporary-email-strategy.html</loc>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://freetemp.email/ar/articles/job-hunting-privacy-temporary-email-strategy.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://freetemp.email/en/articles/job-hunting-privacy-temporary-email-strategy.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://freetemp.email/en/articles/job-hunting-privacy-temporary-email-strategy.html" />
+    <lastmod>2026-09-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://freetemp.email/en/articles/job-hunting-privacy-temporary-email-strategy.html</loc>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://freetemp.email/ar/articles/job-hunting-privacy-temporary-email-strategy.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://freetemp.email/en/articles/job-hunting-privacy-temporary-email-strategy.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://freetemp.email/en/articles/job-hunting-privacy-temporary-email-strategy.html" />
+    <lastmod>2026-09-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://freetemp.email/ar/articles/magic-links-vs-otp.html</loc>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://freetemp.email/ar/articles/magic-links-vs-otp.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://freetemp.email/en/articles/magic-links-vs-otp.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://freetemp.email/en/articles/magic-links-vs-otp.html" />
+    <lastmod>2026-09-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://freetemp.email/en/articles/magic-links-vs-otp.html</loc>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://freetemp.email/ar/articles/magic-links-vs-otp.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://freetemp.email/en/articles/magic-links-vs-otp.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://freetemp.email/en/articles/magic-links-vs-otp.html" />
+    <lastmod>2026-09-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://freetemp.email/ar/articles/managing-multiple-temp-addresses.html</loc>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://freetemp.email/ar/articles/managing-multiple-temp-addresses.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://freetemp.email/en/articles/managing-multiple-temp-addresses.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://freetemp.email/en/articles/managing-multiple-temp-addresses.html" />
+    <lastmod>2026-09-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://freetemp.email/en/articles/managing-multiple-temp-addresses.html</loc>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://freetemp.email/ar/articles/managing-multiple-temp-addresses.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://freetemp.email/en/articles/managing-multiple-temp-addresses.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://freetemp.email/en/articles/managing-multiple-temp-addresses.html" />
+    <lastmod>2026-09-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://freetemp.email/ar/articles/mime-multipart-parsing-raw-eml-extraction.html</loc>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://freetemp.email/ar/articles/mime-multipart-parsing-raw-eml-extraction.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://freetemp.email/en/articles/mime-multipart-parsing-raw-eml-extraction.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://freetemp.email/en/articles/mime-multipart-parsing-raw-eml-extraction.html" />
+    <lastmod>2026-09-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://freetemp.email/en/articles/mime-multipart-parsing-raw-eml-extraction.html</loc>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://freetemp.email/ar/articles/mime-multipart-parsing-raw-eml-extraction.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://freetemp.email/en/articles/mime-multipart-parsing-raw-eml-extraction.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://freetemp.email/en/articles/mime-multipart-parsing-raw-eml-extraction.html" />
+    <lastmod>2026-09-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://freetemp.email/ar/articles/mocking-smtp-servers-vs-ephemeral-inboxes.html</loc>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://freetemp.email/ar/articles/mocking-smtp-servers-vs-ephemeral-inboxes.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://freetemp.email/en/articles/mocking-smtp-servers-vs-ephemeral-inboxes.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://freetemp.email/en/articles/mocking-smtp-servers-vs-ephemeral-inboxes.html" />
+    <lastmod>2026-09-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://freetemp.email/en/articles/mocking-smtp-servers-vs-ephemeral-inboxes.html</loc>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://freetemp.email/ar/articles/mocking-smtp-servers-vs-ephemeral-inboxes.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://freetemp.email/en/articles/mocking-smtp-servers-vs-ephemeral-inboxes.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://freetemp.email/en/articles/mocking-smtp-servers-vs-ephemeral-inboxes.html" />
+    <lastmod>2026-09-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://freetemp.email/ar/articles/multi-domain-rotation-strategies-for-high-availability.html</loc>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://freetemp.email/ar/articles/multi-domain-rotation-strategies-for-high-availability.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://freetemp.email/en/articles/multi-domain-rotation-strategies-for-high-availability.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://freetemp.email/en/articles/multi-domain-rotation-strategies-for-high-availability.html" />
+    <lastmod>2026-09-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://freetemp.email/en/articles/multi-domain-rotation-strategies-for-high-availability.html</loc>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://freetemp.email/ar/articles/multi-domain-rotation-strategies-for-high-availability.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://freetemp.email/en/articles/multi-domain-rotation-strategies-for-high-availability.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://freetemp.email/en/articles/multi-domain-rotation-strategies-for-high-availability.html" />
+    <lastmod>2026-09-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://freetemp.email/ar/articles/node-js-disposable-email-api-integration.html</loc>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://freetemp.email/ar/articles/node-js-disposable-email-api-integration.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://freetemp.email/en/articles/node-js-disposable-email-api-integration.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://freetemp.email/en/articles/node-js-disposable-email-api-integration.html" />
+    <lastmod>2026-09-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://freetemp.email/en/articles/node-js-disposable-email-api-integration.html</loc>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://freetemp.email/ar/articles/node-js-disposable-email-api-integration.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://freetemp.email/en/articles/node-js-disposable-email-api-integration.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://freetemp.email/en/articles/node-js-disposable-email-api-integration.html" />
+    <lastmod>2026-09-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://freetemp.email/ar/articles/owasp-top-10-email-vulnerabilities-mitigation.html</loc>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://freetemp.email/ar/articles/owasp-top-10-email-vulnerabilities-mitigation.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://freetemp.email/en/articles/owasp-top-10-email-vulnerabilities-mitigation.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://freetemp.email/en/articles/owasp-top-10-email-vulnerabilities-mitigation.html" />
+    <lastmod>2026-09-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://freetemp.email/en/articles/owasp-top-10-email-vulnerabilities-mitigation.html</loc>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://freetemp.email/ar/articles/owasp-top-10-email-vulnerabilities-mitigation.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://freetemp.email/en/articles/owasp-top-10-email-vulnerabilities-mitigation.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://freetemp.email/en/articles/owasp-top-10-email-vulnerabilities-mitigation.html" />
+    <lastmod>2026-09-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://freetemp.email/ar/articles/phishing-defense-and-safe-previews.html</loc>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://freetemp.email/ar/articles/phishing-defense-and-safe-previews.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://freetemp.email/en/articles/phishing-defense-and-safe-previews.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://freetemp.email/en/articles/phishing-defense-and-safe-previews.html" />
+    <lastmod>2026-09-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://freetemp.email/en/articles/phishing-defense-and-safe-previews.html</loc>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://freetemp.email/ar/articles/phishing-defense-and-safe-previews.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://freetemp.email/en/articles/phishing-defense-and-safe-previews.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://freetemp.email/en/articles/phishing-defense-and-safe-previews.html" />
+    <lastmod>2026-09-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://freetemp.email/ar/articles/postman-automated-api-email-verification.html</loc>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://freetemp.email/ar/articles/postman-automated-api-email-verification.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://freetemp.email/en/articles/postman-automated-api-email-verification.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://freetemp.email/en/articles/postman-automated-api-email-verification.html" />
+    <lastmod>2026-09-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://freetemp.email/en/articles/postman-automated-api-email-verification.html</loc>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://freetemp.email/ar/articles/postman-automated-api-email-verification.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://freetemp.email/en/articles/postman-automated-api-email-verification.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://freetemp.email/en/articles/postman-automated-api-email-verification.html" />
+    <lastmod>2026-09-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://freetemp.email/ar/articles/preventing-credential-stuffing-and-data-breaches.html</loc>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://freetemp.email/ar/articles/preventing-credential-stuffing-and-data-breaches.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://freetemp.email/en/articles/preventing-credential-stuffing-and-data-breaches.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://freetemp.email/en/articles/preventing-credential-stuffing-and-data-breaches.html" />
+    <lastmod>2026-09-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://freetemp.email/en/articles/preventing-credential-stuffing-and-data-breaches.html</loc>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://freetemp.email/ar/articles/preventing-credential-stuffing-and-data-breaches.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://freetemp.email/en/articles/preventing-credential-stuffing-and-data-breaches.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://freetemp.email/en/articles/preventing-credential-stuffing-and-data-breaches.html" />
+    <lastmod>2026-09-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://freetemp.email/ar/articles/preventing-online-harassment-doxxing-email-hygiene.html</loc>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://freetemp.email/ar/articles/preventing-online-harassment-doxxing-email-hygiene.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://freetemp.email/en/articles/preventing-online-harassment-doxxing-email-hygiene.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://freetemp.email/en/articles/preventing-online-harassment-doxxing-email-hygiene.html" />
+    <lastmod>2026-09-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://freetemp.email/en/articles/preventing-online-harassment-doxxing-email-hygiene.html</loc>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://freetemp.email/ar/articles/preventing-online-harassment-doxxing-email-hygiene.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://freetemp.email/en/articles/preventing-online-harassment-doxxing-email-hygiene.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://freetemp.email/en/articles/preventing-online-harassment-doxxing-email-hygiene.html" />
+    <lastmod>2026-09-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://freetemp.email/ar/articles/privacy-first-form-submissions-and-web-testing.html</loc>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://freetemp.email/ar/articles/privacy-first-form-submissions-and-web-testing.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://freetemp.email/en/articles/privacy-first-form-submissions-and-web-testing.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://freetemp.email/en/articles/privacy-first-form-submissions-and-web-testing.html" />
+    <lastmod>2026-09-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://freetemp.email/en/articles/privacy-first-form-submissions-and-web-testing.html</loc>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://freetemp.email/ar/articles/privacy-first-form-submissions-and-web-testing.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://freetemp.email/en/articles/privacy-first-form-submissions-and-web-testing.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://freetemp.email/en/articles/privacy-first-form-submissions-and-web-testing.html" />
+    <lastmod>2026-09-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://freetemp.email/ar/articles/protecting-online-accounts-with-sub-addresses-and-catchall.html</loc>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://freetemp.email/ar/articles/protecting-online-accounts-with-sub-addresses-and-catchall.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://freetemp.email/en/articles/protecting-online-accounts-with-sub-addresses-and-catchall.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://freetemp.email/en/articles/protecting-online-accounts-with-sub-addresses-and-catchall.html" />
+    <lastmod>2026-09-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://freetemp.email/en/articles/protecting-online-accounts-with-sub-addresses-and-catchall.html</loc>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://freetemp.email/ar/articles/protecting-online-accounts-with-sub-addresses-and-catchall.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://freetemp.email/en/articles/protecting-online-accounts-with-sub-addresses-and-catchall.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://freetemp.email/en/articles/protecting-online-accounts-with-sub-addresses-and-catchall.html" />
+    <lastmod>2026-09-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://freetemp.email/ar/articles/public-wifi-hotspots-email-privacy-risks.html</loc>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://freetemp.email/ar/articles/public-wifi-hotspots-email-privacy-risks.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://freetemp.email/en/articles/public-wifi-hotspots-email-privacy-risks.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://freetemp.email/en/articles/public-wifi-hotspots-email-privacy-risks.html" />
+    <lastmod>2026-09-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://freetemp.email/en/articles/public-wifi-hotspots-email-privacy-risks.html</loc>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://freetemp.email/ar/articles/public-wifi-hotspots-email-privacy-risks.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://freetemp.email/en/articles/public-wifi-hotspots-email-privacy-risks.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://freetemp.email/en/articles/public-wifi-hotspots-email-privacy-risks.html" />
+    <lastmod>2026-09-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://freetemp.email/ar/articles/pwa-desktop-mobile-guide.html</loc>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://freetemp.email/ar/articles/pwa-desktop-mobile-guide.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://freetemp.email/en/articles/pwa-desktop-mobile-guide.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://freetemp.email/en/articles/pwa-desktop-mobile-guide.html" />
+    <lastmod>2026-09-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://freetemp.email/en/articles/pwa-desktop-mobile-guide.html</loc>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://freetemp.email/ar/articles/pwa-desktop-mobile-guide.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://freetemp.email/en/articles/pwa-desktop-mobile-guide.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://freetemp.email/en/articles/pwa-desktop-mobile-guide.html" />
+    <lastmod>2026-09-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://freetemp.email/ar/articles/python-automated-email-testing-tutorial.html</loc>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://freetemp.email/ar/articles/python-automated-email-testing-tutorial.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://freetemp.email/en/articles/python-automated-email-testing-tutorial.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://freetemp.email/en/articles/python-automated-email-testing-tutorial.html" />
+    <lastmod>2026-09-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://freetemp.email/en/articles/python-automated-email-testing-tutorial.html</loc>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://freetemp.email/ar/articles/python-automated-email-testing-tutorial.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://freetemp.email/en/articles/python-automated-email-testing-tutorial.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://freetemp.email/en/articles/python-automated-email-testing-tutorial.html" />
+    <lastmod>2026-09-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://freetemp.email/ar/articles/real-time-websocket-streaming.html</loc>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://freetemp.email/ar/articles/real-time-websocket-streaming.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://freetemp.email/en/articles/real-time-websocket-streaming.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://freetemp.email/en/articles/real-time-websocket-streaming.html" />
+    <lastmod>2026-09-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://freetemp.email/en/articles/real-time-websocket-streaming.html</loc>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://freetemp.email/ar/articles/real-time-websocket-streaming.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://freetemp.email/en/articles/real-time-websocket-streaming.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://freetemp.email/en/articles/real-time-websocket-streaming.html" />
+    <lastmod>2026-09-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://freetemp.email/ar/articles/safe-api-key-generation-and-ephemeral-tokens.html</loc>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://freetemp.email/ar/articles/safe-api-key-generation-and-ephemeral-tokens.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://freetemp.email/en/articles/safe-api-key-generation-and-ephemeral-tokens.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://freetemp.email/en/articles/safe-api-key-generation-and-ephemeral-tokens.html" />
+    <lastmod>2026-09-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://freetemp.email/en/articles/safe-api-key-generation-and-ephemeral-tokens.html</loc>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://freetemp.email/ar/articles/safe-api-key-generation-and-ephemeral-tokens.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://freetemp.email/en/articles/safe-api-key-generation-and-ephemeral-tokens.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://freetemp.email/en/articles/safe-api-key-generation-and-ephemeral-tokens.html" />
+    <lastmod>2026-09-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://freetemp.email/ar/articles/smtp-handshake-protocol-inbox-architecture.html</loc>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://freetemp.email/ar/articles/smtp-handshake-protocol-inbox-architecture.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://freetemp.email/en/articles/smtp-handshake-protocol-inbox-architecture.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://freetemp.email/en/articles/smtp-handshake-protocol-inbox-architecture.html" />
+    <lastmod>2026-09-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://freetemp.email/en/articles/smtp-handshake-protocol-inbox-architecture.html</loc>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://freetemp.email/ar/articles/smtp-handshake-protocol-inbox-architecture.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://freetemp.email/en/articles/smtp-handshake-protocol-inbox-architecture.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://freetemp.email/en/articles/smtp-handshake-protocol-inbox-architecture.html" />
+    <lastmod>2026-09-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://freetemp.email/ar/articles/soc2-type-2-compliance-ephemeral-systems.html</loc>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://freetemp.email/ar/articles/soc2-type-2-compliance-ephemeral-systems.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://freetemp.email/en/articles/soc2-type-2-compliance-ephemeral-systems.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://freetemp.email/en/articles/soc2-type-2-compliance-ephemeral-systems.html" />
+    <lastmod>2026-09-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://freetemp.email/en/articles/soc2-type-2-compliance-ephemeral-systems.html</loc>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://freetemp.email/ar/articles/soc2-type-2-compliance-ephemeral-systems.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://freetemp.email/en/articles/soc2-type-2-compliance-ephemeral-systems.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://freetemp.email/en/articles/soc2-type-2-compliance-ephemeral-systems.html" />
+    <lastmod>2026-09-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://freetemp.email/ar/articles/staging-environment-email-sandboxing.html</loc>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://freetemp.email/ar/articles/staging-environment-email-sandboxing.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://freetemp.email/en/articles/staging-environment-email-sandboxing.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://freetemp.email/en/articles/staging-environment-email-sandboxing.html" />
+    <lastmod>2026-09-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://freetemp.email/en/articles/staging-environment-email-sandboxing.html</loc>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://freetemp.email/ar/articles/staging-environment-email-sandboxing.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://freetemp.email/en/articles/staging-environment-email-sandboxing.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://freetemp.email/en/articles/staging-environment-email-sandboxing.html" />
+    <lastmod>2026-09-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://freetemp.email/ar/articles/stopping-email-scraping-and-harvesting-bots.html</loc>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://freetemp.email/ar/articles/stopping-email-scraping-and-harvesting-bots.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://freetemp.email/en/articles/stopping-email-scraping-and-harvesting-bots.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://freetemp.email/en/articles/stopping-email-scraping-and-harvesting-bots.html" />
+    <lastmod>2026-09-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://freetemp.email/en/articles/stopping-email-scraping-and-harvesting-bots.html</loc>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://freetemp.email/ar/articles/stopping-email-scraping-and-harvesting-bots.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://freetemp.email/en/articles/stopping-email-scraping-and-harvesting-bots.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://freetemp.email/en/articles/stopping-email-scraping-and-harvesting-bots.html" />
+    <lastmod>2026-09-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://freetemp.email/ar/articles/temp-mail-for-newsletter-safety.html</loc>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://freetemp.email/ar/articles/temp-mail-for-newsletter-safety.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://freetemp.email/en/articles/temp-mail-for-newsletter-safety.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://freetemp.email/en/articles/temp-mail-for-newsletter-safety.html" />
+    <lastmod>2026-09-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://freetemp.email/en/articles/temp-mail-for-newsletter-safety.html</loc>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://freetemp.email/ar/articles/temp-mail-for-newsletter-safety.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://freetemp.email/en/articles/temp-mail-for-newsletter-safety.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://freetemp.email/en/articles/temp-mail-for-newsletter-safety.html" />
+    <lastmod>2026-09-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://freetemp.email/ar/articles/temp-mail-vs-spam-filters.html</loc>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://freetemp.email/ar/articles/temp-mail-vs-spam-filters.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://freetemp.email/en/articles/temp-mail-vs-spam-filters.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://freetemp.email/en/articles/temp-mail-vs-spam-filters.html" />
+    <lastmod>2026-09-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://freetemp.email/en/articles/temp-mail-vs-spam-filters.html</loc>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://freetemp.email/ar/articles/temp-mail-vs-spam-filters.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://freetemp.email/en/articles/temp-mail-vs-spam-filters.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://freetemp.email/en/articles/temp-mail-vs-spam-filters.html" />
+    <lastmod>2026-09-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://freetemp.email/ar/articles/temporary-email-for-open-source-software-contributions.html</loc>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://freetemp.email/ar/articles/temporary-email-for-open-source-software-contributions.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://freetemp.email/en/articles/temporary-email-for-open-source-software-contributions.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://freetemp.email/en/articles/temporary-email-for-open-source-software-contributions.html" />
+    <lastmod>2026-09-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://freetemp.email/en/articles/temporary-email-for-open-source-software-contributions.html</loc>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://freetemp.email/ar/articles/temporary-email-for-open-source-software-contributions.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://freetemp.email/en/articles/temporary-email-for-open-source-software-contributions.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://freetemp.email/en/articles/temporary-email-for-open-source-software-contributions.html" />
+    <lastmod>2026-09-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://freetemp.email/ar/articles/temporary-email-for-software-testing.html</loc>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://freetemp.email/ar/articles/temporary-email-for-software-testing.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://freetemp.email/en/articles/temporary-email-for-software-testing.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://freetemp.email/en/articles/temporary-email-for-software-testing.html" />
+    <lastmod>2026-09-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://freetemp.email/en/articles/temporary-email-for-software-testing.html</loc>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://freetemp.email/ar/articles/temporary-email-for-software-testing.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://freetemp.email/en/articles/temporary-email-for-software-testing.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://freetemp.email/en/articles/temporary-email-for-software-testing.html" />
+    <lastmod>2026-09-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://freetemp.email/ar/articles/temporary-sms-vs-temporary-email.html</loc>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://freetemp.email/ar/articles/temporary-sms-vs-temporary-email.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://freetemp.email/en/articles/temporary-sms-vs-temporary-email.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://freetemp.email/en/articles/temporary-sms-vs-temporary-email.html" />
+    <lastmod>2026-09-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://freetemp.email/en/articles/temporary-sms-vs-temporary-email.html</loc>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://freetemp.email/ar/articles/temporary-sms-vs-temporary-email.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://freetemp.email/en/articles/temporary-sms-vs-temporary-email.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://freetemp.email/en/articles/temporary-sms-vs-temporary-email.html" />
+    <lastmod>2026-09-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://freetemp.email/ar/articles/threat-modeling-for-disposable-email-infrastructure.html</loc>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://freetemp.email/ar/articles/threat-modeling-for-disposable-email-infrastructure.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://freetemp.email/en/articles/threat-modeling-for-disposable-email-infrastructure.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://freetemp.email/en/articles/threat-modeling-for-disposable-email-infrastructure.html" />
+    <lastmod>2026-09-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://freetemp.email/en/articles/threat-modeling-for-disposable-email-infrastructure.html</loc>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://freetemp.email/ar/articles/threat-modeling-for-disposable-email-infrastructure.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://freetemp.email/en/articles/threat-modeling-for-disposable-email-infrastructure.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://freetemp.email/en/articles/threat-modeling-for-disposable-email-infrastructure.html" />
+    <lastmod>2026-09-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://freetemp.email/ar/articles/throwaway-email-for-social-media-research.html</loc>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://freetemp.email/ar/articles/throwaway-email-for-social-media-research.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://freetemp.email/en/articles/throwaway-email-for-social-media-research.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://freetemp.email/en/articles/throwaway-email-for-social-media-research.html" />
+    <lastmod>2026-09-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://freetemp.email/en/articles/throwaway-email-for-social-media-research.html</loc>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://freetemp.email/ar/articles/throwaway-email-for-social-media-research.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://freetemp.email/en/articles/throwaway-email-for-social-media-research.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://freetemp.email/en/articles/throwaway-email-for-social-media-research.html" />
+    <lastmod>2026-09-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://freetemp.email/ar/articles/tls-starttls-in-transit-encryption-temp-mail.html</loc>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://freetemp.email/ar/articles/tls-starttls-in-transit-encryption-temp-mail.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://freetemp.email/en/articles/tls-starttls-in-transit-encryption-temp-mail.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://freetemp.email/en/articles/tls-starttls-in-transit-encryption-temp-mail.html" />
+    <lastmod>2026-09-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://freetemp.email/en/articles/tls-starttls-in-transit-encryption-temp-mail.html</loc>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://freetemp.email/ar/articles/tls-starttls-in-transit-encryption-temp-mail.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://freetemp.email/en/articles/tls-starttls-in-transit-encryption-temp-mail.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://freetemp.email/en/articles/tls-starttls-in-transit-encryption-temp-mail.html" />
+    <lastmod>2026-09-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://freetemp.email/ar/articles/travel-booking-wifi-portals-email-safety.html</loc>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://freetemp.email/ar/articles/travel-booking-wifi-portals-email-safety.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://freetemp.email/en/articles/travel-booking-wifi-portals-email-safety.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://freetemp.email/en/articles/travel-booking-wifi-portals-email-safety.html" />
+    <lastmod>2026-09-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://freetemp.email/en/articles/travel-booking-wifi-portals-email-safety.html</loc>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://freetemp.email/ar/articles/travel-booking-wifi-portals-email-safety.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://freetemp.email/en/articles/travel-booking-wifi-portals-email-safety.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://freetemp.email/en/articles/travel-booking-wifi-portals-email-safety.html" />
+    <lastmod>2026-09-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://freetemp.email/ar/articles/universal-verification-coverage.html</loc>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://freetemp.email/ar/articles/universal-verification-coverage.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://freetemp.email/en/articles/universal-verification-coverage.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://freetemp.email/en/articles/universal-verification-coverage.html" />
+    <lastmod>2026-09-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://freetemp.email/en/articles/universal-verification-coverage.html</loc>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://freetemp.email/ar/articles/universal-verification-coverage.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://freetemp.email/en/articles/universal-verification-coverage.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://freetemp.email/en/articles/universal-verification-coverage.html" />
+    <lastmod>2026-09-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://freetemp.email/ar/articles/webhook-event-driven-email-notifications.html</loc>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://freetemp.email/ar/articles/webhook-event-driven-email-notifications.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://freetemp.email/en/articles/webhook-event-driven-email-notifications.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://freetemp.email/en/articles/webhook-event-driven-email-notifications.html" />
+    <lastmod>2026-09-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://freetemp.email/en/articles/webhook-event-driven-email-notifications.html</loc>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://freetemp.email/ar/articles/webhook-event-driven-email-notifications.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://freetemp.email/en/articles/webhook-event-driven-email-notifications.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://freetemp.email/en/articles/webhook-event-driven-email-notifications.html" />
+    <lastmod>2026-09-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://freetemp.email/ar/articles/webhook-triggers-realtime-email-processing.html</loc>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://freetemp.email/ar/articles/webhook-triggers-realtime-email-processing.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://freetemp.email/en/articles/webhook-triggers-realtime-email-processing.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://freetemp.email/en/articles/webhook-triggers-realtime-email-processing.html" />
+    <lastmod>2026-09-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://freetemp.email/en/articles/webhook-triggers-realtime-email-processing.html</loc>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://freetemp.email/ar/articles/webhook-triggers-realtime-email-processing.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://freetemp.email/en/articles/webhook-triggers-realtime-email-processing.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://freetemp.email/en/articles/webhook-triggers-realtime-email-processing.html" />
+    <lastmod>2026-09-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://freetemp.email/ar/articles/what-happens-when-address-expires.html</loc>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://freetemp.email/ar/articles/what-happens-when-address-expires.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://freetemp.email/en/articles/what-happens-when-address-expires.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://freetemp.email/en/articles/what-happens-when-address-expires.html" />
+    <lastmod>2026-09-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://freetemp.email/en/articles/what-happens-when-address-expires.html</loc>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://freetemp.email/ar/articles/what-happens-when-address-expires.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://freetemp.email/en/articles/what-happens-when-address-expires.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://freetemp.email/en/articles/what-happens-when-address-expires.html" />
+    <lastmod>2026-09-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://freetemp.email/ar/articles/zero-knowledge-inbox-architecture.html</loc>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://freetemp.email/ar/articles/zero-knowledge-inbox-architecture.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://freetemp.email/en/articles/zero-knowledge-inbox-architecture.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://freetemp.email/en/articles/zero-knowledge-inbox-architecture.html" />
+    <lastmod>2026-09-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://freetemp.email/en/articles/zero-knowledge-inbox-architecture.html</loc>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://freetemp.email/ar/articles/zero-knowledge-inbox-architecture.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://freetemp.email/en/articles/zero-knowledge-inbox-architecture.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://freetemp.email/en/articles/zero-knowledge-inbox-architecture.html" />
+    <lastmod>2026-09-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://freetemp.email/ar/articles/zero-log-stateless-mail-server-architecture.html</loc>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://freetemp.email/ar/articles/zero-log-stateless-mail-server-architecture.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://freetemp.email/en/articles/zero-log-stateless-mail-server-architecture.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://freetemp.email/en/articles/zero-log-stateless-mail-server-architecture.html" />
+    <lastmod>2026-09-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://freetemp.email/en/articles/zero-log-stateless-mail-server-architecture.html</loc>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://freetemp.email/ar/articles/zero-log-stateless-mail-server-architecture.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://freetemp.email/en/articles/zero-log-stateless-mail-server-architecture.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://freetemp.email/en/articles/zero-log-stateless-mail-server-architecture.html" />
+    <lastmod>2026-09-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://freetemp.email/ar/articles/zero-trust-architecture-for-email-security.html</loc>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://freetemp.email/ar/articles/zero-trust-architecture-for-email-security.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://freetemp.email/en/articles/zero-trust-architecture-for-email-security.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://freetemp.email/en/articles/zero-trust-architecture-for-email-security.html" />
+    <lastmod>2026-09-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://freetemp.email/en/articles/zero-trust-architecture-for-email-security.html</loc>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://freetemp.email/ar/articles/zero-trust-architecture-for-email-security.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://freetemp.email/en/articles/zero-trust-architecture-for-email-security.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://freetemp.email/en/articles/zero-trust-architecture-for-email-security.html" />
+    <lastmod>2026-09-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://freetemp.email/ar/blog.html</loc>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://freetemp.email/ar/blog.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://freetemp.email/en/blog.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://freetemp.email/en/blog.html" />
+    <lastmod>2026-09-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://freetemp.email/en/blog.html</loc>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://freetemp.email/ar/blog.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://freetemp.email/en/blog.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://freetemp.email/en/blog.html" />
+    <lastmod>2026-09-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://freetemp.email/ar/faq.html</loc>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://freetemp.email/ar/faq.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://freetemp.email/en/faq.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://freetemp.email/en/faq.html" />
+    <lastmod>2026-09-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://freetemp.email/en/faq.html</loc>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://freetemp.email/ar/faq.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://freetemp.email/en/faq.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://freetemp.email/en/faq.html" />
+    <lastmod>2026-09-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://freetemp.email/ar/guide.html</loc>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://freetemp.email/ar/guide.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://freetemp.email/en/guide.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://freetemp.email/en/guide.html" />
+    <lastmod>2026-09-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://freetemp.email/en/guide.html</loc>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://freetemp.email/ar/guide.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://freetemp.email/en/guide.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://freetemp.email/en/guide.html" />
+    <lastmod>2026-09-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://freetemp.email/ar/</loc>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://freetemp.email/ar/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://freetemp.email/en/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://freetemp.email/en/" />
+    <lastmod>2026-09-25</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>1.0</priority>
+  </url>
+
+  <url>
+    <loc>https://freetemp.email/en/</loc>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://freetemp.email/ar/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://freetemp.email/en/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://freetemp.email/en/" />
+    <lastmod>2026-09-25</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>1.0</priority>
+  </url>
+
+  <url>
+    <loc>https://freetemp.email/ar/privacy.html</loc>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://freetemp.email/ar/privacy.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://freetemp.email/en/privacy.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://freetemp.email/en/privacy.html" />
+    <lastmod>2026-09-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <url>
+    <loc>https://freetemp.email/en/privacy.html</loc>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://freetemp.email/ar/privacy.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://freetemp.email/en/privacy.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://freetemp.email/en/privacy.html" />
+    <lastmod>2026-09-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+</urlset>

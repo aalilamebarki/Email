@@ -1,0 +1,482 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <!-- 0. Inline Theme Script to Prevent FOUC -->
+    <script>
+      (function () {
+        try {
+          var t = localStorage.getItem('theme') || (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+          document.documentElement.setAttribute('data-theme', t);
+          if (t === 'dark') document.documentElement.classList.add('dark');
+          else document.documentElement.classList.remove('dark');
+        } catch (e) {}
+      })();
+    </script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>دليل استخدام البريد المؤقت — كل ما تحتاج معرفته | بريد مؤقت</title>
+    <meta
+      name="description"
+      content="دليل استخدام البريد المؤقت الشامل: خلاصة سريعة، كيف يعمل بـ 3 خطوات فقط، حالات الاستخدام الحقيقية، ومعايير الأمان لحماية بريدك من السبام."
+    />
+    <link rel="canonical" href="https://freetemp.email/ar/guide.html" />
+    <meta name="robots" content="index, follow" />
+
+    <!-- Multilingual SEO & Hreflang -->
+    <link rel="alternate" hreflang="ar" href="https://freetemp.email/ar/guide.html" />
+    <link rel="alternate" hreflang="en" href="https://freetemp.email/en/guide.html" />
+    <link rel="alternate" hreflang="x-default" href="https://freetemp.email/en/guide.html" />
+
+    <!-- Open Graph Tags -->
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="دليل استخدام البريد المؤقت — كل ما تحتاج معرفته" />
+    <meta
+      property="og:description"
+      content="دليل استخدام البريد المؤقت الشامل: كيف يعمل بـ 3 خطوات فقط، حالات الاستخدام الحقيقية، ومعايير الأمان."
+    />
+    <meta property="og:url" content="https://freetemp.email/ar/guide.html" />
+    <meta property="og:image" content="https://freetemp.email/og-image.png" />
+    <meta property="og:site_name" content="Temp Mail" />
+    <meta property="og:locale" content="ar_AR" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="دليل استخدام البريد المؤقت — كل ما تحتاج معرفته" />
+    <meta
+      name="twitter:description"
+      content="دليل استخدام البريد المؤقت: كيف يعمل بـ 3 خطوات، حالات الاستخدام، ومعايير الأمان."
+    />
+    <meta name="twitter:image" content="https://freetemp.email/og-image.png" />
+
+    <meta name="theme-color" content="#ffffff" id="meta-theme-color" />
+    <link rel="icon" type="image/svg+xml" href="/logo.svg" />
+    <script src="/shared/theme.js" defer></script>
+    <script src="/shared/i18n.js" defer></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        darkMode: 'class',
+      };
+    </script>
+    <style>
+      body {
+        font-family: 'Cairo', 'Inter', sans-serif;
+      }
+    </style>
+
+    <!-- Schema.org HowTo (Rich Results) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "HowTo",
+      "name": "كيف يعمل البريد المؤقت؟ (3 خطوات فقط)",
+      "description": "شرح مبسط لكيفية الحصول على عنوان بريد مؤقت واستخدامه في المواقع واستقبال الرسائل فورا.",
+      "datePublished": "2026-09-20T08:00:00+00:00",
+      "dateModified": "2026-09-24T00:00:00+00:00",
+      "inLanguage": "ar",
+      "publisher": {
+        "@type": "Organization",
+        "name": "Temp Mail",
+        "url": "https://freetemp.email/ar/"
+      },
+      "step": [
+        {
+          "@type": "HowToStep",
+          "name": "احصل على عنوانك",
+          "text": "يولد تلقائيا فور فتح الصفحة، مع زر نسخ بضغطة واحدة."
+        },
+        {
+          "@type": "HowToStep",
+          "name": "استخدمه في أي موقع",
+          "text": "الصقه في أي حقل بريد إلكتروني يطلبه موقع خارجي."
+        },
+        {
+          "@type": "HowToStep",
+          "name": "استقبل الرسالة فورا",
+          "text": "ستظهر الرسالة في صندوق الوارد خلال ثوان، بلا أي تحديث يدود للصفحة."
+        }
+      ]
+    }
+    </script>
+      <!-- Local Fonts and Shared Stylesheet -->
+    <link rel="stylesheet" href="/fonts/fonts.css" />
+    <link rel="stylesheet" href="/shared/style.css" />
+    <script src="/shared/theme.js" defer></script>
+    <script src="/shared/i18n.js" defer></script>
+  </head>
+  <body class="min-h-screen bg-white text-black dark:bg-[#0D0D0D] dark:text-[#F5F5F5] flex flex-col transition-colors duration-200 selection:bg-black selection:text-white dark:selection:bg-white dark:selection:text-black font-['Cairo',sans-serif]">
+    <!-- Master Header -->
+    <header class="border-b border-neutral-200 dark:border-neutral-800 bg-white/95 dark:bg-[#0D0D0D]/95 backdrop-blur-md sticky top-0 z-30 transition-colors">
+      <div class="max-w-4xl mx-auto px-4 h-16 flex items-center justify-between gap-4">
+        <div class="flex items-center gap-6">
+          <a href="/ar/" class="text-xl font-bold tracking-tight text-black dark:text-white hover:opacity-80 transition-opacity flex items-center gap-2">
+            <span class="w-6 h-6 rounded bg-black dark:bg-white text-white dark:text-black flex items-center justify-center text-xs font-mono font-extrabold">T</span>
+            <span data-i18n="brand">بريد مؤقت</span>
+          </a>
+
+          <nav class="hidden md:flex items-center gap-4 text-xs font-medium">
+            <a href="/ar/" data-i18n="home" class="text-neutral-600 dark:text-neutral-400 hover:text-black dark:hover:text-white transition-colors">الرئيسية</a>
+            <a href="/ar/blog.html" data-i18n="blog" class="text-neutral-600 dark:text-neutral-400 hover:text-black dark:hover:text-white transition-colors">المدونة</a>
+            <a href="/ar/guide.html" data-i18n="guide" class="text-black dark:text-white font-bold transition-colors">دليل الاستخدام</a>
+            <a href="/ar/faq.html" data-i18n="faq" class="text-neutral-600 dark:text-neutral-400 hover:text-black dark:hover:text-white transition-colors">الأسئلة الشائعة</a>
+          </nav>
+        </div>
+
+        <div class="flex items-center gap-2 sm:gap-3">
+          <a
+            href="/ar/blog.html"
+            data-i18n="blog"
+            class="md:hidden min-h-[38px] px-2.5 py-1.5 bg-white hover:bg-neutral-50 dark:bg-neutral-900 dark:hover:bg-neutral-800 border border-neutral-200 hover:border-black dark:border-neutral-800 dark:hover:border-neutral-600 rounded-lg text-xs font-semibold text-black dark:text-white transition-all flex items-center"
+          >
+            المدونة
+          </a>
+
+          <button
+            type="button"
+            id="theme-toggle-btn"
+            class="theme-toggle-btn min-h-[38px] min-w-[38px] p-2 bg-white hover:bg-neutral-50 dark:bg-neutral-900 dark:hover:bg-neutral-800 border border-neutral-200 hover:border-black dark:border-neutral-800 dark:hover:border-neutral-600 rounded-lg text-black dark:text-white transition-all flex items-center justify-center cursor-pointer active:scale-95"
+            aria-label="تبديل المظهر"
+          >
+            <svg class="theme-toggle-icon w-4 h-4 stroke-current fill-none stroke-[2]" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+            </svg>
+          </button>
+
+          <button
+            type="button"
+            id="open-lang-picker"
+            class="open-lang-picker min-h-[38px] px-3 py-1.5 bg-white hover:bg-neutral-50 dark:bg-neutral-900 dark:hover:bg-neutral-800 border border-neutral-200 hover:border-black dark:border-neutral-800 dark:hover:border-neutral-600 rounded-lg text-xs font-semibold text-black dark:text-white transition-all flex items-center gap-1.5 cursor-pointer shadow-sm active:scale-95"
+            aria-label="اختيار اللغة"
+          >
+            <svg class="w-3.5 h-3.5 stroke-current fill-none stroke-[2]" viewBox="0 0 24 24" aria-hidden="true">
+              <circle cx="12" cy="12" r="10"></circle>
+              <line x1="2" y1="12" x2="22" y2="12"></line>
+              <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+            </svg>
+            <span id="current-lang-label">العربية</span>
+            <svg class="w-3 h-3 stroke-current fill-none stroke-[2] opacity-60" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Content Container -->
+    <main class="flex-1 max-w-3xl w-full mx-auto px-4 py-10 sm:py-12">
+      <!-- Breadcrumbs -->
+      <nav class="flex items-center gap-2 text-xs text-neutral-500 dark:text-neutral-400 mb-6 font-mono">
+        <a href="/ar/" class="hover:underline">الرئيسية</a>
+        <span>/</span>
+        <span class="text-black dark:text-white font-semibold">دليل الاستخدام التشغيلي</span>
+      </nav>
+
+      <!-- Difference Callout: Guide vs Blog -->
+      <div class="mb-8 p-4 bg-neutral-50 dark:bg-neutral-900 border border-neutral-300 dark:border-neutral-800 rounded-xl flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs shadow-sm">
+        <div class="flex items-center gap-2">
+          <svg class="w-4 h-4 text-black dark:text-white shrink-0 stroke-current fill-none stroke-[2]" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+          <span class="text-neutral-700 dark:text-neutral-300 leading-relaxed">
+            <strong>دليل الاستخدام والتشغيل:</strong> مخصص للتعليمات العملية ووظائف الأزرار والتوليد والتمديد. للاطلاع على المقالات التحليلية وبحوث التغطية الشاملة للتحقق (Universal Verification)، تفضل بزيارة
+          </span>
+        </div>
+        <a href="/ar/blog.html" class="font-bold text-black dark:text-white underline hover:opacity-80 shrink-0">
+          صفحة المدونة والأبحاث ←
+        </a>
+      </div>
+
+      <h1 class="text-3xl sm:text-4xl font-extrabold text-black dark:text-white tracking-tight mb-6 leading-tight">
+        دليل استخدام البريد المؤقت — كل ما تحتاج معرفته
+      </h1>
+
+      <!-- TL;DR (خلاصة سريعة) -->
+      <div class="bg-[#F5F5F5] dark:bg-[#141414] border border-black dark:border-white rounded-2xl p-6 mb-6">
+        <div class="flex items-center gap-2 mb-2">
+          <span class="w-2.5 h-2.5 rounded-full bg-black dark:bg-white inline-block"></span>
+          <span class="text-xs font-mono font-bold uppercase tracking-wider text-black dark:text-white">
+            خلاصة سريعة (TL;DR)
+          </span>
+        </div>
+        <p class="text-sm sm:text-base text-black dark:text-white leading-relaxed">
+          <strong>خلاصة سريعة:</strong> البريد المؤقت هو عنوان بريد إلكتروني عشوائي
+          ينشأ فورا بدون تسجيل، يستقبل الرسائل ورموز التحقق (OTP) للحظات أو دقائق
+          محدودة، ثم يحذف تلقائيا مع كل بياناته. يستخدم لحماية بريدك الحقيقي عند
+          التسجيل في مواقع لا تثق بها بعد.
+        </p>
+      </div>
+
+      <p class="text-xs text-[#555555] dark:text-[#AAAAAA] mb-8 font-mono">
+        آخر تحديث: <span>24 سبتمبر 2026</span>
+      </p>
+
+      <div class="space-y-10 text-sm leading-relaxed text-[#222222] dark:text-[#D4D4D4]">
+        <!-- ما هو البريد المؤقت؟ -->
+        <section class="border-t border-[#EAEAEA] dark:border-[#262626] pt-8">
+          <h2 class="text-2xl font-bold text-black dark:text-white mb-4">
+            ما هو البريد المؤقت؟
+          </h2>
+          <p class="text-base text-[#444444] dark:text-[#CCCCCC] leading-relaxed">
+            البريد المؤقت (يعرف أيضا بالبريد الوهمي، أو Temp Mail، أو Disposable Email)
+            هو عنوان بريد إلكتروني ذاتي التدمير، ينشأ خلال ثوان ويحذف تلقائيا بعد
+            فترة قصيرة. يمنحك صندوق وارد مؤقتا مجهول الهوية، لتستقبل به الرسائل دون
+            كشف بريدك الشخصي الحقيقي.
+          </p>
+        </section>
+
+        <!-- كيف يعمل؟ (3 خطوات فقط) -->
+        <section id="how-it-works" class="border-t border-[#EAEAEA] dark:border-[#262626] pt-8">
+          <h2 class="text-2xl font-bold text-black dark:text-white mb-4">
+            كيف يعمل؟ (3 خطوات فقط)
+          </h2>
+          <ol class="space-y-6">
+            <li class="border border-[#EAEAEA] dark:border-[#262626] rounded-xl p-5 bg-white dark:bg-[#141414]">
+              <div class="font-bold text-base text-black dark:text-white mb-2">
+                1. احصل على عنوانك:
+              </div>
+              <p class="text-sm text-[#555555] dark:text-[#AAAAAA]">
+                يولد تلقائيا فور فتح الصفحة، مع زر نسخ بضغطة واحدة.
+              </p>
+            </li>
+
+            <li class="border border-[#EAEAEA] dark:border-[#262626] rounded-xl p-5 bg-white dark:bg-[#141414]">
+              <div class="font-bold text-base text-black dark:text-white mb-2">
+                2. استخدمه في أي موقع:
+              </div>
+              <p class="text-sm text-[#555555] dark:text-[#AAAAAA]">
+                الصقه في أي حقل بريد إلكتروني يطلبه موقع خارجي.
+              </p>
+            </li>
+
+            <li class="border border-[#EAEAEA] dark:border-[#262626] rounded-xl p-5 bg-white dark:bg-[#141414]">
+              <div class="font-bold text-base text-black dark:text-white mb-2">
+                3. استقبل الرسالة فورا:
+              </div>
+              <p class="text-sm text-[#555555] dark:text-[#AAAAAA]">
+                ستظهر الرسالة في صندوق الوارد خلال ثوان، بلا أي تحديث يدوي للصفحة.
+              </p>
+            </li>
+          </ol>
+        </section>
+
+        <!-- دعم جميع صيغ رسائل التحقق (Universal Verification Coverage) -->
+        <section id="verification-coverage" class="border-t border-[#EAEAEA] dark:border-[#262626] pt-8">
+          <div class="flex items-center gap-2 mb-3">
+            <span class="px-2.5 py-0.5 bg-black text-white dark:bg-white dark:text-black rounded text-[11px] font-bold font-mono">
+              ميزة حصرية
+            </span>
+            <span class="text-xs font-mono text-neutral-500">Universal Verification Coverage</span>
+          </div>
+          <h2 class="text-2xl font-bold text-black dark:text-white mb-4">
+            دعم جميع صيغ رسائل التحقق وروابط التفعيل (100% Coverage)
+          </h2>
+          <p class="text-base text-[#444444] dark:text-[#CCCCCC] leading-relaxed mb-4">
+            تتميز خدمتنا بمحرك تحليل ذكي فائق الدقة (مبني على خوادم Cloudflare Edge وجافاسكربت المعزول محليا)، قادر على استخراج كافة أنواع رسائل التحقق العالمية بنقرة واحدة:
+          </p>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div class="p-4 border border-neutral-300 dark:border-neutral-800 rounded-xl bg-white dark:bg-[#141414]">
+              <div class="font-bold text-sm text-black dark:text-white mb-1 flex items-center gap-1.5">
+                <svg class="w-4 h-4 text-emerald-500 stroke-current fill-none stroke-[2]" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                <span>رموز Google المعتمدة (G-Token)</span>
+              </div>
+              <p class="text-xs text-[#666666] dark:text-[#888888]">
+                التقاط فوري لرموز Google بصيغة <code class="font-mono bg-neutral-100 dark:bg-neutral-800 px-1 rounded">G-XXXXXX</code> بدون تشويه أو فقدان البادئة.
+              </p>
+            </div>
+
+            <div class="p-4 border border-neutral-300 dark:border-neutral-800 rounded-xl bg-white dark:bg-[#141414]">
+              <div class="font-bold text-sm text-black dark:text-white mb-1 flex items-center gap-1.5">
+                <svg class="w-4 h-4 text-emerald-500 stroke-current fill-none stroke-[2]" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                <span>أكواد Steam Guard و 2FA الأبجدية</span>
+              </div>
+              <p class="text-xs text-[#666666] dark:text-[#888888]">
+                استخراج دقيق للرموز المكونة من أحرف وأرقام لاتينية مثل <code class="font-mono bg-neutral-100 dark:bg-neutral-800 px-1 rounded">W4K8X</code> التي يعجز عنها المنافسون.
+              </p>
+            </div>
+
+            <div class="p-4 border border-neutral-300 dark:border-neutral-800 rounded-xl bg-white dark:bg-[#141414]">
+              <div class="font-bold text-sm text-black dark:text-white mb-1 flex items-center gap-1.5">
+                <svg class="w-4 h-4 text-emerald-500 stroke-current fill-none stroke-[2]" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                <span>الأكواد المقسمة (Discord / Microsoft)</span>
+              </div>
+              <p class="text-xs text-[#666666] dark:text-[#888888]">
+                التقاط الرموز المفصولة بواصلة مثل <code class="font-mono bg-neutral-100 dark:bg-neutral-800 px-1 rounded">491-820</code> كاملة بضغطة زر واحدة.
+              </p>
+            </div>
+
+            <div class="p-4 border border-neutral-300 dark:border-neutral-800 rounded-xl bg-white dark:bg-[#141414]">
+              <div class="font-bold text-sm text-black dark:text-white mb-1 flex items-center gap-1.5">
+                <svg class="w-4 h-4 text-emerald-500 stroke-current fill-none stroke-[2]" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                <span>روابط التفعيل المباشرة (Anchor Text)</span>
+              </div>
+              <p class="text-xs text-[#666666] dark:text-[#888888]">
+                اكتشاف روابط أزرار "تفعيل الحساب" و "Confirm" المشفرة وتصفية روابط إلغاء الاشتراك المضللة.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <!-- لمن يفيد البريد المؤقت؟ -->
+        <section class="border-t border-[#EAEAEA] dark:border-[#262626] pt-8">
+          <h2 class="text-2xl font-bold text-black dark:text-white mb-6">
+            لمن يفيد البريد المؤقت؟ (حالات استخدام حقيقية)
+          </h2>
+
+          <div class="space-y-6">
+            <div class="border-s-2 border-black dark:border-white ps-4">
+              <h3 class="text-lg font-bold text-black dark:text-white mb-1">
+                التسجيل في المواقع الجديدة
+              </h3>
+              <p class="text-[#555555] dark:text-[#AAAAAA]">
+                عندما يطلب موقع لا تعرفه جيدا بريدك للتسجيل، استخدم بريدا مؤقتا لتجنب
+                احتمال تسريب بريدك الحقيقي أو تعرضه للرسائل الترويجية لاحقا.
+              </p>
+            </div>
+
+            <div class="border-s-2 border-black dark:border-white ps-4">
+              <h3 class="text-lg font-bold text-black dark:text-white mb-1">
+                تجربة الخدمات المجانية
+              </h3>
+              <p class="text-[#555555] dark:text-[#AAAAAA]">
+                عند تجربة أداة أو خدمة بنسخة تجريبية مجانية، بريد مؤقت يمنعك من تلقي رسائل
+                تسويقية متكررة بعد انتهاء التجربة.
+              </p>
+            </div>
+
+            <div class="border-s-2 border-black dark:border-white ps-4">
+              <h3 class="text-lg font-bold text-black dark:text-white mb-1">
+                استقبال رموز التحقق (OTP)
+              </h3>
+              <p class="text-[#555555] dark:text-[#AAAAAA]">
+                كثير من المواقع تطلب تأكيد بريدك عبر رمز مكون من أرقام. بريدنا المؤقت
+                يستخرج هذا الرمز تلقائيا ويعرضه لك بشكل واضح مع زر نسخ فوري.
+              </p>
+            </div>
+
+            <div class="border-s-2 border-black dark:border-white ps-4">
+              <h3 class="text-lg font-bold text-black dark:text-white mb-1">
+                المشاركة في المنتديات والمجتمعات
+              </h3>
+              <p class="text-[#555555] dark:text-[#AAAAAA]">
+                كثير من المنتديات تطلب تفعيل بريد قبل السماح بالمشاركة. يمكنك فعل ذلك دون
+                ربط هويتك الحقيقية بحسابك في المنتدى.
+              </p>
+            </div>
+
+            <div class="border-s-2 border-black dark:border-white ps-4">
+              <h3 class="text-lg font-bold text-black dark:text-white mb-1">
+                تحميل الملفات والموارد المجانية
+              </h3>
+              <p class="text-[#555555] dark:text-[#AAAAAA]">
+                بعض المواقع تطلب بريدا إلكترونيا لإتاحة تحميل ملف أو كتاب إلكتروني. استخدم
+                بريدا مؤقتا للحصول على الملف دون تسجيل بريدك في قوائمهم البريدية.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <!-- هل البريد المؤقت آمن؟ -->
+        <section class="border-t border-[#EAEAEA] dark:border-[#262626] pt-8">
+          <h2 class="text-2xl font-bold text-black dark:text-white mb-4">
+            هل البريد المؤقت آمن؟
+          </h2>
+          <p class="text-base text-[#444444] dark:text-[#CCCCCC] leading-relaxed">
+            نعم، طالما اقتصر استخدامه على الغرض المخصص له: التسجيلات المؤقتة والرسائل
+            غير الحساسة. لا ينصح باستخدامه لحسابات مهمة أو بيانات سرية طويلة الأمد،
+            لأن طبيعته العامة والمؤقتة تجعله غير مناسب لهذا الغرض.
+          </p>
+        </section>
+
+        <!-- CTA Box -->
+        <div class="mt-10 p-6 sm:p-8 bg-[#FAFAFA] dark:bg-[#141414] border border-black dark:border-white rounded-2xl text-center">
+          <h3 class="text-base sm:text-lg font-bold text-black dark:text-white mb-2">
+            ابدأ باستخدام الأداة فورا
+          </h3>
+          <p class="text-xs text-[#555555] dark:text-[#AAAAAA] mb-5">
+            توليد بريد فوري، استخراج أوتوماتيكي لكود التحقق، وتدمير ذاتي كامل.
+          </p>
+          <a
+            href="/ar/"
+            class="min-h-[44px] inline-flex items-center justify-center px-6 py-2.5 bg-black text-white dark:bg-white dark:text-black text-xs font-bold rounded-lg hover:opacity-90 transition-opacity"
+          >
+            جرب أداة البريد المؤقت الآن ⬅
+          </a>
+        </div>
+      </div>
+    </main>
+
+    <!-- Footer الموحد ذو 4 أعمدة -->
+        <!-- Master Arabic 4-Column Footer — الموحد في جميع الصفحات -->
+    <footer class="border-t border-[#EAEAEA] dark:border-[#222222] bg-white dark:bg-[#0A0A0A] py-12 transition-colors mt-auto text-xs">
+      <div class="max-w-4xl mx-auto px-4">
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 mb-10 text-right">
+          <!-- العمود 1: المنصة والرسالة -->
+          <div>
+            <div class="text-base font-bold text-black dark:text-white mb-2">بريد مؤقت</div>
+            <p class="text-[#666666] dark:text-[#888888] leading-relaxed mb-3">
+              خدمة بريد مؤقت مجانية ومعزولة تقنيا لحماية خصوصيتك من التتبع والرسائل المزعجة (Spam) دون الحاجة لتسجيل أي بيانات شخصية.
+            </p>
+            <div class="inline-flex items-center gap-2 font-mono text-[11px] text-black dark:text-[#A0A0A0] border border-[#EAEAEA] dark:border-[#222222] rounded-md px-2 py-1 bg-[#FAFAFA] dark:bg-[#141414]">
+              <span class="w-1.5 h-1.5 rounded-full bg-black dark:bg-[#00FF66]"></span>
+              <span>جميع خوادم الحافة تعمل بكفاءة</span>
+            </div>
+          </div>
+
+          <!-- العمود 2: التنقل السريع -->
+          <div>
+            <div class="font-bold text-black dark:text-white mb-3 uppercase tracking-wider text-[11px]">
+              التنقل السريع والاستخدام
+            </div>
+            <ul class="space-y-2">
+              <li><a href="/ar/" class="text-[#666666] dark:text-[#888888] hover:text-black dark:hover:text-white transition-colors">الرئيسية</a></li>
+              <li><a href="/ar/blog.html" class="text-neutral-600 dark:text-neutral-400 hover:text-black dark:hover:text-white transition-colors">المدونة والأدلة</a></li>
+              <li><a href="/ar/guide.html" class="text-[#666666] dark:text-[#888888] hover:text-black dark:hover:text-white transition-colors">دليل الاستخدام</a></li>
+              <li><a href="/ar/faq.html" class="text-[#666666] dark:text-[#888888] hover:text-black dark:hover:text-white transition-colors">الأسئلة الشائعة</a></li>
+              <li><a href="/ar/blog.html" class="hover:underline">المدونة</a></li>
+            </ul>
+          </div>
+
+          <!-- العمود 3: الشفافية والامتثال -->
+          <div>
+            <div class="font-bold text-black dark:text-white mb-3 uppercase tracking-wider text-[11px]">
+              الشفافية والامتثال
+            </div>
+            <ul class="space-y-2">
+              <li><a href="/ar/about.html" class="text-[#666666] dark:text-[#888888] hover:text-black dark:hover:text-white transition-colors">من نحن</a></li>
+              <li><a href="/ar/privacy.html" class="text-[#666666] dark:text-[#888888] hover:text-black dark:hover:text-white transition-colors">سياسة الخصوصية</a></li>
+              <li><a href="/ar/privacy.html#terms" class="text-[#666666] dark:text-[#888888] hover:text-black dark:hover:text-white transition-colors">شروط الاستخدام</a></li>
+            </ul>
+          </div>
+
+          <!-- العمود 4: معايير الأمان -->
+          <div>
+            <div class="font-bold text-black dark:text-white mb-3 uppercase tracking-wider text-[11px]">
+              معايير الأمان والتشفير
+            </div>
+            <ul class="space-y-2 text-[#666666] dark:text-[#888888]">
+              <li class="flex items-center gap-1.5">
+                <span class="text-black dark:text-white font-bold"><svg class="w-3.5 h-3.5 stroke-current fill-none stroke-[2] text-black dark:text-white shrink-0 inline-block mr-1 ml-1" viewBox="0 0 24 24" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg></span>
+                <span>إتلاف ذاتي فوري بعد 20 دقيقة</span>
+              </li>
+              <li class="flex items-center gap-1.5">
+                <span class="text-black dark:text-white font-bold"><svg class="w-3.5 h-3.5 stroke-current fill-none stroke-[2] text-black dark:text-white shrink-0 inline-block mr-1 ml-1" viewBox="0 0 24 24" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg></span>
+                <span>عزل مشفر بحاويات O(1)</span>
+              </li>
+              <li class="flex items-center gap-1.5">
+                <span class="text-black dark:text-white font-bold"><svg class="w-3.5 h-3.5 stroke-current fill-none stroke-[2] text-black dark:text-white shrink-0 inline-block mr-1 ml-1" viewBox="0 0 24 24" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg></span>
+                <span>بدون تسجيل بيانات شخصية أو كوكيز</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="border-t border-[#EAEAEA] dark:border-[#222222] pt-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-[#666666] dark:text-[#888888]">
+          <div>© 2026 بريد مؤقت. جميع الحقوق محفوظة.</div>
+          <div class="flex items-center gap-4">
+            <span>TLS 1.3 256-Bit</span>
+            <span>•</span>
+            <span>Cloudflare Edge</span>
+            <span>•</span>
+            <span>Zero-Logs Verified</span>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

@@ -1,0 +1,16 @@
+name = "temp-mail"
+main = "worker/src/index.ts"
+compatibility_date = "2024-09-23"
+compatibility_flags = ["nodejs_compat"]
+
+[vars]
+DOMAIN = "freetemp.email"
+EXPIRY_MINUTES = "20"
+
+[[durable_objects.bindings]]
+name = "MAILBOX"
+class_name = "MailboxDO"
+
+[[migrations]]
+tag = "v1"
+new_sqlite_classes = ["MailboxDO"]

@@ -1,0 +1,667 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <script>
+      (function () {
+        try {
+          var t = localStorage.getItem('theme') || (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+          document.documentElement.setAttribute('data-theme', t);
+          if (t === 'dark') document.documentElement.classList.add('dark');
+          else document.documentElement.classList.remove('dark');
+        } catch (e) {}
+      })();
+    </script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- SEO Meta Tags -->
+    <title>أمان شبكات واي فاي العامة: حماية بيانات البريد من التنصت وهجمات رجل في المنتصف — Temp Mail</title>
+    <meta name="description" content="دليل حماية الخصوصية على شبكات الواي فاي العامة في المقاهي والمطارات لمنع سرقة بيانات تسجيل الدخول وتجنب بوابات الدخول الخادعة بالبريد المؤقت." id="meta-description" />
+    <meta name="keywords" content="" />
+    <link rel="canonical" href="https://freetemp.email/ar/articles/public-wifi-hotspots-email-privacy-risks.html" />
+
+    <!-- Multilingual Alternates -->
+    <link rel="alternate" hreflang="ar" href="https://freetemp.email/ar/articles/public-wifi-hotspots-email-privacy-risks.html" />
+    <link rel="alternate" hreflang="en" href="https://freetemp.email/en/articles/public-wifi-hotspots-email-privacy-risks.html" />
+    <link rel="alternate" hreflang="es" href="https://freetemp.email/en/articles/public-wifi-hotspots-email-privacy-risks.html" />
+    <link rel="alternate" hreflang="fr" href="https://freetemp.email/en/articles/public-wifi-hotspots-email-privacy-risks.html" />
+    <link rel="alternate" hreflang="de" href="https://freetemp.email/en/articles/public-wifi-hotspots-email-privacy-risks.html" />
+    <link rel="alternate" hreflang="pt" href="https://freetemp.email/en/articles/public-wifi-hotspots-email-privacy-risks.html" />
+    <link rel="alternate" hreflang="it" href="https://freetemp.email/en/articles/public-wifi-hotspots-email-privacy-risks.html" />
+    <link rel="alternate" hreflang="ru" href="https://freetemp.email/en/articles/public-wifi-hotspots-email-privacy-risks.html" />
+    <link rel="alternate" hreflang="tr" href="https://freetemp.email/en/articles/public-wifi-hotspots-email-privacy-risks.html" />
+    <link rel="alternate" hreflang="zh" href="https://freetemp.email/en/articles/public-wifi-hotspots-email-privacy-risks.html" />
+    <link rel="alternate" hreflang="ja" href="https://freetemp.email/en/articles/public-wifi-hotspots-email-privacy-risks.html" />
+    <link rel="alternate" hreflang="ko" href="https://freetemp.email/en/articles/public-wifi-hotspots-email-privacy-risks.html" />
+    <link rel="alternate" hreflang="nl" href="https://freetemp.email/en/articles/public-wifi-hotspots-email-privacy-risks.html" />
+    <link rel="alternate" hreflang="pl" href="https://freetemp.email/en/articles/public-wifi-hotspots-email-privacy-risks.html" />
+    <link rel="alternate" hreflang="id" href="https://freetemp.email/en/articles/public-wifi-hotspots-email-privacy-risks.html" />
+    <link rel="alternate" hreflang="vi" href="https://freetemp.email/en/articles/public-wifi-hotspots-email-privacy-risks.html" />
+    <link rel="alternate" hreflang="hi" href="https://freetemp.email/en/articles/public-wifi-hotspots-email-privacy-risks.html" />
+    <link rel="alternate" hreflang="fa" href="https://freetemp.email/ar/articles/public-wifi-hotspots-email-privacy-risks.html" />
+    <link rel="alternate" hreflang="ur" href="https://freetemp.email/ar/articles/public-wifi-hotspots-email-privacy-risks.html" />
+    <link rel="alternate" hreflang="uk" href="https://freetemp.email/en/articles/public-wifi-hotspots-email-privacy-risks.html" />
+    <link rel="alternate" hreflang="sv" href="https://freetemp.email/en/articles/public-wifi-hotspots-email-privacy-risks.html" />
+    <link rel="alternate" hreflang="el" href="https://freetemp.email/en/articles/public-wifi-hotspots-email-privacy-risks.html" />
+    <link rel="alternate" hreflang="x-default" href="https://freetemp.email/en/articles/public-wifi-hotspots-email-privacy-risks.html" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="article" />
+    <meta property="og:site_name" content="Temp Mail" />
+    <meta property="og:title" content="أمان شبكات واي فاي العامة: حماية بيانات البريد من التنصت وهجمات رجل في المنتصف — Temp Mail" />
+    <meta property="og:description" content="دليل حماية الخصوصية على شبكات الواي فاي العامة في المقاهي والمطارات لمنع سرقة بيانات تسجيل الدخول وتجنب بوابات الدخول الخادعة بالبريد المؤقت." />
+    <meta property="og:url" content="https://freetemp.email/ar/articles/public-wifi-hotspots-email-privacy-risks.html" />
+    <meta property="og:image" content="https://freetemp.email/og-image.png" />
+    <meta property="article:published_time" content="2026-09-26T00:00:00Z" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="أمان شبكات واي فاي العامة: حماية بيانات البريد من التنصت وهجمات رجل في المنتصف — Temp Mail" />
+    <meta name="twitter:description" content="دليل حماية الخصوصية على شبكات الواي فاي العامة في المقاهي والمطارات لمنع سرقة بيانات تسجيل الدخول وتجنب بوابات الدخول الخادعة بالبريد المؤقت." />
+    <meta name="twitter:image" content="https://freetemp.email/og-image.png" />
+
+    <meta name="theme-color" content="#ffffff" id="meta-theme-color" />
+    <link rel="icon" type="image/svg+xml" href="/logo.svg" />
+    <link rel="apple-touch-icon" href="/logo.svg" />
+
+    <!-- Stylesheets & Fonts -->
+    <link rel="stylesheet" href="/fonts/fonts.css" />
+    <link rel="stylesheet" href="/shared/style.css" />
+
+    <!-- Structured Data (JSON-LD) -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "TechArticle",
+        "headline": "أمان شبكات واي فاي العامة: حماية بيانات البريد من التنصت وهجمات رجل في المنتصف",
+        "description": "دليل حماية الخصوصية على شبكات الواي فاي العامة في المقاهي والمطارات لمنع سرقة بيانات تسجيل الدخول وتجنب بوابات الدخول الخادعة بالبريد المؤقت.",
+        "inLanguage": "ar",
+        "author": {
+          "@type": "Organization",
+          "name": "Temp Mail Security Engineering Team",
+          "url": "https://freetemp.email"
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "Temp Mail",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://freetemp.email/logo.svg"
+          }
+        },
+        "datePublished": "2026-09-26",
+        "dateModified": "2026-09-26",
+        "mainEntityOfPage": {
+          "@type": "WebPage",
+          "@id": "https://freetemp.email/ar/articles/public-wifi-hotspots-email-privacy-risks.html"
+        }
+      }
+    </script>
+
+    <!-- Scripts -->
+    <script src="/shared/theme.js" defer></script>
+    <script src="/shared/i18n.js" defer></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        darkMode: 'class',
+      };
+    </script>
+  </head>
+  <body class="min-h-screen bg-white text-black dark:bg-[#0D0D0D] dark:text-[#F5F5F5] flex flex-col transition-colors duration-200 font-['Cairo',sans-serif]">
+    <!-- Reading Progress Bar -->
+    <div
+      id="reading-progress"
+      class="fixed top-0 left-0 right-0 h-[2px] bg-black dark:bg-white z-50 origin-left scale-x-0 transition-transform duration-75 pointer-events-none"
+    ></div>
+
+    <!-- Master Header -->
+    <header class="border-b border-neutral-200 dark:border-neutral-800 bg-white/95 dark:bg-[#0D0D0D]/95 backdrop-blur-md sticky top-0 z-30 transition-colors">
+      <div class="max-w-4xl mx-auto px-4 h-16 flex items-center justify-between gap-4">
+        <div class="flex items-center gap-6">
+          <a href="/ar/" class="text-xl font-bold tracking-tight text-black dark:text-white hover:opacity-80 transition-opacity flex items-center gap-2">
+            <span class="w-6 h-6 rounded bg-black dark:bg-white text-white dark:text-black flex items-center justify-center text-xs font-mono font-extrabold">T</span>
+            <span data-i18n="brand">Temp Mail</span>
+          </a>
+
+          <nav class="hidden md:flex items-center gap-4 text-xs font-medium">
+            
+            <a href="/ar/" data-i18n="home" class="text-neutral-600 dark:text-neutral-400 hover:text-black dark:hover:text-white transition-colors">الرئيسية</a>
+            <a href="/ar/blog.html" data-i18n="blog" class="text-neutral-600 dark:text-neutral-400 hover:text-black dark:hover:text-white transition-colors">المدونة</a>
+            <a href="/ar/articles/index.html" class="text-black dark:text-white font-bold transition-colors">المقالات</a>
+            <a href="/ar/guide.html" data-i18n="guide" class="text-neutral-600 dark:text-neutral-400 hover:text-black dark:hover:text-white transition-colors">دليل الاستخدام</a>
+            <a href="/ar/faq.html" data-i18n="faq" class="text-neutral-600 dark:text-neutral-400 hover:text-black dark:hover:text-white transition-colors">الأسئلة الشائعة</a>
+          </nav>
+        </div>
+
+        <div class="flex items-center gap-2 sm:gap-3">
+          <!-- Language Selector Button (22 Languages) -->
+          <button
+            type="button"
+            id="open-lang-picker"
+            class="open-lang-picker min-h-[38px] px-3 py-1.5 bg-white hover:bg-neutral-50 dark:bg-neutral-900 dark:hover:bg-neutral-800 border border-neutral-200 hover:border-black dark:border-neutral-800 dark:hover:border-neutral-600 rounded-lg text-xs font-semibold text-black dark:text-white transition-all flex items-center gap-1.5 cursor-pointer shadow-sm active:scale-95"
+            aria-label="Change Language"
+          >
+            <svg class="w-3.5 h-3.5 stroke-current fill-none stroke-[2]" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+            <span id="current-lang-label">العربية</span>
+            <svg class="w-3 h-3 stroke-current fill-none stroke-[2] opacity-60" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          </button>
+
+          <!-- Dark/Light Theme Toggle Button -->
+          <button
+            type="button"
+            id="theme-toggle-btn"
+            class="theme-toggle-btn min-h-[38px] min-w-[38px] p-2 bg-white hover:bg-neutral-50 dark:bg-neutral-900 dark:hover:bg-neutral-800 border border-neutral-200 hover:border-black dark:border-neutral-800 dark:hover:border-neutral-600 rounded-lg text-black dark:text-white transition-all flex items-center justify-center cursor-pointer active:scale-95"
+            aria-label="Toggle theme"
+          >
+            <svg class="theme-toggle-icon w-4 h-4 stroke-current fill-none stroke-[2]" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Content Container -->
+    <main class="flex-1 max-w-3xl w-full mx-auto px-4 py-8 sm:py-12">
+      
+      <!-- Breadcrumbs -->
+      <nav class="flex items-center gap-2 text-xs text-neutral-500 dark:text-neutral-400 mb-6 font-mono" id="article-breadcrumbs" aria-label="Breadcrumb">
+        <a href="/ar/" class="hover:text-black dark:hover:text-white transition-colors" data-i18n="artNavHome">الرئيسية</a>
+        <span class="opacity-40">/</span>
+        <a href="/ar/blog.html" class="hover:text-black dark:hover:text-white transition-colors" data-i18n="artNavBlog">المدونة</a>
+        <span class="opacity-40">/</span>
+        <a href="/ar/articles/index.html" class="hover:text-black dark:hover:text-white transition-colors">المقالات</a>
+        <span class="opacity-40">/</span>
+        <span class="text-black dark:text-white font-medium truncate max-w-[220px]">أمان شبكات واي فاي العامة: حماية بيانات البريد من التنصت وهجمات رجل في المنتصف</span>
+      </nav>
+
+      <article>
+        <!-- Header & Meta Area (Google Blog / Security Engineering Style) -->
+        <header class="mb-10 pb-8 border-b border-neutral-200 dark:border-neutral-800">
+          <div class="flex items-center gap-2 mb-4">
+            <span class="px-2.5 py-0.5 rounded text-[11px] font-mono font-bold uppercase tracking-wide bg-blue-50 text-blue-700 dark:bg-blue-950/60 dark:text-blue-300 border border-blue-200 dark:border-blue-800/60">
+              الخصوصية والأمان الرقمي
+            </span>
+            <span class="text-xs text-neutral-400 font-mono">•</span>
+            <span class="text-xs text-neutral-500 dark:text-neutral-400 font-mono">أمان الشبكات العامة</span>
+          </div>
+
+          <h1 class="text-2xl sm:text-3xl lg:text-[2.35rem] font-extrabold text-black dark:text-white mb-5 leading-tight tracking-tight">
+            أمان شبكات واي فاي العامة: حماية بيانات البريد من التنصت وهجمات رجل في المنتصف
+          </h1>
+
+          <!-- Author Byline & Meta Info -->
+          <div class="flex flex-wrap items-center justify-between gap-4 py-3.5 px-4 bg-neutral-50 dark:bg-neutral-900/60 rounded-xl border border-neutral-200 dark:border-neutral-800 mb-6">
+            <div class="flex items-center gap-3">
+              <div class="w-9 h-9 rounded-full bg-gradient-to-tr from-blue-600 to-indigo-600 text-white flex items-center justify-center font-bold text-xs shadow-sm shrink-0">
+                TM
+              </div>
+              <div>
+                <div class="font-bold text-xs sm:text-sm text-black dark:text-white flex items-center gap-1.5">
+                  <span>فريق أبحاث الأمان والشبكات</span>
+                  <svg class="w-3.5 h-3.5 text-blue-500 fill-current" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+                </div>
+                <div class="text-[11px] text-neutral-500 dark:text-neutral-400 font-mono">Temp Mail Engineering Group</div>
+              </div>
+            </div>
+
+            <div class="flex items-center gap-3 text-xs text-neutral-500 dark:text-neutral-400 font-mono">
+              <div class="flex items-center gap-1">
+                <svg class="w-3.5 h-3.5 text-neutral-400 stroke-current fill-none stroke-[2]" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                <span>9 دقائق قراءة</span>
+              </div>
+              <span>•</span>
+              <time datetime="2026-09-26">2026-09-26</time>
+            </div>
+          </div>
+
+          <!-- Share Toolbar -->
+          <div class="flex items-center justify-between py-2.5 border-y border-neutral-100 dark:border-neutral-800/80 mb-6 text-xs text-neutral-600 dark:text-neutral-400">
+            <span class="font-mono text-[11px] font-medium">مشاركة هذا الدليل:</span>
+            <div class="flex items-center gap-2">
+              <!-- Copy Link -->
+              <button
+                type="button"
+                onclick="navigator.clipboard.writeText(window.location.href); const label = this.querySelector('span'); label.textContent='تم النسخ ✓'; setTimeout(() => label.textContent='نسخ الرابط', 1800);"
+                class="px-2.5 py-1 rounded-md bg-neutral-100 dark:bg-neutral-800 hover:bg-neutral-200 dark:hover:bg-neutral-700 text-black dark:text-white transition-colors cursor-pointer flex items-center gap-1.5 font-mono text-[11px]"
+                title="نسخ الرابط"
+              >
+                <svg class="w-3.5 h-3.5 stroke-current fill-none stroke-[2]" viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg>
+                <span>نسخ الرابط</span>
+              </button>
+
+              <!-- Twitter / X -->
+              <a
+                href="https://twitter.com/intent/tweet?text=%D8%A3%D9%85%D8%A7%D9%86%20%D8%B4%D8%A8%D9%83%D8%A7%D8%AA%20%D9%88%D8%A7%D9%8A%20%D9%81%D8%A7%D9%8A%20%D8%A7%D9%84%D8%B9%D8%A7%D9%85%D8%A9%3A%20%D8%AD%D9%85%D8%A7%D9%8A%D8%A9%20%D8%A8%D9%8A%D8%A7%D9%86%D8%A7%D8%AA%20%D8%A7%D9%84%D8%A8%D8%B1%D9%8A%D8%AF%20%D9%85%D9%86%20%D8%A7%D9%84%D8%AA%D9%86%D8%B5%D8%AA%20%D9%88%D9%87%D8%AC%D9%85%D8%A7%D8%AA%20%D8%B1%D8%AC%D9%84%20%D9%81%D9%8A%20%D8%A7%D9%84%D9%85%D9%86%D8%AA%D8%B5%D9%81&url=https%3A%2F%2Ffreetemp.email%2Far%2Farticles%2Fpublic-wifi-hotspots-email-privacy-risks.html"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="p-1.5 rounded-md hover:bg-neutral-100 dark:hover:bg-neutral-800 text-neutral-600 dark:text-neutral-300 transition-colors"
+                title="Share on X"
+              >
+                <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+              </a>
+
+              <!-- LinkedIn -->
+              <a
+                href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Ffreetemp.email%2Far%2Farticles%2Fpublic-wifi-hotspots-email-privacy-risks.html"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="p-1.5 rounded-md hover:bg-neutral-100 dark:hover:bg-neutral-800 text-neutral-600 dark:text-neutral-300 transition-colors"
+                title="Share on LinkedIn"
+              >
+                <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/></svg>
+              </a>
+
+              <!-- WhatsApp -->
+              <a
+                href="https://api.whatsapp.com/send?text=%D8%A3%D9%85%D8%A7%D9%86%20%D8%B4%D8%A8%D9%83%D8%A7%D8%AA%20%D9%88%D8%A7%D9%8A%20%D9%81%D8%A7%D9%8A%20%D8%A7%D9%84%D8%B9%D8%A7%D9%85%D8%A9%3A%20%D8%AD%D9%85%D8%A7%D9%8A%D8%A9%20%D8%A8%D9%8A%D8%A7%D9%86%D8%A7%D8%AA%20%D8%A7%D9%84%D8%A8%D8%B1%D9%8A%D8%AF%20%D9%85%D9%86%20%D8%A7%D9%84%D8%AA%D9%86%D8%B5%D8%AA%20%D9%88%D9%87%D8%AC%D9%85%D8%A7%D8%AA%20%D8%B1%D8%AC%D9%84%20%D9%81%D9%8A%20%D8%A7%D9%84%D9%85%D9%86%D8%AA%D8%B5%D9%81%20https%3A%2F%2Ffreetemp.email%2Far%2Farticles%2Fpublic-wifi-hotspots-email-privacy-risks.html"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="p-1.5 rounded-md hover:bg-neutral-100 dark:hover:bg-neutral-800 text-neutral-600 dark:text-neutral-300 transition-colors"
+                title="Share on WhatsApp"
+              >
+                <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91C2.13 13.66 2.59 15.36 3.45 16.86L2.05 22L7.3 20.62C8.75 21.41 10.38 21.83 12.04 21.83C17.5 21.83 21.95 17.38 21.95 11.92C21.95 9.27 20.92 6.78 19.05 4.91C17.18 3.03 14.69 2 12.04 2M12.05 3.67C14.25 3.67 16.31 4.53 17.87 6.09C19.42 7.65 20.28 9.72 20.28 11.92C20.28 16.46 16.58 20.15 12.04 20.15C10.56 20.15 9.11 19.76 7.85 19L7.55 18.83L4.43 19.65L5.26 16.61L5.06 16.29C4.24 15 3.8 13.47 3.8 11.91C3.81 7.37 7.5 3.67 12.05 3.67M9.53 7.32C9.36 7.32 9.09 7.38 8.87 7.63C8.65 7.87 8.03 8.45 8.03 9.63C8.03 10.81 8.89 11.95 9.01 12.11C9.13 12.28 10.7 14.7 13.1 15.74C13.68 15.98 14.12 16.13 14.48 16.24C15.05 16.43 15.58 16.4 16 16.34C16.46 16.27 17.42 15.76 17.62 15.2C17.82 14.63 17.82 14.15 17.76 14.05C17.7 13.95 17.54 13.89 17.3 13.78C17.06 13.66 15.86 13.07 15.64 12.99C15.42 12.9 15.25 12.86 15.09 13.11C14.93 13.35 14.46 13.89 14.32 14.05C14.18 14.21 14.04 14.24 13.8 14.12C13.56 14 12.56 13.67 11.37 12.61C10.45 11.79 9.83 10.77 9.65 10.47C9.47 10.17 9.63 10.01 9.75 9.89C9.86 9.78 10 9.59 10.12 9.45C10.24 9.31 10.28 9.21 10.36 9.05C10.44 8.89 10.4 8.75 10.34 8.63C10.28 8.5 9.8 7.34 9.53 7.32Z"/></svg>
+              </a>
+            </div>
+          </div>
+
+          <p class="text-base sm:text-lg text-neutral-700 dark:text-neutral-300 leading-relaxed font-normal">
+            تشكل شبكات الواي فاي المفتوحة في المقاهي والفنادق والمطارات بيئة خصبة للمهاجمين لاعتراض حزم البيانات واستدراج المستخدمين لتسجيل بريدهم الشخصي عبر بوابات الدخول الإجبارية (Captive Portals). نستعرض في هذا المقال المخاطر الأمنية لشبكات Wi-Fi العامة وكيف يمنحك البريد المؤقت درعا واقيا يمنع ربط جهازك بسجلات التتبع والمراقبة.
+          </p>
+
+          <!-- Modern Quick Specs Indicator Strip -->
+          
+        <!-- Modern Quick Technical Specs Strip -->
+        <div class="my-6 grid grid-cols-2 sm:grid-cols-4 gap-3 p-3.5 bg-neutral-50 dark:bg-neutral-900/70 border border-neutral-200 dark:border-neutral-800 rounded-xl text-xs font-mono">
+          <div class="p-2 bg-white dark:bg-neutral-800/60 rounded-lg border border-neutral-100 dark:border-neutral-800 flex flex-col">
+            <span class="text-neutral-400 text-[10px] uppercase">بيئة التخزين</span>
+            <span class="font-bold text-black dark:text-white truncate">In-Memory RAM</span>
+          </div>
+          <div class="p-2 bg-white dark:bg-neutral-800/60 rounded-lg border border-neutral-100 dark:border-neutral-800 flex flex-col">
+            <span class="text-neutral-400 text-[10px] uppercase">بروتوكول النقل</span>
+            <span class="font-bold text-black dark:text-white truncate">TLS 1.3 / RFC 5322</span>
+          </div>
+          <div class="p-2 bg-white dark:bg-neutral-800/60 rounded-lg border border-neutral-100 dark:border-neutral-800 flex flex-col">
+            <span class="text-neutral-400 text-[10px] uppercase">زمن المعالجة</span>
+            <span class="font-bold text-emerald-600 dark:text-emerald-400">&lt; 500ms Instant</span>
+          </div>
+          <div class="p-2 bg-white dark:bg-neutral-800/60 rounded-lg border border-neutral-100 dark:border-neutral-800 flex flex-col">
+            <span class="text-neutral-400 text-[10px] uppercase">سياسة البيانات</span>
+            <span class="font-bold text-blue-600 dark:text-blue-400">Zero Retention</span>
+          </div>
+        </div>
+        </header>
+
+        <!-- Table of Contents -->
+        
+        <!-- Table of Contents -->
+        <div class="mb-10 p-5 bg-neutral-50/80 dark:bg-neutral-900/60 border border-neutral-200 dark:border-neutral-800 rounded-xl">
+          <div class="flex items-center justify-between mb-3 text-xs font-bold text-neutral-500 dark:text-neutral-400 uppercase tracking-wider font-mono">
+            <span class="flex items-center gap-1.5">
+              <svg class="w-3.5 h-3.5 stroke-current fill-none stroke-[2]" viewBox="0 0 24 24"><line x1="8" y1="6" x2="21" y2="6"></line><line x1="8" y1="12" x2="21" y2="12"></line><line x1="8" y1="18" x2="21" y2="18"></line><line x1="3" y1="6" x2="3.01" y2="6"></line><line x1="3" y1="12" x2="3.01" y2="12"></line><line x1="3" y1="18" x2="3.01" y2="18"></line></svg>
+              <span>فهرس المحتويات</span>
+            </span>
+            <span class="text-[11px] text-neutral-400">1 أقسام</span>
+          </div>
+          <ul class="space-y-2.5">
+            
+          <li>
+            <a href="#captive-portal-surveillance" class="group flex items-start gap-2 text-neutral-600 dark:text-neutral-400 hover:text-black dark:hover:text-white transition-colors text-xs sm:text-sm">
+              <span class="font-mono text-neutral-400 dark:text-neutral-500 shrink-0 font-medium">1.0</span>
+              <span class="group-hover:underline">كيف تجمع شبكات Wi-Fi العامة بياناتك الشخصية؟</span>
+            </a>
+          </li>
+          </ul>
+        </div>
+
+        <!-- Key Takeaways -->
+        
+        <!-- Key Takeaways Box -->
+        <div class="mb-10 p-5 sm:p-6 bg-neutral-50 dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 rounded-xl shadow-sm" id="article-takeaways-box">
+          <h2 class="text-xs sm:text-sm font-bold text-black dark:text-white uppercase tracking-wider mb-4 flex items-center gap-2 font-mono">
+            <svg class="w-4 h-4 text-emerald-500 stroke-current fill-none stroke-[2.5]" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>
+            <span>أبرز النقاط والنتائج في هذا الدليل</span>
+          </h2>
+          <ul class="space-y-3 text-xs sm:text-sm text-neutral-700 dark:text-neutral-300">
+            
+              <li class="flex items-start gap-3">
+                <span class="text-black dark:text-white font-bold shrink-0 mt-0.5 text-xs">✓</span>
+                <span class="leading-relaxed">تجنب تقديم بريدك الشخصي الحقيقي في بوابات تسجيل الدخول بالشبكات العامة.</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <span class="text-black dark:text-white font-bold shrink-0 mt-0.5 text-xs">✓</span>
+                <span class="leading-relaxed">الحماية من هجمات التوأم الشرير Evil Twin ونقاط الوصول المزيفة.</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <span class="text-black dark:text-white font-bold shrink-0 mt-0.5 text-xs">✓</span>
+                <span class="leading-relaxed">عزل هاتف جهازك ومنع ربط عنوان MAC بحساباتك الشخصية.</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <span class="text-black dark:text-white font-bold shrink-0 mt-0.5 text-xs">✓</span>
+                <span class="leading-relaxed">استخدام البريد المؤقت لتجاوز متطلبات الدخول للإنترنت في ثوانٍ معدودة.</span>
+              </li>
+          </ul>
+        </div>
+
+        <!-- Body Sections -->
+        <div id="article-sections-container">
+          
+          <section class="mb-10 pt-2" id="captive-portal-surveillance">
+            <h2 class="text-xl sm:text-2xl font-bold text-black dark:text-white mb-4 leading-snug flex items-baseline gap-2.5">
+              <span class="font-mono text-xs sm:text-sm px-2 py-0.5 rounded bg-neutral-100 dark:bg-neutral-800 text-neutral-600 dark:text-neutral-400 font-semibold shrink-0">1.0</span>
+              <span>كيف تجمع شبكات Wi-Fi العامة بياناتك الشخصية؟</span>
+            </h2>
+            <div class="text-[15px] sm:text-[16px] text-neutral-700 dark:text-neutral-300 leading-[1.9] space-y-4">
+              <p>عند الاتصال بشبكة عامة تطلب تسجيل الدخول، تسجل البوابة عنوان MAC الخاص بجهازك وتربطه بالبريد الإلكتروني الذي تدخله. تقوم شركات تشغيل الشبكات ببيع هذه السجلات للمعلنين لرسم خريطة دقيقة لتحركاتك اليومية وأماكن تواجدك. باستخدام بريد مؤقت، تفشل هذه المنظومة في ربط جهازك بأي هوية حقيقية.</p>
+            </div>
+            
+            
+          </section>
+        </div>
+
+        <!-- In-Content Contextual Deep Dive Box -->
+        
+              <div class="my-6 p-4 rounded-xl border border-blue-200 dark:border-blue-900/60 bg-blue-50/40 dark:bg-blue-950/20 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs">
+                <div class="flex items-center gap-2.5">
+                  <span class="px-2 py-0.5 rounded bg-blue-600 text-white font-mono text-[10px] font-bold shrink-0">DEEP DIVE</span>
+                  <div class="text-neutral-700 dark:text-neutral-300">
+                    <span class="font-bold text-black dark:text-white">استكشاف هندسي متقدم:</span>
+                    <span class="font-medium text-neutral-600 dark:text-neutral-300">الدفاع ضد هجمات التصيد الاحتيالي والمعاينة الآمنة للرسائل في البريد المؤقت</span>
+                  </div>
+                </div>
+                <a href="/ar/articles/phishing-defense-and-safe-previews.html" class="inline-flex items-center gap-1 text-blue-600 dark:text-blue-400 font-bold hover:underline shrink-0">
+                  <span>متابعة القراءة</span>
+                  <span>←</span>
+                </a>
+              </div>
+
+        <!-- Comparison Table (if present) -->
+        
+        <!-- Comparison Table -->
+        <section class="mb-10" id="comparison-table-section">
+          <h2 class="text-xl sm:text-2xl font-bold text-black dark:text-white mb-4">
+            مقارنة أمان الاتصال بالشبكات العامة
+          </h2>
+          <div class="overflow-x-auto rounded-xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-[#121212]">
+            <table class="w-full text-xs sm:text-sm text-right">
+              <thead class="bg-neutral-100 dark:bg-neutral-800 text-black dark:text-white font-bold border-b border-neutral-200 dark:border-neutral-800">
+                <tr>
+                  <th class="p-3.5 sm:p-4">طريقة التسجيل</th>
+                  <th class="p-3.5 sm:p-4 text-neutral-500">البريد الشخصي الدائم</th>
+                  <th class="p-3.5 sm:p-4 text-black dark:text-white">البريد المؤقت اللحظي</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-neutral-200 dark:divide-neutral-800">
+                
+                  <tr class="">
+                    <td class="p-3.5 sm:p-4 font-semibold text-black dark:text-white">التعقب الجغرافي والإعلاني</td>
+                    <td class="p-3.5 sm:p-4 text-neutral-500">مرتفع (ربط تحركاتك بهويتك الحقيقية)</td>
+                    <td class="p-3.5 sm:p-4 font-semibold text-emerald-600 dark:text-emerald-400">منعدم (هوية عشوائية تتلف فورا)</td>
+                  </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- Verified Standards & Sources -->
+        
+        <!-- Verified Sources & Citations -->
+        <section class="mb-10 p-5 bg-neutral-50 dark:bg-neutral-900/50 border border-neutral-200 dark:border-neutral-800 rounded-xl" id="article-sources-section">
+          <h3 class="text-xs font-bold uppercase tracking-wider text-neutral-500 dark:text-neutral-400 mb-3 flex items-center gap-1.5 font-mono">
+            <svg class="w-3.5 h-3.5 stroke-current fill-none stroke-[2]" viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
+            <span>المراجع والمعايير القياسية المعتمدة</span>
+          </h3>
+          <ul class="space-y-2 text-xs text-neutral-600 dark:text-neutral-400">
+            
+            <li class="flex items-center gap-2">
+              <span class="text-neutral-400">•</span>
+              <a href="https://csrc.nist.gov/" target="_blank" rel="noopener noreferrer" class="hover:underline text-black dark:text-white font-medium flex items-center gap-1.5">
+                <span>NIST SP 800-162 — Guide to Public Wi-Fi and Remote Access Security</span>
+                <svg class="w-3 h-3 opacity-60 stroke-current fill-none stroke-[2]" viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+              </a>
+            </li>
+          </ul>
+        </section>
+
+        <!-- FAQs -->
+        
+        <!-- FAQ Accordion -->
+        <section class="mb-12 pt-6 border-t border-neutral-200 dark:border-neutral-800" id="article-faqs-section">
+          <h2 class="text-xl sm:text-2xl font-bold text-black dark:text-white mb-6">
+            الأسئلة الشائعة والأمان
+          </h2>
+          <div class="space-y-3">
+            
+            <div class="faq-item rounded-xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-[#121212] overflow-hidden">
+              <button
+                type="button"
+                class="faq-toggle w-full p-4 text-right font-semibold text-sm sm:text-base text-black dark:text-white flex items-center justify-between gap-4 cursor-pointer hover:bg-neutral-50 dark:hover:bg-neutral-900/50 transition-colors"
+                aria-expanded="true"
+              >
+                <span>هل يكفي استخدام VPN دون الحاجة للبريد المؤقت في بوابات Wi-Fi؟</span>
+                <svg class="faq-chevron w-4 h-4 stroke-current fill-none stroke-[2] text-neutral-400 transition-transform duration-200 rotate-180" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg>
+              </button>
+              <div class="faq-content p-4 pt-0 text-xs sm:text-sm text-neutral-600 dark:text-neutral-400 leading-relaxed border-t border-neutral-100 dark:border-neutral-800/60 ">
+                <p class="mt-3">لا؛ لأن شبكة VPN لا تعمل إلا بعد تجاوز بوابة تسجيل الدخول وإدخال البريد، لذا فإن استخدام البريد المؤقت هو خط الدفاع الأول.</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Prev & Next Pagination -->
+        
+        <!-- Previous & Next Article Navigation (Google Tech Blog Style) -->
+        <nav class="my-10 pt-6 border-t border-neutral-200 dark:border-neutral-800 grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs font-mono" aria-label="Articles Navigation">
+          
+            <a href="/ar/articles/burner-email-vs-email-alias-forwarding.html" class="p-4 rounded-xl border border-neutral-200 dark:border-neutral-800 hover:border-black dark:hover:border-white bg-neutral-50/50 dark:bg-neutral-900/40 transition-all flex flex-col group text-start">
+              <span class="text-neutral-400 dark:text-neutral-500 mb-1 flex items-center gap-1 font-semibold">
+                <span>→ المقال السابق</span>
+              </span>
+              <span class="font-bold text-sm text-black dark:text-white group-hover:underline line-clamp-1 font-sans">البريد المستهلك المؤقت مقابل إعادة توجيه الأسماء المستعارة: مقارنة معمارية الخصوصية</span>
+            </a>
+          
+            <a href="/ar/articles/ecommerce-guest-checkout-spam-prevention.html" class="p-4 rounded-xl border border-neutral-200 dark:border-neutral-800 hover:border-black dark:hover:border-white bg-neutral-50/50 dark:bg-neutral-900/40 transition-all flex flex-col group sm:text-left text-start">
+              <span class="text-neutral-400 dark:text-neutral-500 mb-1 flex items-center sm:justify-start justify-start gap-1 font-semibold">
+                <span>المقال التالي ←</span>
+              </span>
+              <span class="font-bold text-sm text-black dark:text-white group-hover:underline line-clamp-1 font-sans">خصوصية التسوق الإلكتروني: استخدام البريد المؤقت للشراء كزائر دون رسائل ترويجية</span>
+            </a>
+        </nav>
+
+        <!-- Related Technical Guides -->
+        
+        <!-- Related Articles -->
+        <section class="mb-12 pt-8 border-t border-neutral-200 dark:border-neutral-800">
+          <div class="flex items-center justify-between mb-6">
+            <h2 class="text-lg sm:text-xl font-bold text-black dark:text-white">
+              أدلة ومقالات هندسية ذات صلة
+            </h2>
+            <a href="/ar/articles/index.html" class="text-xs font-bold text-neutral-500 hover:text-black dark:hover:text-white flex items-center gap-1">
+              <span>عرض كافة المقالات</span>
+              <span>←</span>
+            </a>
+          </div>
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            
+              <article class="p-4 bg-white dark:bg-[#121212] border border-neutral-200 dark:border-neutral-800 rounded-xl hover:border-black dark:hover:border-white transition-all flex flex-col justify-between shadow-sm">
+                <div>
+                  <span class="text-[10px] font-mono uppercase px-2 py-0.5 bg-neutral-100 dark:bg-neutral-800 rounded text-neutral-600 dark:text-neutral-400 font-bold mb-2 inline-block">
+                    الأمن السيبراني
+                  </span>
+                  <h3 class="font-bold text-sm text-black dark:text-white mb-1.5 line-clamp-2">
+                    <a href="/ar/articles/phishing-defense-and-safe-previews.html" class="hover:underline">
+                      الدفاع ضد هجمات التصيد الاحتيالي والمعاينة الآمنة للرسائل في البريد المؤقت
+                    </a>
+                  </h3>
+                  <p class="text-xs text-neutral-600 dark:text-neutral-400 leading-relaxed mb-4 line-clamp-2">
+                    تعلم كيف تكشف رسائل التصيد الاحتيالي والروابط المزيفة، وكيف توفر معمارية المعاينة المعزولة في البريد المؤقت حماية مطلقة ضد البرمجيات الخبيثة.
+                  </p>
+                </div>
+                <a href="/ar/articles/phishing-defense-and-safe-previews.html" class="text-xs font-bold text-black dark:text-white hover:underline flex items-center gap-1 pt-2 border-t border-neutral-100 dark:border-neutral-800">
+                  <span>قراءة الدليل</span>
+                  <span>←</span>
+                </a>
+              </article>
+              <article class="p-4 bg-white dark:bg-[#121212] border border-neutral-200 dark:border-neutral-800 rounded-xl hover:border-black dark:hover:border-white transition-all flex flex-col justify-between shadow-sm">
+                <div>
+                  <span class="text-[10px] font-mono uppercase px-2 py-0.5 bg-neutral-100 dark:bg-neutral-800 rounded text-neutral-600 dark:text-neutral-400 font-bold mb-2 inline-block">
+                    الأمن السيبراني
+                  </span>
+                  <h3 class="font-bold text-sm text-black dark:text-white mb-1.5 line-clamp-2">
+                    <a href="/ar/articles/preventing-credential-stuffing-and-data-breaches.html" class="hover:underline">
+                      الوقاية من هجمات حشو بيانات الاعتماد (Credential Stuffing) وتداعيات تسريب البيانات
+                    </a>
+                  </h3>
+                  <p class="text-xs text-neutral-600 dark:text-neutral-400 leading-relaxed mb-4 line-clamp-2">
+                    شرح مفصل لكيفية حدوث هجمات حشو بيانات الاعتماد، وكيف يحميك استخدام البريد المؤقت من تسريب كلمات المرور وربط الحسابات عند اختراق المواقع.
+                  </p>
+                </div>
+                <a href="/ar/articles/preventing-credential-stuffing-and-data-breaches.html" class="text-xs font-bold text-black dark:text-white hover:underline flex items-center gap-1 pt-2 border-t border-neutral-100 dark:border-neutral-800">
+                  <span>قراءة الدليل</span>
+                  <span>←</span>
+                </a>
+              </article>
+              <article class="p-4 bg-white dark:bg-[#121212] border border-neutral-200 dark:border-neutral-800 rounded-xl hover:border-black dark:hover:border-white transition-all flex flex-col justify-between shadow-sm">
+                <div>
+                  <span class="text-[10px] font-mono uppercase px-2 py-0.5 bg-neutral-100 dark:bg-neutral-800 rounded text-neutral-600 dark:text-neutral-400 font-bold mb-2 inline-block">
+                    الخصوصية الرقمية
+                  </span>
+                  <h3 class="font-bold text-sm text-black dark:text-white mb-1.5 line-clamp-2">
+                    <a href="/ar/articles/disposable-email-vs-marketing-trackers.html" class="hover:underline">
+                      البريد المؤقت مقابل متتبعات التسويق: كيف تحمي هويتك من وسطاء البيانات (Data Brokers)؟
+                    </a>
+                  </h3>
+                  <p class="text-xs text-neutral-600 dark:text-neutral-400 leading-relaxed mb-4 line-clamp-2">
+                    تحليل لكيفية قيام شركات الإعلانات ووسطاء البيانات بجمع وبناء ملفات شخصية عبر بريدك الدائم، وكيف يقضي البريد المؤقت على هذه الممارسات.
+                  </p>
+                </div>
+                <a href="/ar/articles/disposable-email-vs-marketing-trackers.html" class="text-xs font-bold text-black dark:text-white hover:underline flex items-center gap-1 pt-2 border-t border-neutral-100 dark:border-neutral-800">
+                  <span>قراءة الدليل</span>
+                  <span>←</span>
+                </a>
+              </article>
+          </div>
+        </section>
+
+        <!-- Bottom Simple CTA -->
+        <div class="p-6 bg-neutral-50 dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 rounded-xl text-center mb-12 shadow-sm">
+          <h3 class="text-base font-bold text-black dark:text-white mb-2" data-i18n="blogCtaTitle">
+            جاهز لتجربة البريد المؤقت؟
+          </h3>
+          <p class="text-xs text-neutral-600 dark:text-neutral-400 mb-4 max-w-md mx-auto" data-i18n="blogCtaDesc">
+            احصل على عنوان بريد مؤقت معزول واستقبل كود التحقق في ثوانٍ وبدون تسجيل.
+          </p>
+          <a
+            href="/ar/"
+            class="inline-block px-5 py-2.5 bg-black text-white dark:bg-white dark:text-black rounded-lg text-xs font-bold hover:opacity-90 transition-opacity"
+            data-i18n="goToInbox"
+          >
+            الانتقال إلى صندوق البريد ←
+          </a>
+        </div>
+      </article>
+    </main>
+
+    <!-- Master Footer -->
+    <footer class="border-t border-neutral-200 dark:border-neutral-800 bg-white dark:bg-[#0D0D0D] py-12 text-xs transition-colors">
+      <div class="max-w-4xl mx-auto px-4">
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 mb-12">
+          <div class="sm:col-span-2 md:col-span-1">
+            <div class="flex items-center gap-2 mb-3">
+              <span class="w-6 h-6 rounded bg-black dark:bg-white text-white dark:text-black flex items-center justify-center text-xs font-mono font-extrabold">T</span>
+              <span class="font-bold text-sm tracking-tight text-black dark:text-white">Temp Mail</span>
+            </div>
+            <p class="text-neutral-500 leading-relaxed text-[11px] mb-4">
+              منصة بريد مؤقت سريعة وفورية توفر حماية استباقية للخصوصية واستخراجاً ذكياً لأكواد التحقق.
+            </p>
+            <div class="flex items-center gap-2">
+              <span class="inline-block w-2 h-2 rounded-full bg-emerald-500"></span>
+              <span class="text-[10px] text-neutral-500 font-mono">100% In-Memory RAM Engine</span>
+            </div>
+          </div>
+
+          <div>
+            <div class="font-bold text-black dark:text-white mb-3 uppercase tracking-wider text-[11px]">
+              التنقل
+            </div>
+            <ul class="space-y-2">
+              <li><a href="/ar/" class="text-neutral-600 dark:text-neutral-400 hover:text-black dark:hover:text-white transition-colors">الرئيسية</a></li>
+              <li><a href="/ar/blog.html" class="text-neutral-600 dark:text-neutral-400 hover:text-black dark:hover:text-white transition-colors">المدونة</a></li>
+              <li><a href="/ar/guide.html" class="text-neutral-600 dark:text-neutral-400 hover:text-black dark:hover:text-white transition-colors">دليل الاستخدام</a></li>
+              <li><a href="/ar/faq.html" class="text-neutral-600 dark:text-neutral-400 hover:text-black dark:hover:text-white transition-colors">الأسئلة الشائعة</a></li>
+              <li><a href="/ar/articles/index.html" class="text-neutral-600 dark:text-neutral-400 hover:text-black dark:hover:text-white transition-colors">المقالات</a></li>
+            </ul>
+          </div>
+
+          <div>
+            <div class="font-bold text-black dark:text-white mb-3 uppercase tracking-wider text-[11px]">
+              الشفافية والأمان
+            </div>
+            <ul class="space-y-2">
+              <li><a href="/ar/about.html" class="text-neutral-600 dark:text-neutral-400 hover:text-black dark:hover:text-white transition-colors">من نحن</a></li>
+              <li><a href="/ar/privacy.html" class="text-neutral-600 dark:text-neutral-400 hover:text-black dark:hover:text-white transition-colors">سياسة الخصوصية</a></li>
+              <li><a href="/ar/privacy.html#terms" class="text-neutral-600 dark:text-neutral-400 hover:text-black dark:hover:text-white transition-colors">شروط الاستخدام</a></li>
+            </ul>
+          </div>
+
+          <div>
+            <div class="font-bold text-black dark:text-white mb-3 uppercase tracking-wider text-[11px]">
+              معايير الأمان
+            </div>
+            <ul class="space-y-2 text-neutral-600 dark:text-neutral-400">
+              <li class="flex items-center gap-1.5"><span class="text-black dark:text-white font-bold">✓</span><span>إتلاف تلقائي بعد 20 دقيقة</span></li>
+              <li class="flex items-center gap-1.5"><span class="text-black dark:text-white font-bold">✓</span><span>صفر سجلات تتبع</span></li>
+              <li class="flex items-center gap-1.5"><span class="text-black dark:text-white font-bold">✓</span><span>عزل تام للذاكرة العشوائية</span></li>
+              <li class="flex items-center gap-1.5"><span class="text-black dark:text-white font-bold">✓</span><span>تشفير كامل للاتصال TLS</span></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="pt-8 border-t border-neutral-100 dark:border-neutral-800/80 flex flex-col sm:flex-row items-center justify-between gap-4 text-[11px] text-neutral-500">
+          <p>© 2026 Temp Mail. All rights reserved.</p>
+          <div class="flex items-center gap-4">
+            <a href="/ar/articles/index.html" class="hover:underline">فهرس المقالات</a>
+            <span>•</span>
+            <a href="/ar/privacy.html" class="hover:underline">Privacy Policy</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Interactive Scripts: Reading Progress & Accordion -->
+    <script>
+      document.addEventListener('DOMContentLoaded', function () {
+        // 1. Reading Progress Bar
+        var progressBar = document.getElementById('reading-progress');
+        if (progressBar) {
+          window.addEventListener('scroll', function () {
+            var totalHeight = document.documentElement.scrollHeight - window.innerHeight;
+            if (totalHeight > 0) {
+              var progress = window.scrollY / totalHeight;
+              progressBar.style.transform = 'scaleX(' + Math.min(Math.max(progress, 0), 1) + ')';
+            }
+          }, { passive: true });
+        }
+
+        // 2. Accordion Toggle
+        document.querySelectorAll('.faq-toggle').forEach(function (btn) {
+          btn.addEventListener('click', function () {
+            var item = btn.closest('.faq-item');
+            var content = item.querySelector('.faq-content');
+            var chevron = btn.querySelector('.faq-chevron');
+            var isExpanded = btn.getAttribute('aria-expanded') === 'true';
+
+            if (isExpanded) {
+              btn.setAttribute('aria-expanded', 'false');
+              content.classList.add('hidden');
+              if (chevron) chevron.classList.remove('rotate-180');
+            } else {
+              btn.setAttribute('aria-expanded', 'true');
+              content.classList.remove('hidden');
+              if (chevron) chevron.classList.add('rotate-180');
+            }
+          });
+        });
+      });
+    </script>
+  </body>
+</html>

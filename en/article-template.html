@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Technical Guide — Temp Mail</title>
+    <script>
+      (function() {
+        var params = new URLSearchParams(window.location.search);
+        var slug = params.get('slug') || 'universal-verification-coverage';
+        window.location.replace('/article-template.html?slug=' + slug + '&lang=en' + window.location.hash);
+      })();
+    </script>
+  </head>
+  <body></body>
+</html>

@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Technical Guides & Engineering Library — Temp Mail</title>
+    <meta name="description" content="Authoritative engineering guides, protocol standards, OTP verification mechanics, and digital privacy architecture." id="meta-description" />
+    <link rel="canonical" href="https://freetemp.email/en/article.html" />
+    <link rel="alternate" hreflang="ar" href="https://freetemp.email/ar/article.html" />
+    <link rel="alternate" hreflang="en" href="https://freetemp.email/en/article.html" />
+    <link rel="alternate" hreflang="x-default" href="https://freetemp.email/en/article.html" />
+
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="Technical Guides & Engineering Library — Temp Mail" />
+    <meta property="og:description" content="Authoritative engineering guides, protocol standards, OTP verification mechanics, and digital privacy architecture." />
+    <meta property="og:url" content="https://freetemp.email/en/article.html" />
+    <meta property="og:site_name" content="Temp Mail" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <!-- Tailwind CSS & Shared Styles -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        darkMode: 'class'
+      }
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+
+    <script src="/shared/theme.js"></script>
+    <script src="/shared/i18n.js"></script>
+    <script src="/shared/articles-data.js"></script>
+  </head>
+  <body class="min-h-screen bg-white text-black dark:bg-[#0D0D0D] dark:text-[#F5F5F5] flex flex-col transition-colors duration-200 font-sans antialiased selection:bg-neutral-200 dark:selection:bg-neutral-800">
+    <!-- Reading Progress Bar -->
+    <div id="reading-progress" class="fixed top-0 left-0 right-0 h-[2.5px] bg-black dark:bg-white z-50 transform origin-left scale-x-0 transition-transform duration-75"></div>
+
+    <!-- Master Header -->
+    <header class="border-b border-neutral-200 dark:border-neutral-800 bg-white/95 dark:bg-[#0D0D0D]/95 backdrop-blur-md sticky top-0 z-30 transition-colors">
+      <div class="max-w-4xl mx-auto px-4 h-16 flex items-center justify-between gap-4">
+        <div class="flex items-center gap-6">
+          <a href="/en/" class="text-xl font-bold tracking-tight text-black dark:text-white hover:opacity-80 transition-opacity flex items-center gap-2">
+            <span class="w-6 h-6 rounded bg-black dark:bg-white text-white dark:text-black flex items-center justify-center text-xs font-mono font-extrabold">T</span>
+            <span data-i18n="brand">Temp Mail</span>
+          </a>
+
+          <nav class="hidden md:flex items-center gap-4 text-xs font-medium">
+            <a href="/en/" data-i18n="home" class="text-neutral-600 dark:text-neutral-400 hover:text-black dark:hover:text-white transition-colors">Home</a>
+            <a href="/en/blog.html" data-i18n="blog" class="text-neutral-600 dark:text-neutral-400 hover:text-black dark:hover:text-white transition-colors">Blog</a>
+            <a href="/en/articles/index.html" class="text-black dark:text-white font-bold transition-colors">Articles</a>
+            <a href="/en/guide.html" data-i18n="guide" class="text-neutral-600 dark:text-neutral-400 hover:text-black dark:hover:text-white transition-colors">Guide</a>
+            <a href="/en/faq.html" data-i18n="faq" class="text-neutral-600 dark:text-neutral-400 hover:text-black dark:hover:text-white transition-colors">FAQ</a>
+          </nav>
+        </div>
+
+        <div class="flex items-center gap-2 sm:gap-3">
+          <!-- Language Selector Button -->
+          <button
+            type="button"
+            id="open-lang-picker"
+            class="open-lang-picker min-h-[38px] px-3 py-1.5 bg-white hover:bg-neutral-50 dark:bg-neutral-900 dark:hover:bg-neutral-800 border border-neutral-200 hover:border-black dark:border-neutral-800 dark:hover:border-neutral-600 rounded-lg text-xs font-semibold text-black dark:text-white transition-all flex items-center gap-1.5 cursor-pointer shadow-sm active:scale-95"
+            aria-label="Change Language"
+          >
+            <svg class="w-3.5 h-3.5 stroke-current fill-none stroke-[2]" viewBox="0 0 24 24" aria-hidden="true">
+              <circle cx="12" cy="12" r="10"></circle>
+              <line x1="2" y1="12" x2="22" y2="12"></line>
+              <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+            </svg>
+            <span id="current-lang-label">English</span>
+            <svg class="w-3 h-3 stroke-current fill-none stroke-[2] opacity-60" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          </button>
+
+          <!-- Dark/Light Theme Toggle Button -->
+          <button
+            type="button"
+            id="theme-toggle-btn"
+            class="theme-toggle-btn min-h-[38px] min-w-[38px] p-2 bg-white hover:bg-neutral-50 dark:bg-neutral-900 dark:hover:bg-neutral-800 border border-neutral-200 hover:border-black dark:border-neutral-800 dark:hover:border-neutral-600 rounded-lg text-black dark:text-white transition-all flex items-center justify-center cursor-pointer active:scale-95"
+            aria-label="Toggle theme"
+          >
+            <svg class="theme-toggle-icon w-4 h-4 stroke-current fill-none stroke-[2]" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Content Container -->
+    <main class="flex-1 max-w-3xl w-full mx-auto px-4 py-8 sm:py-12">
+      <!-- Breadcrumbs -->
+      <nav class="flex items-center gap-2 text-xs text-neutral-500 dark:text-neutral-400 mb-6 font-mono" id="article-breadcrumbs" aria-label="Breadcrumb">
+        <a href="/en/" class="hover:text-black dark:hover:text-white transition-colors" data-i18n="artNavHome">Home</a>
+        <span class="opacity-40">/</span>
+        <a href="/en/blog.html" class="hover:text-black dark:hover:text-white transition-colors" data-i18n="artNavBlog">Blog</a>
+        <span class="opacity-40">/</span>
+        <a href="/en/articles/index.html" class="hover:text-black dark:hover:text-white transition-colors">Articles</a>
+        <span class="opacity-40">/</span>
+        <span class="text-black dark:text-white font-medium truncate max-w-[220px]" id="breadcrumb-current-title">Technical Guide</span>
+      </nav>
+
+      <!-- Article Content -->
+      <article>
+        <header class="mb-8">
+          <div class="flex flex-wrap items-center justify-between gap-3 mb-4 text-xs font-mono">
+            <div class="flex items-center gap-2">
+              <span class="px-2.5 py-0.5 rounded bg-black text-white dark:bg-white dark:text-black font-bold uppercase tracking-wider text-[10px]" id="article-badge">
+                Technical Guide
+              </span>
+              <span class="text-neutral-400">•</span>
+              <span class="text-neutral-500 font-mono" id="article-readtime">8 mins read</span>
+              <span class="text-neutral-400">•</span>
+              <time datetime="2026-09-25" class="text-neutral-500 font-mono" id="article-date">2026-09-25</time>
+            </div>
+
+            <!-- Share / Copy Link -->
+            <button
+              type="button"
+              id="article-share-btn"
+              onclick="navigator.clipboard.writeText(window.location.href); this.querySelector('span').textContent='Copied'; setTimeout(()=>this.querySelector('span').textContent='Share', 1500);"
+              class="inline-flex items-center gap-1.5 text-neutral-500 hover:text-black dark:hover:text-white transition-colors cursor-pointer text-xs"
+              title="Copy Article Link"
+            >
+              <svg class="w-3.5 h-3.5 stroke-current fill-none stroke-[2]" viewBox="0 0 24 24"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"></path><polyline points="16 6 12 2 8 6"></polyline><line x1="12" y1="2" x2="12" y2="15"></line></svg>
+              <span>Share</span>
+            </button>
+          </div>
+
+          <h1 class="text-2xl sm:text-3xl lg:text-[2.25rem] font-extrabold text-black dark:text-white mb-5 leading-tight tracking-tight" id="article-h1">
+            Article Title
+          </h1>
+
+          <p class="text-base sm:text-lg text-neutral-600 dark:text-neutral-400 leading-relaxed font-normal border-b border-neutral-100 dark:border-neutral-800/80 pb-6" id="article-lead">
+            Article introduction and lead paragraph.
+          </p>
+        </header>
+
+        <!-- Table of Contents Container -->
+        <div id="article-toc-container" class="mb-10 p-5 bg-neutral-50/80 dark:bg-neutral-900/60 border border-neutral-200 dark:border-neutral-800 rounded-xl"></div>
+
+        <!-- Takeaways Container -->
+        <div class="mb-10 p-5 sm:p-6 bg-neutral-50 dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 rounded-xl shadow-sm" id="article-takeaways-box">
+          <h2 class="text-xs sm:text-sm font-bold text-black dark:text-white uppercase tracking-wider mb-4 flex items-center gap-2 font-mono">
+            <svg class="w-4 h-4 text-emerald-500 stroke-current fill-none stroke-[2.5]" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>
+            <span id="takeaways-header-text">Key Technical Takeaways & Summary</span>
+          </h2>
+          <ul class="space-y-3 text-xs sm:text-sm text-neutral-700 dark:text-neutral-300" id="article-takeaways-list"></ul>
+        </div>
+
+        <!-- Sections Container -->
+        <div id="article-sections-container"></div>
+
+        <!-- Table Container -->
+        <div id="article-table-container"></div>
+
+        <!-- Sources Container -->
+        <section class="mb-10 p-5 bg-neutral-50 dark:bg-neutral-900/50 border border-neutral-200 dark:border-neutral-800 rounded-xl" id="article-sources-section">
+          <h3 class="text-xs font-bold uppercase tracking-wider text-neutral-500 dark:text-neutral-400 mb-3 flex items-center gap-1.5 font-mono">
+            <svg class="w-3.5 h-3.5 stroke-current fill-none stroke-[2]" viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
+            <span>Verified Standards & Citations</span>
+          </h3>
+          <ul class="space-y-2 text-xs text-neutral-600 dark:text-neutral-400" id="article-sources-list"></ul>
+        </section>
+
+        <!-- FAQs Container -->
+        <section class="mb-12 pt-6 border-t border-neutral-200 dark:border-neutral-800" id="article-faqs-section">
+          <h2 class="text-xl sm:text-2xl font-bold text-black dark:text-white mb-6">
+            Frequently Asked Questions
+          </h2>
+          <div class="space-y-3" id="article-faqs-list"></div>
+        </section>
+
+        <!-- Related Articles -->
+        <section class="mb-12 pt-8 border-t border-neutral-200 dark:border-neutral-800" id="article-related-section">
+          <div class="flex items-center justify-between mb-6">
+            <h2 class="text-lg sm:text-xl font-bold text-black dark:text-white">
+              Related Technical Guides
+            </h2>
+            <a href="/en/articles/index.html" class="text-xs font-bold text-neutral-500 hover:text-black dark:hover:text-white flex items-center gap-1">
+              <span>View all articles</span>
+              <span>→</span>
+            </a>
+          </div>
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-4" id="article-related-list"></div>
+        </section>
+
+        <!-- Bottom Simple CTA -->
+        <div class="p-6 bg-neutral-50 dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 rounded-xl text-center mb-12 shadow-sm">
+          <h3 class="text-base font-bold text-black dark:text-white mb-2" data-i18n="blogCtaTitle">Ready to Try Temp Mail?</h3>
+          <p class="text-xs text-neutral-600 dark:text-neutral-400 mb-4 max-w-md mx-auto" data-i18n="blogCtaDesc">
+            Get a private, isolated disposable mailbox and receive passcodes in seconds with zero signup.
+          </p>
+          <a
+            href="/en/"
+            class="inline-block px-5 py-2.5 bg-black text-white dark:bg-white dark:text-black rounded-lg text-xs font-bold hover:opacity-90 transition-opacity"
+            data-i18n="goToInbox"
+          >
+            Go to Temporary Inbox →
+          </a>
+        </div>
+      </article>
+    </main>
+
+    <!-- Master Footer -->
+    <footer class="border-t border-neutral-200 dark:border-neutral-800 bg-white dark:bg-[#0A0A0A] py-12 transition-colors mt-auto text-xs">
+      <div class="max-w-4xl mx-auto px-4">
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 mb-10 text-left">
+          <!-- Column 1: Brand & Status -->
+          <div>
+            <div class="text-base font-bold text-black dark:text-white mb-2" data-i18n="brand">Temp Mail</div>
+            <p class="text-neutral-600 dark:text-neutral-400 leading-relaxed mb-3" data-i18n="footerDesc">
+              Disposable ephemeral email infrastructure designed for privacy, automated verification, and zero spam tracking.
+            </p>
+            <div class="inline-flex items-center gap-2 font-mono text-[11px] text-black dark:text-neutral-300 border border-neutral-200 dark:border-neutral-800 rounded-md px-2 py-1 bg-neutral-50 dark:bg-neutral-900">
+              <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+              <span data-i18n="footerNodesStatus">All edge nodes operational</span>
+            </div>
+          </div>
+
+          <!-- Column 2: Navigation -->
+          <div>
+            <div class="font-bold text-black dark:text-white mb-3 uppercase tracking-wider text-[11px]" data-i18n="footerNav">
+              Navigation
+            </div>
+            <ul class="space-y-2">
+              <li><a href="/en/" class="text-neutral-600 dark:text-neutral-400 hover:text-black dark:hover:text-white transition-colors" data-i18n="home">Home</a></li>
+              <li><a href="/en/blog.html" class="text-neutral-600 dark:text-neutral-400 hover:text-black dark:hover:text-white transition-colors" data-i18n="blog">Blog</a></li>
+              <li><a href="/en/guide.html" class="text-neutral-600 dark:text-neutral-400 hover:text-black dark:hover:text-white transition-colors" data-i18n="guide">Guide</a></li>
+              <li><a href="/en/faq.html" class="text-neutral-600 dark:text-neutral-400 hover:text-black dark:hover:text-white transition-colors" data-i18n="faq">FAQ</a></li>
+              <li><a href="/en/articles/index.html" class="text-neutral-600 dark:text-neutral-400 hover:text-black dark:hover:text-white transition-colors" data-i18n="footerArticles">Articles</a></li>
+            </ul>
+          </div>
+
+          <!-- Column 3: Legal & Transparency -->
+          <div>
+            <div class="font-bold text-black dark:text-white mb-3 uppercase tracking-wider text-[11px]" data-i18n="footerTransparency">
+              Transparency
+            </div>
+            <ul class="space-y-2">
+              <li><a href="/en/about.html" class="text-neutral-600 dark:text-neutral-400 hover:text-black dark:hover:text-white transition-colors" data-i18n="footerAbout">About</a></li>
+              <li><a href="/en/privacy.html" class="text-neutral-600 dark:text-neutral-400 hover:text-black dark:hover:text-white transition-colors" data-i18n="footerPrivacy">Privacy Policy</a></li>
+              <li><a href="/en/privacy.html#terms" class="text-neutral-600 dark:text-neutral-400 hover:text-black dark:hover:text-white transition-colors" data-i18n="footerTerms">Terms</a></li>
+            </ul>
+          </div>
+
+          <!-- Column 4: Security Pillars -->
+          <div>
+            <div class="font-bold text-black dark:text-white mb-3 uppercase tracking-wider text-[11px]" data-i18n="footerSecurity">
+              Security Standards
+            </div>
+            <ul class="space-y-2 text-neutral-600 dark:text-neutral-400">
+              <li class="flex items-center gap-1.5"><span class="text-black dark:text-white font-bold">✓</span><span data-i18n="footerSec1">Auto-purge after 20 mins</span></li>
+              <li class="flex items-center gap-1.5"><span class="text-black dark:text-white font-bold">✓</span><span data-i18n="footerSec2">Zero activity tracking</span></li>
+              <li class="flex items-center gap-1.5"><span class="text-black dark:text-white font-bold">✓</span><span data-i18n="footerSec3">Volatile RAM isolation</span></li>
+              <li class="flex items-center gap-1.5"><span class="text-black dark:text-white font-bold">✓</span><span data-i18n="footerSec4">TLS 1.3 Transport Security</span></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="pt-8 border-t border-neutral-100 dark:border-neutral-800/80 flex flex-col sm:flex-row items-center justify-between gap-4 text-[11px] text-neutral-500">
+          <p>© 2026 Temp Mail. All rights reserved.</p>
+          <div class="flex items-center gap-4">
+            <a href="/en/articles/index.html" class="hover:underline">Articles Index</a>
+            <span>•</span>
+            <a href="/en/privacy.html" class="hover:underline">Privacy Policy</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Interactive Scripts -->
+    <script>
+      document.addEventListener('DOMContentLoaded', function () {
+        // 1. Reading Progress Bar
+        var progressBar = document.getElementById('reading-progress');
+        if (progressBar) {
+          window.addEventListener('scroll', function () {
+            var totalHeight = document.documentElement.scrollHeight - window.innerHeight;
+            if (totalHeight > 0) {
+              var progress = window.scrollY / totalHeight;
+              progressBar.style.transform = 'scaleX(' + Math.min(Math.max(progress, 0), 1) + ')';
+            }
+          }, { passive: true });
+        }
+
+        // 2. Accordion Toggle
+        function bindFaqs() {
+          document.querySelectorAll('.faq-toggle').forEach(function (btn) {
+            btn.onclick = function () {
+              var item = btn.closest('.faq-item');
+              var content = item.querySelector('.faq-content');
+              var chevron = btn.querySelector('.faq-chevron');
+              var isExpanded = btn.getAttribute('aria-expanded') === 'true';
+
+              if (isExpanded) {
+                btn.setAttribute('aria-expanded', 'false');
+                content.classList.add('hidden');
+                if (chevron) chevron.classList.remove('rotate-180');
+              } else {
+                btn.setAttribute('aria-expanded', 'true');
+                content.classList.remove('hidden');
+                if (chevron) chevron.classList.add('rotate-180');
+              }
+            };
+          });
+        }
+        bindFaqs();
+
+        // 3. Dynamic Article Loader
+        var params = new URLSearchParams(window.location.search);
+        var targetSlug = params.get('slug');
+        if (!targetSlug && window.ARTICLES_DATA && window.ARTICLES_DATA.length > 0) {
+          targetSlug = window.ARTICLES_DATA[0].slug;
+        }
+
+        if (targetSlug && window.ARTICLES_DATA) {
+          var art = window.ARTICLES_DATA.find(function (a) { return a.slug === targetSlug; });
+          if (art) {
+            var isAr = document.documentElement.lang === 'ar';
+            var l = isAr ? 'ar' : 'en';
+
+            document.title = art.title[l] + ' — Temp Mail';
+            var metaDescEl = document.getElementById('meta-description');
+            if (metaDescEl) metaDescEl.setAttribute('content', art.metaDesc[l]);
+
+            var bTitle = document.getElementById('breadcrumb-current-title');
+            if (bTitle) bTitle.textContent = art.title[l];
+
+            var badgeEl = document.getElementById('article-badge');
+            if (badgeEl) badgeEl.textContent = art.badge[l];
+
+            var readEl = document.getElementById('article-readtime');
+            if (readEl) readEl.textContent = art.readTimeMin + (isAr ? ' دقائق قراءة' : ' mins read');
+
+            var dateEl = document.getElementById('article-date');
+            if (dateEl) {
+              dateEl.textContent = art.publishedAt;
+              dateEl.setAttribute('datetime', art.publishedAt);
+            }
+
+            var h1El = document.getElementById('article-h1');
+            if (h1El) h1El.textContent = art.title[l];
+
+            var leadEl = document.getElementById('article-lead');
+            if (leadEl) leadEl.textContent = art.lead[l];
+
+            // Table of contents
+            var tocEl = document.getElementById('article-toc-container');
+            if (tocEl && art.sections) {
+              var tocItems = art.sections.map(function (sec, idx) {
+                return '<li><a href="#' + sec.id + '" class="group flex items-start gap-2 text-neutral-600 dark:text-neutral-400 hover:text-black dark:hover:text-white transition-colors text-xs sm:text-sm"><span class="font-mono text-neutral-400 dark:text-neutral-500 shrink-0 font-medium">' + (idx + 1) + '.0</span><span class="group-hover:underline">' + sec.title[l] + '</span></a></li>';
+              }).join('');
+              tocEl.innerHTML = '<div class="flex items-center justify-between mb-3 text-xs font-bold text-neutral-500 dark:text-neutral-400 uppercase tracking-wider font-mono"><span class="flex items-center gap-1.5"><svg class="w-3.5 h-3.5 stroke-current fill-none stroke-[2]" viewBox="0 0 24 24"><line x1="8" y1="6" x2="21" y2="6"></line><line x1="8" y1="12" x2="21" y2="12"></line><line x1="8" y1="18" x2="21" y2="18"></line><line x1="3" y1="6" x2="3.01" y2="6"></line><line x1="3" y1="12" x2="3.01" y2="12"></line><line x1="3" y1="18" x2="3.01" y2="18"></line></svg><span>' + (isAr ? 'فهرس المحتويات' : 'Table of Contents') + '</span></span><span class="text-[11px] text-neutral-400">' + art.sections.length + ' ' + (isAr ? 'أقسام' : 'sections') + '</span></div><ul class="space-y-2.5">' + tocItems + '</ul>';
+            }
+
+            // Takeaways
+            var takeawaysList = document.getElementById('article-takeaways-list');
+            if (takeawaysList && art.takeaways[l]) {
+              takeawaysList.innerHTML = art.takeaways[l].map(function (t) {
+                return '<li class="flex items-start gap-3"><span class="text-black dark:text-white font-bold shrink-0 mt-0.5 text-xs">✓</span><span class="leading-relaxed">' + t + '</span></li>';
+              }).join('');
+            }
+
+            // Sections
+            var secContainer = document.getElementById('article-sections-container');
+            if (secContainer && art.sections) {
+              secContainer.innerHTML = art.sections.map(function (sec, idx) {
+                var calloutHtml = sec.callout ? '<div class="my-6 p-4 sm:p-5 bg-neutral-50 dark:bg-neutral-900/90 border-s-4 border-black dark:border-white rounded-e-xl text-xs sm:text-sm text-neutral-800 dark:text-neutral-200 shadow-sm"><div class="font-bold mb-1.5 flex items-center gap-1.5 text-black dark:text-white"><svg class="w-4 h-4 stroke-current fill-none stroke-[2]" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg><span>' + sec.callout.title[l] + '</span></div><p class="leading-relaxed text-neutral-600 dark:text-neutral-300">' + sec.callout.text[l] + '</p></div>' : '';
+                
+                var codeHtml = '';
+                if (sec.codeSnippet) {
+                  var escapedCode = sec.codeSnippet.code.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+                  codeHtml = '<div class="my-6 rounded-xl overflow-hidden border border-neutral-200 dark:border-neutral-800 bg-[#0d1117] text-left shadow-sm" dir="ltr"><div class="bg-[#161b22] px-4 py-2.5 flex items-center justify-between border-b border-neutral-800 text-[11px] text-neutral-400 font-mono"><div class="flex items-center gap-2"><span class="w-2.5 h-2.5 rounded-full bg-neutral-700 inline-block"></span><span>' + sec.codeSnippet.filename + '</span></div><button type="button" class="copy-code-btn hover:text-white text-neutral-400 transition-colors flex items-center gap-1 text-[10px] font-mono cursor-pointer" onclick="navigator.clipboard.writeText(this.closest(\'.rounded-xl\').querySelector(\'code\').innerText); this.textContent=\'Copied!\'; setTimeout(()=>this.textContent=\'Copy\', 1500);"><span>Copy</span></button></div><pre class="p-4 text-xs font-mono text-neutral-200 overflow-x-auto leading-relaxed"><code>' + escapedCode + '</code></pre></div>';
+                }
+
+                return '<section class="mb-10 pt-2" id="' + sec.id + '"><h2 class="text-xl sm:text-2xl font-bold text-black dark:text-white mb-4 leading-snug flex items-baseline gap-2"><span class="font-mono text-sm sm:text-base text-neutral-400 dark:text-neutral-500 font-normal shrink-0">' + (idx + 1) + '.0</span><span>' + sec.title[l] + '</span></h2><div class="text-[15px] sm:text-[16px] text-neutral-700 dark:text-neutral-300 leading-[1.85] space-y-4">' + sec.content[l] + '</div>' + calloutHtml + codeHtml + '</section>';
+              }).join('');
+            }
+
+            // Comparison table
+            var tableContainer = document.getElementById('article-table-container');
+            if (tableContainer) {
+              if (art.comparisonTable) {
+                var table = art.comparisonTable;
+                var rows = table.rows.map(function (r, i) {
+                  return '<tr class="' + (i % 2 === 1 ? 'bg-neutral-50/50 dark:bg-neutral-900/40' : '') + '"><td class="p-3.5 sm:p-4 font-semibold text-black dark:text-white">' + r.feature[l] + '</td><td class="p-3.5 sm:p-4 text-neutral-500">' + r.legacy[l] + '</td><td class="p-3.5 sm:p-4 font-semibold text-emerald-600 dark:text-emerald-400">' + r.advanced[l] + '</td></tr>';
+                }).join('');
+                tableContainer.innerHTML = '<section class="mb-10" id="comparison-table-section"><h2 class="text-xl sm:text-2xl font-bold text-black dark:text-white mb-4">' + table.title[l] + '</h2><div class="overflow-x-auto rounded-xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-[#121212]"><table class="w-full text-xs sm:text-sm ' + (isAr ? 'text-right' : 'text-left') + '"><thead class="bg-neutral-100 dark:bg-neutral-800 text-black dark:text-white font-bold border-b border-neutral-200 dark:border-neutral-800"><tr><th class="p-3.5 sm:p-4">' + table.headers[0][l] + '</th><th class="p-3.5 sm:p-4 text-neutral-500">' + table.headers[1][l] + '</th><th class="p-3.5 sm:p-4 text-black dark:text-white">' + table.headers[2][l] + '</th></tr></thead><tbody class="divide-y divide-neutral-200 dark:divide-neutral-800">' + rows + '</tbody></table></div></section>';
+              } else {
+                tableContainer.innerHTML = '';
+              }
+            }
+
+            // Sources
+            var sourcesList = document.getElementById('article-sources-list');
+            if (sourcesList && art.sources) {
+              sourcesList.innerHTML = art.sources.map(function (s) {
+                return '<li class="flex items-center gap-2"><span class="text-neutral-400">•</span><a href="' + s.url + '" target="_blank" rel="noopener noreferrer" class="hover:underline text-black dark:text-white font-medium flex items-center gap-1.5"><span>' + s.title + '</span><svg class="w-3 h-3 opacity-60 stroke-current fill-none stroke-[2]" viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg></a></li>';
+              }).join('');
+            }
+
+            // FAQs
+            var faqsList = document.getElementById('article-faqs-list');
+            if (faqsList && art.faqs) {
+              faqsList.innerHTML = art.faqs.map(function (faq) {
+                return '<div class="faq-item rounded-xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-[#121212] overflow-hidden"><button type="button" class="faq-toggle w-full p-4 ' + (isAr ? 'text-right' : 'text-left') + ' font-semibold text-sm sm:text-base text-black dark:text-white flex items-center justify-between gap-4 cursor-pointer hover:bg-neutral-50 dark:hover:bg-neutral-900/50 transition-colors" aria-expanded="true"><span>' + faq.q[l] + '</span><svg class="faq-chevron w-4 h-4 stroke-current fill-none stroke-[2] text-neutral-400 transition-transform duration-200 rotate-180" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg></button><div class="faq-content p-4 pt-0 text-xs sm:text-sm text-neutral-600 dark:text-neutral-400 leading-relaxed border-t border-neutral-100 dark:border-neutral-800/60 "><p class="mt-3">' + faq.a[l] + '</p></div></div>';
+              }).join('');
+              bindFaqs();
+            }
+
+            // Related
+            var relatedList = document.getElementById('article-related-list');
+            if (relatedList && art.relatedSlugs) {
+              var relItems = art.relatedSlugs.map(function (slug) {
+                var r = window.ARTICLES_DATA.find(function (x) { return x.slug === slug; });
+                if (!r) return '';
+                return '<article class="p-4 bg-white dark:bg-[#121212] border border-neutral-200 dark:border-neutral-800 rounded-xl hover:border-black dark:hover:border-white transition-all flex flex-col justify-between shadow-sm"><div><span class="text-[10px] font-mono uppercase px-2 py-0.5 bg-neutral-100 dark:bg-neutral-800 rounded text-neutral-600 dark:text-neutral-400 font-bold mb-2 inline-block">' + r.category[l] + '</span><h3 class="font-bold text-sm text-black dark:text-white mb-1.5 line-clamp-2"><a href="/' + l + '/articles/' + r.slug + '.html" class="hover:underline">' + r.title[l] + '</a></h3><p class="text-xs text-neutral-600 dark:text-neutral-400 leading-relaxed mb-4 line-clamp-2">' + r.metaDesc[l] + '</p></div><a href="/' + l + '/articles/' + r.slug + '.html" class="text-xs font-bold text-black dark:text-white hover:underline flex items-center gap-1 pt-2 border-t border-neutral-100 dark:border-neutral-800"><span>' + (isAr ? 'قراءة الدليل' : 'Read Guide') + '</span><span>' + (isAr ? '←' : '→') + '</span></a></article>';
+              }).join('');
+              relatedList.innerHTML = relItems;
+            }
+          }
+        }
+      });
+    </script>
+  </body>
+</html>
