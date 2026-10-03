@@ -1,0 +1,7 @@
+{
+  "name": "بريد مؤقت - Temp Mail (Cloudflare Workers & Durable Objects)",
+  "description": "تطبيق بريد إلكتروني مؤقت فائق الأداء مبني على Cloudflare Workers وDurable Objects مع WebSockets واستخراج تلقائي لرموز التحقق OTP والروابط.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
+

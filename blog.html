@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html class="dark" lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <meta content="web_standard" name="shell-type"/>
+  <title>المدونة والأبحاث الهندسية — FreeTemp.email</title>
+  <meta name="description" content="مقالات وأبحاث معمارية حول أمان البريد المؤقت، استخراج أكواد OTP، ومكافحة التتبع والتصيد الرقمي." />
+  
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=JetBrains+Mono:wght@100..900&family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet"/>
+  
+  <style>
+    @layer base {
+      html, body { margin: 0; padding: 0; font-family: 'Cairo', 'Inter', system-ui, sans-serif; }
+      body { overscroll-behavior: none; }
+    }
+    ::-webkit-scrollbar { display: none; }
+  </style>
+  
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "surface-bright": "#393939",
+            "surface-container-lowest": "#0e0e0e",
+            "on-background": "#e4e2e1",
+            "on-surface-variant": "#bbcabf",
+            "on-tertiary-container": "#79000e",
+            "inverse-surface": "#e4e2e1",
+            "secondary-fixed": "#ffddb8",
+            "tertiary": "#ffb3ad",
+            "error-container": "#93000a",
+            "surface-container-low": "#1b1c1c",
+            "surface-dim": "#131313",
+            "surface": "#131313",
+            "on-tertiary": "#68000a",
+            "error": "#ffb4ab",
+            "on-error-container": "#ffdad6",
+            "surface-container": "#1f2020",
+            "surface-variant": "#353535",
+            "on-secondary-fixed": "#2a1700",
+            "inverse-primary": "#006c49",
+            "background": "#131313",
+            "on-secondary-container": "#5b3800",
+            "on-primary-container": "#00422b",
+            "secondary": "#ffb95f",
+            "on-primary-fixed-variant": "#005236",
+            "on-tertiary-fixed-variant": "#930013",
+            "on-primary-fixed": "#002113",
+            "surface-tint": "#4edea3",
+            "on-primary": "#003824",
+            "secondary-fixed-dim": "#ffb95f",
+            "on-surface": "#e4e2e1",
+            "on-secondary": "#472a00",
+            "secondary-container": "#ee9800",
+            "primary-fixed-dim": "#4edea3",
+            "outline": "#86948a",
+            "surface-container-high": "#2a2a2a",
+            "tertiary-container": "#ff7a73",
+            "surface-container-highest": "#353535",
+            "on-tertiary-fixed": "#410004",
+            "on-error": "#690005",
+            "tertiary-fixed-dim": "#ffb3ad",
+            "outline-variant": "#3c4a42",
+            "tertiary-fixed": "#ffdad7",
+            "on-secondary-fixed-variant": "#653e00",
+            "primary-container": "#10b981",
+            "primary-fixed": "#6ffbbe",
+            "primary": "#4edea3",
+            "inverse-on-surface": "#303030"
+          },
+          borderRadius: { "DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem" },
+          fontFamily: {
+            "code-sm": ["JetBrains Mono", "monospace"],
+            "body-md": ["Inter", "Cairo", "sans-serif"],
+            "body-sm": ["Inter", "Cairo", "sans-serif"],
+            "headline-md": ["Inter", "Cairo", "sans-serif"],
+            "body-lg": ["Inter", "Cairo", "sans-serif"],
+            "label-caps": ["JetBrains Mono", "monospace"],
+            "display-lg": ["Inter", "Cairo", "sans-serif"],
+            "headline-sm": ["Inter", "Cairo", "sans-serif"]
+          }
+        }
+      }
+    };
+  </script>
+
+  <!-- Scripts -->
+  <script src="/shared/theme.js" defer></script>
+  <script src="/shared/purify.min.js"></script>
+  <script src="/shared/i18n.js" defer></script>
+  <link rel="stylesheet" href="/shared/style.css"/>
+</head>
+<body class="bg-background text-on-background min-h-screen selection:bg-primary-container selection:text-black">
+  <!-- Top Navigation -->
+  <header class="border-b border-outline-variant/30 bg-surface-dim/95 backdrop-blur-md sticky top-0 z-40 transition-colors">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
+      <div class="flex items-center gap-8">
+        <a href="/" class="flex items-center gap-3 group focus:outline-none">
+          <svg class="h-8 w-auto" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 40" fill="none">
+            <rect x="2" y="6" width="28" height="28" rx="6" fill="#141414" stroke="#262626" stroke-width="1.5"/>
+            <path d="M8 14L16 20L24 14" stroke="#FFFFFF" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
+            <rect x="8" y="14" width="16" height="12" rx="2" stroke="#FFFFFF" stroke-width="1.75"/>
+            <circle cx="24" cy="12" r="3" fill="#10B981"/>
+            <text x="38" y="25" fill="#FFFFFF" font-family="Inter, system-ui, -apple-system, sans-serif" font-weight="700" font-size="16" letter-spacing="-0.03em">FreeTemp<tspan fill="#10B981">.email</tspan></text>
+          </svg>
+        </a>
+        <nav class="hidden md:flex items-center gap-6 text-sm font-medium">
+          <a href="/" class="text-on-surface-variant hover:text-primary transition-colors flex items-center gap-1.5" data-i18n="home">
+            <span class="material-symbols-outlined text-base">inbox</span>الرئيسية
+          </a>
+          <a href="/blog.html" class="text-primary font-semibold flex items-center gap-1.5" data-i18n="blog">
+            <span class="material-symbols-outlined text-base">article</span>المدونة
+          </a>
+          <a href="/guide.html" class="text-on-surface-variant hover:text-primary transition-colors flex items-center gap-1.5" data-i18n="guide">
+            <span class="material-symbols-outlined text-base">menu_book</span>الدليل
+          </a>
+          <a href="/faq.html" class="text-on-surface-variant hover:text-primary transition-colors flex items-center gap-1.5" data-i18n="faq">
+            <span class="material-symbols-outlined text-base">help</span>الأسئلة الشائعة
+          </a>
+          <a href="/privacy.html" class="text-on-surface-variant hover:text-primary transition-colors flex items-center gap-1.5">
+            <span class="material-symbols-outlined text-base">security</span>الخصوصية
+          </a>
+        </nav>
+      </div>
+      <div class="flex items-center gap-3">
+        <!-- Language Switcher Button -->
+        <button id="open-lang-picker" class="open-lang-picker flex items-center gap-2 px-3 py-1.5 rounded-lg bg-surface-container hover:bg-surface-container-high border border-outline-variant/40 text-xs font-mono text-on-surface hover:text-primary transition-all">
+          <span class="material-symbols-outlined text-base text-primary">translate</span>
+          <span id="current-lang-label">العربية</span>
+          <span class="material-symbols-outlined text-xs opacity-60">expand_more</span>
+        </button>
+
+        <!-- Theme Toggle Button -->
+        <button id="theme-toggle-btn" class="theme-toggle-btn p-2 rounded-lg bg-surface-container hover:bg-surface-container-high border border-outline-variant/40 text-on-surface hover:text-primary transition-all flex items-center justify-center" aria-label="تبديل المظهر">
+          <span class="material-symbols-outlined text-lg theme-toggle-icon">dark_mode</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="border-b border-outline-variant/30 bg-surface-container-lowest/60 py-12 lg:py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6">
+      <div class="max-w-3xl">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary text-xs font-mono font-semibold mb-4">
+          <span class="material-symbols-outlined text-sm">terminal</span>
+          <span>ARCHIVES & SECURITY RESEARCH</span>
+        </div>
+        <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-on-surface mb-4">
+          أرشيف المدونة والأبحاث المعمارية
+        </h1>
+        <p class="text-base sm:text-lg text-on-surface-variant leading-relaxed">
+          دليل تقني وهندسي متقدم حول تقنيات البريد المؤقت، عزل البيانات في الذاكرة RAM، استخراج رموز التحقق الثنائية OTP، واستراتيجيات الحماية من التتبع والتصيد الإلكتروني.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Filter & Article Grid -->
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 py-12">
+    <!-- Category Tabs -->
+    <div class="flex flex-wrap items-center gap-2 mb-8 pb-4 border-b border-outline-variant/20">
+      <button class="px-4 py-1.5 rounded-md bg-primary text-on-primary text-xs font-semibold font-mono tracking-wide">الكل (22)</button>
+      <button class="px-4 py-1.5 rounded-md bg-surface-container hover:bg-surface-container-high border border-outline-variant/30 text-on-surface-variant text-xs font-mono">الأمان والتشفير</button>
+      <button class="px-4 py-1.5 rounded-md bg-surface-container hover:bg-surface-container-high border border-outline-variant/30 text-on-surface-variant text-xs font-mono">أكواد OTP</button>
+      <button class="px-4 py-1.5 rounded-md bg-surface-container hover:bg-surface-container-high border border-outline-variant/30 text-on-surface-variant text-xs font-mono">مكافحة السبام</button>
+      <button class="px-4 py-1.5 rounded-md bg-surface-container hover:bg-surface-container-high border border-outline-variant/30 text-on-surface-variant text-xs font-mono">الهندسة المعمارية</button>
+    </div>
+
+    <!-- Article Cards Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      
+      <!-- Article 1 -->
+      <article class="flex flex-col bg-surface-container-low hover:bg-surface-container border border-outline-variant/30 hover:border-primary/50 rounded-xl overflow-hidden transition-all duration-300 group">
+        <div class="p-6 flex-1 flex flex-col">
+          <div class="flex items-center justify-between gap-2 mb-3">
+            <span class="px-2.5 py-0.5 rounded bg-primary/10 border border-primary/20 text-primary text-[11px] font-mono font-semibold">SECURITY</span>
+            <span class="text-xs font-mono text-outline">5 دقائق قراءة</span>
+          </div>
+          <h2 class="text-lg font-bold text-on-surface group-hover:text-primary transition-colors mb-2 line-clamp-2">
+            <a href="/article.html?slug=temp-mail-privacy-complete-guide">تعزيز الخصوصية الرقمية: الدليل الشامل للبريد المؤقت وتخطي جدران التحقق</a>
+          </h2>
+          <p class="text-xs text-on-surface-variant leading-relaxed mb-6 line-clamp-3">
+            تعرف على آليات المعالجة المعزولة في الذاكرة العشوائية RAM ومزايا استخدام العناوين المؤقتة ذاتية التدمير لحماية بياناتك من التسريبات.
+          </p>
+          <div class="mt-auto pt-4 border-t border-outline-variant/20 flex items-center justify-between">
+            <span class="text-[11px] font-mono text-outline">فريق هندسة الأمان</span>
+            <a href="/article.html?slug=temp-mail-privacy-complete-guide" class="text-xs font-semibold text-primary inline-flex items-center gap-1 group-hover:translate-x-[-2px] transition-transform">
+              اقرأ المقال <span class="material-symbols-outlined text-sm">arrow_back</span>
+            </a>
+          </div>
+        </div>
+      </article>
+
+      <!-- Article 2 -->
+      <article class="flex flex-col bg-surface-container-low hover:bg-surface-container border border-outline-variant/30 hover:border-primary/50 rounded-xl overflow-hidden transition-all duration-300 group">
+        <div class="p-6 flex-1 flex flex-col">
+          <div class="flex items-center justify-between gap-2 mb-3">
+            <span class="px-2.5 py-0.5 rounded bg-secondary-container/20 border border-secondary/30 text-secondary text-[11px] font-mono font-semibold">OTP ENGINE</span>
+            <span class="text-xs font-mono text-outline">4 دقائق قراءة</span>
+          </div>
+          <h2 class="text-lg font-bold text-on-surface group-hover:text-primary transition-colors mb-2 line-clamp-2">
+            <a href="/article.html?slug=how-otp-extraction-engine-works">كيف يعمل محرك استخراج أكواد OTP بدقة 99.8% في الوقت الفعلي؟</a>
+          </h2>
+          <p class="text-xs text-on-surface-variant leading-relaxed mb-6 line-clamp-3">
+            تشريح تقني لخوارزميات التعرف على الأنماط والتخلص من الكلمات الدلالية الزائفة والتعامل مع الرسائل متعددة اللغات بلحظات.
+          </p>
+          <div class="mt-auto pt-4 border-t border-outline-variant/20 flex items-center justify-between">
+            <span class="text-[11px] font-mono text-outline">فريق الخوارزميات</span>
+            <a href="/article.html?slug=how-otp-extraction-engine-works" class="text-xs font-semibold text-primary inline-flex items-center gap-1 group-hover:translate-x-[-2px] transition-transform">
+              اقرأ المقال <span class="material-symbols-outlined text-sm">arrow_back</span>
+            </a>
+          </div>
+        </div>
+      </article>
+
+      <!-- Article 3 -->
+      <article class="flex flex-col bg-surface-container-low hover:bg-surface-container border border-outline-variant/30 hover:border-primary/50 rounded-xl overflow-hidden transition-all duration-300 group">
+        <div class="p-6 flex-1 flex flex-col">
+          <div class="flex items-center justify-between gap-2 mb-3">
+            <span class="px-2.5 py-0.5 rounded bg-primary/10 border border-primary/20 text-primary text-[11px] font-mono font-semibold">ARCHITECTURE</span>
+            <span class="text-xs font-mono text-outline">6 دقائق قراءة</span>
+          </div>
+          <h2 class="text-lg font-bold text-on-surface group-hover:text-primary transition-colors mb-2 line-clamp-2">
+            <a href="/article.html?slug=websocket-realtime-mailbox-architecture">معمارية البث الحي WebSocket: استلام الإيميلات دون إعادة تحميل الصفحة</a>
+          </h2>
+          <p class="text-xs text-on-surface-variant leading-relaxed mb-6 line-clamp-3">
+            استعراض نظام Durable Objects وشبكة الحافة Edge المشفرة لإيصال الرسائل بالمللي ثانية مع صفر تخزين دائم.
+          </p>
+          <div class="mt-auto pt-4 border-t border-outline-variant/20 flex items-center justify-between">
+            <span class="text-[11px] font-mono text-outline">فريق البنية التحتية</span>
+            <a href="/article.html?slug=websocket-realtime-mailbox-architecture" class="text-xs font-semibold text-primary inline-flex items-center gap-1 group-hover:translate-x-[-2px] transition-transform">
+              اقرأ المقال <span class="material-symbols-outlined text-sm">arrow_back</span>
+            </a>
+          </div>
+        </div>
+      </article>
+
+      <!-- Article 4 -->
+      <article class="flex flex-col bg-surface-container-low hover:bg-surface-container border border-outline-variant/30 hover:border-primary/50 rounded-xl overflow-hidden transition-all duration-300 group">
+        <div class="p-6 flex-1 flex flex-col">
+          <div class="flex items-center justify-between gap-2 mb-3">
+            <span class="px-2.5 py-0.5 rounded bg-error-container/20 border border-error/30 text-error text-[11px] font-mono font-semibold">ZERO LOGS</span>
+            <span class="text-xs font-mono text-outline">3 دقائق قراءة</span>
+          </div>
+          <h2 class="text-lg font-bold text-on-surface group-hover:text-primary transition-colors mb-2 line-clamp-2">
+            <a href="/article.html?slug=zero-logs-guarantee-explained">ضمان انعدام السجلات (Zero-Logs Policy): الحقيقة التقنية وراء الإتلاف التام</a>
+          </h2>
+          <p class="text-xs text-on-surface-variant leading-relaxed mb-6 line-clamp-3">
+            لماذا لا نخزن أي بصمة رقمية أو عنوان IP أو كوكيز، وكيف يتم تنظيف الذاكرة بعد انقضاء المهلة الزمنية فوراً.
+          </p>
+          <div class="mt-auto pt-4 border-t border-outline-variant/20 flex items-center justify-between">
+            <span class="text-[11px] font-mono text-outline">فريق الأمان السيبراني</span>
+            <a href="/article.html?slug=zero-logs-guarantee-explained" class="text-xs font-semibold text-primary inline-flex items-center gap-1 group-hover:translate-x-[-2px] transition-transform">
+              اقرأ المقال <span class="material-symbols-outlined text-sm">arrow_back</span>
+            </a>
+          </div>
+        </div>
+      </article>
+
+      <!-- Article 5 -->
+      <article class="flex flex-col bg-surface-container-low hover:bg-surface-container border border-outline-variant/30 hover:border-primary/50 rounded-xl overflow-hidden transition-all duration-300 group">
+        <div class="p-6 flex-1 flex flex-col">
+          <div class="flex items-center justify-between gap-2 mb-3">
+            <span class="px-2.5 py-0.5 rounded bg-primary/10 border border-primary/20 text-primary text-[11px] font-mono font-semibold">ANTI-SPAM</span>
+            <span class="text-xs font-mono text-outline">5 دقائق قراءة</span>
+          </div>
+          <h2 class="text-lg font-bold text-on-surface group-hover:text-primary transition-colors mb-2 line-clamp-2">
+            <a href="/article.html?slug=protect-primary-email-from-data-breaches">كيف تحمي بريدك الرئيسي من تسريبات قواعد البيانات وحملات السبام؟</a>
+          </h2>
+          <p class="text-xs text-on-surface-variant leading-relaxed mb-6 line-clamp-3">
+            استراتيجيات تقسيم الهوية الرقمية واستخدام الإيميلات الوهمية المؤقتة للاشتراك في الخدمات غير الموثوقة.
+          </p>
+          <div class="mt-auto pt-4 border-t border-outline-variant/20 flex items-center justify-between">
+            <span class="text-[11px] font-mono text-outline">قسم التوعية الرقمية</span>
+            <a href="/article.html?slug=protect-primary-email-from-data-breaches" class="text-xs font-semibold text-primary inline-flex items-center gap-1 group-hover:translate-x-[-2px] transition-transform">
+              اقرأ المقال <span class="material-symbols-outlined text-sm">arrow_back</span>
+            </a>
+          </div>
+        </div>
+      </article>
+
+      <!-- Article 6 -->
+      <article class="flex flex-col bg-surface-container-low hover:bg-surface-container border border-outline-variant/30 hover:border-primary/50 rounded-xl overflow-hidden transition-all duration-300 group">
+        <div class="p-6 flex-1 flex flex-col">
+          <div class="flex items-center justify-between gap-2 mb-3">
+            <span class="px-2.5 py-0.5 rounded bg-secondary-container/20 border border-secondary/30 text-secondary text-[11px] font-mono font-semibold">SECURITY</span>
+            <span class="text-xs font-mono text-outline">4 دقائق قراءة</span>
+          </div>
+          <h2 class="text-lg font-bold text-on-surface group-hover:text-primary transition-colors mb-2 line-clamp-2">
+            <a href="/article.html?slug=dompurify-xss-email-sanitization">تطهير محتوى البريد الإلكتروني ومنع ثغرات XSS باستخدام DOMPurify الصارم</a>
+          </h2>
+          <p class="text-xs text-on-surface-variant leading-relaxed mb-6 line-clamp-3">
+            كيف نحمي متصفحك من الأكواد الخبيثة والروابط المضللة المدمجة داخل رسائل HTML المستلمة.
+          </p>
+          <div class="mt-auto pt-4 border-t border-outline-variant/20 flex items-center justify-between">
+            <span class="text-[11px] font-mono text-outline">فريق هندسة الواجهات</span>
+            <a href="/article.html?slug=dompurify-xss-email-sanitization" class="text-xs font-semibold text-primary inline-flex items-center gap-1 group-hover:translate-x-[-2px] transition-transform">
+              اقرأ المقال <span class="material-symbols-outlined text-sm">arrow_back</span>
+            </a>
+          </div>
+        </div>
+      </article>
+
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="mt-auto border-t border-outline-variant/30 bg-surface-container-lowest py-10">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 flex flex-col sm:flex-row items-center justify-between gap-6">
+      <div class="flex items-center gap-3">
+        <svg class="h-6 w-auto" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 40" fill="none">
+          <rect x="2" y="6" width="28" height="28" rx="6" fill="#141414" stroke="#262626" stroke-width="1.5"/>
+          <path d="M8 14L16 20L24 14" stroke="#FFFFFF" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
+          <rect x="8" y="14" width="16" height="12" rx="2" stroke="#FFFFFF" stroke-width="1.75"/>
+          <circle cx="24" cy="12" r="3" fill="#10B981"/>
+          <text x="38" y="25" fill="#FFFFFF" font-family="Inter, system-ui, -apple-system, sans-serif" font-weight="700" font-size="16" letter-spacing="-0.03em">FreeTemp<tspan fill="#10B981">.email</tspan></text>
+        </svg>
+        <span class="text-xs text-outline font-mono">© 2026 FreeTemp.email — تشفير فوري ومعالجة في الذاكرة RAM</span>
+      </div>
+      <div class="flex items-center gap-6 text-xs text-on-surface-variant font-mono">
+        <a href="/" class="hover:text-primary transition-colors">الرئيسية</a>
+        <a href="/guide.html" class="hover:text-primary transition-colors">الدليل</a>
+        <a href="/faq.html" class="hover:text-primary transition-colors">الأسئلة الشائعة</a>
+        <a href="/privacy.html" class="hover:text-primary transition-colors">سياسة الخصوصية</a>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,651 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <script>
+      (function () {
+        try {
+          var t = localStorage.getItem('theme') || (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+          document.documentElement.setAttribute('data-theme', t);
+          if (t === 'dark') document.documentElement.classList.add('dark');
+          else document.documentElement.classList.remove('dark');
+        } catch (e) {}
+      })();
+    </script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- SEO Meta Tags -->
+    <title>معمارية عدم المعرفة (Zero-Knowledge): كيف نعالج رسائل البريد المؤقت في الذاكرة الحية دون حفظها؟ — FreeTemp.email</title>
+    <meta name="description" content="نظرة هندسية عميقة على معمارية المعرفة الصفرية (Zero-Knowledge) في معالجة البريد المؤقت في الذاكرة الحية (RAM) دون كتابة أي بايت على الأقراص الدائمة." id="meta-description" />
+    <meta name="keywords" content="" />
+    <link rel="canonical" href="https://freetemp.email/fa/articles/zero-knowledge-inbox-architecture.html" />
+
+    <!-- Multilingual Alternates -->
+    <link rel="alternate" hreflang="ar" href="https://freetemp.email/ar/articles/zero-knowledge-inbox-architecture.html" />
+    <link rel="alternate" hreflang="en" href="https://freetemp.email/en/articles/zero-knowledge-inbox-architecture.html" />
+    <link rel="alternate" hreflang="es" href="https://freetemp.email/es/articles/zero-knowledge-inbox-architecture.html" />
+    <link rel="alternate" hreflang="fr" href="https://freetemp.email/fr/articles/zero-knowledge-inbox-architecture.html" />
+    <link rel="alternate" hreflang="de" href="https://freetemp.email/de/articles/zero-knowledge-inbox-architecture.html" />
+    <link rel="alternate" hreflang="pt" href="https://freetemp.email/pt/articles/zero-knowledge-inbox-architecture.html" />
+    <link rel="alternate" hreflang="it" href="https://freetemp.email/it/articles/zero-knowledge-inbox-architecture.html" />
+    <link rel="alternate" hreflang="ru" href="https://freetemp.email/ru/articles/zero-knowledge-inbox-architecture.html" />
+    <link rel="alternate" hreflang="tr" href="https://freetemp.email/tr/articles/zero-knowledge-inbox-architecture.html" />
+    <link rel="alternate" hreflang="zh" href="https://freetemp.email/zh/articles/zero-knowledge-inbox-architecture.html" />
+    <link rel="alternate" hreflang="ja" href="https://freetemp.email/ja/articles/zero-knowledge-inbox-architecture.html" />
+    <link rel="alternate" hreflang="ko" href="https://freetemp.email/ko/articles/zero-knowledge-inbox-architecture.html" />
+    <link rel="alternate" hreflang="nl" href="https://freetemp.email/nl/articles/zero-knowledge-inbox-architecture.html" />
+    <link rel="alternate" hreflang="pl" href="https://freetemp.email/pl/articles/zero-knowledge-inbox-architecture.html" />
+    <link rel="alternate" hreflang="id" href="https://freetemp.email/id/articles/zero-knowledge-inbox-architecture.html" />
+    <link rel="alternate" hreflang="vi" href="https://freetemp.email/vi/articles/zero-knowledge-inbox-architecture.html" />
+    <link rel="alternate" hreflang="hi" href="https://freetemp.email/hi/articles/zero-knowledge-inbox-architecture.html" />
+    <link rel="alternate" hreflang="fa" href="https://freetemp.email/fa/articles/zero-knowledge-inbox-architecture.html" />
+    <link rel="alternate" hreflang="ur" href="https://freetemp.email/ur/articles/zero-knowledge-inbox-architecture.html" />
+    <link rel="alternate" hreflang="uk" href="https://freetemp.email/uk/articles/zero-knowledge-inbox-architecture.html" />
+    <link rel="alternate" hreflang="bn" href="https://freetemp.email/bn/articles/zero-knowledge-inbox-architecture.html" />
+    <link rel="alternate" hreflang="ms" href="https://freetemp.email/ms/articles/zero-knowledge-inbox-architecture.html" />
+    <link rel="alternate" hreflang="x-default" href="https://freetemp.email/en/articles/zero-knowledge-inbox-architecture.html" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="article" />
+    <meta property="og:site_name" content="FreeTemp.email" />
+    <meta property="og:title" content="معمارية عدم المعرفة (Zero-Knowledge): كيف نعالج رسائل البريد المؤقت في الذاكرة الحية دون حفظها؟ — FreeTemp.email" />
+    <meta property="og:description" content="نظرة هندسية عميقة على معمارية المعرفة الصفرية (Zero-Knowledge) في معالجة البريد المؤقت في الذاكرة الحية (RAM) دون كتابة أي بايت على الأقراص الدائمة." />
+    <meta property="og:url" content="https://freetemp.email/fa/articles/zero-knowledge-inbox-architecture.html" />
+    <meta property="og:image" content="https://freetemp.email/og-image.png" />
+    <meta property="article:published_time" content="2026-09-25T00:00:00Z" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="معمارية عدم المعرفة (Zero-Knowledge): كيف نعالج رسائل البريد المؤقت في الذاكرة الحية دون حفظها؟ — FreeTemp.email" />
+    <meta name="twitter:description" content="نظرة هندسية عميقة على معمارية المعرفة الصفرية (Zero-Knowledge) في معالجة البريد المؤقت في الذاكرة الحية (RAM) دون كتابة أي بايت على الأقراص الدائمة." />
+    <meta name="twitter:image" content="https://freetemp.email/og-image.png" />
+
+    <meta name="theme-color" content="#ffffff" id="meta-theme-color" />
+    <link rel="icon" type="image/svg+xml" href="/logo.svg" />
+    <link rel="apple-touch-icon" href="/logo.svg" />
+
+    <!-- Stylesheets & Fonts -->
+    <link rel="stylesheet" href="/fonts/fonts.css" />
+    <link rel="stylesheet" href="/shared/style.css" />
+
+    <!-- Structured Data (JSON-LD) -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "TechArticle",
+        "headline": "معمارية عدم المعرفة (Zero-Knowledge): كيف نعالج رسائل البريد المؤقت في الذاكرة الحية دون حفظها؟",
+        "description": "نظرة هندسية عميقة على معمارية المعرفة الصفرية (Zero-Knowledge) في معالجة البريد المؤقت في الذاكرة الحية (RAM) دون كتابة أي بايت على الأقراص الدائمة.",
+        "inLanguage": "fa",
+        "author": {
+          "@type": "Organization",
+          "name": "FreeTemp.email Security Engineering Team",
+          "url": "https://freetemp.email"
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "FreeTemp.email",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://freetemp.email/logo.svg"
+          }
+        },
+        "datePublished": "2026-09-25",
+        "dateModified": "2026-09-25",
+        "mainEntityOfPage": {
+          "@type": "WebPage",
+          "@id": "https://freetemp.email/fa/articles/zero-knowledge-inbox-architecture.html"
+        }
+      }
+    </script>
+
+    <!-- Scripts -->
+    <script src="/shared/theme.js" defer></script>
+    <script src="/shared/i18n.js" defer></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        darkMode: 'class',
+      };
+    </script>
+  </head>
+  <body class="min-h-screen bg-white text-black dark:bg-[#0D0D0D] dark:text-[#F5F5F5] flex flex-col transition-colors duration-200 font-['Cairo',sans-serif]">
+    <!-- Reading Progress Bar -->
+    <div
+      id="reading-progress"
+      class="fixed top-0 left-0 right-0 h-[2px] bg-black dark:bg-white z-50 origin-left scale-x-0 transition-transform duration-75 pointer-events-none"
+    ></div>
+
+    <!-- Master Header -->
+    <header class="border-b border-neutral-200 dark:border-neutral-800 bg-white/95 dark:bg-[#0D0D0D]/95 backdrop-blur-md sticky top-0 z-30 transition-colors">
+      <div class="max-w-4xl mx-auto px-4 h-16 flex items-center justify-between gap-4">
+        <div class="flex items-center gap-6">
+          <a href="/fa/" dir="ltr" class="flex items-center gap-2.5 transition-opacity hover:opacity-90">
+            <img src="/logo.svg" alt="freetemp.email" class="w-8 h-8 rounded-lg shadow-sm shrink-0" width="32" height="32" />
+            <span class="flex items-baseline font-sans tracking-tight">
+              <span class="text-xl font-extrabold text-black dark:text-white">freetemp</span>
+              <span class="text-sm font-semibold text-neutral-500 dark:text-neutral-400">.email</span>
+            </span>
+          </a>
+
+          <nav class="hidden md:flex items-center gap-4 text-xs font-medium">
+            
+            <a href="/fa/" data-i18n="home" class="text-neutral-600 dark:text-neutral-400 hover:text-black dark:hover:text-white transition-colors">الرئيسية</a>
+            <a href="/fa/blog.html" data-i18n="blog" class="text-neutral-600 dark:text-neutral-400 hover:text-black dark:hover:text-white transition-colors">المدونة</a>
+            <a href="/fa/articles/index.html" class="text-black dark:text-white font-bold transition-colors">المقالات</a>
+            <a href="/fa/guide.html" data-i18n="guide" class="text-neutral-600 dark:text-neutral-400 hover:text-black dark:hover:text-white transition-colors">دليل الاستخدام</a>
+            <a href="/fa/faq.html" data-i18n="faq" class="text-neutral-600 dark:text-neutral-400 hover:text-black dark:hover:text-white transition-colors">الأسئلة الشائعة</a>
+          </nav>
+        </div>
+
+        <div class="flex items-center gap-2 sm:gap-3">
+          <!-- Language Selector Button (22 Languages) -->
+          <button
+            type="button"
+            id="open-lang-picker"
+            class="open-lang-picker min-h-[38px] px-3 py-1.5 bg-white hover:bg-neutral-50 dark:bg-neutral-900 dark:hover:bg-neutral-800 border border-neutral-200 hover:border-black dark:border-neutral-800 dark:hover:border-neutral-600 rounded-lg text-xs font-semibold text-black dark:text-white transition-all flex items-center gap-1.5 cursor-pointer shadow-sm active:scale-95"
+            aria-label="Change Language"
+          >
+            <svg class="w-3.5 h-3.5 stroke-current fill-none stroke-[2]" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+            <span id="current-lang-label">فارسی</span>
+            <svg class="w-3 h-3 stroke-current fill-none stroke-[2] opacity-60" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          </button>
+
+          <!-- Dark/Light Theme Toggle -->
+          <button
+            type="button"
+            id="theme-toggle-btn"
+            class="theme-toggle-btn min-h-[38px] min-w-[38px] p-2 bg-white hover:bg-neutral-50 dark:bg-neutral-900 dark:hover:bg-neutral-800 border border-neutral-200 hover:border-black dark:border-neutral-800 dark:hover:border-neutral-600 rounded-lg text-black dark:text-white transition-all flex items-center justify-center cursor-pointer active:scale-95"
+            aria-label="Toggle theme"
+          >
+            <svg class="theme-toggle-icon w-4 h-4 stroke-current fill-none stroke-[2]" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Container -->
+    <main class="flex-1 max-w-3xl w-full mx-auto px-4 py-8 sm:py-12">
+      
+      <!-- Breadcrumbs -->
+      <nav class="flex items-center gap-2 text-xs text-neutral-500 dark:text-neutral-400 mb-6 font-mono" id="article-breadcrumbs" aria-label="Breadcrumb">
+        <a href="/fa/" class="hover:text-black dark:hover:text-white transition-colors" data-i18n="artNavHome">الرئيسية</a>
+        <span class="opacity-40">/</span>
+        <a href="/fa/blog.html" class="hover:text-black dark:hover:text-white transition-colors" data-i18n="artNavBlog">المدونة</a>
+        <span class="opacity-40">/</span>
+        <a href="/fa/articles/index.html" class="hover:text-black dark:hover:text-white transition-colors">المقالات</a>
+        <span class="opacity-40">/</span>
+        <span class="text-black dark:text-white font-medium truncate max-w-[220px]">معمارية عدم المعرفة (Zero-Knowledge): كيف نعالج رسائل البريد المؤقت في الذاكرة الحية دون حفظها؟</span>
+      </nav>
+
+      <!-- Article Header -->
+      <header class="mb-8">
+        <div class="flex flex-wrap items-center gap-2 mb-3">
+          <span class="px-2.5 py-0.5 rounded-full text-[11px] font-mono font-bold bg-neutral-100 dark:bg-neutral-800 text-neutral-800 dark:text-neutral-200 border border-neutral-200 dark:border-neutral-700">
+            معمارية الأنظمة
+          </span>
+          <span class="text-xs font-mono text-neutral-400">|</span>
+          <span class="text-xs font-mono text-neutral-500 dark:text-neutral-400">الهندسة والمعمارية</span>
+        </div>
+
+        <h1 class="text-2xl sm:text-4xl font-extrabold text-black dark:text-white tracking-tight leading-[1.25] mb-4">
+          معمارية عدم المعرفة (Zero-Knowledge): كيف نعالج رسائل البريد المؤقت في الذاكرة الحية دون حفظها؟
+        </h1>
+
+        <div class="flex flex-wrap items-center gap-y-2 gap-x-4 text-xs font-mono text-neutral-500 dark:text-neutral-400 pb-6 border-b border-neutral-200 dark:border-neutral-800">
+          <div class="flex items-center gap-1.5">
+            <svg class="w-3.5 h-3.5 stroke-current fill-none stroke-[2]" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+            <span>12 دقائق قراءة</span>
+          </div>
+          <span>•</span>
+          <div class="flex items-center gap-1.5">
+            <svg class="w-3.5 h-3.5 stroke-current fill-none stroke-[2]" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+            <time datetime="2026-09-25">2026-09-25</time>
+          </div>
+          <span>•</span>
+          <span class="text-emerald-600 dark:text-emerald-400 font-medium">محدث لمعايير 2026</span>
+        </div>
+      </header>
+
+      <!-- Lead Summary Paragraph -->
+      <div class="mb-8 p-5 sm:p-6 bg-neutral-50 dark:bg-neutral-900/60 border border-neutral-200 dark:border-neutral-800 rounded-xl text-sm sm:text-base leading-relaxed text-neutral-800 dark:text-neutral-200 font-medium">
+        في أنظمة التخزين التقليدية، تكون البيانات المحفوظة على الأقراص الصلبة عرضة لمخاطر الاختراق والاستعادة الجنائية وتسريب السجلات حتى بعد محاولة حذفها. لمعالجة هذا الخطر من جذوره، قمنا بهندسة بنية تحتية ثورية تعمل بنظام المعرفة الصفرية (Zero-Knowledge Architecture)؛ حيث تجري كافة عمليات استقبال وتشفير وبث رسائل البريد المؤقت داخل الذاكرة العشوائية المتطايرة (RAM) فقط، دون كتابة بايت واحد على وسائط التخزين الدائمة.
+      </div>
+
+      
+        <!-- Modern Quick Technical Specs Strip -->
+        <div class="my-6 grid grid-cols-2 sm:grid-cols-4 gap-3 p-3.5 bg-neutral-50 dark:bg-neutral-900/70 border border-neutral-200 dark:border-neutral-800 rounded-xl text-xs font-mono">
+          <div class="p-2 bg-white dark:bg-neutral-800/60 rounded-lg border border-neutral-100 dark:border-neutral-800 flex flex-col">
+            <span class="text-neutral-400 text-[10px] uppercase">Storage Tier</span>
+            <span class="font-bold text-black dark:text-white truncate">In-Memory RAM</span>
+          </div>
+          <div class="p-2 bg-white dark:bg-neutral-800/60 rounded-lg border border-neutral-100 dark:border-neutral-800 flex flex-col">
+            <span class="text-neutral-400 text-[10px] uppercase">Protocol</span>
+            <span class="font-bold text-black dark:text-white truncate">TLS 1.3 / RFC 5322</span>
+          </div>
+          <div class="p-2 bg-white dark:bg-neutral-800/60 rounded-lg border border-neutral-100 dark:border-neutral-800 flex flex-col">
+            <span class="text-neutral-400 text-[10px] uppercase">Latency</span>
+            <span class="font-bold text-emerald-600 dark:text-emerald-400">&lt; 500ms Instant</span>
+          </div>
+          <div class="p-2 bg-white dark:bg-neutral-800/60 rounded-lg border border-neutral-100 dark:border-neutral-800 flex flex-col">
+            <span class="text-neutral-400 text-[10px] uppercase">Data Policy</span>
+            <span class="font-bold text-blue-600 dark:text-blue-400">Zero Retention</span>
+          </div>
+        </div>
+      
+        <!-- Table of Contents -->
+        <div class="mb-10 p-5 bg-neutral-50/80 dark:bg-neutral-900/60 border border-neutral-200 dark:border-neutral-800 rounded-xl">
+          <div class="flex items-center justify-between mb-3 text-xs font-bold text-neutral-500 dark:text-neutral-400 uppercase tracking-wider font-mono">
+            <span class="flex items-center gap-1.5">
+              <svg class="w-3.5 h-3.5 stroke-current fill-none stroke-[2]" viewBox="0 0 24 24"><line x1="8" y1="6" x2="21" y2="6"></line><line x1="8" y1="12" x2="21" y2="12"></line><line x1="8" y1="18" x2="21" y2="18"></line><line x1="3" y1="6" x2="3.01" y2="6"></line><line x1="3" y1="12" x2="3.01" y2="12"></line><line x1="3" y1="18" x2="3.01" y2="18"></line></svg>
+              <span>فهرس المحتويات</span>
+            </span>
+            <span class="text-[11px] text-neutral-400">4 أقسام</span>
+          </div>
+          <ul class="space-y-2.5">
+            
+          <li>
+            <a href="#the-vulnerability-of-disk-storage" class="group flex items-start gap-2 text-neutral-600 dark:text-neutral-400 hover:text-black dark:hover:text-white transition-colors text-xs sm:text-sm">
+              <span class="font-mono text-neutral-400 dark:text-neutral-500 shrink-0 font-medium">1.0</span>
+              <span class="group-hover:underline">مخاطر التخزين التقليدي على الأقراص الصلبة في خدمات البريد</span>
+            </a>
+          </li>
+          <li>
+            <a href="#in-memory-pipeline-design" class="group flex items-start gap-2 text-neutral-600 dark:text-neutral-400 hover:text-black dark:hover:text-white transition-colors text-xs sm:text-sm">
+              <span class="font-mono text-neutral-400 dark:text-neutral-500 shrink-0 font-medium">2.0</span>
+              <span class="group-hover:underline">معمارية المعالجة المتطايرة في الذاكرة الحية (In-Memory Processing)</span>
+            </a>
+          </li>
+          <li>
+            <a href="#zero-logging-ip-sanitization" class="group flex items-start gap-2 text-neutral-600 dark:text-neutral-400 hover:text-black dark:hover:text-white transition-colors text-xs sm:text-sm">
+              <span class="font-mono text-neutral-400 dark:text-neutral-500 shrink-0 font-medium">3.0</span>
+              <span class="group-hover:underline">سياسة انعدام السجلات وتجريد عناوين IP عند المداخل</span>
+            </a>
+          </li>
+          <li>
+            <a href="#cryptographic-session-hygiene" class="group flex items-start gap-2 text-neutral-600 dark:text-neutral-400 hover:text-black dark:hover:text-white transition-colors text-xs sm:text-sm">
+              <span class="font-mono text-neutral-400 dark:text-neutral-500 shrink-0 font-medium">4.0</span>
+              <span class="group-hover:underline">الأمان ونظافة الجلسات في متصفح المستخدم</span>
+            </a>
+          </li>
+          </ul>
+        </div>
+      
+        <!-- Key Takeaways Box -->
+        <div class="mb-10 p-5 sm:p-6 bg-neutral-50 dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 rounded-xl shadow-sm" id="article-takeaways-box">
+          <h2 class="text-xs sm:text-sm font-bold text-black dark:text-white uppercase tracking-wider mb-4 flex items-center gap-2 font-mono">
+            <svg class="w-4 h-4 text-emerald-500 stroke-current fill-none stroke-[2.5]" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>
+            <span>أبرز النقاط والنتائج في هذا الدليل</span>
+          </h2>
+          <ul class="space-y-3 text-xs sm:text-sm text-neutral-700 dark:text-neutral-300">
+            
+              <li class="flex items-start gap-3">
+                <span class="text-black dark:text-white font-bold shrink-0 mt-0.5 text-xs">✓</span>
+                <span class="leading-relaxed">معالجة متطايرة بنسبة 100% داخل الذاكرة العشوائية دون كتابة أي سجلات على أقراص التخزين الدائمة.</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <span class="text-black dark:text-white font-bold shrink-0 mt-0.5 text-xs">✓</span>
+                <span class="leading-relaxed">تفريغ وطمس كامل للبيانات فور انتهاء الجلسة أو النقر على زر حذف الصندوق.</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <span class="text-black dark:text-white font-bold shrink-0 mt-0.5 text-xs">✓</span>
+                <span class="leading-relaxed">سياسة صارمة لمنع إعادة تدوير العناوين تضمن عدم وصول أي مستخدم آخر إلى رسائلك القديمة.</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <span class="text-black dark:text-white font-bold shrink-0 mt-0.5 text-xs">✓</span>
+                <span class="leading-relaxed">انعدام السجلات المركزية وبصمات IP لحماية الهوية الرقمية للمستخدمين حول العالم.</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <span class="text-black dark:text-white font-bold shrink-0 mt-0.5 text-xs">✓</span>
+                <span class="leading-relaxed">إمكانية تمديد صلاحية الصندوق بضغطة زر عند الحاجة لاستقبال رسائل تحقق إضافية.</span>
+              </li>
+          </ul>
+        </div>
+      
+              <div class="my-6 p-4 rounded-xl border border-blue-200 dark:border-blue-900/60 bg-blue-50/40 dark:bg-blue-950/20 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs">
+                <div class="flex items-center gap-2.5">
+                  <span class="px-2 py-0.5 rounded bg-blue-600 text-white font-mono text-[10px] font-bold shrink-0">DEEP DIVE</span>
+                  <div class="text-neutral-700 dark:text-neutral-300">
+                    <span class="font-bold text-black dark:text-white">استكشاف هندسي متقدم:</span>
+                    <span class="font-medium text-neutral-600 dark:text-neutral-300">دورة حياة البريد المؤقت: ماذا يحدث للبيانات عند انتهاء الصلاحية والحذف التام؟</span>
+                  </div>
+                </div>
+                <a href="/fa/articles/what-happens-when-address-expires.html" class="inline-flex items-center gap-1 text-blue-600 dark:text-blue-400 font-bold hover:underline shrink-0">
+                  <span>متابعة القراءة</span>
+                  <span>←</span>
+                </a>
+              </div>
+
+      <!-- Article Body Sections -->
+      <article class="prose prose-neutral dark:prose-invert max-w-none text-neutral-800 dark:text-neutral-200" id="article-main-content">
+        
+          <section class="mb-10 pt-2" id="the-vulnerability-of-disk-storage">
+            <h2 class="text-xl sm:text-2xl font-bold text-black dark:text-white mb-4 leading-snug flex items-baseline gap-2.5">
+              <span class="font-mono text-xs sm:text-sm px-2 py-0.5 rounded bg-neutral-100 dark:bg-neutral-800 text-neutral-600 dark:text-neutral-400 font-semibold shrink-0">1.0</span>
+              <span>مخاطر التخزين التقليدي على الأقراص الصلبة في خدمات البريد</span>
+            </h2>
+            <div class="text-[15px] sm:text-[16px] text-neutral-700 dark:text-neutral-300 leading-[1.9] space-y-4">
+              <p>عندما تقوم خوادم البريد العادية بحفظ رسالة إلكترونية على قرص صلب أو وحدة SSD، تقوم أنظمة الملفات بتوزيع البيانات عبر كتل التخزين الفيزيائية (Storage Blocks). عند إجراء عملية الحذف العادية (Logical Delete)، يقوم نظام التشغيل فقط بإلغاء الإشارة إلى الملف في جدول الفهرس، بينما تظل البيانات الفعلية قابلة للاسترجاع عبر أدوات التحليل الجنائي للبيانات (Digital Forensics) لشهور طويلة.</p>
+<p>علاوة على ذلك، تقوم أنظمة التشغيل بإنشاء ملفات مقايضة مؤقتة (Swap Files)، ونسخ احتياطية تلقائية (Snapshots)، وسجلات تشخيصية (Diagnostic Logs) تحتوي على أجزاء من الرسائل المسلمة.</p>
+<p>في نظامنا المخصص للبريد المؤقت، قضينا على هذا التهديد بالكامل عبر حظر كافة عمليات الكتابة على القرص لرسائل البريد والترويسات، وقصر المعالجة حصرياً على الذاكرة الحية المتطايرة.</p><p>تتضمن معمارية الذاكرة الحية أيضاً استخدام تشفير متقدم على مستوى مصفوفات RAM (In-Memory AES-GCM Encryption) لحماية البيانات من أي هجمات استخراج للذاكرة (Cold Boot Attacks) أو عمليات فحص الذاكرة غير المصرح بها على مستوى نواة النظام.</p>
+            </div>
+            
+            
+          </section>
+          <section class="mb-10 pt-2" id="in-memory-pipeline-design">
+            <h2 class="text-xl sm:text-2xl font-bold text-black dark:text-white mb-4 leading-snug flex items-baseline gap-2.5">
+              <span class="font-mono text-xs sm:text-sm px-2 py-0.5 rounded bg-neutral-100 dark:bg-neutral-800 text-neutral-600 dark:text-neutral-400 font-semibold shrink-0">2.0</span>
+              <span>معمارية المعالجة المتطايرة في الذاكرة الحية (In-Memory Processing)</span>
+            </h2>
+            <div class="text-[15px] sm:text-[16px] text-neutral-700 dark:text-neutral-300 leading-[1.9] space-y-4">
+              <p>صُمم خط أنابيب المعالجة في خوادم الحافة لدينا ليعمل وفق التدفق الهندسي التالي:</p>
+<ol class="list-decimal pr-6 space-y-2 my-3 text-neutral-700 dark:text-neutral-300">
+  <li><strong>الاستقبال عبر <a href="/fa/articles/temp-mail-vs-spam-filters.html" class="text-blue-600 dark:text-blue-400 font-medium underline decoration-blue-300 dark:decoration-blue-700 underline-offset-4 hover:decoration-blue-600 hover:text-blue-800 dark:hover:text-blue-200 transition-colors" title="SMTP">SMTP</a>:</strong> تستقبل العقدة حزمة البريد وتفكك تشفير TLS في شريحة الذاكرة العشوائية المخصصة للجلسة.</li>
+  <li><strong>التحليل واستخراج الرموز:</strong> يحلل محرك UVC النص ويستخرج أكواد <a href="/fa/articles/how-to-receive-otp.html" class="text-blue-600 dark:text-blue-400 font-medium underline decoration-blue-300 dark:decoration-blue-700 underline-offset-4 hover:decoration-blue-600 hover:text-blue-800 dark:hover:text-blue-200 transition-colors" title="OTP">OTP</a> دون لمس أي وسيط تخزين دائم.</li>
+  <li><strong>البث المباشر عبر <a href="/fa/articles/real-time-websocket-streaming.html" class="text-blue-600 dark:text-blue-400 font-medium underline decoration-blue-300 dark:decoration-blue-700 underline-offset-4 hover:decoration-blue-600 hover:text-blue-800 dark:hover:text-blue-200 transition-colors" title="WebSocket">WebSocket</a>:</strong> يتم تحويل الرسالة إلى كائن JSON وتمريره فوراً عبر قناة الاتصال المشفرة إلى متصفح العميل.</li>
+  <li><strong>التفريغ الفوري (Memory Purge):</strong> بمجرد تسليم الحزمة، يتم تحرير مصفوفة الذاكرة وطمس البايتات بالأصفار لمنع أي تسريب.</li>
+</ol>
+<p>تضمن هذه المعمارية الفائقة عدم وجود أي أثر للرسائل على خوادمنا بعد تسليمها للمستخدم.</p><p>كل دورة معالجة هي حلقة مغلقة تبدأ بالاستقبال وتنتهي بالتطهير الشامل فوراً، مما يجعل منصتنا المعيار الذهبي للخصوصية والأمان الرقمي على الإنترنت.</p>
+            </div>
+            
+            
+          </section>
+          <section class="mb-10 pt-2" id="zero-logging-ip-sanitization">
+            <h2 class="text-xl sm:text-2xl font-bold text-black dark:text-white mb-4 leading-snug flex items-baseline gap-2.5">
+              <span class="font-mono text-xs sm:text-sm px-2 py-0.5 rounded bg-neutral-100 dark:bg-neutral-800 text-neutral-600 dark:text-neutral-400 font-semibold shrink-0">3.0</span>
+              <span>سياسة انعدام السجلات وتجريد عناوين IP عند المداخل</span>
+            </h2>
+            <div class="text-[15px] sm:text-[16px] text-neutral-700 dark:text-neutral-300 leading-[1.9] space-y-4">
+              <p>تلتزم منصتنا بسياسة انعدام السجلات بنسبة 100%؛ فنحن لا نسجل عناوين IP للمستخدمين، ولا نربط المعرفات بهويات فيزيائية، ولا نحتفظ بسجلات اتصال تاريخية. كل جلسة هي كيان مستقل ومؤقت يزول بزوال الاتصال.</p><p>تخضع بنيتنا التحتية الموزعة لاختبارات أمان مستمرة لضمان عدم وجود أي تسريب للذاكرة أو إمكانية للوصول غير المصرح به بين خيوط المعالجة المتزامنة (Thread Sandboxing)، مما يضمن خصوصية مطلقة لكافة المستخدمين.</p>
+            </div>
+            
+            
+          </section>
+          <section class="mb-10 pt-2" id="cryptographic-session-hygiene">
+            <h2 class="text-xl sm:text-2xl font-bold text-black dark:text-white mb-4 leading-snug flex items-baseline gap-2.5">
+              <span class="font-mono text-xs sm:text-sm px-2 py-0.5 rounded bg-neutral-100 dark:bg-neutral-800 text-neutral-600 dark:text-neutral-400 font-semibold shrink-0">4.0</span>
+              <span>الأمان ونظافة الجلسات في متصفح المستخدم</span>
+            </h2>
+            <div class="text-[15px] sm:text-[16px] text-neutral-700 dark:text-neutral-300 leading-[1.9] space-y-4">
+              <p>على جانب المتصفح، يتم الاحتفاظ بالرسائل في ذاكرة الصفحة النشطة فقط. بمجرد إغلاق علامة التبويب أو النقر على زر حذف الصندوق، يتم تنظيف الذاكرة بالكامل دون ترك أي ملفات مخبأة على جهازك.</p><p>معمارية عدم المعرفة ليست مجرد شعار، بل هي التزام هندسي صارم يجعل من المستحيل فيزيائياً وبرمجياً على أي شخص—بما في ذلك مهندسونا—الوصول إلى رسائلك أو الاطلاع على بياناتك بعد انتهاء الجلسة.</p>
+            </div>
+            
+            
+          </section>
+      </article>
+
+      
+      
+        <!-- Verified Sources & Citations -->
+        <section class="mb-10 p-5 bg-neutral-50 dark:bg-neutral-900/50 border border-neutral-200 dark:border-neutral-800 rounded-xl" id="article-sources-section">
+          <h3 class="text-xs font-bold uppercase tracking-wider text-neutral-500 dark:text-neutral-400 mb-3 flex items-center gap-1.5 font-mono">
+            <svg class="w-3.5 h-3.5 stroke-current fill-none stroke-[2]" viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
+            <span>المراجع والمعايير القياسية المعتمدة</span>
+          </h3>
+          <ul class="space-y-2 text-xs text-neutral-600 dark:text-neutral-400">
+            
+            <li class="flex items-center gap-2">
+              <span class="text-neutral-400">•</span>
+              <a href="https://csrc.nist.gov/publications/detail/sp/800-88/rev-1/final" target="_blank" rel="noopener noreferrer" class="hover:underline text-black dark:text-white font-medium flex items-center gap-1.5">
+                <span>NIST Special Publication 800-88 Rev. 1 — Media Sanitization Guidelines</span>
+                <svg class="w-3 h-3 opacity-60 stroke-current fill-none stroke-[2]" viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+              </a>
+            </li>
+            <li class="flex items-center gap-2">
+              <span class="text-neutral-400">•</span>
+              <a href="https://datatracker.ietf.org/doc/html/rfc7516" target="_blank" rel="noopener noreferrer" class="hover:underline text-black dark:text-white font-medium flex items-center gap-1.5">
+                <span>RFC 7516 — JSON Web Encryption (JWE) Specification</span>
+                <svg class="w-3 h-3 opacity-60 stroke-current fill-none stroke-[2]" viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+              </a>
+            </li>
+            <li class="flex items-center gap-2">
+              <span class="text-neutral-400">•</span>
+              <a href="https://www.cncf.io/" target="_blank" rel="noopener noreferrer" class="hover:underline text-black dark:text-white font-medium flex items-center gap-1.5">
+                <span>Cloud Native Computing Foundation (CNCF) — Edge Computing Zero-Trust Patterns</span>
+                <svg class="w-3 h-3 opacity-60 stroke-current fill-none stroke-[2]" viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+              </a>
+            </li>
+          </ul>
+        </section>
+      
+        <!-- FAQ Accordion -->
+        <section class="mb-12 pt-6 border-t border-neutral-200 dark:border-neutral-800" id="article-faqs-section">
+          <h2 class="text-xl sm:text-2xl font-bold text-black dark:text-white mb-6">
+            الأسئلة الشائعة والأمان
+          </h2>
+          <div class="space-y-3">
+            
+            <div class="faq-item rounded-xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-[#121212] overflow-hidden">
+              <button
+                type="button"
+                class="faq-toggle w-full p-4 text-right font-semibold text-sm sm:text-base text-black dark:text-white flex items-center justify-between gap-4 cursor-pointer hover:bg-neutral-50 dark:hover:bg-neutral-900/50 transition-colors"
+                aria-expanded="true"
+              >
+                <span>هل يمكن استرجاع الرسائل بعد إعادة تشغيل الخادم؟</span>
+                <svg class="faq-chevron w-4 h-4 stroke-current fill-none stroke-[2] text-neutral-400 transition-transform duration-200 rotate-180" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg>
+              </button>
+              <div class="faq-content p-4 pt-0 text-xs sm:text-sm text-neutral-600 dark:text-neutral-400 leading-relaxed border-t border-neutral-100 dark:border-neutral-800/60 ">
+                <p class="mt-3">مستحيل تماماً؛ فالبيانات توجد في الذاكرة العشوائية فقط، وتتبدد ذاتياً وفورياً عند انقطاع الطاقة أو إعادة التشغيل.</p>
+              </div>
+            </div>
+            <div class="faq-item rounded-xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-[#121212] overflow-hidden">
+              <button
+                type="button"
+                class="faq-toggle w-full p-4 text-right font-semibold text-sm sm:text-base text-black dark:text-white flex items-center justify-between gap-4 cursor-pointer hover:bg-neutral-50 dark:hover:bg-neutral-900/50 transition-colors"
+                aria-expanded="true"
+              >
+                <span>هل يتم تخزين الرسائل في السحابة لحفظها؟</span>
+                <svg class="faq-chevron w-4 h-4 stroke-current fill-none stroke-[2] text-neutral-400 transition-transform duration-200 rotate-180" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg>
+              </button>
+              <div class="faq-content p-4 pt-0 text-xs sm:text-sm text-neutral-600 dark:text-neutral-400 leading-relaxed border-t border-neutral-100 dark:border-neutral-800/60 ">
+                <p class="mt-3">كلا، لا توجد أي نسخ احتياطية سحابية لرسائل البريد المؤقت لضمان أقصى درجات الخصوصية والأمان.</p>
+              </div>
+            </div>
+            <div class="faq-item rounded-xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-[#121212] overflow-hidden">
+              <button
+                type="button"
+                class="faq-toggle w-full p-4 text-right font-semibold text-sm sm:text-base text-black dark:text-white flex items-center justify-between gap-4 cursor-pointer hover:bg-neutral-50 dark:hover:bg-neutral-900/50 transition-colors"
+                aria-expanded="true"
+              >
+                <span>هل يمكن لأي جهة الاطلاع على رسائلي أثناء وجودها في الذاكرة؟</span>
+                <svg class="faq-chevron w-4 h-4 stroke-current fill-none stroke-[2] text-neutral-400 transition-transform duration-200 rotate-180" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg>
+              </button>
+              <div class="faq-content p-4 pt-0 text-xs sm:text-sm text-neutral-600 dark:text-neutral-400 leading-relaxed border-t border-neutral-100 dark:border-neutral-800/60 ">
+                <p class="mt-3">كلا، تعزل خوادم الحافة مساحات الذاكرة لكل جلسة بتشفير محكم وعزل تام يمنع أي تداخل بين الجلسات.</p>
+              </div>
+            </div>
+          </div>
+        </section>
+      
+        <!-- Previous & Next Article Navigation (Google Tech Blog Style) -->
+        <nav class="my-10 pt-6 border-t border-neutral-200 dark:border-neutral-800 grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs font-mono" aria-label="Articles Navigation">
+          
+            <a href="/fa/articles/temporary-email-for-software-testing.html" class="p-4 rounded-xl border border-neutral-200 dark:border-neutral-800 hover:border-black dark:hover:border-white bg-neutral-50/50 dark:bg-neutral-900/40 transition-all flex flex-col group text-start">
+              <span class="text-neutral-400 dark:text-neutral-500 mb-1 flex items-center gap-1 font-semibold">
+                <span>→ المقال السابق</span>
+              </span>
+              <span class="font-bold text-sm text-black dark:text-white group-hover:underline line-clamp-1 font-sans">استخدام البريد المؤقت في اختبار البرمجيات والتحقق الآلي (QA & CI/CD)</span>
+            </a>
+          
+            <a href="/fa/articles/bypass-email-verification-paywalls.html" class="p-4 rounded-xl border border-neutral-200 dark:border-neutral-800 hover:border-black dark:hover:border-white bg-neutral-50/50 dark:bg-neutral-900/40 transition-all flex flex-col group text-start">
+              <span class="text-neutral-400 dark:text-neutral-500 mb-1 flex items-center gap-1 font-semibold">
+                <span>المقال التالي ←</span>
+              </span>
+              <span class="font-bold text-sm text-black dark:text-white group-hover:underline line-clamp-1 font-sans">الوصول إلى المحتوى المحجوب بالبريد الإلكتروني (Gated Content) بأمان وتفادي الرسائل المزعجة</span>
+            </a>
+        </nav>
+      
+        <!-- Related Articles -->
+        <section class="mb-12 pt-8 border-t border-neutral-200 dark:border-neutral-800">
+          <div class="flex items-center justify-between mb-6">
+            <h2 class="text-lg sm:text-xl font-bold text-black dark:text-white">
+              أدلة ومقالات هندسية ذات صلة
+            </h2>
+            <a href="/fa/articles/index.html" class="text-xs font-bold text-neutral-500 hover:text-black dark:hover:text-white flex items-center gap-1">
+              <span>عرض كافة المقالات</span>
+              <span>←</span>
+            </a>
+          </div>
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            
+              <article class="p-4 bg-white dark:bg-[#121212] border border-neutral-200 dark:border-neutral-800 rounded-xl hover:border-black dark:hover:border-white transition-all flex flex-col justify-between shadow-sm">
+                <div>
+                  <span class="text-[10px] font-mono uppercase px-2 py-0.5 bg-neutral-100 dark:bg-neutral-800 rounded text-neutral-600 dark:text-neutral-400 font-bold mb-2 inline-block">
+                    الخصوصية وهندسة البيانات
+                  </span>
+                  <h3 class="font-bold text-sm text-black dark:text-white mb-1.5 line-clamp-2">
+                    <a href="/fa/articles/what-happens-when-address-expires.html" class="hover:underline">
+                      دورة حياة البريد المؤقت: ماذا يحدث للبيانات عند انتهاء الصلاحية والحذف التام؟
+                    </a>
+                  </h3>
+                  <p class="text-xs text-neutral-600 dark:text-neutral-400 leading-relaxed mb-4 line-clamp-2">
+                    شرح تفصيلي لدورة حياة صندوق البريد المؤقت، وكيف يتم طمس البيانات في الذاكرة العشوائية وتطبيق سياسة عدم إعادة التدوير لضمان الخصوصية المطلقة.
+                  </p>
+                </div>
+                <a href="/fa/articles/what-happens-when-address-expires.html" class="text-xs font-bold text-black dark:text-white hover:underline flex items-center gap-1 pt-2 border-t border-neutral-100 dark:border-neutral-800">
+                  <span>قراءة الدليل</span>
+                  <span>←</span>
+                </a>
+              </article>
+              <article class="p-4 bg-white dark:bg-[#121212] border border-neutral-200 dark:border-neutral-800 rounded-xl hover:border-black dark:hover:border-white transition-all flex flex-col justify-between shadow-sm">
+                <div>
+                  <span class="text-[10px] font-mono uppercase px-2 py-0.5 bg-neutral-100 dark:bg-neutral-800 rounded text-neutral-600 dark:text-neutral-400 font-bold mb-2 inline-block">
+                    البنية التحتية والشبكات
+                  </span>
+                  <h3 class="font-bold text-sm text-black dark:text-white mb-1.5 line-clamp-2">
+                    <a href="/fa/articles/real-time-websocket-streaming.html" class="hover:underline">
+                      التحديث اللحظي عبر WebSocket: كيف تصل الرسائل إلى صندوق البريد في أجزاء من الثانية؟
+                    </a>
+                  </h3>
+                  <p class="text-xs text-neutral-600 dark:text-neutral-400 leading-relaxed mb-4 line-clamp-2">
+                    شرح تفصيلي لمعمارية التحديث اللحظي في البريد المؤقت عبر اتصالات WebSocket وخوادم الحافة لتوصيل رسائل التفعيل فوراً وبدون الحاجة لإعادة تحميل الصفحة.
+                  </p>
+                </div>
+                <a href="/fa/articles/real-time-websocket-streaming.html" class="text-xs font-bold text-black dark:text-white hover:underline flex items-center gap-1 pt-2 border-t border-neutral-100 dark:border-neutral-800">
+                  <span>قراءة الدليل</span>
+                  <span>←</span>
+                </a>
+              </article>
+              <article class="p-4 bg-white dark:bg-[#121212] border border-neutral-200 dark:border-neutral-800 rounded-xl hover:border-black dark:hover:border-white transition-all flex flex-col justify-between shadow-sm">
+                <div>
+                  <span class="text-[10px] font-mono uppercase px-2 py-0.5 bg-neutral-100 dark:bg-neutral-800 rounded text-neutral-600 dark:text-neutral-400 font-bold mb-2 inline-block">
+                    الخصوصية والتشريعات
+                  </span>
+                  <h3 class="font-bold text-sm text-black dark:text-white mb-1.5 line-clamp-2">
+                    <a href="/fa/articles/gdpr-ccpa-compliance-ephemeral-data.html" class="hover:underline">
+                      البريد المؤقت وقوانين الخصوصية العالمية: التوافق مع معايير GDPR و CCPA ومبدأ الحق في النسيان
+                    </a>
+                  </h3>
+                  <p class="text-xs text-neutral-600 dark:text-neutral-400 leading-relaxed mb-4 line-clamp-2">
+                    شرح قانوني وتقني لكيفية توافق معمارية البريد المؤقت مع تشريعات حماية البيانات العالمية (GDPR و CCPA) ومبدأ تقليل جمع البيانات وتصفير السجلات.
+                  </p>
+                </div>
+                <a href="/fa/articles/gdpr-ccpa-compliance-ephemeral-data.html" class="text-xs font-bold text-black dark:text-white hover:underline flex items-center gap-1 pt-2 border-t border-neutral-100 dark:border-neutral-800">
+                  <span>قراءة الدليل</span>
+                  <span>←</span>
+                </a>
+              </article>
+          </div>
+        </section>
+    </main>
+
+    <!-- Master Footer -->
+    <footer class="border-t border-neutral-200 dark:border-neutral-800 bg-white dark:bg-[#0D0D0D] py-12 text-xs transition-colors mt-auto">
+      <div class="max-w-4xl mx-auto px-4">
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 mb-12">
+          <div class="sm:col-span-2 md:col-span-1">
+            <a href="/fa/" dir="ltr" class="inline-flex items-center gap-2.5 transition-opacity hover:opacity-90 mb-3">
+              <img src="/logo.svg" alt="freetemp.email" class="w-7 h-7 rounded-lg shadow-sm shrink-0" width="28" height="28" />
+              <span class="flex items-baseline font-sans tracking-tight">
+                <span class="text-lg font-extrabold text-black dark:text-white">freetemp</span>
+                <span class="text-xs font-semibold text-neutral-500 dark:text-neutral-400">.email</span>
+              </span>
+            </a>
+            <p class="text-neutral-500 leading-relaxed text-[11px] mb-4">
+              خدمة بريد مؤقت هندسية معزولة تقنياً لحماية خصوصيتك واستقبال رسائل التفعيل وأكواد OTP فوراً دون تسجيل.
+            </p>
+          </div>
+
+          <div>
+            <div class="font-bold text-black dark:text-white mb-3 uppercase tracking-wider text-[11px]">
+              التنقل
+            </div>
+            <ul class="space-y-2">
+              <li><a href="/fa/" class="text-neutral-600 dark:text-neutral-400 hover:text-black dark:hover:text-white transition-colors">الرئيسية</a></li>
+              <li><a href="/fa/blog.html" class="text-neutral-600 dark:text-neutral-400 hover:text-black dark:hover:text-white transition-colors">المدونة</a></li>
+              <li><a href="/fa/guide.html" class="text-neutral-600 dark:text-neutral-400 hover:text-black dark:hover:text-white transition-colors">دليل الاستخدام</a></li>
+              <li><a href="/fa/faq.html" class="text-neutral-600 dark:text-neutral-400 hover:text-black dark:hover:text-white transition-colors">الأسئلة الشائعة</a></li>
+              <li><a href="/fa/articles/index.html" class="text-neutral-600 dark:text-neutral-400 hover:text-black dark:hover:text-white transition-colors">المقالات</a></li>
+            </ul>
+          </div>
+
+          <div>
+            <div class="font-bold text-black dark:text-white mb-3 uppercase tracking-wider text-[11px]">
+              الشفافية والأمان
+            </div>
+            <ul class="space-y-2">
+              <li><a href="/fa/about.html" class="text-neutral-600 dark:text-neutral-400 hover:text-black dark:hover:text-white transition-colors">من نحن</a></li>
+              <li><a href="/fa/privacy.html" class="text-neutral-600 dark:text-neutral-400 hover:text-black dark:hover:text-white transition-colors">سياسة الخصوصية</a></li>
+              <li><a href="/fa/privacy.html#terms" class="text-neutral-600 dark:text-neutral-400 hover:text-black dark:hover:text-white transition-colors">شروط الاستخدام</a></li>
+            </ul>
+          </div>
+
+          <div>
+            <div class="font-bold text-black dark:text-white mb-3 uppercase tracking-wider text-[11px]">
+              معايير الأمان
+            </div>
+            <ul class="space-y-2 text-neutral-600 dark:text-neutral-400">
+              <li class="flex items-center gap-1.5"><span class="text-black dark:text-white font-bold">✓</span><span>إتلاف تلقائي بعد 20 دقيقة</span></li>
+              <li class="flex items-center gap-1.5"><span class="text-black dark:text-white font-bold">✓</span><span>عزل تام O(1)</span></li>
+              <li class="flex items-center gap-1.5"><span class="text-black dark:text-white font-bold">✓</span><span>انعدام تام للسجلات</span></li>
+              <li class="flex items-center gap-1.5"><span class="text-black dark:text-white font-bold">✓</span><span>تشفير TLS 1.3 256-Bit</span></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="pt-8 border-t border-neutral-100 dark:border-neutral-800/80 flex flex-col sm:flex-row items-center justify-between gap-4 text-[11px] text-neutral-500">
+          <p>© 2026 FreeTemp.email — بريد مؤقت مجاني. جميع الحقوق محفوظة.</p>
+          <div class="flex items-center gap-4">
+            <a href="/fa/articles/index.html" class="hover:underline">فهرس المقالات</a>
+            <span>•</span>
+            <a href="/fa/privacy.html" class="hover:underline">سياسة الخصوصية</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Interactive FAQ Script -->
+    <script>
+      document.addEventListener('DOMContentLoaded', function () {
+        var faqToggles = document.querySelectorAll('.faq-toggle');
+        faqToggles.forEach(function (btn) {
+          btn.addEventListener('click', function () {
+            var content = btn.nextElementSibling;
+            var chevron = btn.querySelector('.faq-chevron');
+            var isExpanded = btn.getAttribute('aria-expanded') === 'true';
+
+            if (isExpanded) {
+              btn.setAttribute('aria-expanded', 'false');
+              content.style.display = 'none';
+              if (chevron) chevron.classList.remove('rotate-180');
+            } else {
+              btn.setAttribute('aria-expanded', 'true');
+              content.style.display = 'block';
+              if (chevron) chevron.classList.add('rotate-180');
+            }
+          });
+        });
+
+        // Reading progress calculation
+        var progressBar = document.getElementById('reading-progress');
+        if (progressBar) {
+          window.addEventListener('scroll', function () {
+            var winScroll = document.documentElement.scrollTop || document.body.scrollTop;
+            var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            var scrolled = height > 0 ? (winScroll / height) : 0;
+            progressBar.style.transform = 'scaleX(' + scrolled + ')';
+          }, { passive: true });
+        }
+      });
+    </script>
+  </body>
+</html>

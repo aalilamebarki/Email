@@ -1,0 +1,6579 @@
+var __defProp = Object.defineProperty;
+var __name = (target, value) => __defProp(target, "name", { value, configurable: true });
+
+// node_modules/unenv/dist/runtime/_internal/utils.mjs
+// @__NO_SIDE_EFFECTS__
+function createNotImplementedError(name) {
+  return new Error(`[unenv] ${name} is not implemented yet!`);
+}
+__name(createNotImplementedError, "createNotImplementedError");
+// @__NO_SIDE_EFFECTS__
+function notImplemented(name) {
+  const fn = /* @__PURE__ */ __name(() => {
+    throw /* @__PURE__ */ createNotImplementedError(name);
+  }, "fn");
+  return Object.assign(fn, { __unenv__: true });
+}
+__name(notImplemented, "notImplemented");
+// @__NO_SIDE_EFFECTS__
+function notImplementedClass(name) {
+  return class {
+    __unenv__ = true;
+    constructor() {
+      throw new Error(`[unenv] ${name} is not implemented yet!`);
+    }
+  };
+}
+__name(notImplementedClass, "notImplementedClass");
+
+// node_modules/unenv/dist/runtime/node/internal/perf_hooks/performance.mjs
+var _timeOrigin = globalThis.performance?.timeOrigin ?? Date.now();
+var _performanceNow = globalThis.performance?.now ? globalThis.performance.now.bind(globalThis.performance) : () => Date.now() - _timeOrigin;
+var nodeTiming = {
+  name: "node",
+  entryType: "node",
+  startTime: 0,
+  duration: 0,
+  nodeStart: 0,
+  v8Start: 0,
+  bootstrapComplete: 0,
+  environment: 0,
+  loopStart: 0,
+  loopExit: 0,
+  idleTime: 0,
+  uvMetricsInfo: {
+    loopCount: 0,
+    events: 0,
+    eventsWaiting: 0
+  },
+  detail: void 0,
+  toJSON() {
+    return this;
+  }
+};
+var PerformanceEntry = class {
+  static {
+    __name(this, "PerformanceEntry");
+  }
+  __unenv__ = true;
+  detail;
+  entryType = "event";
+  name;
+  startTime;
+  constructor(name, options) {
+    this.name = name;
+    this.startTime = options?.startTime || _performanceNow();
+    this.detail = options?.detail;
+  }
+  get duration() {
+    return _performanceNow() - this.startTime;
+  }
+  toJSON() {
+    return {
+      name: this.name,
+      entryType: this.entryType,
+      startTime: this.startTime,
+      duration: this.duration,
+      detail: this.detail
+    };
+  }
+};
+var PerformanceMark = class PerformanceMark2 extends PerformanceEntry {
+  static {
+    __name(this, "PerformanceMark");
+  }
+  entryType = "mark";
+  constructor() {
+    super(...arguments);
+  }
+  get duration() {
+    return 0;
+  }
+};
+var PerformanceMeasure = class extends PerformanceEntry {
+  static {
+    __name(this, "PerformanceMeasure");
+  }
+  entryType = "measure";
+};
+var PerformanceResourceTiming = class extends PerformanceEntry {
+  static {
+    __name(this, "PerformanceResourceTiming");
+  }
+  entryType = "resource";
+  serverTiming = [];
+  connectEnd = 0;
+  connectStart = 0;
+  decodedBodySize = 0;
+  domainLookupEnd = 0;
+  domainLookupStart = 0;
+  encodedBodySize = 0;
+  fetchStart = 0;
+  initiatorType = "";
+  name = "";
+  nextHopProtocol = "";
+  redirectEnd = 0;
+  redirectStart = 0;
+  requestStart = 0;
+  responseEnd = 0;
+  responseStart = 0;
+  secureConnectionStart = 0;
+  startTime = 0;
+  transferSize = 0;
+  workerStart = 0;
+  responseStatus = 0;
+};
+var PerformanceObserverEntryList = class {
+  static {
+    __name(this, "PerformanceObserverEntryList");
+  }
+  __unenv__ = true;
+  getEntries() {
+    return [];
+  }
+  getEntriesByName(_name, _type) {
+    return [];
+  }
+  getEntriesByType(type) {
+    return [];
+  }
+};
+var Performance = class {
+  static {
+    __name(this, "Performance");
+  }
+  __unenv__ = true;
+  timeOrigin = _timeOrigin;
+  eventCounts = /* @__PURE__ */ new Map();
+  _entries = [];
+  _resourceTimingBufferSize = 0;
+  navigation = void 0;
+  timing = void 0;
+  timerify(_fn, _options) {
+    throw createNotImplementedError("Performance.timerify");
+  }
+  get nodeTiming() {
+    return nodeTiming;
+  }
+  eventLoopUtilization() {
+    return {};
+  }
+  markResourceTiming() {
+    return new PerformanceResourceTiming("");
+  }
+  onresourcetimingbufferfull = null;
+  now() {
+    if (this.timeOrigin === _timeOrigin) {
+      return _performanceNow();
+    }
+    return Date.now() - this.timeOrigin;
+  }
+  clearMarks(markName) {
+    this._entries = markName ? this._entries.filter((e) => e.name !== markName) : this._entries.filter((e) => e.entryType !== "mark");
+  }
+  clearMeasures(measureName) {
+    this._entries = measureName ? this._entries.filter((e) => e.name !== measureName) : this._entries.filter((e) => e.entryType !== "measure");
+  }
+  clearResourceTimings() {
+    this._entries = this._entries.filter((e) => e.entryType !== "resource" || e.entryType !== "navigation");
+  }
+  getEntries() {
+    return this._entries;
+  }
+  getEntriesByName(name, type) {
+    return this._entries.filter((e) => e.name === name && (!type || e.entryType === type));
+  }
+  getEntriesByType(type) {
+    return this._entries.filter((e) => e.entryType === type);
+  }
+  mark(name, options) {
+    const entry = new PerformanceMark(name, options);
+    this._entries.push(entry);
+    return entry;
+  }
+  measure(measureName, startOrMeasureOptions, endMark) {
+    let start;
+    let end;
+    if (typeof startOrMeasureOptions === "string") {
+      start = this.getEntriesByName(startOrMeasureOptions, "mark")[0]?.startTime;
+      end = this.getEntriesByName(endMark, "mark")[0]?.startTime;
+    } else {
+      start = Number.parseFloat(startOrMeasureOptions?.start) || this.now();
+      end = Number.parseFloat(startOrMeasureOptions?.end) || this.now();
+    }
+    const entry = new PerformanceMeasure(measureName, {
+      startTime: start,
+      detail: {
+        start,
+        end
+      }
+    });
+    this._entries.push(entry);
+    return entry;
+  }
+  setResourceTimingBufferSize(maxSize) {
+    this._resourceTimingBufferSize = maxSize;
+  }
+  addEventListener(type, listener, options) {
+    throw createNotImplementedError("Performance.addEventListener");
+  }
+  removeEventListener(type, listener, options) {
+    throw createNotImplementedError("Performance.removeEventListener");
+  }
+  dispatchEvent(event) {
+    throw createNotImplementedError("Performance.dispatchEvent");
+  }
+  toJSON() {
+    return this;
+  }
+};
+var PerformanceObserver = class {
+  static {
+    __name(this, "PerformanceObserver");
+  }
+  __unenv__ = true;
+  static supportedEntryTypes = [];
+  _callback = null;
+  constructor(callback) {
+    this._callback = callback;
+  }
+  takeRecords() {
+    return [];
+  }
+  disconnect() {
+    throw createNotImplementedError("PerformanceObserver.disconnect");
+  }
+  observe(options) {
+    throw createNotImplementedError("PerformanceObserver.observe");
+  }
+  bind(fn) {
+    return fn;
+  }
+  runInAsyncScope(fn, thisArg, ...args) {
+    return fn.call(thisArg, ...args);
+  }
+  asyncId() {
+    return 0;
+  }
+  triggerAsyncId() {
+    return 0;
+  }
+  emitDestroy() {
+    return this;
+  }
+};
+var performance = globalThis.performance && "addEventListener" in globalThis.performance ? globalThis.performance : new Performance();
+
+// node_modules/@cloudflare/unenv-preset/dist/runtime/polyfill/performance.mjs
+if (!("__unenv__" in performance)) {
+  const proto = Performance.prototype;
+  for (const key of Object.getOwnPropertyNames(proto)) {
+    if (key !== "constructor" && !(key in performance)) {
+      const desc = Object.getOwnPropertyDescriptor(proto, key);
+      if (desc) {
+        Object.defineProperty(performance, key, desc);
+      }
+    }
+  }
+}
+globalThis.performance = performance;
+globalThis.Performance = Performance;
+globalThis.PerformanceEntry = PerformanceEntry;
+globalThis.PerformanceMark = PerformanceMark;
+globalThis.PerformanceMeasure = PerformanceMeasure;
+globalThis.PerformanceObserver = PerformanceObserver;
+globalThis.PerformanceObserverEntryList = PerformanceObserverEntryList;
+globalThis.PerformanceResourceTiming = PerformanceResourceTiming;
+
+// node_modules/unenv/dist/runtime/node/console.mjs
+import { Writable } from "node:stream";
+
+// node_modules/unenv/dist/runtime/mock/noop.mjs
+var noop_default = Object.assign(() => {
+}, { __unenv__: true });
+
+// node_modules/unenv/dist/runtime/node/console.mjs
+var _console = globalThis.console;
+var _ignoreErrors = true;
+var _stderr = new Writable();
+var _stdout = new Writable();
+var log = _console?.log ?? noop_default;
+var info = _console?.info ?? log;
+var trace = _console?.trace ?? info;
+var debug = _console?.debug ?? log;
+var table = _console?.table ?? log;
+var error = _console?.error ?? log;
+var warn = _console?.warn ?? error;
+var createTask = _console?.createTask ?? /* @__PURE__ */ notImplemented("console.createTask");
+var clear = _console?.clear ?? noop_default;
+var count = _console?.count ?? noop_default;
+var countReset = _console?.countReset ?? noop_default;
+var dir = _console?.dir ?? noop_default;
+var dirxml = _console?.dirxml ?? noop_default;
+var group = _console?.group ?? noop_default;
+var groupEnd = _console?.groupEnd ?? noop_default;
+var groupCollapsed = _console?.groupCollapsed ?? noop_default;
+var profile = _console?.profile ?? noop_default;
+var profileEnd = _console?.profileEnd ?? noop_default;
+var time = _console?.time ?? noop_default;
+var timeEnd = _console?.timeEnd ?? noop_default;
+var timeLog = _console?.timeLog ?? noop_default;
+var timeStamp = _console?.timeStamp ?? noop_default;
+var Console = _console?.Console ?? /* @__PURE__ */ notImplementedClass("console.Console");
+var _times = /* @__PURE__ */ new Map();
+var _stdoutErrorHandler = noop_default;
+var _stderrErrorHandler = noop_default;
+
+// node_modules/@cloudflare/unenv-preset/dist/runtime/node/console.mjs
+var workerdConsole = globalThis["console"];
+var {
+  assert,
+  clear: clear2,
+  // @ts-expect-error undocumented public API
+  context,
+  count: count2,
+  countReset: countReset2,
+  // @ts-expect-error undocumented public API
+  createTask: createTask2,
+  debug: debug2,
+  dir: dir2,
+  dirxml: dirxml2,
+  error: error2,
+  group: group2,
+  groupCollapsed: groupCollapsed2,
+  groupEnd: groupEnd2,
+  info: info2,
+  log: log2,
+  profile: profile2,
+  profileEnd: profileEnd2,
+  table: table2,
+  time: time2,
+  timeEnd: timeEnd2,
+  timeLog: timeLog2,
+  timeStamp: timeStamp2,
+  trace: trace2,
+  warn: warn2
+} = workerdConsole;
+Object.assign(workerdConsole, {
+  Console,
+  _ignoreErrors,
+  _stderr,
+  _stderrErrorHandler,
+  _stdout,
+  _stdoutErrorHandler,
+  _times
+});
+var console_default = workerdConsole;
+
+// node_modules/wrangler/_virtual_unenv_global_polyfill-@cloudflare-unenv-preset-node-console
+globalThis.console = console_default;
+
+// node_modules/unenv/dist/runtime/node/internal/process/hrtime.mjs
+var hrtime = /* @__PURE__ */ Object.assign(/* @__PURE__ */ __name(function hrtime2(startTime) {
+  const now = Date.now();
+  const seconds = Math.trunc(now / 1e3);
+  const nanos = now % 1e3 * 1e6;
+  if (startTime) {
+    let diffSeconds = seconds - startTime[0];
+    let diffNanos = nanos - startTime[0];
+    if (diffNanos < 0) {
+      diffSeconds = diffSeconds - 1;
+      diffNanos = 1e9 + diffNanos;
+    }
+    return [diffSeconds, diffNanos];
+  }
+  return [seconds, nanos];
+}, "hrtime"), { bigint: /* @__PURE__ */ __name(function bigint() {
+  return BigInt(Date.now() * 1e6);
+}, "bigint") });
+
+// node_modules/unenv/dist/runtime/node/internal/process/process.mjs
+import { EventEmitter } from "node:events";
+
+// node_modules/unenv/dist/runtime/node/internal/tty/read-stream.mjs
+var ReadStream = class {
+  static {
+    __name(this, "ReadStream");
+  }
+  fd;
+  isRaw = false;
+  isTTY = false;
+  constructor(fd) {
+    this.fd = fd;
+  }
+  setRawMode(mode) {
+    this.isRaw = mode;
+    return this;
+  }
+};
+
+// node_modules/unenv/dist/runtime/node/internal/tty/write-stream.mjs
+var WriteStream = class {
+  static {
+    __name(this, "WriteStream");
+  }
+  fd;
+  columns = 80;
+  rows = 24;
+  isTTY = false;
+  constructor(fd) {
+    this.fd = fd;
+  }
+  clearLine(dir3, callback) {
+    callback && callback();
+    return false;
+  }
+  clearScreenDown(callback) {
+    callback && callback();
+    return false;
+  }
+  cursorTo(x, y, callback) {
+    callback && typeof callback === "function" && callback();
+    return false;
+  }
+  moveCursor(dx, dy, callback) {
+    callback && callback();
+    return false;
+  }
+  getColorDepth(env2) {
+    return 1;
+  }
+  hasColors(count3, env2) {
+    return false;
+  }
+  getWindowSize() {
+    return [this.columns, this.rows];
+  }
+  write(str, encoding, cb) {
+    if (str instanceof Uint8Array) {
+      str = new TextDecoder().decode(str);
+    }
+    try {
+      console.log(str);
+    } catch {
+    }
+    cb && typeof cb === "function" && cb();
+    return false;
+  }
+};
+
+// node_modules/unenv/dist/runtime/node/internal/process/node-version.mjs
+var NODE_VERSION = "22.14.0";
+
+// node_modules/unenv/dist/runtime/node/internal/process/process.mjs
+var Process = class _Process extends EventEmitter {
+  static {
+    __name(this, "Process");
+  }
+  env;
+  hrtime;
+  nextTick;
+  constructor(impl) {
+    super();
+    this.env = impl.env;
+    this.hrtime = impl.hrtime;
+    this.nextTick = impl.nextTick;
+    for (const prop of [...Object.getOwnPropertyNames(_Process.prototype), ...Object.getOwnPropertyNames(EventEmitter.prototype)]) {
+      const value = this[prop];
+      if (typeof value === "function") {
+        this[prop] = value.bind(this);
+      }
+    }
+  }
+  // --- event emitter ---
+  emitWarning(warning, type, code) {
+    console.warn(`${code ? `[${code}] ` : ""}${type ? `${type}: ` : ""}${warning}`);
+  }
+  emit(...args) {
+    return super.emit(...args);
+  }
+  listeners(eventName) {
+    return super.listeners(eventName);
+  }
+  // --- stdio (lazy initializers) ---
+  #stdin;
+  #stdout;
+  #stderr;
+  get stdin() {
+    return this.#stdin ??= new ReadStream(0);
+  }
+  get stdout() {
+    return this.#stdout ??= new WriteStream(1);
+  }
+  get stderr() {
+    return this.#stderr ??= new WriteStream(2);
+  }
+  // --- cwd ---
+  #cwd = "/";
+  chdir(cwd2) {
+    this.#cwd = cwd2;
+  }
+  cwd() {
+    return this.#cwd;
+  }
+  // --- dummy props and getters ---
+  arch = "";
+  platform = "";
+  argv = [];
+  argv0 = "";
+  execArgv = [];
+  execPath = "";
+  title = "";
+  pid = 200;
+  ppid = 100;
+  get version() {
+    return `v${NODE_VERSION}`;
+  }
+  get versions() {
+    return { node: NODE_VERSION };
+  }
+  get allowedNodeEnvironmentFlags() {
+    return /* @__PURE__ */ new Set();
+  }
+  get sourceMapsEnabled() {
+    return false;
+  }
+  get debugPort() {
+    return 0;
+  }
+  get throwDeprecation() {
+    return false;
+  }
+  get traceDeprecation() {
+    return false;
+  }
+  get features() {
+    return {};
+  }
+  get release() {
+    return {};
+  }
+  get connected() {
+    return false;
+  }
+  get config() {
+    return {};
+  }
+  get moduleLoadList() {
+    return [];
+  }
+  constrainedMemory() {
+    return 0;
+  }
+  availableMemory() {
+    return 0;
+  }
+  uptime() {
+    return 0;
+  }
+  resourceUsage() {
+    return {};
+  }
+  // --- noop methods ---
+  ref() {
+  }
+  unref() {
+  }
+  // --- unimplemented methods ---
+  umask() {
+    throw createNotImplementedError("process.umask");
+  }
+  getBuiltinModule() {
+    return void 0;
+  }
+  getActiveResourcesInfo() {
+    throw createNotImplementedError("process.getActiveResourcesInfo");
+  }
+  exit() {
+    throw createNotImplementedError("process.exit");
+  }
+  reallyExit() {
+    throw createNotImplementedError("process.reallyExit");
+  }
+  kill() {
+    throw createNotImplementedError("process.kill");
+  }
+  abort() {
+    throw createNotImplementedError("process.abort");
+  }
+  dlopen() {
+    throw createNotImplementedError("process.dlopen");
+  }
+  setSourceMapsEnabled() {
+    throw createNotImplementedError("process.setSourceMapsEnabled");
+  }
+  loadEnvFile() {
+    throw createNotImplementedError("process.loadEnvFile");
+  }
+  disconnect() {
+    throw createNotImplementedError("process.disconnect");
+  }
+  cpuUsage() {
+    throw createNotImplementedError("process.cpuUsage");
+  }
+  setUncaughtExceptionCaptureCallback() {
+    throw createNotImplementedError("process.setUncaughtExceptionCaptureCallback");
+  }
+  hasUncaughtExceptionCaptureCallback() {
+    throw createNotImplementedError("process.hasUncaughtExceptionCaptureCallback");
+  }
+  initgroups() {
+    throw createNotImplementedError("process.initgroups");
+  }
+  openStdin() {
+    throw createNotImplementedError("process.openStdin");
+  }
+  assert() {
+    throw createNotImplementedError("process.assert");
+  }
+  binding() {
+    throw createNotImplementedError("process.binding");
+  }
+  // --- attached interfaces ---
+  permission = { has: /* @__PURE__ */ notImplemented("process.permission.has") };
+  report = {
+    directory: "",
+    filename: "",
+    signal: "SIGUSR2",
+    compact: false,
+    reportOnFatalError: false,
+    reportOnSignal: false,
+    reportOnUncaughtException: false,
+    getReport: /* @__PURE__ */ notImplemented("process.report.getReport"),
+    writeReport: /* @__PURE__ */ notImplemented("process.report.writeReport")
+  };
+  finalization = {
+    register: /* @__PURE__ */ notImplemented("process.finalization.register"),
+    unregister: /* @__PURE__ */ notImplemented("process.finalization.unregister"),
+    registerBeforeExit: /* @__PURE__ */ notImplemented("process.finalization.registerBeforeExit")
+  };
+  memoryUsage = Object.assign(() => ({
+    arrayBuffers: 0,
+    rss: 0,
+    external: 0,
+    heapTotal: 0,
+    heapUsed: 0
+  }), { rss: /* @__PURE__ */ __name(() => 0, "rss") });
+  // --- undefined props ---
+  mainModule = void 0;
+  domain = void 0;
+  // optional
+  send = void 0;
+  exitCode = void 0;
+  channel = void 0;
+  getegid = void 0;
+  geteuid = void 0;
+  getgid = void 0;
+  getgroups = void 0;
+  getuid = void 0;
+  setegid = void 0;
+  seteuid = void 0;
+  setgid = void 0;
+  setgroups = void 0;
+  setuid = void 0;
+  // internals
+  _events = void 0;
+  _eventsCount = void 0;
+  _exiting = void 0;
+  _maxListeners = void 0;
+  _debugEnd = void 0;
+  _debugProcess = void 0;
+  _fatalException = void 0;
+  _getActiveHandles = void 0;
+  _getActiveRequests = void 0;
+  _kill = void 0;
+  _preload_modules = void 0;
+  _rawDebug = void 0;
+  _startProfilerIdleNotifier = void 0;
+  _stopProfilerIdleNotifier = void 0;
+  _tickCallback = void 0;
+  _disconnect = void 0;
+  _handleQueue = void 0;
+  _pendingMessage = void 0;
+  _channel = void 0;
+  _send = void 0;
+  _linkedBinding = void 0;
+};
+
+// node_modules/@cloudflare/unenv-preset/dist/runtime/node/process.mjs
+var globalProcess = globalThis["process"];
+var getBuiltinModule = globalProcess.getBuiltinModule;
+var workerdProcess = getBuiltinModule("node:process");
+var unenvProcess = new Process({
+  env: globalProcess.env,
+  hrtime,
+  // `nextTick` is available from workerd process v1
+  nextTick: workerdProcess.nextTick
+});
+var { exit, features, platform } = workerdProcess;
+var {
+  _channel,
+  _debugEnd,
+  _debugProcess,
+  _disconnect,
+  _events,
+  _eventsCount,
+  _exiting,
+  _fatalException,
+  _getActiveHandles,
+  _getActiveRequests,
+  _handleQueue,
+  _kill,
+  _linkedBinding,
+  _maxListeners,
+  _pendingMessage,
+  _preload_modules,
+  _rawDebug,
+  _send,
+  _startProfilerIdleNotifier,
+  _stopProfilerIdleNotifier,
+  _tickCallback,
+  abort,
+  addListener,
+  allowedNodeEnvironmentFlags,
+  arch,
+  argv,
+  argv0,
+  assert: assert2,
+  availableMemory,
+  binding,
+  channel,
+  chdir,
+  config,
+  connected,
+  constrainedMemory,
+  cpuUsage,
+  cwd,
+  debugPort,
+  disconnect,
+  dlopen,
+  domain,
+  emit,
+  emitWarning,
+  env,
+  eventNames,
+  execArgv,
+  execPath,
+  exitCode,
+  finalization,
+  getActiveResourcesInfo,
+  getegid,
+  geteuid,
+  getgid,
+  getgroups,
+  getMaxListeners,
+  getuid,
+  hasUncaughtExceptionCaptureCallback,
+  hrtime: hrtime3,
+  initgroups,
+  kill,
+  listenerCount,
+  listeners,
+  loadEnvFile,
+  mainModule,
+  memoryUsage,
+  moduleLoadList,
+  nextTick,
+  off,
+  on,
+  once,
+  openStdin,
+  permission,
+  pid,
+  ppid,
+  prependListener,
+  prependOnceListener,
+  rawListeners,
+  reallyExit,
+  ref,
+  release,
+  removeAllListeners,
+  removeListener,
+  report,
+  resourceUsage,
+  send,
+  setegid,
+  seteuid,
+  setgid,
+  setgroups,
+  setMaxListeners,
+  setSourceMapsEnabled,
+  setuid,
+  setUncaughtExceptionCaptureCallback,
+  sourceMapsEnabled,
+  stderr,
+  stdin,
+  stdout,
+  throwDeprecation,
+  title,
+  traceDeprecation,
+  umask,
+  unref,
+  uptime,
+  version,
+  versions
+} = unenvProcess;
+var _process = {
+  abort,
+  addListener,
+  allowedNodeEnvironmentFlags,
+  hasUncaughtExceptionCaptureCallback,
+  setUncaughtExceptionCaptureCallback,
+  loadEnvFile,
+  sourceMapsEnabled,
+  arch,
+  argv,
+  argv0,
+  chdir,
+  config,
+  connected,
+  constrainedMemory,
+  availableMemory,
+  cpuUsage,
+  cwd,
+  debugPort,
+  dlopen,
+  disconnect,
+  emit,
+  emitWarning,
+  env,
+  eventNames,
+  execArgv,
+  execPath,
+  exit,
+  finalization,
+  features,
+  getBuiltinModule,
+  getActiveResourcesInfo,
+  getMaxListeners,
+  hrtime: hrtime3,
+  kill,
+  listeners,
+  listenerCount,
+  memoryUsage,
+  nextTick,
+  on,
+  off,
+  once,
+  pid,
+  platform,
+  ppid,
+  prependListener,
+  prependOnceListener,
+  rawListeners,
+  release,
+  removeAllListeners,
+  removeListener,
+  report,
+  resourceUsage,
+  setMaxListeners,
+  setSourceMapsEnabled,
+  stderr,
+  stdin,
+  stdout,
+  title,
+  throwDeprecation,
+  traceDeprecation,
+  umask,
+  uptime,
+  version,
+  versions,
+  // @ts-expect-error old API
+  domain,
+  initgroups,
+  moduleLoadList,
+  reallyExit,
+  openStdin,
+  assert: assert2,
+  binding,
+  send,
+  exitCode,
+  channel,
+  getegid,
+  geteuid,
+  getgid,
+  getgroups,
+  getuid,
+  setegid,
+  seteuid,
+  setgid,
+  setgroups,
+  setuid,
+  permission,
+  mainModule,
+  _events,
+  _eventsCount,
+  _exiting,
+  _maxListeners,
+  _debugEnd,
+  _debugProcess,
+  _fatalException,
+  _getActiveHandles,
+  _getActiveRequests,
+  _kill,
+  _preload_modules,
+  _rawDebug,
+  _startProfilerIdleNotifier,
+  _stopProfilerIdleNotifier,
+  _tickCallback,
+  _disconnect,
+  _handleQueue,
+  _pendingMessage,
+  _channel,
+  _send,
+  _linkedBinding
+};
+var process_default = _process;
+
+// node_modules/wrangler/_virtual_unenv_global_polyfill-@cloudflare-unenv-preset-node-process
+globalThis.process = process_default;
+
+// node_modules/postal-mime/src/decode-strings.js
+var textEncoder = new TextEncoder();
+var base64Chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
+var base64Lookup = new Uint8Array(256);
+for (let i = 0; i < base64Chars.length; i++) {
+  base64Lookup[base64Chars.charCodeAt(i)] = i;
+}
+function decodeBase64(base64) {
+  let len = base64.length;
+  while (len > 0 && base64.charAt(len - 1) === "=") {
+    len--;
+  }
+  if (len % 4 === 1) {
+    len--;
+  }
+  const remainder = len % 4;
+  const bufferLength = Math.floor(len / 4) * 3 + (remainder ? remainder - 1 : 0);
+  const arrayBuffer = new ArrayBuffer(bufferLength);
+  const bytes = new Uint8Array(arrayBuffer);
+  let p = 0;
+  for (let i = 0; i < len; i += 4) {
+    let encoded1 = base64Lookup[base64.charCodeAt(i)];
+    let encoded2 = base64Lookup[base64.charCodeAt(i + 1)];
+    let encoded3 = base64Lookup[base64.charCodeAt(i + 2)];
+    let encoded4 = base64Lookup[base64.charCodeAt(i + 3)];
+    bytes[p++] = encoded1 << 2 | encoded2 >> 4;
+    if (p < bufferLength) {
+      bytes[p++] = (encoded2 & 15) << 4 | encoded3 >> 2;
+    }
+    if (p < bufferLength) {
+      bytes[p++] = (encoded3 & 3) << 6 | encoded4 & 63;
+    }
+  }
+  return arrayBuffer;
+}
+__name(decodeBase64, "decodeBase64");
+var charsetAliases = /* @__PURE__ */ new Map([
+  // Hebrew. The logical and explicit ordering variants share the iso-8859-8 index.
+  ["iso88598i", "iso-8859-8"],
+  ["iso88598e", "iso-8859-8"],
+  // Japanese. WHATWG shift_jis is the Windows-31J index, so cp932 text decodes
+  // identically, including the NEC and IBM extension rows.
+  ["shiftjis", "shift_jis"],
+  ["windows31j", "shift_jis"],
+  ["mskanji", "shift_jis"],
+  ["eucjp", "euc-jp"],
+  // ISO-2022-JP, including the -1 / -2 supersets. Escape sequences outside plain
+  // ISO-2022-JP (JIS X 0212, the non-Japanese G2 sets, and the SO/SI katakana shifts
+  // cp50222 uses) decode to replacement characters, but the Japanese text around them
+  // still comes out right.
+  ["iso2022jp", "iso-2022-jp"],
+  ["iso2022jp1", "iso-2022-jp"],
+  ["iso2022jp2", "iso-2022-jp"],
+  ["junet", "iso-2022-jp"],
+  // Korean. The WHATWG euc-kr index is the extended cp949 / UHC index.
+  ["euckr", "euc-kr"],
+  ["uhc", "euc-kr"],
+  // Thai.
+  ["tis620", "windows-874"]
+]);
+var codePageAliases = /* @__PURE__ */ new Map([
+  ["932", "shift_jis"],
+  ["936", "gbk"],
+  ["949", "euc-kr"],
+  ["950", "big5"],
+  ["874", "windows-874"],
+  // Microsoft's EUC-JP and ISO-2022-JP variants. euc-jp and iso-2022-jp cover
+  // everything they can express.
+  ["51932", "euc-jp"],
+  ["50220", "iso-2022-jp"],
+  ["50221", "iso-2022-jp"],
+  ["50222", "iso-2022-jp"]
+]);
+var codePagePattern = /^(?:cp|windows|ms|ibm)(\d+)$/;
+function normalizeCharset(charset) {
+  return charset.replace(/^(?:x-ms-|x-|cs)/, "").replace(/[\s._-]+/g, "");
+}
+__name(normalizeCharset, "normalizeCharset");
+var ENCODING_LABELS = new Set(
+  [
+    // UTF-8
+    "unicode-1-1-utf-8 unicode11utf8 unicode20utf8 utf-8 utf8 x-unicode20utf8",
+    // IBM866
+    "866 cp866 csibm866 ibm866",
+    // ISO-8859-2
+    "csisolatin2 iso-8859-2 iso-ir-101 iso8859-2 iso88592 iso_8859-2 iso_8859-2:1987 l2 latin2",
+    // ISO-8859-3
+    "csisolatin3 iso-8859-3 iso-ir-109 iso8859-3 iso88593 iso_8859-3 iso_8859-3:1988 l3 latin3",
+    // ISO-8859-4
+    "csisolatin4 iso-8859-4 iso-ir-110 iso8859-4 iso88594 iso_8859-4 iso_8859-4:1988 l4 latin4",
+    // ISO-8859-5
+    "csisolatincyrillic cyrillic iso-8859-5 iso-ir-144 iso8859-5 iso88595 iso_8859-5 iso_8859-5:1988",
+    // ISO-8859-6
+    "arabic asmo-708 csiso88596e csiso88596i csisolatinarabic ecma-114 iso-8859-6 iso-8859-6-e",
+    "iso-8859-6-i iso-ir-127 iso8859-6 iso88596 iso_8859-6 iso_8859-6:1987",
+    // ISO-8859-7
+    "csisolatingreek ecma-118 elot_928 greek greek8 iso-8859-7 iso-ir-126 iso8859-7 iso88597 iso_8859-7",
+    "iso_8859-7:1987 sun_eu_greek",
+    // ISO-8859-8
+    "csiso88598e csisolatinhebrew hebrew iso-8859-8 iso-8859-8-e iso-ir-138 iso8859-8 iso88598 iso_8859-8",
+    "iso_8859-8:1988 visual",
+    // ISO-8859-8-I
+    "csiso88598i iso-8859-8-i logical",
+    // ISO-8859-10
+    "csisolatin6 iso-8859-10 iso-ir-157 iso8859-10 iso885910 l6 latin6",
+    // ISO-8859-13
+    "iso-8859-13 iso8859-13 iso885913",
+    // ISO-8859-14
+    "iso-8859-14 iso8859-14 iso885914",
+    // ISO-8859-15
+    "csisolatin9 iso-8859-15 iso8859-15 iso885915 iso_8859-15 l9",
+    // ISO-8859-16
+    "iso-8859-16",
+    // KOI8-R
+    "cskoi8r koi koi8 koi8-r koi8_r",
+    // KOI8-U
+    "koi8-ru koi8-u",
+    // macintosh
+    "csmacintosh mac macintosh x-mac-roman",
+    // windows-874
+    "dos-874 iso-8859-11 iso8859-11 iso885911 tis-620 windows-874",
+    // windows-1250
+    "cp1250 windows-1250 x-cp1250",
+    // windows-1251
+    "cp1251 windows-1251 x-cp1251",
+    // windows-1252
+    "ansi_x3.4-1968 ascii cp1252 cp819 csisolatin1 ibm819 iso-8859-1 iso-ir-100 iso8859-1 iso88591",
+    "iso_8859-1 iso_8859-1:1987 l1 latin1 us-ascii windows-1252 x-cp1252",
+    // windows-1253
+    "cp1253 windows-1253 x-cp1253",
+    // windows-1254
+    "cp1254 csisolatin5 iso-8859-9 iso-ir-148 iso8859-9 iso88599 iso_8859-9 iso_8859-9:1989 l5 latin5",
+    "windows-1254 x-cp1254",
+    // windows-1255
+    "cp1255 windows-1255 x-cp1255",
+    // windows-1256
+    "cp1256 windows-1256 x-cp1256",
+    // windows-1257
+    "cp1257 windows-1257 x-cp1257",
+    // windows-1258
+    "cp1258 windows-1258 x-cp1258",
+    // x-mac-cyrillic
+    "x-mac-cyrillic x-mac-ukrainian",
+    // GBK
+    "chinese csgb2312 csiso58gb231280 gb2312 gb_2312 gb_2312-80 gbk iso-ir-58 x-gbk",
+    // gb18030
+    "gb18030",
+    // Big5
+    "big5 big5-hkscs cn-big5 csbig5 x-x-big5",
+    // EUC-JP
+    "cseucpkdfmtjapanese euc-jp x-euc-jp",
+    // ISO-2022-JP
+    "csiso2022jp iso-2022-jp",
+    // Shift_JIS
+    "csshiftjis ms932 ms_kanji shift-jis shift_jis sjis windows-31j x-sjis",
+    // EUC-KR
+    "cseuckr csksc56011987 euc-kr iso-ir-149 korean ks_c_5601-1987 ks_c_5601-1989 ksc5601 ksc_5601",
+    "windows-949",
+    // replacement
+    "csiso2022kr hz-gb-2312 iso-2022-cn iso-2022-cn-ext iso-2022-kr replacement",
+    // UTF-16BE
+    "unicodefffe utf-16be",
+    // UTF-16LE
+    "csunicode iso-10646-ucs-2 ucs-2 unicode unicodefeff utf-16 utf-16le",
+    // x-user-defined
+    "x-user-defined"
+  ].join(" ").split(" ")
+);
+var decoders = /* @__PURE__ */ new Map();
+function tryDecoder(charset) {
+  if (!ENCODING_LABELS.has(charset)) {
+    return null;
+  }
+  if (!decoders.has(charset)) {
+    let decoder = null;
+    try {
+      decoder = new TextDecoder(charset);
+    } catch (err) {
+    }
+    decoders.set(charset, decoder);
+  }
+  return decoders.get(charset);
+}
+__name(tryDecoder, "tryDecoder");
+function getDecoder(charset) {
+  charset = (charset || "utf8").trim().toLowerCase();
+  const decoder = tryDecoder(charset);
+  if (decoder) {
+    return decoder;
+  }
+  const normalized = normalizeCharset(charset);
+  const codePage = normalized.match(codePagePattern);
+  const alias = codePage && codePageAliases.get(codePage[1]) || charsetAliases.get(normalized) || normalized;
+  return tryDecoder(alias) || tryDecoder("windows-1252");
+}
+__name(getDecoder, "getDecoder");
+async function blobToArrayBuffer(blob) {
+  if ("arrayBuffer" in blob) {
+    return await blob.arrayBuffer();
+  }
+  const fr = new FileReader();
+  return new Promise((resolve, reject) => {
+    fr.onload = function(e) {
+      resolve(e.target.result);
+    };
+    fr.onerror = function(e) {
+      reject(fr.error);
+    };
+    fr.readAsArrayBuffer(blob);
+  });
+}
+__name(blobToArrayBuffer, "blobToArrayBuffer");
+function hexNibble(c) {
+  if (c >= 48 && c <= 57) {
+    return c - 48;
+  }
+  if (c >= 97 && c <= 102) {
+    return c - 97 + 10;
+  }
+  if (c >= 65 && c <= 70) {
+    return c - 65 + 10;
+  }
+  return -1;
+}
+__name(hexNibble, "hexNibble");
+function decodeWord(charset, encoding, str) {
+  let splitPos = charset.indexOf("*");
+  if (splitPos >= 0) {
+    charset = charset.substr(0, splitPos);
+  }
+  encoding = encoding.toUpperCase();
+  let byteStr;
+  if (encoding === "Q") {
+    str = str.replace(/=\s+([0-9a-fA-F])/g, "=$1").replace(/[_\s]/g, " ");
+    let buf = textEncoder.encode(str);
+    let encodedBytes = [];
+    for (let i = 0, len = buf.length; i < len; i++) {
+      let c = buf[i];
+      if (i <= len - 2 && c === 61) {
+        let high = hexNibble(buf[i + 1]);
+        let low = hexNibble(buf[i + 2]);
+        if (high >= 0 && low >= 0) {
+          encodedBytes.push(high << 4 | low);
+          i += 2;
+          continue;
+        }
+      }
+      encodedBytes.push(c);
+    }
+    byteStr = new ArrayBuffer(encodedBytes.length);
+    let dataView = new DataView(byteStr);
+    for (let i = 0, len = encodedBytes.length; i < len; i++) {
+      dataView.setUint8(i, encodedBytes[i]);
+    }
+  } else if (encoding === "B") {
+    byteStr = decodeBase64(str.replace(/[^a-zA-Z0-9\+\/=]+/g, ""));
+  } else {
+    byteStr = textEncoder.encode(str);
+  }
+  return getDecoder(charset).decode(byteStr);
+}
+__name(decodeWord, "decodeWord");
+var ENCODED_WORD_PATTERN = "=\\?([^?\\s]+)\\?([QqBb])\\?([^?]*)\\?=";
+var ENCODED_WORD_REGEX = new RegExp(ENCODED_WORD_PATTERN, "g");
+var WORD_SEPARATOR_REGEX = /^[ \t\r\n]+$/;
+var ENCODED_WORDS_ONLY_REGEX = new RegExp(`^(?:${ENCODED_WORD_PATTERN}\\s*)+$`);
+function isEncodedWordsOnly(str) {
+  return ENCODED_WORDS_ONLY_REGEX.test(str);
+}
+__name(isEncodedWordsOnly, "isEncodedWordsOnly");
+function splitEncodedWords(str) {
+  const tokens = [];
+  ENCODED_WORD_REGEX.lastIndex = 0;
+  let pos = 0;
+  let match;
+  while (match = ENCODED_WORD_REGEX.exec(str)) {
+    if (match.index > pos) {
+      tokens.push({ text: str.substring(pos, match.index) });
+    }
+    tokens.push({ charset: match[1], encoding: match[2], encodedText: match[3] });
+    pos = match.index + match[0].length;
+  }
+  if (pos < str.length) {
+    tokens.push({ text: str.substring(pos) });
+  }
+  return tokens;
+}
+__name(splitEncodedWords, "splitEncodedWords");
+function canJoinWords(left, right) {
+  const encoding = left.encoding.toUpperCase();
+  if (left.charset !== right.charset || encoding !== right.encoding.toUpperCase()) {
+    return false;
+  }
+  if (encoding === "B") {
+    return left.encodedText.length % 4 === 0 && !/=$/.test(left.encodedText);
+  }
+  return true;
+}
+__name(canJoinWords, "canJoinWords");
+function renderTokens(tokens, joinWords) {
+  let result = "";
+  let pending = null;
+  for (let i = 0; i < tokens.length; i++) {
+    const token = tokens[i];
+    if (token.text !== void 0) {
+      const nextToken = tokens[i + 1];
+      if (pending && nextToken && nextToken.text === void 0 && WORD_SEPARATOR_REGEX.test(token.text)) {
+        continue;
+      }
+      if (pending) {
+        result += decodeWord(pending.charset, pending.encoding, pending.encodedText);
+        pending = null;
+      }
+      result += token.text;
+      continue;
+    }
+    if (pending && joinWords && canJoinWords(pending, token)) {
+      pending.encodedText += token.encodedText;
+      continue;
+    }
+    if (pending) {
+      result += decodeWord(pending.charset, pending.encoding, pending.encodedText);
+    }
+    pending = { charset: token.charset, encoding: token.encoding, encodedText: token.encodedText };
+  }
+  if (pending) {
+    result += decodeWord(pending.charset, pending.encoding, pending.encodedText);
+  }
+  return result;
+}
+__name(renderTokens, "renderTokens");
+function decodeWords(str) {
+  const tokens = splitEncodedWords((str || "").toString());
+  const result = renderTokens(tokens, true);
+  return result.indexOf("\uFFFD") < 0 ? result : renderTokens(tokens, false);
+}
+__name(decodeWords, "decodeWords");
+function decodeURIComponentWithCharset(encodedStr, charset) {
+  charset = charset || "utf-8";
+  let encodedBytes = [];
+  for (let i = 0; i < encodedStr.length; i++) {
+    let c = encodedStr.charAt(i);
+    if (c === "%" && /^[a-f0-9]{2}/i.test(encodedStr.substr(i + 1, 2))) {
+      let byte = encodedStr.substr(i + 1, 2);
+      i += 2;
+      encodedBytes.push(parseInt(byte, 16));
+    } else if (c.charCodeAt(0) > 126) {
+      c = textEncoder.encode(c);
+      for (let j = 0; j < c.length; j++) {
+        encodedBytes.push(c[j]);
+      }
+    } else {
+      encodedBytes.push(c.charCodeAt(0));
+    }
+  }
+  const byteStr = new ArrayBuffer(encodedBytes.length);
+  const dataView = new DataView(byteStr);
+  for (let i = 0, len = encodedBytes.length; i < len; i++) {
+    dataView.setUint8(i, encodedBytes[i]);
+  }
+  return getDecoder(charset).decode(byteStr);
+}
+__name(decodeURIComponentWithCharset, "decodeURIComponentWithCharset");
+function decodeParameterValueContinuations(header) {
+  let paramKeys = /* @__PURE__ */ new Map();
+  Object.keys(header.params).forEach((key) => {
+    let match = key.match(/\*((\d+)\*?)?$/);
+    if (!match) {
+      return;
+    }
+    let actualKey = key.substr(0, match.index).toLowerCase();
+    let nr = Number(match[2]) || 0;
+    let paramVal;
+    if (!paramKeys.has(actualKey)) {
+      paramVal = {
+        charset: false,
+        values: []
+      };
+      paramKeys.set(actualKey, paramVal);
+    } else {
+      paramVal = paramKeys.get(actualKey);
+    }
+    let value = header.params[key];
+    let encoded = match[0].charAt(match[0].length - 1) === "*";
+    if (nr === 0 && encoded && (match = value.match(/^([^']*)'[^']*'(.*)$/))) {
+      paramVal.charset = match[1] || "utf-8";
+      value = match[2];
+    }
+    paramVal.values.push({ nr, value, encoded });
+    delete header.params[key];
+  });
+  paramKeys.forEach((paramVal, key) => {
+    let result = "";
+    let pending = "";
+    for (let part of paramVal.values.sort((a, b) => a.nr - b.nr)) {
+      if (part.encoded) {
+        pending += part.value;
+        continue;
+      }
+      if (pending) {
+        result += decodeURIComponentWithCharset(pending, paramVal.charset);
+        pending = "";
+      }
+      result += part.value;
+    }
+    if (pending) {
+      result += decodeURIComponentWithCharset(pending, paramVal.charset);
+    }
+    header.params[key] = result;
+  });
+}
+__name(decodeParameterValueContinuations, "decodeParameterValueContinuations");
+
+// node_modules/postal-mime/src/pass-through-decoder.js
+var PassThroughDecoder = class {
+  static {
+    __name(this, "PassThroughDecoder");
+  }
+  constructor() {
+    this.chunks = [];
+  }
+  update(line) {
+    this.chunks.push(line);
+    this.chunks.push("\n");
+  }
+  finalize() {
+    return blobToArrayBuffer(new Blob(this.chunks, { type: "application/octet-stream" }));
+  }
+};
+
+// node_modules/postal-mime/src/base64-decoder.js
+var Base64Decoder = class {
+  static {
+    __name(this, "Base64Decoder");
+  }
+  constructor(opts) {
+    opts = opts || {};
+    this.decoder = opts.decoder || new TextDecoder();
+    this.maxChunkSize = 100 * 1024;
+    this.chunks = [];
+    this.remainder = "";
+  }
+  pushChunk(base64Str) {
+    if (base64Str.length) {
+      this.chunks.push(decodeBase64(base64Str));
+    }
+  }
+  flushRemainder() {
+    this.pushChunk(this.remainder);
+    this.remainder = "";
+  }
+  update(buffer) {
+    let str = this.decoder.decode(buffer).replace(/[^a-zA-Z0-9+/=]+/g, "");
+    const units = str.split(/=+/);
+    for (let i = 0; i < units.length; i++) {
+      this.remainder += units[i];
+      if (i < units.length - 1) {
+        this.flushRemainder();
+      }
+    }
+    if (this.remainder.length >= this.maxChunkSize) {
+      const alignedLength = Math.floor(this.remainder.length / 4) * 4;
+      this.pushChunk(this.remainder.substring(0, alignedLength));
+      this.remainder = this.remainder.substring(alignedLength);
+    }
+  }
+  finalize() {
+    this.flushRemainder();
+    return blobToArrayBuffer(new Blob(this.chunks, { type: "application/octet-stream" }));
+  }
+};
+
+// node_modules/postal-mime/src/qp-decoder.js
+var CHR_EQUALS = 61;
+var CHR_LF = 10;
+var QPDecoder = class {
+  static {
+    __name(this, "QPDecoder");
+  }
+  constructor() {
+    this.maxChunkSize = 100 * 1024;
+    this.buffer = new Uint8Array(this.maxChunkSize);
+    this.bufferPos = 0;
+    this.chunks = [];
+  }
+  writeByte(byte) {
+    if (this.bufferPos >= this.buffer.length) {
+      this.flushBuffer();
+    }
+    this.buffer[this.bufferPos++] = byte;
+  }
+  // Literal text is the bulk of a typical body, so it is copied in runs rather than a
+  // byte at a time
+  writeBytes(line, start, end) {
+    while (start < end) {
+      if (this.bufferPos >= this.buffer.length) {
+        this.flushBuffer();
+      }
+      const count3 = Math.min(end - start, this.buffer.length - this.bufferPos);
+      this.buffer.set(line.subarray(start, start + count3), this.bufferPos);
+      this.bufferPos += count3;
+      start += count3;
+    }
+  }
+  flushBuffer() {
+    if (this.bufferPos) {
+      this.chunks.push(this.buffer.slice(0, this.bufferPos));
+      this.bufferPos = 0;
+    }
+  }
+  // Quoted-printable source is 7 bit by definition, so it is decoded byte by byte and
+  // the result is handed on as bytes. Running the body charset over the encoded source
+  // instead corrupted every part whose charset was not ASCII compatible: the same
+  // content that decoded correctly in base64 came out as mojibake in quoted-printable.
+  update(line) {
+    let len = line.length;
+    const softBreak = len > 0 && line[len - 1] === CHR_EQUALS;
+    if (softBreak) {
+      len--;
+    }
+    let literalStart = 0;
+    for (let i = 0; i < len; i++) {
+      if (line[i] !== CHR_EQUALS || i + 2 >= len) {
+        continue;
+      }
+      const high = hexNibble(line[i + 1]);
+      const low = hexNibble(line[i + 2]);
+      if (high < 0 || low < 0) {
+        continue;
+      }
+      this.writeBytes(line, literalStart, i);
+      this.writeByte(high << 4 | low);
+      i += 2;
+      literalStart = i + 1;
+    }
+    this.writeBytes(line, literalStart, len);
+    if (!softBreak) {
+      this.writeByte(CHR_LF);
+    }
+  }
+  finalize() {
+    this.flushBuffer();
+    return blobToArrayBuffer(new Blob(this.chunks, { type: "application/octet-stream" }));
+  }
+};
+
+// node_modules/postal-mime/src/mime-node.js
+var headerDecoder = new TextDecoder("utf-8", { ignoreBOM: true });
+var isWsp = /* @__PURE__ */ __name((c) => c === 32 || c === 9, "isWsp");
+var trimWsp = /* @__PURE__ */ __name((str) => {
+  let start = 0;
+  let end = str.length;
+  while (start < end && isWsp(str.charCodeAt(start))) {
+    start++;
+  }
+  while (end > start && isWsp(str.charCodeAt(end - 1))) {
+    end--;
+  }
+  return str.slice(start, end);
+}, "trimWsp");
+var CONTENT_HEADERS = /* @__PURE__ */ new Set([
+  "content-type",
+  "content-transfer-encoding",
+  "content-disposition",
+  "content-id",
+  "content-description"
+]);
+var MimeNode = class {
+  static {
+    __name(this, "MimeNode");
+  }
+  constructor(options) {
+    this.options = options || {};
+    this.postalMime = this.options.postalMime;
+    this.childNodes = [];
+    this.finalizedChildCount = 0;
+    if (this.options.parentNode) {
+      this.parentNode = this.options.parentNode;
+      this.depth = this.parentNode.depth + 1;
+      if (this.depth > this.options.maxNestingDepth) {
+        throw new Error(`Maximum MIME nesting depth of ${this.options.maxNestingDepth} levels exceeded`);
+      }
+      this.options.parentNode.childNodes.push(this);
+    } else {
+      this.depth = 0;
+    }
+    this.state = "header";
+    this.headerLines = [];
+    const parentMultipartType = this.options.parentMultipartType || null;
+    const defaultContentType = parentMultipartType === "digest" ? "message/rfc822" : "text/plain";
+    this.contentType = {
+      value: defaultContentType
+    };
+    this.contentTransferEncoding = {
+      value: "8bit"
+    };
+    this.contentDisposition = {
+      value: ""
+    };
+    this.headers = [];
+    this.contentDecoder = false;
+  }
+  setupContentDecoder(transferEncoding) {
+    if (/base64/i.test(transferEncoding)) {
+      this.contentDecoder = new Base64Decoder();
+    } else if (/quoted-printable/i.test(transferEncoding)) {
+      this.contentDecoder = new QPDecoder();
+    } else {
+      this.contentDecoder = new PassThroughDecoder();
+    }
+  }
+  async finalize() {
+    if (this.state === "finished") {
+      return;
+    }
+    if (this.state === "header") {
+      this.processHeaders();
+    }
+    let boundaries = this.postalMime.boundaries;
+    for (let i = boundaries.length - 1; i >= 0; i--) {
+      let boundary = boundaries[i];
+      if (boundary.node === this) {
+        boundaries.splice(i, 1);
+        break;
+      }
+    }
+    await this.finalizeChildNodes();
+    this.content = this.contentDecoder ? await this.contentDecoder.finalize() : null;
+    this.contentDecoder = false;
+    this.state = "finished";
+  }
+  async finalizeChildNodes() {
+    while (this.finalizedChildCount < this.childNodes.length) {
+      await this.childNodes[this.finalizedChildCount++].finalize();
+    }
+  }
+  // Strip RFC 822 comments (parenthesized text) from structured header values.
+  //
+  // Inside an unquoted parameter value a parenthesis that continues the current token is
+  // content, because `filename=Invoice(1).pdf` is a filename and not a token followed by
+  // a comment, and deleting the parens silently renames the attachment.
+  stripComments(str) {
+    let result = "";
+    let depth = 0;
+    let escaped = false;
+    let inQuote = false;
+    let commentStart = -1;
+    let inParameterValue = false;
+    let endsWithWsp = false;
+    const append = /* @__PURE__ */ __name((c) => {
+      result += c;
+      endsWithWsp = c === " " || c === "	";
+    }, "append");
+    const opensComment = /* @__PURE__ */ __name(() => !inParameterValue || !result.length || endsWithWsp, "opensComment");
+    for (let i = 0; i < str.length; i++) {
+      const chr = str.charAt(i);
+      if (escaped) {
+        if (depth === 0) {
+          append(chr);
+        }
+        escaped = false;
+        continue;
+      }
+      if (chr === "\\") {
+        escaped = true;
+        if (depth === 0) {
+          append(chr);
+        }
+        continue;
+      }
+      if (chr === '"' && depth === 0) {
+        inQuote = !inQuote;
+        append(chr);
+        continue;
+      }
+      if (!inQuote) {
+        if (chr === "(" && opensComment()) {
+          if (depth === 0) {
+            commentStart = i;
+          }
+          depth++;
+          continue;
+        }
+        if (chr === ")" && depth > 0) {
+          depth--;
+          continue;
+        }
+        if (depth === 0) {
+          if (chr === "=") {
+            inParameterValue = true;
+          } else if (chr === ";") {
+            inParameterValue = false;
+          }
+        }
+      }
+      if (depth === 0) {
+        append(chr);
+      }
+    }
+    if (depth === 0) {
+      return result;
+    }
+    return str.indexOf(";", commentStart) < 0 ? result : str;
+  }
+  parseStructuredHeader(str) {
+    str = this.stripComments(str);
+    let response = {
+      value: false,
+      params: {}
+    };
+    let key = false;
+    let value = "";
+    let stage = "value";
+    let pendingSpace = "";
+    let quoteClosed = false;
+    let quote = false;
+    let escaped = false;
+    let chr;
+    const addChr = /* @__PURE__ */ __name((c) => {
+      if (value.length) {
+        value += pendingSpace;
+      }
+      pendingSpace = "";
+      value += c;
+    }, "addChr");
+    const takeValue = /* @__PURE__ */ __name(() => {
+      const result = value;
+      value = "";
+      pendingSpace = "";
+      quoteClosed = false;
+      return result;
+    }, "takeValue");
+    const storeParam = /* @__PURE__ */ __name((name, result) => {
+      if (!Object.prototype.hasOwnProperty.call(response.params, name)) {
+        response.params[name] = result;
+      }
+    }, "storeParam");
+    const storeValue = /* @__PURE__ */ __name(() => {
+      const result = takeValue();
+      if (key === false) {
+        response.value = result;
+      } else {
+        storeParam(key, result);
+      }
+    }, "storeValue");
+    const storeEmptyKey = /* @__PURE__ */ __name(() => {
+      const name = takeValue().trim();
+      if (name) {
+        storeParam(name.toLowerCase(), "");
+      }
+    }, "storeEmptyKey");
+    for (let i = 0, len = str.length; i < len; i++) {
+      chr = str.charAt(i);
+      switch (stage) {
+        case "key":
+          if (chr === "=") {
+            key = takeValue().trim().toLowerCase();
+            stage = "value";
+            break;
+          }
+          if (chr === ";") {
+            storeEmptyKey();
+            break;
+          }
+          value += chr;
+          break;
+        case "value":
+          if (escaped) {
+            addChr(chr);
+          } else if (quote && chr === "\\") {
+            escaped = true;
+            continue;
+          } else if (quote && chr === quote) {
+            quote = false;
+            quoteClosed = true;
+          } else if (!quote && chr === '"') {
+            quote = chr;
+            if (value.length) {
+              value += pendingSpace;
+            }
+            pendingSpace = "";
+          } else if (!quote && chr === ";") {
+            storeValue();
+            stage = "key";
+          } else if (!quote && (chr === " " || chr === "	")) {
+            pendingSpace += chr;
+          } else if (!quoteClosed) {
+            addChr(chr);
+          }
+          escaped = false;
+          break;
+      }
+    }
+    if (stage === "value") {
+      storeValue();
+    } else {
+      storeEmptyKey();
+    }
+    if (response.value) {
+      response.value = response.value.toLowerCase();
+    }
+    decodeParameterValueContinuations(response);
+    return response;
+  }
+  decodeFlowedText(str, delSp) {
+    const parts = [];
+    let lineStart = 0;
+    let lineLength = 0;
+    const lines = str.split(/\r?\n/);
+    for (let i = 0; i < lines.length; i++) {
+      let line = lines[i];
+      if (line.charAt(0) === " ") {
+        line = line.slice(1);
+      }
+      if (i) {
+        const last = parts.length ? parts[parts.length - 1] : "";
+        const isSignature = lineLength === 3 && parts.slice(lineStart).join("") === "-- ";
+        if (last.endsWith(" ") && !isSignature) {
+          if (delSp) {
+            if (last.length > 1) {
+              parts[parts.length - 1] = last.slice(0, -1);
+            } else {
+              parts.pop();
+            }
+            lineLength--;
+          }
+        } else {
+          parts.push("\n");
+          lineStart = parts.length;
+          lineLength = 0;
+        }
+      }
+      if (line) {
+        parts.push(line);
+        lineLength += line.length;
+      }
+    }
+    return parts.join("");
+  }
+  getTextContent() {
+    if (!this.content) {
+      return "";
+    }
+    let str = getDecoder(this.contentType.parsed.params.charset).decode(this.content);
+    if (/^flowed$/i.test(this.contentType.parsed.params.format)) {
+      str = this.decodeFlowedText(str, /^yes$/i.test(this.contentType.parsed.params.delsp));
+    }
+    return str;
+  }
+  processHeaders() {
+    let foldedLines = [];
+    for (let line of this.headerLines) {
+      if (foldedLines.length && /^[ \t]/.test(line)) {
+        foldedLines[foldedLines.length - 1].push(line);
+      } else {
+        foldedLines.push([line]);
+      }
+    }
+    this.rawHeaderLines = [];
+    let seenContentHeaders = /* @__PURE__ */ new Set();
+    for (let parts of foldedLines) {
+      let rawLine = parts.join("\n");
+      let sep = rawLine.indexOf(":");
+      let rawKey = trimWsp(sep < 0 ? rawLine : rawLine.substr(0, sep));
+      this.rawHeaderLines.push({
+        key: rawKey.toLowerCase(),
+        line: rawLine
+      });
+      let unfoldedLine = parts.join("");
+      sep = unfoldedLine.indexOf(":");
+      let key = trimWsp(sep < 0 ? unfoldedLine : unfoldedLine.substr(0, sep));
+      let value = sep < 0 ? "" : trimWsp(unfoldedLine.substr(sep + 1).replace(/[\r\n]+/g, " "));
+      this.headers.push({ key: key.toLowerCase(), originalKey: key, value });
+      const lowerKey = key.toLowerCase();
+      if (CONTENT_HEADERS.has(lowerKey) && !seenContentHeaders.has(lowerKey)) {
+        seenContentHeaders.add(lowerKey);
+        switch (lowerKey) {
+          case "content-type":
+            this.contentType = { value, parsed: {} };
+            break;
+          case "content-transfer-encoding":
+            this.contentTransferEncoding = { value, parsed: {} };
+            break;
+          case "content-disposition":
+            this.contentDisposition = { value, parsed: {} };
+            break;
+          case "content-id":
+            this.contentId = value;
+            break;
+          case "content-description":
+            this.contentDescription = value;
+            break;
+        }
+      }
+    }
+    this.contentType.parsed = this.parseStructuredHeader(this.contentType.value);
+    this.contentType.multipart = /^multipart\//i.test(this.contentType.parsed.value) ? this.contentType.parsed.value.substr(this.contentType.parsed.value.indexOf("/") + 1) : false;
+    if (this.contentType.multipart && this.contentType.parsed.params.boundary) {
+      this.postalMime.boundaries.push({
+        value: textEncoder.encode(this.contentType.parsed.params.boundary),
+        node: this
+      });
+    }
+    this.contentDisposition.parsed = this.parseStructuredHeader(this.contentDisposition.value);
+    this.contentTransferEncoding.encoding = (this.stripComments(this.contentTransferEncoding.value).toLowerCase().match(/[\w-]+/) || [""])[0];
+    this.setupContentDecoder(this.contentTransferEncoding.encoding);
+  }
+  feed(line) {
+    switch (this.state) {
+      case "header":
+        if (!line.length) {
+          this.state = "body";
+          return this.processHeaders();
+        }
+        this.postalMime.headerSize += line.length;
+        if (this.postalMime.headerSize > this.options.maxHeadersSize) {
+          let error3 = new Error(`Maximum header size of ${this.options.maxHeadersSize} bytes exceeded`);
+          throw error3;
+        }
+        this.headerLines.push(headerDecoder.decode(line));
+        break;
+      case "body": {
+        this.contentDecoder.update(line);
+      }
+    }
+  }
+};
+
+// node_modules/postal-mime/src/html-entities.js
+var htmlEntities = {
+  "&AElig": "\xC6",
+  "&AElig;": "\xC6",
+  "&AMP": "&",
+  "&AMP;": "&",
+  "&Aacute": "\xC1",
+  "&Aacute;": "\xC1",
+  "&Abreve;": "\u0102",
+  "&Acirc": "\xC2",
+  "&Acirc;": "\xC2",
+  "&Acy;": "\u0410",
+  "&Afr;": "\u{1D504}",
+  "&Agrave": "\xC0",
+  "&Agrave;": "\xC0",
+  "&Alpha;": "\u0391",
+  "&Amacr;": "\u0100",
+  "&And;": "\u2A53",
+  "&Aogon;": "\u0104",
+  "&Aopf;": "\u{1D538}",
+  "&ApplyFunction;": "\u2061",
+  "&Aring": "\xC5",
+  "&Aring;": "\xC5",
+  "&Ascr;": "\u{1D49C}",
+  "&Assign;": "\u2254",
+  "&Atilde": "\xC3",
+  "&Atilde;": "\xC3",
+  "&Auml": "\xC4",
+  "&Auml;": "\xC4",
+  "&Backslash;": "\u2216",
+  "&Barv;": "\u2AE7",
+  "&Barwed;": "\u2306",
+  "&Bcy;": "\u0411",
+  "&Because;": "\u2235",
+  "&Bernoullis;": "\u212C",
+  "&Beta;": "\u0392",
+  "&Bfr;": "\u{1D505}",
+  "&Bopf;": "\u{1D539}",
+  "&Breve;": "\u02D8",
+  "&Bscr;": "\u212C",
+  "&Bumpeq;": "\u224E",
+  "&CHcy;": "\u0427",
+  "&COPY": "\xA9",
+  "&COPY;": "\xA9",
+  "&Cacute;": "\u0106",
+  "&Cap;": "\u22D2",
+  "&CapitalDifferentialD;": "\u2145",
+  "&Cayleys;": "\u212D",
+  "&Ccaron;": "\u010C",
+  "&Ccedil": "\xC7",
+  "&Ccedil;": "\xC7",
+  "&Ccirc;": "\u0108",
+  "&Cconint;": "\u2230",
+  "&Cdot;": "\u010A",
+  "&Cedilla;": "\xB8",
+  "&CenterDot;": "\xB7",
+  "&Cfr;": "\u212D",
+  "&Chi;": "\u03A7",
+  "&CircleDot;": "\u2299",
+  "&CircleMinus;": "\u2296",
+  "&CirclePlus;": "\u2295",
+  "&CircleTimes;": "\u2297",
+  "&ClockwiseContourIntegral;": "\u2232",
+  "&CloseCurlyDoubleQuote;": "\u201D",
+  "&CloseCurlyQuote;": "\u2019",
+  "&Colon;": "\u2237",
+  "&Colone;": "\u2A74",
+  "&Congruent;": "\u2261",
+  "&Conint;": "\u222F",
+  "&ContourIntegral;": "\u222E",
+  "&Copf;": "\u2102",
+  "&Coproduct;": "\u2210",
+  "&CounterClockwiseContourIntegral;": "\u2233",
+  "&Cross;": "\u2A2F",
+  "&Cscr;": "\u{1D49E}",
+  "&Cup;": "\u22D3",
+  "&CupCap;": "\u224D",
+  "&DD;": "\u2145",
+  "&DDotrahd;": "\u2911",
+  "&DJcy;": "\u0402",
+  "&DScy;": "\u0405",
+  "&DZcy;": "\u040F",
+  "&Dagger;": "\u2021",
+  "&Darr;": "\u21A1",
+  "&Dashv;": "\u2AE4",
+  "&Dcaron;": "\u010E",
+  "&Dcy;": "\u0414",
+  "&Del;": "\u2207",
+  "&Delta;": "\u0394",
+  "&Dfr;": "\u{1D507}",
+  "&DiacriticalAcute;": "\xB4",
+  "&DiacriticalDot;": "\u02D9",
+  "&DiacriticalDoubleAcute;": "\u02DD",
+  "&DiacriticalGrave;": "`",
+  "&DiacriticalTilde;": "\u02DC",
+  "&Diamond;": "\u22C4",
+  "&DifferentialD;": "\u2146",
+  "&Dopf;": "\u{1D53B}",
+  "&Dot;": "\xA8",
+  "&DotDot;": "\u20DC",
+  "&DotEqual;": "\u2250",
+  "&DoubleContourIntegral;": "\u222F",
+  "&DoubleDot;": "\xA8",
+  "&DoubleDownArrow;": "\u21D3",
+  "&DoubleLeftArrow;": "\u21D0",
+  "&DoubleLeftRightArrow;": "\u21D4",
+  "&DoubleLeftTee;": "\u2AE4",
+  "&DoubleLongLeftArrow;": "\u27F8",
+  "&DoubleLongLeftRightArrow;": "\u27FA",
+  "&DoubleLongRightArrow;": "\u27F9",
+  "&DoubleRightArrow;": "\u21D2",
+  "&DoubleRightTee;": "\u22A8",
+  "&DoubleUpArrow;": "\u21D1",
+  "&DoubleUpDownArrow;": "\u21D5",
+  "&DoubleVerticalBar;": "\u2225",
+  "&DownArrow;": "\u2193",
+  "&DownArrowBar;": "\u2913",
+  "&DownArrowUpArrow;": "\u21F5",
+  "&DownBreve;": "\u0311",
+  "&DownLeftRightVector;": "\u2950",
+  "&DownLeftTeeVector;": "\u295E",
+  "&DownLeftVector;": "\u21BD",
+  "&DownLeftVectorBar;": "\u2956",
+  "&DownRightTeeVector;": "\u295F",
+  "&DownRightVector;": "\u21C1",
+  "&DownRightVectorBar;": "\u2957",
+  "&DownTee;": "\u22A4",
+  "&DownTeeArrow;": "\u21A7",
+  "&Downarrow;": "\u21D3",
+  "&Dscr;": "\u{1D49F}",
+  "&Dstrok;": "\u0110",
+  "&ENG;": "\u014A",
+  "&ETH": "\xD0",
+  "&ETH;": "\xD0",
+  "&Eacute": "\xC9",
+  "&Eacute;": "\xC9",
+  "&Ecaron;": "\u011A",
+  "&Ecirc": "\xCA",
+  "&Ecirc;": "\xCA",
+  "&Ecy;": "\u042D",
+  "&Edot;": "\u0116",
+  "&Efr;": "\u{1D508}",
+  "&Egrave": "\xC8",
+  "&Egrave;": "\xC8",
+  "&Element;": "\u2208",
+  "&Emacr;": "\u0112",
+  "&EmptySmallSquare;": "\u25FB",
+  "&EmptyVerySmallSquare;": "\u25AB",
+  "&Eogon;": "\u0118",
+  "&Eopf;": "\u{1D53C}",
+  "&Epsilon;": "\u0395",
+  "&Equal;": "\u2A75",
+  "&EqualTilde;": "\u2242",
+  "&Equilibrium;": "\u21CC",
+  "&Escr;": "\u2130",
+  "&Esim;": "\u2A73",
+  "&Eta;": "\u0397",
+  "&Euml": "\xCB",
+  "&Euml;": "\xCB",
+  "&Exists;": "\u2203",
+  "&ExponentialE;": "\u2147",
+  "&Fcy;": "\u0424",
+  "&Ffr;": "\u{1D509}",
+  "&FilledSmallSquare;": "\u25FC",
+  "&FilledVerySmallSquare;": "\u25AA",
+  "&Fopf;": "\u{1D53D}",
+  "&ForAll;": "\u2200",
+  "&Fouriertrf;": "\u2131",
+  "&Fscr;": "\u2131",
+  "&GJcy;": "\u0403",
+  "&GT": ">",
+  "&GT;": ">",
+  "&Gamma;": "\u0393",
+  "&Gammad;": "\u03DC",
+  "&Gbreve;": "\u011E",
+  "&Gcedil;": "\u0122",
+  "&Gcirc;": "\u011C",
+  "&Gcy;": "\u0413",
+  "&Gdot;": "\u0120",
+  "&Gfr;": "\u{1D50A}",
+  "&Gg;": "\u22D9",
+  "&Gopf;": "\u{1D53E}",
+  "&GreaterEqual;": "\u2265",
+  "&GreaterEqualLess;": "\u22DB",
+  "&GreaterFullEqual;": "\u2267",
+  "&GreaterGreater;": "\u2AA2",
+  "&GreaterLess;": "\u2277",
+  "&GreaterSlantEqual;": "\u2A7E",
+  "&GreaterTilde;": "\u2273",
+  "&Gscr;": "\u{1D4A2}",
+  "&Gt;": "\u226B",
+  "&HARDcy;": "\u042A",
+  "&Hacek;": "\u02C7",
+  "&Hat;": "^",
+  "&Hcirc;": "\u0124",
+  "&Hfr;": "\u210C",
+  "&HilbertSpace;": "\u210B",
+  "&Hopf;": "\u210D",
+  "&HorizontalLine;": "\u2500",
+  "&Hscr;": "\u210B",
+  "&Hstrok;": "\u0126",
+  "&HumpDownHump;": "\u224E",
+  "&HumpEqual;": "\u224F",
+  "&IEcy;": "\u0415",
+  "&IJlig;": "\u0132",
+  "&IOcy;": "\u0401",
+  "&Iacute": "\xCD",
+  "&Iacute;": "\xCD",
+  "&Icirc": "\xCE",
+  "&Icirc;": "\xCE",
+  "&Icy;": "\u0418",
+  "&Idot;": "\u0130",
+  "&Ifr;": "\u2111",
+  "&Igrave": "\xCC",
+  "&Igrave;": "\xCC",
+  "&Im;": "\u2111",
+  "&Imacr;": "\u012A",
+  "&ImaginaryI;": "\u2148",
+  "&Implies;": "\u21D2",
+  "&Int;": "\u222C",
+  "&Integral;": "\u222B",
+  "&Intersection;": "\u22C2",
+  "&InvisibleComma;": "\u2063",
+  "&InvisibleTimes;": "\u2062",
+  "&Iogon;": "\u012E",
+  "&Iopf;": "\u{1D540}",
+  "&Iota;": "\u0399",
+  "&Iscr;": "\u2110",
+  "&Itilde;": "\u0128",
+  "&Iukcy;": "\u0406",
+  "&Iuml": "\xCF",
+  "&Iuml;": "\xCF",
+  "&Jcirc;": "\u0134",
+  "&Jcy;": "\u0419",
+  "&Jfr;": "\u{1D50D}",
+  "&Jopf;": "\u{1D541}",
+  "&Jscr;": "\u{1D4A5}",
+  "&Jsercy;": "\u0408",
+  "&Jukcy;": "\u0404",
+  "&KHcy;": "\u0425",
+  "&KJcy;": "\u040C",
+  "&Kappa;": "\u039A",
+  "&Kcedil;": "\u0136",
+  "&Kcy;": "\u041A",
+  "&Kfr;": "\u{1D50E}",
+  "&Kopf;": "\u{1D542}",
+  "&Kscr;": "\u{1D4A6}",
+  "&LJcy;": "\u0409",
+  "&LT": "<",
+  "&LT;": "<",
+  "&Lacute;": "\u0139",
+  "&Lambda;": "\u039B",
+  "&Lang;": "\u27EA",
+  "&Laplacetrf;": "\u2112",
+  "&Larr;": "\u219E",
+  "&Lcaron;": "\u013D",
+  "&Lcedil;": "\u013B",
+  "&Lcy;": "\u041B",
+  "&LeftAngleBracket;": "\u27E8",
+  "&LeftArrow;": "\u2190",
+  "&LeftArrowBar;": "\u21E4",
+  "&LeftArrowRightArrow;": "\u21C6",
+  "&LeftCeiling;": "\u2308",
+  "&LeftDoubleBracket;": "\u27E6",
+  "&LeftDownTeeVector;": "\u2961",
+  "&LeftDownVector;": "\u21C3",
+  "&LeftDownVectorBar;": "\u2959",
+  "&LeftFloor;": "\u230A",
+  "&LeftRightArrow;": "\u2194",
+  "&LeftRightVector;": "\u294E",
+  "&LeftTee;": "\u22A3",
+  "&LeftTeeArrow;": "\u21A4",
+  "&LeftTeeVector;": "\u295A",
+  "&LeftTriangle;": "\u22B2",
+  "&LeftTriangleBar;": "\u29CF",
+  "&LeftTriangleEqual;": "\u22B4",
+  "&LeftUpDownVector;": "\u2951",
+  "&LeftUpTeeVector;": "\u2960",
+  "&LeftUpVector;": "\u21BF",
+  "&LeftUpVectorBar;": "\u2958",
+  "&LeftVector;": "\u21BC",
+  "&LeftVectorBar;": "\u2952",
+  "&Leftarrow;": "\u21D0",
+  "&Leftrightarrow;": "\u21D4",
+  "&LessEqualGreater;": "\u22DA",
+  "&LessFullEqual;": "\u2266",
+  "&LessGreater;": "\u2276",
+  "&LessLess;": "\u2AA1",
+  "&LessSlantEqual;": "\u2A7D",
+  "&LessTilde;": "\u2272",
+  "&Lfr;": "\u{1D50F}",
+  "&Ll;": "\u22D8",
+  "&Lleftarrow;": "\u21DA",
+  "&Lmidot;": "\u013F",
+  "&LongLeftArrow;": "\u27F5",
+  "&LongLeftRightArrow;": "\u27F7",
+  "&LongRightArrow;": "\u27F6",
+  "&Longleftarrow;": "\u27F8",
+  "&Longleftrightarrow;": "\u27FA",
+  "&Longrightarrow;": "\u27F9",
+  "&Lopf;": "\u{1D543}",
+  "&LowerLeftArrow;": "\u2199",
+  "&LowerRightArrow;": "\u2198",
+  "&Lscr;": "\u2112",
+  "&Lsh;": "\u21B0",
+  "&Lstrok;": "\u0141",
+  "&Lt;": "\u226A",
+  "&Map;": "\u2905",
+  "&Mcy;": "\u041C",
+  "&MediumSpace;": "\u205F",
+  "&Mellintrf;": "\u2133",
+  "&Mfr;": "\u{1D510}",
+  "&MinusPlus;": "\u2213",
+  "&Mopf;": "\u{1D544}",
+  "&Mscr;": "\u2133",
+  "&Mu;": "\u039C",
+  "&NJcy;": "\u040A",
+  "&Nacute;": "\u0143",
+  "&Ncaron;": "\u0147",
+  "&Ncedil;": "\u0145",
+  "&Ncy;": "\u041D",
+  "&NegativeMediumSpace;": "\u200B",
+  "&NegativeThickSpace;": "\u200B",
+  "&NegativeThinSpace;": "\u200B",
+  "&NegativeVeryThinSpace;": "\u200B",
+  "&NestedGreaterGreater;": "\u226B",
+  "&NestedLessLess;": "\u226A",
+  "&NewLine;": "\n",
+  "&Nfr;": "\u{1D511}",
+  "&NoBreak;": "\u2060",
+  "&NonBreakingSpace;": "\xA0",
+  "&Nopf;": "\u2115",
+  "&Not;": "\u2AEC",
+  "&NotCongruent;": "\u2262",
+  "&NotCupCap;": "\u226D",
+  "&NotDoubleVerticalBar;": "\u2226",
+  "&NotElement;": "\u2209",
+  "&NotEqual;": "\u2260",
+  "&NotEqualTilde;": "\u2242\u0338",
+  "&NotExists;": "\u2204",
+  "&NotGreater;": "\u226F",
+  "&NotGreaterEqual;": "\u2271",
+  "&NotGreaterFullEqual;": "\u2267\u0338",
+  "&NotGreaterGreater;": "\u226B\u0338",
+  "&NotGreaterLess;": "\u2279",
+  "&NotGreaterSlantEqual;": "\u2A7E\u0338",
+  "&NotGreaterTilde;": "\u2275",
+  "&NotHumpDownHump;": "\u224E\u0338",
+  "&NotHumpEqual;": "\u224F\u0338",
+  "&NotLeftTriangle;": "\u22EA",
+  "&NotLeftTriangleBar;": "\u29CF\u0338",
+  "&NotLeftTriangleEqual;": "\u22EC",
+  "&NotLess;": "\u226E",
+  "&NotLessEqual;": "\u2270",
+  "&NotLessGreater;": "\u2278",
+  "&NotLessLess;": "\u226A\u0338",
+  "&NotLessSlantEqual;": "\u2A7D\u0338",
+  "&NotLessTilde;": "\u2274",
+  "&NotNestedGreaterGreater;": "\u2AA2\u0338",
+  "&NotNestedLessLess;": "\u2AA1\u0338",
+  "&NotPrecedes;": "\u2280",
+  "&NotPrecedesEqual;": "\u2AAF\u0338",
+  "&NotPrecedesSlantEqual;": "\u22E0",
+  "&NotReverseElement;": "\u220C",
+  "&NotRightTriangle;": "\u22EB",
+  "&NotRightTriangleBar;": "\u29D0\u0338",
+  "&NotRightTriangleEqual;": "\u22ED",
+  "&NotSquareSubset;": "\u228F\u0338",
+  "&NotSquareSubsetEqual;": "\u22E2",
+  "&NotSquareSuperset;": "\u2290\u0338",
+  "&NotSquareSupersetEqual;": "\u22E3",
+  "&NotSubset;": "\u2282\u20D2",
+  "&NotSubsetEqual;": "\u2288",
+  "&NotSucceeds;": "\u2281",
+  "&NotSucceedsEqual;": "\u2AB0\u0338",
+  "&NotSucceedsSlantEqual;": "\u22E1",
+  "&NotSucceedsTilde;": "\u227F\u0338",
+  "&NotSuperset;": "\u2283\u20D2",
+  "&NotSupersetEqual;": "\u2289",
+  "&NotTilde;": "\u2241",
+  "&NotTildeEqual;": "\u2244",
+  "&NotTildeFullEqual;": "\u2247",
+  "&NotTildeTilde;": "\u2249",
+  "&NotVerticalBar;": "\u2224",
+  "&Nscr;": "\u{1D4A9}",
+  "&Ntilde": "\xD1",
+  "&Ntilde;": "\xD1",
+  "&Nu;": "\u039D",
+  "&OElig;": "\u0152",
+  "&Oacute": "\xD3",
+  "&Oacute;": "\xD3",
+  "&Ocirc": "\xD4",
+  "&Ocirc;": "\xD4",
+  "&Ocy;": "\u041E",
+  "&Odblac;": "\u0150",
+  "&Ofr;": "\u{1D512}",
+  "&Ograve": "\xD2",
+  "&Ograve;": "\xD2",
+  "&Omacr;": "\u014C",
+  "&Omega;": "\u03A9",
+  "&Omicron;": "\u039F",
+  "&Oopf;": "\u{1D546}",
+  "&OpenCurlyDoubleQuote;": "\u201C",
+  "&OpenCurlyQuote;": "\u2018",
+  "&Or;": "\u2A54",
+  "&Oscr;": "\u{1D4AA}",
+  "&Oslash": "\xD8",
+  "&Oslash;": "\xD8",
+  "&Otilde": "\xD5",
+  "&Otilde;": "\xD5",
+  "&Otimes;": "\u2A37",
+  "&Ouml": "\xD6",
+  "&Ouml;": "\xD6",
+  "&OverBar;": "\u203E",
+  "&OverBrace;": "\u23DE",
+  "&OverBracket;": "\u23B4",
+  "&OverParenthesis;": "\u23DC",
+  "&PartialD;": "\u2202",
+  "&Pcy;": "\u041F",
+  "&Pfr;": "\u{1D513}",
+  "&Phi;": "\u03A6",
+  "&Pi;": "\u03A0",
+  "&PlusMinus;": "\xB1",
+  "&Poincareplane;": "\u210C",
+  "&Popf;": "\u2119",
+  "&Pr;": "\u2ABB",
+  "&Precedes;": "\u227A",
+  "&PrecedesEqual;": "\u2AAF",
+  "&PrecedesSlantEqual;": "\u227C",
+  "&PrecedesTilde;": "\u227E",
+  "&Prime;": "\u2033",
+  "&Product;": "\u220F",
+  "&Proportion;": "\u2237",
+  "&Proportional;": "\u221D",
+  "&Pscr;": "\u{1D4AB}",
+  "&Psi;": "\u03A8",
+  "&QUOT": '"',
+  "&QUOT;": '"',
+  "&Qfr;": "\u{1D514}",
+  "&Qopf;": "\u211A",
+  "&Qscr;": "\u{1D4AC}",
+  "&RBarr;": "\u2910",
+  "&REG": "\xAE",
+  "&REG;": "\xAE",
+  "&Racute;": "\u0154",
+  "&Rang;": "\u27EB",
+  "&Rarr;": "\u21A0",
+  "&Rarrtl;": "\u2916",
+  "&Rcaron;": "\u0158",
+  "&Rcedil;": "\u0156",
+  "&Rcy;": "\u0420",
+  "&Re;": "\u211C",
+  "&ReverseElement;": "\u220B",
+  "&ReverseEquilibrium;": "\u21CB",
+  "&ReverseUpEquilibrium;": "\u296F",
+  "&Rfr;": "\u211C",
+  "&Rho;": "\u03A1",
+  "&RightAngleBracket;": "\u27E9",
+  "&RightArrow;": "\u2192",
+  "&RightArrowBar;": "\u21E5",
+  "&RightArrowLeftArrow;": "\u21C4",
+  "&RightCeiling;": "\u2309",
+  "&RightDoubleBracket;": "\u27E7",
+  "&RightDownTeeVector;": "\u295D",
+  "&RightDownVector;": "\u21C2",
+  "&RightDownVectorBar;": "\u2955",
+  "&RightFloor;": "\u230B",
+  "&RightTee;": "\u22A2",
+  "&RightTeeArrow;": "\u21A6",
+  "&RightTeeVector;": "\u295B",
+  "&RightTriangle;": "\u22B3",
+  "&RightTriangleBar;": "\u29D0",
+  "&RightTriangleEqual;": "\u22B5",
+  "&RightUpDownVector;": "\u294F",
+  "&RightUpTeeVector;": "\u295C",
+  "&RightUpVector;": "\u21BE",
+  "&RightUpVectorBar;": "\u2954",
+  "&RightVector;": "\u21C0",
+  "&RightVectorBar;": "\u2953",
+  "&Rightarrow;": "\u21D2",
+  "&Ropf;": "\u211D",
+  "&RoundImplies;": "\u2970",
+  "&Rrightarrow;": "\u21DB",
+  "&Rscr;": "\u211B",
+  "&Rsh;": "\u21B1",
+  "&RuleDelayed;": "\u29F4",
+  "&SHCHcy;": "\u0429",
+  "&SHcy;": "\u0428",
+  "&SOFTcy;": "\u042C",
+  "&Sacute;": "\u015A",
+  "&Sc;": "\u2ABC",
+  "&Scaron;": "\u0160",
+  "&Scedil;": "\u015E",
+  "&Scirc;": "\u015C",
+  "&Scy;": "\u0421",
+  "&Sfr;": "\u{1D516}",
+  "&ShortDownArrow;": "\u2193",
+  "&ShortLeftArrow;": "\u2190",
+  "&ShortRightArrow;": "\u2192",
+  "&ShortUpArrow;": "\u2191",
+  "&Sigma;": "\u03A3",
+  "&SmallCircle;": "\u2218",
+  "&Sopf;": "\u{1D54A}",
+  "&Sqrt;": "\u221A",
+  "&Square;": "\u25A1",
+  "&SquareIntersection;": "\u2293",
+  "&SquareSubset;": "\u228F",
+  "&SquareSubsetEqual;": "\u2291",
+  "&SquareSuperset;": "\u2290",
+  "&SquareSupersetEqual;": "\u2292",
+  "&SquareUnion;": "\u2294",
+  "&Sscr;": "\u{1D4AE}",
+  "&Star;": "\u22C6",
+  "&Sub;": "\u22D0",
+  "&Subset;": "\u22D0",
+  "&SubsetEqual;": "\u2286",
+  "&Succeeds;": "\u227B",
+  "&SucceedsEqual;": "\u2AB0",
+  "&SucceedsSlantEqual;": "\u227D",
+  "&SucceedsTilde;": "\u227F",
+  "&SuchThat;": "\u220B",
+  "&Sum;": "\u2211",
+  "&Sup;": "\u22D1",
+  "&Superset;": "\u2283",
+  "&SupersetEqual;": "\u2287",
+  "&Supset;": "\u22D1",
+  "&THORN": "\xDE",
+  "&THORN;": "\xDE",
+  "&TRADE;": "\u2122",
+  "&TSHcy;": "\u040B",
+  "&TScy;": "\u0426",
+  "&Tab;": "	",
+  "&Tau;": "\u03A4",
+  "&Tcaron;": "\u0164",
+  "&Tcedil;": "\u0162",
+  "&Tcy;": "\u0422",
+  "&Tfr;": "\u{1D517}",
+  "&Therefore;": "\u2234",
+  "&Theta;": "\u0398",
+  "&ThickSpace;": "\u205F\u200A",
+  "&ThinSpace;": "\u2009",
+  "&Tilde;": "\u223C",
+  "&TildeEqual;": "\u2243",
+  "&TildeFullEqual;": "\u2245",
+  "&TildeTilde;": "\u2248",
+  "&Topf;": "\u{1D54B}",
+  "&TripleDot;": "\u20DB",
+  "&Tscr;": "\u{1D4AF}",
+  "&Tstrok;": "\u0166",
+  "&Uacute": "\xDA",
+  "&Uacute;": "\xDA",
+  "&Uarr;": "\u219F",
+  "&Uarrocir;": "\u2949",
+  "&Ubrcy;": "\u040E",
+  "&Ubreve;": "\u016C",
+  "&Ucirc": "\xDB",
+  "&Ucirc;": "\xDB",
+  "&Ucy;": "\u0423",
+  "&Udblac;": "\u0170",
+  "&Ufr;": "\u{1D518}",
+  "&Ugrave": "\xD9",
+  "&Ugrave;": "\xD9",
+  "&Umacr;": "\u016A",
+  "&UnderBar;": "_",
+  "&UnderBrace;": "\u23DF",
+  "&UnderBracket;": "\u23B5",
+  "&UnderParenthesis;": "\u23DD",
+  "&Union;": "\u22C3",
+  "&UnionPlus;": "\u228E",
+  "&Uogon;": "\u0172",
+  "&Uopf;": "\u{1D54C}",
+  "&UpArrow;": "\u2191",
+  "&UpArrowBar;": "\u2912",
+  "&UpArrowDownArrow;": "\u21C5",
+  "&UpDownArrow;": "\u2195",
+  "&UpEquilibrium;": "\u296E",
+  "&UpTee;": "\u22A5",
+  "&UpTeeArrow;": "\u21A5",
+  "&Uparrow;": "\u21D1",
+  "&Updownarrow;": "\u21D5",
+  "&UpperLeftArrow;": "\u2196",
+  "&UpperRightArrow;": "\u2197",
+  "&Upsi;": "\u03D2",
+  "&Upsilon;": "\u03A5",
+  "&Uring;": "\u016E",
+  "&Uscr;": "\u{1D4B0}",
+  "&Utilde;": "\u0168",
+  "&Uuml": "\xDC",
+  "&Uuml;": "\xDC",
+  "&VDash;": "\u22AB",
+  "&Vbar;": "\u2AEB",
+  "&Vcy;": "\u0412",
+  "&Vdash;": "\u22A9",
+  "&Vdashl;": "\u2AE6",
+  "&Vee;": "\u22C1",
+  "&Verbar;": "\u2016",
+  "&Vert;": "\u2016",
+  "&VerticalBar;": "\u2223",
+  "&VerticalLine;": "|",
+  "&VerticalSeparator;": "\u2758",
+  "&VerticalTilde;": "\u2240",
+  "&VeryThinSpace;": "\u200A",
+  "&Vfr;": "\u{1D519}",
+  "&Vopf;": "\u{1D54D}",
+  "&Vscr;": "\u{1D4B1}",
+  "&Vvdash;": "\u22AA",
+  "&Wcirc;": "\u0174",
+  "&Wedge;": "\u22C0",
+  "&Wfr;": "\u{1D51A}",
+  "&Wopf;": "\u{1D54E}",
+  "&Wscr;": "\u{1D4B2}",
+  "&Xfr;": "\u{1D51B}",
+  "&Xi;": "\u039E",
+  "&Xopf;": "\u{1D54F}",
+  "&Xscr;": "\u{1D4B3}",
+  "&YAcy;": "\u042F",
+  "&YIcy;": "\u0407",
+  "&YUcy;": "\u042E",
+  "&Yacute": "\xDD",
+  "&Yacute;": "\xDD",
+  "&Ycirc;": "\u0176",
+  "&Ycy;": "\u042B",
+  "&Yfr;": "\u{1D51C}",
+  "&Yopf;": "\u{1D550}",
+  "&Yscr;": "\u{1D4B4}",
+  "&Yuml;": "\u0178",
+  "&ZHcy;": "\u0416",
+  "&Zacute;": "\u0179",
+  "&Zcaron;": "\u017D",
+  "&Zcy;": "\u0417",
+  "&Zdot;": "\u017B",
+  "&ZeroWidthSpace;": "\u200B",
+  "&Zeta;": "\u0396",
+  "&Zfr;": "\u2128",
+  "&Zopf;": "\u2124",
+  "&Zscr;": "\u{1D4B5}",
+  "&aacute": "\xE1",
+  "&aacute;": "\xE1",
+  "&abreve;": "\u0103",
+  "&ac;": "\u223E",
+  "&acE;": "\u223E\u0333",
+  "&acd;": "\u223F",
+  "&acirc": "\xE2",
+  "&acirc;": "\xE2",
+  "&acute": "\xB4",
+  "&acute;": "\xB4",
+  "&acy;": "\u0430",
+  "&aelig": "\xE6",
+  "&aelig;": "\xE6",
+  "&af;": "\u2061",
+  "&afr;": "\u{1D51E}",
+  "&agrave": "\xE0",
+  "&agrave;": "\xE0",
+  "&alefsym;": "\u2135",
+  "&aleph;": "\u2135",
+  "&alpha;": "\u03B1",
+  "&amacr;": "\u0101",
+  "&amalg;": "\u2A3F",
+  "&amp": "&",
+  "&amp;": "&",
+  "&and;": "\u2227",
+  "&andand;": "\u2A55",
+  "&andd;": "\u2A5C",
+  "&andslope;": "\u2A58",
+  "&andv;": "\u2A5A",
+  "&ang;": "\u2220",
+  "&ange;": "\u29A4",
+  "&angle;": "\u2220",
+  "&angmsd;": "\u2221",
+  "&angmsdaa;": "\u29A8",
+  "&angmsdab;": "\u29A9",
+  "&angmsdac;": "\u29AA",
+  "&angmsdad;": "\u29AB",
+  "&angmsdae;": "\u29AC",
+  "&angmsdaf;": "\u29AD",
+  "&angmsdag;": "\u29AE",
+  "&angmsdah;": "\u29AF",
+  "&angrt;": "\u221F",
+  "&angrtvb;": "\u22BE",
+  "&angrtvbd;": "\u299D",
+  "&angsph;": "\u2222",
+  "&angst;": "\xC5",
+  "&angzarr;": "\u237C",
+  "&aogon;": "\u0105",
+  "&aopf;": "\u{1D552}",
+  "&ap;": "\u2248",
+  "&apE;": "\u2A70",
+  "&apacir;": "\u2A6F",
+  "&ape;": "\u224A",
+  "&apid;": "\u224B",
+  "&apos;": "'",
+  "&approx;": "\u2248",
+  "&approxeq;": "\u224A",
+  "&aring": "\xE5",
+  "&aring;": "\xE5",
+  "&ascr;": "\u{1D4B6}",
+  "&ast;": "*",
+  "&asymp;": "\u2248",
+  "&asympeq;": "\u224D",
+  "&atilde": "\xE3",
+  "&atilde;": "\xE3",
+  "&auml": "\xE4",
+  "&auml;": "\xE4",
+  "&awconint;": "\u2233",
+  "&awint;": "\u2A11",
+  "&bNot;": "\u2AED",
+  "&backcong;": "\u224C",
+  "&backepsilon;": "\u03F6",
+  "&backprime;": "\u2035",
+  "&backsim;": "\u223D",
+  "&backsimeq;": "\u22CD",
+  "&barvee;": "\u22BD",
+  "&barwed;": "\u2305",
+  "&barwedge;": "\u2305",
+  "&bbrk;": "\u23B5",
+  "&bbrktbrk;": "\u23B6",
+  "&bcong;": "\u224C",
+  "&bcy;": "\u0431",
+  "&bdquo;": "\u201E",
+  "&becaus;": "\u2235",
+  "&because;": "\u2235",
+  "&bemptyv;": "\u29B0",
+  "&bepsi;": "\u03F6",
+  "&bernou;": "\u212C",
+  "&beta;": "\u03B2",
+  "&beth;": "\u2136",
+  "&between;": "\u226C",
+  "&bfr;": "\u{1D51F}",
+  "&bigcap;": "\u22C2",
+  "&bigcirc;": "\u25EF",
+  "&bigcup;": "\u22C3",
+  "&bigodot;": "\u2A00",
+  "&bigoplus;": "\u2A01",
+  "&bigotimes;": "\u2A02",
+  "&bigsqcup;": "\u2A06",
+  "&bigstar;": "\u2605",
+  "&bigtriangledown;": "\u25BD",
+  "&bigtriangleup;": "\u25B3",
+  "&biguplus;": "\u2A04",
+  "&bigvee;": "\u22C1",
+  "&bigwedge;": "\u22C0",
+  "&bkarow;": "\u290D",
+  "&blacklozenge;": "\u29EB",
+  "&blacksquare;": "\u25AA",
+  "&blacktriangle;": "\u25B4",
+  "&blacktriangledown;": "\u25BE",
+  "&blacktriangleleft;": "\u25C2",
+  "&blacktriangleright;": "\u25B8",
+  "&blank;": "\u2423",
+  "&blk12;": "\u2592",
+  "&blk14;": "\u2591",
+  "&blk34;": "\u2593",
+  "&block;": "\u2588",
+  "&bne;": "=\u20E5",
+  "&bnequiv;": "\u2261\u20E5",
+  "&bnot;": "\u2310",
+  "&bopf;": "\u{1D553}",
+  "&bot;": "\u22A5",
+  "&bottom;": "\u22A5",
+  "&bowtie;": "\u22C8",
+  "&boxDL;": "\u2557",
+  "&boxDR;": "\u2554",
+  "&boxDl;": "\u2556",
+  "&boxDr;": "\u2553",
+  "&boxH;": "\u2550",
+  "&boxHD;": "\u2566",
+  "&boxHU;": "\u2569",
+  "&boxHd;": "\u2564",
+  "&boxHu;": "\u2567",
+  "&boxUL;": "\u255D",
+  "&boxUR;": "\u255A",
+  "&boxUl;": "\u255C",
+  "&boxUr;": "\u2559",
+  "&boxV;": "\u2551",
+  "&boxVH;": "\u256C",
+  "&boxVL;": "\u2563",
+  "&boxVR;": "\u2560",
+  "&boxVh;": "\u256B",
+  "&boxVl;": "\u2562",
+  "&boxVr;": "\u255F",
+  "&boxbox;": "\u29C9",
+  "&boxdL;": "\u2555",
+  "&boxdR;": "\u2552",
+  "&boxdl;": "\u2510",
+  "&boxdr;": "\u250C",
+  "&boxh;": "\u2500",
+  "&boxhD;": "\u2565",
+  "&boxhU;": "\u2568",
+  "&boxhd;": "\u252C",
+  "&boxhu;": "\u2534",
+  "&boxminus;": "\u229F",
+  "&boxplus;": "\u229E",
+  "&boxtimes;": "\u22A0",
+  "&boxuL;": "\u255B",
+  "&boxuR;": "\u2558",
+  "&boxul;": "\u2518",
+  "&boxur;": "\u2514",
+  "&boxv;": "\u2502",
+  "&boxvH;": "\u256A",
+  "&boxvL;": "\u2561",
+  "&boxvR;": "\u255E",
+  "&boxvh;": "\u253C",
+  "&boxvl;": "\u2524",
+  "&boxvr;": "\u251C",
+  "&bprime;": "\u2035",
+  "&breve;": "\u02D8",
+  "&brvbar": "\xA6",
+  "&brvbar;": "\xA6",
+  "&bscr;": "\u{1D4B7}",
+  "&bsemi;": "\u204F",
+  "&bsim;": "\u223D",
+  "&bsime;": "\u22CD",
+  "&bsol;": "\\",
+  "&bsolb;": "\u29C5",
+  "&bsolhsub;": "\u27C8",
+  "&bull;": "\u2022",
+  "&bullet;": "\u2022",
+  "&bump;": "\u224E",
+  "&bumpE;": "\u2AAE",
+  "&bumpe;": "\u224F",
+  "&bumpeq;": "\u224F",
+  "&cacute;": "\u0107",
+  "&cap;": "\u2229",
+  "&capand;": "\u2A44",
+  "&capbrcup;": "\u2A49",
+  "&capcap;": "\u2A4B",
+  "&capcup;": "\u2A47",
+  "&capdot;": "\u2A40",
+  "&caps;": "\u2229\uFE00",
+  "&caret;": "\u2041",
+  "&caron;": "\u02C7",
+  "&ccaps;": "\u2A4D",
+  "&ccaron;": "\u010D",
+  "&ccedil": "\xE7",
+  "&ccedil;": "\xE7",
+  "&ccirc;": "\u0109",
+  "&ccups;": "\u2A4C",
+  "&ccupssm;": "\u2A50",
+  "&cdot;": "\u010B",
+  "&cedil": "\xB8",
+  "&cedil;": "\xB8",
+  "&cemptyv;": "\u29B2",
+  "&cent": "\xA2",
+  "&cent;": "\xA2",
+  "&centerdot;": "\xB7",
+  "&cfr;": "\u{1D520}",
+  "&chcy;": "\u0447",
+  "&check;": "\u2713",
+  "&checkmark;": "\u2713",
+  "&chi;": "\u03C7",
+  "&cir;": "\u25CB",
+  "&cirE;": "\u29C3",
+  "&circ;": "\u02C6",
+  "&circeq;": "\u2257",
+  "&circlearrowleft;": "\u21BA",
+  "&circlearrowright;": "\u21BB",
+  "&circledR;": "\xAE",
+  "&circledS;": "\u24C8",
+  "&circledast;": "\u229B",
+  "&circledcirc;": "\u229A",
+  "&circleddash;": "\u229D",
+  "&cire;": "\u2257",
+  "&cirfnint;": "\u2A10",
+  "&cirmid;": "\u2AEF",
+  "&cirscir;": "\u29C2",
+  "&clubs;": "\u2663",
+  "&clubsuit;": "\u2663",
+  "&colon;": ":",
+  "&colone;": "\u2254",
+  "&coloneq;": "\u2254",
+  "&comma;": ",",
+  "&commat;": "@",
+  "&comp;": "\u2201",
+  "&compfn;": "\u2218",
+  "&complement;": "\u2201",
+  "&complexes;": "\u2102",
+  "&cong;": "\u2245",
+  "&congdot;": "\u2A6D",
+  "&conint;": "\u222E",
+  "&copf;": "\u{1D554}",
+  "&coprod;": "\u2210",
+  "&copy": "\xA9",
+  "&copy;": "\xA9",
+  "&copysr;": "\u2117",
+  "&crarr;": "\u21B5",
+  "&cross;": "\u2717",
+  "&cscr;": "\u{1D4B8}",
+  "&csub;": "\u2ACF",
+  "&csube;": "\u2AD1",
+  "&csup;": "\u2AD0",
+  "&csupe;": "\u2AD2",
+  "&ctdot;": "\u22EF",
+  "&cudarrl;": "\u2938",
+  "&cudarrr;": "\u2935",
+  "&cuepr;": "\u22DE",
+  "&cuesc;": "\u22DF",
+  "&cularr;": "\u21B6",
+  "&cularrp;": "\u293D",
+  "&cup;": "\u222A",
+  "&cupbrcap;": "\u2A48",
+  "&cupcap;": "\u2A46",
+  "&cupcup;": "\u2A4A",
+  "&cupdot;": "\u228D",
+  "&cupor;": "\u2A45",
+  "&cups;": "\u222A\uFE00",
+  "&curarr;": "\u21B7",
+  "&curarrm;": "\u293C",
+  "&curlyeqprec;": "\u22DE",
+  "&curlyeqsucc;": "\u22DF",
+  "&curlyvee;": "\u22CE",
+  "&curlywedge;": "\u22CF",
+  "&curren": "\xA4",
+  "&curren;": "\xA4",
+  "&curvearrowleft;": "\u21B6",
+  "&curvearrowright;": "\u21B7",
+  "&cuvee;": "\u22CE",
+  "&cuwed;": "\u22CF",
+  "&cwconint;": "\u2232",
+  "&cwint;": "\u2231",
+  "&cylcty;": "\u232D",
+  "&dArr;": "\u21D3",
+  "&dHar;": "\u2965",
+  "&dagger;": "\u2020",
+  "&daleth;": "\u2138",
+  "&darr;": "\u2193",
+  "&dash;": "\u2010",
+  "&dashv;": "\u22A3",
+  "&dbkarow;": "\u290F",
+  "&dblac;": "\u02DD",
+  "&dcaron;": "\u010F",
+  "&dcy;": "\u0434",
+  "&dd;": "\u2146",
+  "&ddagger;": "\u2021",
+  "&ddarr;": "\u21CA",
+  "&ddotseq;": "\u2A77",
+  "&deg": "\xB0",
+  "&deg;": "\xB0",
+  "&delta;": "\u03B4",
+  "&demptyv;": "\u29B1",
+  "&dfisht;": "\u297F",
+  "&dfr;": "\u{1D521}",
+  "&dharl;": "\u21C3",
+  "&dharr;": "\u21C2",
+  "&diam;": "\u22C4",
+  "&diamond;": "\u22C4",
+  "&diamondsuit;": "\u2666",
+  "&diams;": "\u2666",
+  "&die;": "\xA8",
+  "&digamma;": "\u03DD",
+  "&disin;": "\u22F2",
+  "&div;": "\xF7",
+  "&divide": "\xF7",
+  "&divide;": "\xF7",
+  "&divideontimes;": "\u22C7",
+  "&divonx;": "\u22C7",
+  "&djcy;": "\u0452",
+  "&dlcorn;": "\u231E",
+  "&dlcrop;": "\u230D",
+  "&dollar;": "$",
+  "&dopf;": "\u{1D555}",
+  "&dot;": "\u02D9",
+  "&doteq;": "\u2250",
+  "&doteqdot;": "\u2251",
+  "&dotminus;": "\u2238",
+  "&dotplus;": "\u2214",
+  "&dotsquare;": "\u22A1",
+  "&doublebarwedge;": "\u2306",
+  "&downarrow;": "\u2193",
+  "&downdownarrows;": "\u21CA",
+  "&downharpoonleft;": "\u21C3",
+  "&downharpoonright;": "\u21C2",
+  "&drbkarow;": "\u2910",
+  "&drcorn;": "\u231F",
+  "&drcrop;": "\u230C",
+  "&dscr;": "\u{1D4B9}",
+  "&dscy;": "\u0455",
+  "&dsol;": "\u29F6",
+  "&dstrok;": "\u0111",
+  "&dtdot;": "\u22F1",
+  "&dtri;": "\u25BF",
+  "&dtrif;": "\u25BE",
+  "&duarr;": "\u21F5",
+  "&duhar;": "\u296F",
+  "&dwangle;": "\u29A6",
+  "&dzcy;": "\u045F",
+  "&dzigrarr;": "\u27FF",
+  "&eDDot;": "\u2A77",
+  "&eDot;": "\u2251",
+  "&eacute": "\xE9",
+  "&eacute;": "\xE9",
+  "&easter;": "\u2A6E",
+  "&ecaron;": "\u011B",
+  "&ecir;": "\u2256",
+  "&ecirc": "\xEA",
+  "&ecirc;": "\xEA",
+  "&ecolon;": "\u2255",
+  "&ecy;": "\u044D",
+  "&edot;": "\u0117",
+  "&ee;": "\u2147",
+  "&efDot;": "\u2252",
+  "&efr;": "\u{1D522}",
+  "&eg;": "\u2A9A",
+  "&egrave": "\xE8",
+  "&egrave;": "\xE8",
+  "&egs;": "\u2A96",
+  "&egsdot;": "\u2A98",
+  "&el;": "\u2A99",
+  "&elinters;": "\u23E7",
+  "&ell;": "\u2113",
+  "&els;": "\u2A95",
+  "&elsdot;": "\u2A97",
+  "&emacr;": "\u0113",
+  "&empty;": "\u2205",
+  "&emptyset;": "\u2205",
+  "&emptyv;": "\u2205",
+  "&emsp13;": "\u2004",
+  "&emsp14;": "\u2005",
+  "&emsp;": "\u2003",
+  "&eng;": "\u014B",
+  "&ensp;": "\u2002",
+  "&eogon;": "\u0119",
+  "&eopf;": "\u{1D556}",
+  "&epar;": "\u22D5",
+  "&eparsl;": "\u29E3",
+  "&eplus;": "\u2A71",
+  "&epsi;": "\u03B5",
+  "&epsilon;": "\u03B5",
+  "&epsiv;": "\u03F5",
+  "&eqcirc;": "\u2256",
+  "&eqcolon;": "\u2255",
+  "&eqsim;": "\u2242",
+  "&eqslantgtr;": "\u2A96",
+  "&eqslantless;": "\u2A95",
+  "&equals;": "=",
+  "&equest;": "\u225F",
+  "&equiv;": "\u2261",
+  "&equivDD;": "\u2A78",
+  "&eqvparsl;": "\u29E5",
+  "&erDot;": "\u2253",
+  "&erarr;": "\u2971",
+  "&escr;": "\u212F",
+  "&esdot;": "\u2250",
+  "&esim;": "\u2242",
+  "&eta;": "\u03B7",
+  "&eth": "\xF0",
+  "&eth;": "\xF0",
+  "&euml": "\xEB",
+  "&euml;": "\xEB",
+  "&euro;": "\u20AC",
+  "&excl;": "!",
+  "&exist;": "\u2203",
+  "&expectation;": "\u2130",
+  "&exponentiale;": "\u2147",
+  "&fallingdotseq;": "\u2252",
+  "&fcy;": "\u0444",
+  "&female;": "\u2640",
+  "&ffilig;": "\uFB03",
+  "&fflig;": "\uFB00",
+  "&ffllig;": "\uFB04",
+  "&ffr;": "\u{1D523}",
+  "&filig;": "\uFB01",
+  "&fjlig;": "fj",
+  "&flat;": "\u266D",
+  "&fllig;": "\uFB02",
+  "&fltns;": "\u25B1",
+  "&fnof;": "\u0192",
+  "&fopf;": "\u{1D557}",
+  "&forall;": "\u2200",
+  "&fork;": "\u22D4",
+  "&forkv;": "\u2AD9",
+  "&fpartint;": "\u2A0D",
+  "&frac12": "\xBD",
+  "&frac12;": "\xBD",
+  "&frac13;": "\u2153",
+  "&frac14": "\xBC",
+  "&frac14;": "\xBC",
+  "&frac15;": "\u2155",
+  "&frac16;": "\u2159",
+  "&frac18;": "\u215B",
+  "&frac23;": "\u2154",
+  "&frac25;": "\u2156",
+  "&frac34": "\xBE",
+  "&frac34;": "\xBE",
+  "&frac35;": "\u2157",
+  "&frac38;": "\u215C",
+  "&frac45;": "\u2158",
+  "&frac56;": "\u215A",
+  "&frac58;": "\u215D",
+  "&frac78;": "\u215E",
+  "&frasl;": "\u2044",
+  "&frown;": "\u2322",
+  "&fscr;": "\u{1D4BB}",
+  "&gE;": "\u2267",
+  "&gEl;": "\u2A8C",
+  "&gacute;": "\u01F5",
+  "&gamma;": "\u03B3",
+  "&gammad;": "\u03DD",
+  "&gap;": "\u2A86",
+  "&gbreve;": "\u011F",
+  "&gcirc;": "\u011D",
+  "&gcy;": "\u0433",
+  "&gdot;": "\u0121",
+  "&ge;": "\u2265",
+  "&gel;": "\u22DB",
+  "&geq;": "\u2265",
+  "&geqq;": "\u2267",
+  "&geqslant;": "\u2A7E",
+  "&ges;": "\u2A7E",
+  "&gescc;": "\u2AA9",
+  "&gesdot;": "\u2A80",
+  "&gesdoto;": "\u2A82",
+  "&gesdotol;": "\u2A84",
+  "&gesl;": "\u22DB\uFE00",
+  "&gesles;": "\u2A94",
+  "&gfr;": "\u{1D524}",
+  "&gg;": "\u226B",
+  "&ggg;": "\u22D9",
+  "&gimel;": "\u2137",
+  "&gjcy;": "\u0453",
+  "&gl;": "\u2277",
+  "&glE;": "\u2A92",
+  "&gla;": "\u2AA5",
+  "&glj;": "\u2AA4",
+  "&gnE;": "\u2269",
+  "&gnap;": "\u2A8A",
+  "&gnapprox;": "\u2A8A",
+  "&gne;": "\u2A88",
+  "&gneq;": "\u2A88",
+  "&gneqq;": "\u2269",
+  "&gnsim;": "\u22E7",
+  "&gopf;": "\u{1D558}",
+  "&grave;": "`",
+  "&gscr;": "\u210A",
+  "&gsim;": "\u2273",
+  "&gsime;": "\u2A8E",
+  "&gsiml;": "\u2A90",
+  "&gt": ">",
+  "&gt;": ">",
+  "&gtcc;": "\u2AA7",
+  "&gtcir;": "\u2A7A",
+  "&gtdot;": "\u22D7",
+  "&gtlPar;": "\u2995",
+  "&gtquest;": "\u2A7C",
+  "&gtrapprox;": "\u2A86",
+  "&gtrarr;": "\u2978",
+  "&gtrdot;": "\u22D7",
+  "&gtreqless;": "\u22DB",
+  "&gtreqqless;": "\u2A8C",
+  "&gtrless;": "\u2277",
+  "&gtrsim;": "\u2273",
+  "&gvertneqq;": "\u2269\uFE00",
+  "&gvnE;": "\u2269\uFE00",
+  "&hArr;": "\u21D4",
+  "&hairsp;": "\u200A",
+  "&half;": "\xBD",
+  "&hamilt;": "\u210B",
+  "&hardcy;": "\u044A",
+  "&harr;": "\u2194",
+  "&harrcir;": "\u2948",
+  "&harrw;": "\u21AD",
+  "&hbar;": "\u210F",
+  "&hcirc;": "\u0125",
+  "&hearts;": "\u2665",
+  "&heartsuit;": "\u2665",
+  "&hellip;": "\u2026",
+  "&hercon;": "\u22B9",
+  "&hfr;": "\u{1D525}",
+  "&hksearow;": "\u2925",
+  "&hkswarow;": "\u2926",
+  "&hoarr;": "\u21FF",
+  "&homtht;": "\u223B",
+  "&hookleftarrow;": "\u21A9",
+  "&hookrightarrow;": "\u21AA",
+  "&hopf;": "\u{1D559}",
+  "&horbar;": "\u2015",
+  "&hscr;": "\u{1D4BD}",
+  "&hslash;": "\u210F",
+  "&hstrok;": "\u0127",
+  "&hybull;": "\u2043",
+  "&hyphen;": "\u2010",
+  "&iacute": "\xED",
+  "&iacute;": "\xED",
+  "&ic;": "\u2063",
+  "&icirc": "\xEE",
+  "&icirc;": "\xEE",
+  "&icy;": "\u0438",
+  "&iecy;": "\u0435",
+  "&iexcl": "\xA1",
+  "&iexcl;": "\xA1",
+  "&iff;": "\u21D4",
+  "&ifr;": "\u{1D526}",
+  "&igrave": "\xEC",
+  "&igrave;": "\xEC",
+  "&ii;": "\u2148",
+  "&iiiint;": "\u2A0C",
+  "&iiint;": "\u222D",
+  "&iinfin;": "\u29DC",
+  "&iiota;": "\u2129",
+  "&ijlig;": "\u0133",
+  "&imacr;": "\u012B",
+  "&image;": "\u2111",
+  "&imagline;": "\u2110",
+  "&imagpart;": "\u2111",
+  "&imath;": "\u0131",
+  "&imof;": "\u22B7",
+  "&imped;": "\u01B5",
+  "&in;": "\u2208",
+  "&incare;": "\u2105",
+  "&infin;": "\u221E",
+  "&infintie;": "\u29DD",
+  "&inodot;": "\u0131",
+  "&int;": "\u222B",
+  "&intcal;": "\u22BA",
+  "&integers;": "\u2124",
+  "&intercal;": "\u22BA",
+  "&intlarhk;": "\u2A17",
+  "&intprod;": "\u2A3C",
+  "&iocy;": "\u0451",
+  "&iogon;": "\u012F",
+  "&iopf;": "\u{1D55A}",
+  "&iota;": "\u03B9",
+  "&iprod;": "\u2A3C",
+  "&iquest": "\xBF",
+  "&iquest;": "\xBF",
+  "&iscr;": "\u{1D4BE}",
+  "&isin;": "\u2208",
+  "&isinE;": "\u22F9",
+  "&isindot;": "\u22F5",
+  "&isins;": "\u22F4",
+  "&isinsv;": "\u22F3",
+  "&isinv;": "\u2208",
+  "&it;": "\u2062",
+  "&itilde;": "\u0129",
+  "&iukcy;": "\u0456",
+  "&iuml": "\xEF",
+  "&iuml;": "\xEF",
+  "&jcirc;": "\u0135",
+  "&jcy;": "\u0439",
+  "&jfr;": "\u{1D527}",
+  "&jmath;": "\u0237",
+  "&jopf;": "\u{1D55B}",
+  "&jscr;": "\u{1D4BF}",
+  "&jsercy;": "\u0458",
+  "&jukcy;": "\u0454",
+  "&kappa;": "\u03BA",
+  "&kappav;": "\u03F0",
+  "&kcedil;": "\u0137",
+  "&kcy;": "\u043A",
+  "&kfr;": "\u{1D528}",
+  "&kgreen;": "\u0138",
+  "&khcy;": "\u0445",
+  "&kjcy;": "\u045C",
+  "&kopf;": "\u{1D55C}",
+  "&kscr;": "\u{1D4C0}",
+  "&lAarr;": "\u21DA",
+  "&lArr;": "\u21D0",
+  "&lAtail;": "\u291B",
+  "&lBarr;": "\u290E",
+  "&lE;": "\u2266",
+  "&lEg;": "\u2A8B",
+  "&lHar;": "\u2962",
+  "&lacute;": "\u013A",
+  "&laemptyv;": "\u29B4",
+  "&lagran;": "\u2112",
+  "&lambda;": "\u03BB",
+  "&lang;": "\u27E8",
+  "&langd;": "\u2991",
+  "&langle;": "\u27E8",
+  "&lap;": "\u2A85",
+  "&laquo": "\xAB",
+  "&laquo;": "\xAB",
+  "&larr;": "\u2190",
+  "&larrb;": "\u21E4",
+  "&larrbfs;": "\u291F",
+  "&larrfs;": "\u291D",
+  "&larrhk;": "\u21A9",
+  "&larrlp;": "\u21AB",
+  "&larrpl;": "\u2939",
+  "&larrsim;": "\u2973",
+  "&larrtl;": "\u21A2",
+  "&lat;": "\u2AAB",
+  "&latail;": "\u2919",
+  "&late;": "\u2AAD",
+  "&lates;": "\u2AAD\uFE00",
+  "&lbarr;": "\u290C",
+  "&lbbrk;": "\u2772",
+  "&lbrace;": "{",
+  "&lbrack;": "[",
+  "&lbrke;": "\u298B",
+  "&lbrksld;": "\u298F",
+  "&lbrkslu;": "\u298D",
+  "&lcaron;": "\u013E",
+  "&lcedil;": "\u013C",
+  "&lceil;": "\u2308",
+  "&lcub;": "{",
+  "&lcy;": "\u043B",
+  "&ldca;": "\u2936",
+  "&ldquo;": "\u201C",
+  "&ldquor;": "\u201E",
+  "&ldrdhar;": "\u2967",
+  "&ldrushar;": "\u294B",
+  "&ldsh;": "\u21B2",
+  "&le;": "\u2264",
+  "&leftarrow;": "\u2190",
+  "&leftarrowtail;": "\u21A2",
+  "&leftharpoondown;": "\u21BD",
+  "&leftharpoonup;": "\u21BC",
+  "&leftleftarrows;": "\u21C7",
+  "&leftrightarrow;": "\u2194",
+  "&leftrightarrows;": "\u21C6",
+  "&leftrightharpoons;": "\u21CB",
+  "&leftrightsquigarrow;": "\u21AD",
+  "&leftthreetimes;": "\u22CB",
+  "&leg;": "\u22DA",
+  "&leq;": "\u2264",
+  "&leqq;": "\u2266",
+  "&leqslant;": "\u2A7D",
+  "&les;": "\u2A7D",
+  "&lescc;": "\u2AA8",
+  "&lesdot;": "\u2A7F",
+  "&lesdoto;": "\u2A81",
+  "&lesdotor;": "\u2A83",
+  "&lesg;": "\u22DA\uFE00",
+  "&lesges;": "\u2A93",
+  "&lessapprox;": "\u2A85",
+  "&lessdot;": "\u22D6",
+  "&lesseqgtr;": "\u22DA",
+  "&lesseqqgtr;": "\u2A8B",
+  "&lessgtr;": "\u2276",
+  "&lesssim;": "\u2272",
+  "&lfisht;": "\u297C",
+  "&lfloor;": "\u230A",
+  "&lfr;": "\u{1D529}",
+  "&lg;": "\u2276",
+  "&lgE;": "\u2A91",
+  "&lhard;": "\u21BD",
+  "&lharu;": "\u21BC",
+  "&lharul;": "\u296A",
+  "&lhblk;": "\u2584",
+  "&ljcy;": "\u0459",
+  "&ll;": "\u226A",
+  "&llarr;": "\u21C7",
+  "&llcorner;": "\u231E",
+  "&llhard;": "\u296B",
+  "&lltri;": "\u25FA",
+  "&lmidot;": "\u0140",
+  "&lmoust;": "\u23B0",
+  "&lmoustache;": "\u23B0",
+  "&lnE;": "\u2268",
+  "&lnap;": "\u2A89",
+  "&lnapprox;": "\u2A89",
+  "&lne;": "\u2A87",
+  "&lneq;": "\u2A87",
+  "&lneqq;": "\u2268",
+  "&lnsim;": "\u22E6",
+  "&loang;": "\u27EC",
+  "&loarr;": "\u21FD",
+  "&lobrk;": "\u27E6",
+  "&longleftarrow;": "\u27F5",
+  "&longleftrightarrow;": "\u27F7",
+  "&longmapsto;": "\u27FC",
+  "&longrightarrow;": "\u27F6",
+  "&looparrowleft;": "\u21AB",
+  "&looparrowright;": "\u21AC",
+  "&lopar;": "\u2985",
+  "&lopf;": "\u{1D55D}",
+  "&loplus;": "\u2A2D",
+  "&lotimes;": "\u2A34",
+  "&lowast;": "\u2217",
+  "&lowbar;": "_",
+  "&loz;": "\u25CA",
+  "&lozenge;": "\u25CA",
+  "&lozf;": "\u29EB",
+  "&lpar;": "(",
+  "&lparlt;": "\u2993",
+  "&lrarr;": "\u21C6",
+  "&lrcorner;": "\u231F",
+  "&lrhar;": "\u21CB",
+  "&lrhard;": "\u296D",
+  "&lrm;": "\u200E",
+  "&lrtri;": "\u22BF",
+  "&lsaquo;": "\u2039",
+  "&lscr;": "\u{1D4C1}",
+  "&lsh;": "\u21B0",
+  "&lsim;": "\u2272",
+  "&lsime;": "\u2A8D",
+  "&lsimg;": "\u2A8F",
+  "&lsqb;": "[",
+  "&lsquo;": "\u2018",
+  "&lsquor;": "\u201A",
+  "&lstrok;": "\u0142",
+  "&lt": "<",
+  "&lt;": "<",
+  "&ltcc;": "\u2AA6",
+  "&ltcir;": "\u2A79",
+  "&ltdot;": "\u22D6",
+  "&lthree;": "\u22CB",
+  "&ltimes;": "\u22C9",
+  "&ltlarr;": "\u2976",
+  "&ltquest;": "\u2A7B",
+  "&ltrPar;": "\u2996",
+  "&ltri;": "\u25C3",
+  "&ltrie;": "\u22B4",
+  "&ltrif;": "\u25C2",
+  "&lurdshar;": "\u294A",
+  "&luruhar;": "\u2966",
+  "&lvertneqq;": "\u2268\uFE00",
+  "&lvnE;": "\u2268\uFE00",
+  "&mDDot;": "\u223A",
+  "&macr": "\xAF",
+  "&macr;": "\xAF",
+  "&male;": "\u2642",
+  "&malt;": "\u2720",
+  "&maltese;": "\u2720",
+  "&map;": "\u21A6",
+  "&mapsto;": "\u21A6",
+  "&mapstodown;": "\u21A7",
+  "&mapstoleft;": "\u21A4",
+  "&mapstoup;": "\u21A5",
+  "&marker;": "\u25AE",
+  "&mcomma;": "\u2A29",
+  "&mcy;": "\u043C",
+  "&mdash;": "\u2014",
+  "&measuredangle;": "\u2221",
+  "&mfr;": "\u{1D52A}",
+  "&mho;": "\u2127",
+  "&micro": "\xB5",
+  "&micro;": "\xB5",
+  "&mid;": "\u2223",
+  "&midast;": "*",
+  "&midcir;": "\u2AF0",
+  "&middot": "\xB7",
+  "&middot;": "\xB7",
+  "&minus;": "\u2212",
+  "&minusb;": "\u229F",
+  "&minusd;": "\u2238",
+  "&minusdu;": "\u2A2A",
+  "&mlcp;": "\u2ADB",
+  "&mldr;": "\u2026",
+  "&mnplus;": "\u2213",
+  "&models;": "\u22A7",
+  "&mopf;": "\u{1D55E}",
+  "&mp;": "\u2213",
+  "&mscr;": "\u{1D4C2}",
+  "&mstpos;": "\u223E",
+  "&mu;": "\u03BC",
+  "&multimap;": "\u22B8",
+  "&mumap;": "\u22B8",
+  "&nGg;": "\u22D9\u0338",
+  "&nGt;": "\u226B\u20D2",
+  "&nGtv;": "\u226B\u0338",
+  "&nLeftarrow;": "\u21CD",
+  "&nLeftrightarrow;": "\u21CE",
+  "&nLl;": "\u22D8\u0338",
+  "&nLt;": "\u226A\u20D2",
+  "&nLtv;": "\u226A\u0338",
+  "&nRightarrow;": "\u21CF",
+  "&nVDash;": "\u22AF",
+  "&nVdash;": "\u22AE",
+  "&nabla;": "\u2207",
+  "&nacute;": "\u0144",
+  "&nang;": "\u2220\u20D2",
+  "&nap;": "\u2249",
+  "&napE;": "\u2A70\u0338",
+  "&napid;": "\u224B\u0338",
+  "&napos;": "\u0149",
+  "&napprox;": "\u2249",
+  "&natur;": "\u266E",
+  "&natural;": "\u266E",
+  "&naturals;": "\u2115",
+  "&nbsp": "\xA0",
+  "&nbsp;": "\xA0",
+  "&nbump;": "\u224E\u0338",
+  "&nbumpe;": "\u224F\u0338",
+  "&ncap;": "\u2A43",
+  "&ncaron;": "\u0148",
+  "&ncedil;": "\u0146",
+  "&ncong;": "\u2247",
+  "&ncongdot;": "\u2A6D\u0338",
+  "&ncup;": "\u2A42",
+  "&ncy;": "\u043D",
+  "&ndash;": "\u2013",
+  "&ne;": "\u2260",
+  "&neArr;": "\u21D7",
+  "&nearhk;": "\u2924",
+  "&nearr;": "\u2197",
+  "&nearrow;": "\u2197",
+  "&nedot;": "\u2250\u0338",
+  "&nequiv;": "\u2262",
+  "&nesear;": "\u2928",
+  "&nesim;": "\u2242\u0338",
+  "&nexist;": "\u2204",
+  "&nexists;": "\u2204",
+  "&nfr;": "\u{1D52B}",
+  "&ngE;": "\u2267\u0338",
+  "&nge;": "\u2271",
+  "&ngeq;": "\u2271",
+  "&ngeqq;": "\u2267\u0338",
+  "&ngeqslant;": "\u2A7E\u0338",
+  "&nges;": "\u2A7E\u0338",
+  "&ngsim;": "\u2275",
+  "&ngt;": "\u226F",
+  "&ngtr;": "\u226F",
+  "&nhArr;": "\u21CE",
+  "&nharr;": "\u21AE",
+  "&nhpar;": "\u2AF2",
+  "&ni;": "\u220B",
+  "&nis;": "\u22FC",
+  "&nisd;": "\u22FA",
+  "&niv;": "\u220B",
+  "&njcy;": "\u045A",
+  "&nlArr;": "\u21CD",
+  "&nlE;": "\u2266\u0338",
+  "&nlarr;": "\u219A",
+  "&nldr;": "\u2025",
+  "&nle;": "\u2270",
+  "&nleftarrow;": "\u219A",
+  "&nleftrightarrow;": "\u21AE",
+  "&nleq;": "\u2270",
+  "&nleqq;": "\u2266\u0338",
+  "&nleqslant;": "\u2A7D\u0338",
+  "&nles;": "\u2A7D\u0338",
+  "&nless;": "\u226E",
+  "&nlsim;": "\u2274",
+  "&nlt;": "\u226E",
+  "&nltri;": "\u22EA",
+  "&nltrie;": "\u22EC",
+  "&nmid;": "\u2224",
+  "&nopf;": "\u{1D55F}",
+  "&not": "\xAC",
+  "&not;": "\xAC",
+  "&notin;": "\u2209",
+  "&notinE;": "\u22F9\u0338",
+  "&notindot;": "\u22F5\u0338",
+  "&notinva;": "\u2209",
+  "&notinvb;": "\u22F7",
+  "&notinvc;": "\u22F6",
+  "&notni;": "\u220C",
+  "&notniva;": "\u220C",
+  "&notnivb;": "\u22FE",
+  "&notnivc;": "\u22FD",
+  "&npar;": "\u2226",
+  "&nparallel;": "\u2226",
+  "&nparsl;": "\u2AFD\u20E5",
+  "&npart;": "\u2202\u0338",
+  "&npolint;": "\u2A14",
+  "&npr;": "\u2280",
+  "&nprcue;": "\u22E0",
+  "&npre;": "\u2AAF\u0338",
+  "&nprec;": "\u2280",
+  "&npreceq;": "\u2AAF\u0338",
+  "&nrArr;": "\u21CF",
+  "&nrarr;": "\u219B",
+  "&nrarrc;": "\u2933\u0338",
+  "&nrarrw;": "\u219D\u0338",
+  "&nrightarrow;": "\u219B",
+  "&nrtri;": "\u22EB",
+  "&nrtrie;": "\u22ED",
+  "&nsc;": "\u2281",
+  "&nsccue;": "\u22E1",
+  "&nsce;": "\u2AB0\u0338",
+  "&nscr;": "\u{1D4C3}",
+  "&nshortmid;": "\u2224",
+  "&nshortparallel;": "\u2226",
+  "&nsim;": "\u2241",
+  "&nsime;": "\u2244",
+  "&nsimeq;": "\u2244",
+  "&nsmid;": "\u2224",
+  "&nspar;": "\u2226",
+  "&nsqsube;": "\u22E2",
+  "&nsqsupe;": "\u22E3",
+  "&nsub;": "\u2284",
+  "&nsubE;": "\u2AC5\u0338",
+  "&nsube;": "\u2288",
+  "&nsubset;": "\u2282\u20D2",
+  "&nsubseteq;": "\u2288",
+  "&nsubseteqq;": "\u2AC5\u0338",
+  "&nsucc;": "\u2281",
+  "&nsucceq;": "\u2AB0\u0338",
+  "&nsup;": "\u2285",
+  "&nsupE;": "\u2AC6\u0338",
+  "&nsupe;": "\u2289",
+  "&nsupset;": "\u2283\u20D2",
+  "&nsupseteq;": "\u2289",
+  "&nsupseteqq;": "\u2AC6\u0338",
+  "&ntgl;": "\u2279",
+  "&ntilde": "\xF1",
+  "&ntilde;": "\xF1",
+  "&ntlg;": "\u2278",
+  "&ntriangleleft;": "\u22EA",
+  "&ntrianglelefteq;": "\u22EC",
+  "&ntriangleright;": "\u22EB",
+  "&ntrianglerighteq;": "\u22ED",
+  "&nu;": "\u03BD",
+  "&num;": "#",
+  "&numero;": "\u2116",
+  "&numsp;": "\u2007",
+  "&nvDash;": "\u22AD",
+  "&nvHarr;": "\u2904",
+  "&nvap;": "\u224D\u20D2",
+  "&nvdash;": "\u22AC",
+  "&nvge;": "\u2265\u20D2",
+  "&nvgt;": ">\u20D2",
+  "&nvinfin;": "\u29DE",
+  "&nvlArr;": "\u2902",
+  "&nvle;": "\u2264\u20D2",
+  "&nvlt;": "<\u20D2",
+  "&nvltrie;": "\u22B4\u20D2",
+  "&nvrArr;": "\u2903",
+  "&nvrtrie;": "\u22B5\u20D2",
+  "&nvsim;": "\u223C\u20D2",
+  "&nwArr;": "\u21D6",
+  "&nwarhk;": "\u2923",
+  "&nwarr;": "\u2196",
+  "&nwarrow;": "\u2196",
+  "&nwnear;": "\u2927",
+  "&oS;": "\u24C8",
+  "&oacute": "\xF3",
+  "&oacute;": "\xF3",
+  "&oast;": "\u229B",
+  "&ocir;": "\u229A",
+  "&ocirc": "\xF4",
+  "&ocirc;": "\xF4",
+  "&ocy;": "\u043E",
+  "&odash;": "\u229D",
+  "&odblac;": "\u0151",
+  "&odiv;": "\u2A38",
+  "&odot;": "\u2299",
+  "&odsold;": "\u29BC",
+  "&oelig;": "\u0153",
+  "&ofcir;": "\u29BF",
+  "&ofr;": "\u{1D52C}",
+  "&ogon;": "\u02DB",
+  "&ograve": "\xF2",
+  "&ograve;": "\xF2",
+  "&ogt;": "\u29C1",
+  "&ohbar;": "\u29B5",
+  "&ohm;": "\u03A9",
+  "&oint;": "\u222E",
+  "&olarr;": "\u21BA",
+  "&olcir;": "\u29BE",
+  "&olcross;": "\u29BB",
+  "&oline;": "\u203E",
+  "&olt;": "\u29C0",
+  "&omacr;": "\u014D",
+  "&omega;": "\u03C9",
+  "&omicron;": "\u03BF",
+  "&omid;": "\u29B6",
+  "&ominus;": "\u2296",
+  "&oopf;": "\u{1D560}",
+  "&opar;": "\u29B7",
+  "&operp;": "\u29B9",
+  "&oplus;": "\u2295",
+  "&or;": "\u2228",
+  "&orarr;": "\u21BB",
+  "&ord;": "\u2A5D",
+  "&order;": "\u2134",
+  "&orderof;": "\u2134",
+  "&ordf": "\xAA",
+  "&ordf;": "\xAA",
+  "&ordm": "\xBA",
+  "&ordm;": "\xBA",
+  "&origof;": "\u22B6",
+  "&oror;": "\u2A56",
+  "&orslope;": "\u2A57",
+  "&orv;": "\u2A5B",
+  "&oscr;": "\u2134",
+  "&oslash": "\xF8",
+  "&oslash;": "\xF8",
+  "&osol;": "\u2298",
+  "&otilde": "\xF5",
+  "&otilde;": "\xF5",
+  "&otimes;": "\u2297",
+  "&otimesas;": "\u2A36",
+  "&ouml": "\xF6",
+  "&ouml;": "\xF6",
+  "&ovbar;": "\u233D",
+  "&par;": "\u2225",
+  "&para": "\xB6",
+  "&para;": "\xB6",
+  "&parallel;": "\u2225",
+  "&parsim;": "\u2AF3",
+  "&parsl;": "\u2AFD",
+  "&part;": "\u2202",
+  "&pcy;": "\u043F",
+  "&percnt;": "%",
+  "&period;": ".",
+  "&permil;": "\u2030",
+  "&perp;": "\u22A5",
+  "&pertenk;": "\u2031",
+  "&pfr;": "\u{1D52D}",
+  "&phi;": "\u03C6",
+  "&phiv;": "\u03D5",
+  "&phmmat;": "\u2133",
+  "&phone;": "\u260E",
+  "&pi;": "\u03C0",
+  "&pitchfork;": "\u22D4",
+  "&piv;": "\u03D6",
+  "&planck;": "\u210F",
+  "&planckh;": "\u210E",
+  "&plankv;": "\u210F",
+  "&plus;": "+",
+  "&plusacir;": "\u2A23",
+  "&plusb;": "\u229E",
+  "&pluscir;": "\u2A22",
+  "&plusdo;": "\u2214",
+  "&plusdu;": "\u2A25",
+  "&pluse;": "\u2A72",
+  "&plusmn": "\xB1",
+  "&plusmn;": "\xB1",
+  "&plussim;": "\u2A26",
+  "&plustwo;": "\u2A27",
+  "&pm;": "\xB1",
+  "&pointint;": "\u2A15",
+  "&popf;": "\u{1D561}",
+  "&pound": "\xA3",
+  "&pound;": "\xA3",
+  "&pr;": "\u227A",
+  "&prE;": "\u2AB3",
+  "&prap;": "\u2AB7",
+  "&prcue;": "\u227C",
+  "&pre;": "\u2AAF",
+  "&prec;": "\u227A",
+  "&precapprox;": "\u2AB7",
+  "&preccurlyeq;": "\u227C",
+  "&preceq;": "\u2AAF",
+  "&precnapprox;": "\u2AB9",
+  "&precneqq;": "\u2AB5",
+  "&precnsim;": "\u22E8",
+  "&precsim;": "\u227E",
+  "&prime;": "\u2032",
+  "&primes;": "\u2119",
+  "&prnE;": "\u2AB5",
+  "&prnap;": "\u2AB9",
+  "&prnsim;": "\u22E8",
+  "&prod;": "\u220F",
+  "&profalar;": "\u232E",
+  "&profline;": "\u2312",
+  "&profsurf;": "\u2313",
+  "&prop;": "\u221D",
+  "&propto;": "\u221D",
+  "&prsim;": "\u227E",
+  "&prurel;": "\u22B0",
+  "&pscr;": "\u{1D4C5}",
+  "&psi;": "\u03C8",
+  "&puncsp;": "\u2008",
+  "&qfr;": "\u{1D52E}",
+  "&qint;": "\u2A0C",
+  "&qopf;": "\u{1D562}",
+  "&qprime;": "\u2057",
+  "&qscr;": "\u{1D4C6}",
+  "&quaternions;": "\u210D",
+  "&quatint;": "\u2A16",
+  "&quest;": "?",
+  "&questeq;": "\u225F",
+  "&quot": '"',
+  "&quot;": '"',
+  "&rAarr;": "\u21DB",
+  "&rArr;": "\u21D2",
+  "&rAtail;": "\u291C",
+  "&rBarr;": "\u290F",
+  "&rHar;": "\u2964",
+  "&race;": "\u223D\u0331",
+  "&racute;": "\u0155",
+  "&radic;": "\u221A",
+  "&raemptyv;": "\u29B3",
+  "&rang;": "\u27E9",
+  "&rangd;": "\u2992",
+  "&range;": "\u29A5",
+  "&rangle;": "\u27E9",
+  "&raquo": "\xBB",
+  "&raquo;": "\xBB",
+  "&rarr;": "\u2192",
+  "&rarrap;": "\u2975",
+  "&rarrb;": "\u21E5",
+  "&rarrbfs;": "\u2920",
+  "&rarrc;": "\u2933",
+  "&rarrfs;": "\u291E",
+  "&rarrhk;": "\u21AA",
+  "&rarrlp;": "\u21AC",
+  "&rarrpl;": "\u2945",
+  "&rarrsim;": "\u2974",
+  "&rarrtl;": "\u21A3",
+  "&rarrw;": "\u219D",
+  "&ratail;": "\u291A",
+  "&ratio;": "\u2236",
+  "&rationals;": "\u211A",
+  "&rbarr;": "\u290D",
+  "&rbbrk;": "\u2773",
+  "&rbrace;": "}",
+  "&rbrack;": "]",
+  "&rbrke;": "\u298C",
+  "&rbrksld;": "\u298E",
+  "&rbrkslu;": "\u2990",
+  "&rcaron;": "\u0159",
+  "&rcedil;": "\u0157",
+  "&rceil;": "\u2309",
+  "&rcub;": "}",
+  "&rcy;": "\u0440",
+  "&rdca;": "\u2937",
+  "&rdldhar;": "\u2969",
+  "&rdquo;": "\u201D",
+  "&rdquor;": "\u201D",
+  "&rdsh;": "\u21B3",
+  "&real;": "\u211C",
+  "&realine;": "\u211B",
+  "&realpart;": "\u211C",
+  "&reals;": "\u211D",
+  "&rect;": "\u25AD",
+  "&reg": "\xAE",
+  "&reg;": "\xAE",
+  "&rfisht;": "\u297D",
+  "&rfloor;": "\u230B",
+  "&rfr;": "\u{1D52F}",
+  "&rhard;": "\u21C1",
+  "&rharu;": "\u21C0",
+  "&rharul;": "\u296C",
+  "&rho;": "\u03C1",
+  "&rhov;": "\u03F1",
+  "&rightarrow;": "\u2192",
+  "&rightarrowtail;": "\u21A3",
+  "&rightharpoondown;": "\u21C1",
+  "&rightharpoonup;": "\u21C0",
+  "&rightleftarrows;": "\u21C4",
+  "&rightleftharpoons;": "\u21CC",
+  "&rightrightarrows;": "\u21C9",
+  "&rightsquigarrow;": "\u219D",
+  "&rightthreetimes;": "\u22CC",
+  "&ring;": "\u02DA",
+  "&risingdotseq;": "\u2253",
+  "&rlarr;": "\u21C4",
+  "&rlhar;": "\u21CC",
+  "&rlm;": "\u200F",
+  "&rmoust;": "\u23B1",
+  "&rmoustache;": "\u23B1",
+  "&rnmid;": "\u2AEE",
+  "&roang;": "\u27ED",
+  "&roarr;": "\u21FE",
+  "&robrk;": "\u27E7",
+  "&ropar;": "\u2986",
+  "&ropf;": "\u{1D563}",
+  "&roplus;": "\u2A2E",
+  "&rotimes;": "\u2A35",
+  "&rpar;": ")",
+  "&rpargt;": "\u2994",
+  "&rppolint;": "\u2A12",
+  "&rrarr;": "\u21C9",
+  "&rsaquo;": "\u203A",
+  "&rscr;": "\u{1D4C7}",
+  "&rsh;": "\u21B1",
+  "&rsqb;": "]",
+  "&rsquo;": "\u2019",
+  "&rsquor;": "\u2019",
+  "&rthree;": "\u22CC",
+  "&rtimes;": "\u22CA",
+  "&rtri;": "\u25B9",
+  "&rtrie;": "\u22B5",
+  "&rtrif;": "\u25B8",
+  "&rtriltri;": "\u29CE",
+  "&ruluhar;": "\u2968",
+  "&rx;": "\u211E",
+  "&sacute;": "\u015B",
+  "&sbquo;": "\u201A",
+  "&sc;": "\u227B",
+  "&scE;": "\u2AB4",
+  "&scap;": "\u2AB8",
+  "&scaron;": "\u0161",
+  "&sccue;": "\u227D",
+  "&sce;": "\u2AB0",
+  "&scedil;": "\u015F",
+  "&scirc;": "\u015D",
+  "&scnE;": "\u2AB6",
+  "&scnap;": "\u2ABA",
+  "&scnsim;": "\u22E9",
+  "&scpolint;": "\u2A13",
+  "&scsim;": "\u227F",
+  "&scy;": "\u0441",
+  "&sdot;": "\u22C5",
+  "&sdotb;": "\u22A1",
+  "&sdote;": "\u2A66",
+  "&seArr;": "\u21D8",
+  "&searhk;": "\u2925",
+  "&searr;": "\u2198",
+  "&searrow;": "\u2198",
+  "&sect": "\xA7",
+  "&sect;": "\xA7",
+  "&semi;": ";",
+  "&seswar;": "\u2929",
+  "&setminus;": "\u2216",
+  "&setmn;": "\u2216",
+  "&sext;": "\u2736",
+  "&sfr;": "\u{1D530}",
+  "&sfrown;": "\u2322",
+  "&sharp;": "\u266F",
+  "&shchcy;": "\u0449",
+  "&shcy;": "\u0448",
+  "&shortmid;": "\u2223",
+  "&shortparallel;": "\u2225",
+  "&shy": "\xAD",
+  "&shy;": "\xAD",
+  "&sigma;": "\u03C3",
+  "&sigmaf;": "\u03C2",
+  "&sigmav;": "\u03C2",
+  "&sim;": "\u223C",
+  "&simdot;": "\u2A6A",
+  "&sime;": "\u2243",
+  "&simeq;": "\u2243",
+  "&simg;": "\u2A9E",
+  "&simgE;": "\u2AA0",
+  "&siml;": "\u2A9D",
+  "&simlE;": "\u2A9F",
+  "&simne;": "\u2246",
+  "&simplus;": "\u2A24",
+  "&simrarr;": "\u2972",
+  "&slarr;": "\u2190",
+  "&smallsetminus;": "\u2216",
+  "&smashp;": "\u2A33",
+  "&smeparsl;": "\u29E4",
+  "&smid;": "\u2223",
+  "&smile;": "\u2323",
+  "&smt;": "\u2AAA",
+  "&smte;": "\u2AAC",
+  "&smtes;": "\u2AAC\uFE00",
+  "&softcy;": "\u044C",
+  "&sol;": "/",
+  "&solb;": "\u29C4",
+  "&solbar;": "\u233F",
+  "&sopf;": "\u{1D564}",
+  "&spades;": "\u2660",
+  "&spadesuit;": "\u2660",
+  "&spar;": "\u2225",
+  "&sqcap;": "\u2293",
+  "&sqcaps;": "\u2293\uFE00",
+  "&sqcup;": "\u2294",
+  "&sqcups;": "\u2294\uFE00",
+  "&sqsub;": "\u228F",
+  "&sqsube;": "\u2291",
+  "&sqsubset;": "\u228F",
+  "&sqsubseteq;": "\u2291",
+  "&sqsup;": "\u2290",
+  "&sqsupe;": "\u2292",
+  "&sqsupset;": "\u2290",
+  "&sqsupseteq;": "\u2292",
+  "&squ;": "\u25A1",
+  "&square;": "\u25A1",
+  "&squarf;": "\u25AA",
+  "&squf;": "\u25AA",
+  "&srarr;": "\u2192",
+  "&sscr;": "\u{1D4C8}",
+  "&ssetmn;": "\u2216",
+  "&ssmile;": "\u2323",
+  "&sstarf;": "\u22C6",
+  "&star;": "\u2606",
+  "&starf;": "\u2605",
+  "&straightepsilon;": "\u03F5",
+  "&straightphi;": "\u03D5",
+  "&strns;": "\xAF",
+  "&sub;": "\u2282",
+  "&subE;": "\u2AC5",
+  "&subdot;": "\u2ABD",
+  "&sube;": "\u2286",
+  "&subedot;": "\u2AC3",
+  "&submult;": "\u2AC1",
+  "&subnE;": "\u2ACB",
+  "&subne;": "\u228A",
+  "&subplus;": "\u2ABF",
+  "&subrarr;": "\u2979",
+  "&subset;": "\u2282",
+  "&subseteq;": "\u2286",
+  "&subseteqq;": "\u2AC5",
+  "&subsetneq;": "\u228A",
+  "&subsetneqq;": "\u2ACB",
+  "&subsim;": "\u2AC7",
+  "&subsub;": "\u2AD5",
+  "&subsup;": "\u2AD3",
+  "&succ;": "\u227B",
+  "&succapprox;": "\u2AB8",
+  "&succcurlyeq;": "\u227D",
+  "&succeq;": "\u2AB0",
+  "&succnapprox;": "\u2ABA",
+  "&succneqq;": "\u2AB6",
+  "&succnsim;": "\u22E9",
+  "&succsim;": "\u227F",
+  "&sum;": "\u2211",
+  "&sung;": "\u266A",
+  "&sup1": "\xB9",
+  "&sup1;": "\xB9",
+  "&sup2": "\xB2",
+  "&sup2;": "\xB2",
+  "&sup3": "\xB3",
+  "&sup3;": "\xB3",
+  "&sup;": "\u2283",
+  "&supE;": "\u2AC6",
+  "&supdot;": "\u2ABE",
+  "&supdsub;": "\u2AD8",
+  "&supe;": "\u2287",
+  "&supedot;": "\u2AC4",
+  "&suphsol;": "\u27C9",
+  "&suphsub;": "\u2AD7",
+  "&suplarr;": "\u297B",
+  "&supmult;": "\u2AC2",
+  "&supnE;": "\u2ACC",
+  "&supne;": "\u228B",
+  "&supplus;": "\u2AC0",
+  "&supset;": "\u2283",
+  "&supseteq;": "\u2287",
+  "&supseteqq;": "\u2AC6",
+  "&supsetneq;": "\u228B",
+  "&supsetneqq;": "\u2ACC",
+  "&supsim;": "\u2AC8",
+  "&supsub;": "\u2AD4",
+  "&supsup;": "\u2AD6",
+  "&swArr;": "\u21D9",
+  "&swarhk;": "\u2926",
+  "&swarr;": "\u2199",
+  "&swarrow;": "\u2199",
+  "&swnwar;": "\u292A",
+  "&szlig": "\xDF",
+  "&szlig;": "\xDF",
+  "&target;": "\u2316",
+  "&tau;": "\u03C4",
+  "&tbrk;": "\u23B4",
+  "&tcaron;": "\u0165",
+  "&tcedil;": "\u0163",
+  "&tcy;": "\u0442",
+  "&tdot;": "\u20DB",
+  "&telrec;": "\u2315",
+  "&tfr;": "\u{1D531}",
+  "&there4;": "\u2234",
+  "&therefore;": "\u2234",
+  "&theta;": "\u03B8",
+  "&thetasym;": "\u03D1",
+  "&thetav;": "\u03D1",
+  "&thickapprox;": "\u2248",
+  "&thicksim;": "\u223C",
+  "&thinsp;": "\u2009",
+  "&thkap;": "\u2248",
+  "&thksim;": "\u223C",
+  "&thorn": "\xFE",
+  "&thorn;": "\xFE",
+  "&tilde;": "\u02DC",
+  "&times": "\xD7",
+  "&times;": "\xD7",
+  "&timesb;": "\u22A0",
+  "&timesbar;": "\u2A31",
+  "&timesd;": "\u2A30",
+  "&tint;": "\u222D",
+  "&toea;": "\u2928",
+  "&top;": "\u22A4",
+  "&topbot;": "\u2336",
+  "&topcir;": "\u2AF1",
+  "&topf;": "\u{1D565}",
+  "&topfork;": "\u2ADA",
+  "&tosa;": "\u2929",
+  "&tprime;": "\u2034",
+  "&trade;": "\u2122",
+  "&triangle;": "\u25B5",
+  "&triangledown;": "\u25BF",
+  "&triangleleft;": "\u25C3",
+  "&trianglelefteq;": "\u22B4",
+  "&triangleq;": "\u225C",
+  "&triangleright;": "\u25B9",
+  "&trianglerighteq;": "\u22B5",
+  "&tridot;": "\u25EC",
+  "&trie;": "\u225C",
+  "&triminus;": "\u2A3A",
+  "&triplus;": "\u2A39",
+  "&trisb;": "\u29CD",
+  "&tritime;": "\u2A3B",
+  "&trpezium;": "\u23E2",
+  "&tscr;": "\u{1D4C9}",
+  "&tscy;": "\u0446",
+  "&tshcy;": "\u045B",
+  "&tstrok;": "\u0167",
+  "&twixt;": "\u226C",
+  "&twoheadleftarrow;": "\u219E",
+  "&twoheadrightarrow;": "\u21A0",
+  "&uArr;": "\u21D1",
+  "&uHar;": "\u2963",
+  "&uacute": "\xFA",
+  "&uacute;": "\xFA",
+  "&uarr;": "\u2191",
+  "&ubrcy;": "\u045E",
+  "&ubreve;": "\u016D",
+  "&ucirc": "\xFB",
+  "&ucirc;": "\xFB",
+  "&ucy;": "\u0443",
+  "&udarr;": "\u21C5",
+  "&udblac;": "\u0171",
+  "&udhar;": "\u296E",
+  "&ufisht;": "\u297E",
+  "&ufr;": "\u{1D532}",
+  "&ugrave": "\xF9",
+  "&ugrave;": "\xF9",
+  "&uharl;": "\u21BF",
+  "&uharr;": "\u21BE",
+  "&uhblk;": "\u2580",
+  "&ulcorn;": "\u231C",
+  "&ulcorner;": "\u231C",
+  "&ulcrop;": "\u230F",
+  "&ultri;": "\u25F8",
+  "&umacr;": "\u016B",
+  "&uml": "\xA8",
+  "&uml;": "\xA8",
+  "&uogon;": "\u0173",
+  "&uopf;": "\u{1D566}",
+  "&uparrow;": "\u2191",
+  "&updownarrow;": "\u2195",
+  "&upharpoonleft;": "\u21BF",
+  "&upharpoonright;": "\u21BE",
+  "&uplus;": "\u228E",
+  "&upsi;": "\u03C5",
+  "&upsih;": "\u03D2",
+  "&upsilon;": "\u03C5",
+  "&upuparrows;": "\u21C8",
+  "&urcorn;": "\u231D",
+  "&urcorner;": "\u231D",
+  "&urcrop;": "\u230E",
+  "&uring;": "\u016F",
+  "&urtri;": "\u25F9",
+  "&uscr;": "\u{1D4CA}",
+  "&utdot;": "\u22F0",
+  "&utilde;": "\u0169",
+  "&utri;": "\u25B5",
+  "&utrif;": "\u25B4",
+  "&uuarr;": "\u21C8",
+  "&uuml": "\xFC",
+  "&uuml;": "\xFC",
+  "&uwangle;": "\u29A7",
+  "&vArr;": "\u21D5",
+  "&vBar;": "\u2AE8",
+  "&vBarv;": "\u2AE9",
+  "&vDash;": "\u22A8",
+  "&vangrt;": "\u299C",
+  "&varepsilon;": "\u03F5",
+  "&varkappa;": "\u03F0",
+  "&varnothing;": "\u2205",
+  "&varphi;": "\u03D5",
+  "&varpi;": "\u03D6",
+  "&varpropto;": "\u221D",
+  "&varr;": "\u2195",
+  "&varrho;": "\u03F1",
+  "&varsigma;": "\u03C2",
+  "&varsubsetneq;": "\u228A\uFE00",
+  "&varsubsetneqq;": "\u2ACB\uFE00",
+  "&varsupsetneq;": "\u228B\uFE00",
+  "&varsupsetneqq;": "\u2ACC\uFE00",
+  "&vartheta;": "\u03D1",
+  "&vartriangleleft;": "\u22B2",
+  "&vartriangleright;": "\u22B3",
+  "&vcy;": "\u0432",
+  "&vdash;": "\u22A2",
+  "&vee;": "\u2228",
+  "&veebar;": "\u22BB",
+  "&veeeq;": "\u225A",
+  "&vellip;": "\u22EE",
+  "&verbar;": "|",
+  "&vert;": "|",
+  "&vfr;": "\u{1D533}",
+  "&vltri;": "\u22B2",
+  "&vnsub;": "\u2282\u20D2",
+  "&vnsup;": "\u2283\u20D2",
+  "&vopf;": "\u{1D567}",
+  "&vprop;": "\u221D",
+  "&vrtri;": "\u22B3",
+  "&vscr;": "\u{1D4CB}",
+  "&vsubnE;": "\u2ACB\uFE00",
+  "&vsubne;": "\u228A\uFE00",
+  "&vsupnE;": "\u2ACC\uFE00",
+  "&vsupne;": "\u228B\uFE00",
+  "&vzigzag;": "\u299A",
+  "&wcirc;": "\u0175",
+  "&wedbar;": "\u2A5F",
+  "&wedge;": "\u2227",
+  "&wedgeq;": "\u2259",
+  "&weierp;": "\u2118",
+  "&wfr;": "\u{1D534}",
+  "&wopf;": "\u{1D568}",
+  "&wp;": "\u2118",
+  "&wr;": "\u2240",
+  "&wreath;": "\u2240",
+  "&wscr;": "\u{1D4CC}",
+  "&xcap;": "\u22C2",
+  "&xcirc;": "\u25EF",
+  "&xcup;": "\u22C3",
+  "&xdtri;": "\u25BD",
+  "&xfr;": "\u{1D535}",
+  "&xhArr;": "\u27FA",
+  "&xharr;": "\u27F7",
+  "&xi;": "\u03BE",
+  "&xlArr;": "\u27F8",
+  "&xlarr;": "\u27F5",
+  "&xmap;": "\u27FC",
+  "&xnis;": "\u22FB",
+  "&xodot;": "\u2A00",
+  "&xopf;": "\u{1D569}",
+  "&xoplus;": "\u2A01",
+  "&xotime;": "\u2A02",
+  "&xrArr;": "\u27F9",
+  "&xrarr;": "\u27F6",
+  "&xscr;": "\u{1D4CD}",
+  "&xsqcup;": "\u2A06",
+  "&xuplus;": "\u2A04",
+  "&xutri;": "\u25B3",
+  "&xvee;": "\u22C1",
+  "&xwedge;": "\u22C0",
+  "&yacute": "\xFD",
+  "&yacute;": "\xFD",
+  "&yacy;": "\u044F",
+  "&ycirc;": "\u0177",
+  "&ycy;": "\u044B",
+  "&yen": "\xA5",
+  "&yen;": "\xA5",
+  "&yfr;": "\u{1D536}",
+  "&yicy;": "\u0457",
+  "&yopf;": "\u{1D56A}",
+  "&yscr;": "\u{1D4CE}",
+  "&yucy;": "\u044E",
+  "&yuml": "\xFF",
+  "&yuml;": "\xFF",
+  "&zacute;": "\u017A",
+  "&zcaron;": "\u017E",
+  "&zcy;": "\u0437",
+  "&zdot;": "\u017C",
+  "&zeetrf;": "\u2128",
+  "&zeta;": "\u03B6",
+  "&zfr;": "\u{1D537}",
+  "&zhcy;": "\u0436",
+  "&zigrarr;": "\u21DD",
+  "&zopf;": "\u{1D56B}",
+  "&zscr;": "\u{1D4CF}",
+  "&zwj;": "\u200D",
+  "&zwnj;": "\u200C"
+};
+var html_entities_default = htmlEntities;
+
+// node_modules/postal-mime/src/text-format.js
+function decodeHTMLEntities(str) {
+  return str.replace(/&(#\d+|#x[a-f0-9]+|[a-z]+\d*);?/gi, (match, entity) => {
+    if (typeof html_entities_default[match] === "string") {
+      return html_entities_default[match];
+    }
+    if (entity.charAt(0) !== "#" || match.charAt(match.length - 1) !== ";") {
+      return match;
+    }
+    let codePoint;
+    if (entity.charAt(1) === "x") {
+      codePoint = parseInt(entity.substr(2), 16);
+    } else {
+      codePoint = parseInt(entity.substr(1), 10);
+    }
+    let output = "";
+    if (codePoint >= 55296 && codePoint <= 57343 || codePoint > 1114111) {
+      return "\uFFFD";
+    }
+    if (codePoint > 65535) {
+      codePoint -= 65536;
+      output += String.fromCharCode(codePoint >>> 10 & 1023 | 55296);
+      codePoint = 56320 | codePoint & 1023;
+    }
+    output += String.fromCharCode(codePoint);
+    return output;
+  });
+}
+__name(decodeHTMLEntities, "decodeHTMLEntities");
+function escapeHtml(str) {
+  return str.trim().replace(/[<>"'?&]/g, (c) => {
+    let hex = c.charCodeAt(0).toString(16);
+    if (hex.length < 2) {
+      hex = "0" + hex;
+    }
+    return "&#x" + hex.toUpperCase() + ";";
+  });
+}
+__name(escapeHtml, "escapeHtml");
+function textToHtml(str) {
+  let html = escapeHtml(str).replace(/\n/g, "<br />");
+  return "<div>" + html + "</div>";
+}
+__name(textToHtml, "textToHtml");
+var LINE_TERMINATOR = /[\n\r\u2028\u2029]/g;
+function lastLineTerminator(str) {
+  return Math.max(str.lastIndexOf("\n"), str.lastIndexOf("\r"), str.lastIndexOf("\u2028"), str.lastIndexOf("\u2029"));
+}
+__name(lastLineTerminator, "lastLineTerminator");
+function createFinder(str, regex) {
+  let searchedFrom = Infinity;
+  let found = null;
+  return (pos) => {
+    if (pos < searchedFrom || found && pos > found.index) {
+      regex.lastIndex = pos;
+      found = regex.exec(str);
+      searchedFrom = pos;
+    }
+    return found;
+  };
+}
+__name(createFinder, "createFinder");
+function replaceClosedTags(str, pattern, replacement) {
+  const end = str.lastIndexOf(">") + 1;
+  return str.slice(0, end).replace(pattern, replacement) + str.slice(end);
+}
+__name(replaceClosedTags, "replaceClosedTags");
+function replaceTags(str, prefix, pattern, replacement) {
+  const parts = [];
+  let copied = 0;
+  let searchFrom = 0;
+  while (true) {
+    prefix.lastIndex = searchFrom;
+    const candidate = prefix.exec(str);
+    if (!candidate) {
+      break;
+    }
+    const start = candidate.index;
+    pattern.lastIndex = start;
+    const match = pattern.exec(str);
+    if (!match) {
+      const gt = str.indexOf(">", start);
+      if (gt < 0) {
+        break;
+      }
+      searchFrom = gt + 1;
+      continue;
+    }
+    parts.push(str.slice(copied, start), replacement(...match));
+    copied = searchFrom = start + match[0].length;
+  }
+  parts.push(str.slice(copied));
+  return parts.join("");
+}
+__name(replaceTags, "replaceTags");
+function replaceBlocks(str, open, openToGt, close, closeToGt, replacement) {
+  const nextGt = createFinder(str, />/g);
+  const nextClose = createFinder(str, close);
+  const nextLineEnd = createFinder(str, LINE_TERMINATOR);
+  const parts = [];
+  let copied = 0;
+  let searchFrom = 0;
+  while (true) {
+    open.lastIndex = searchFrom;
+    const opener = open.exec(str);
+    if (!opener) {
+      break;
+    }
+    const start = opener.index;
+    searchFrom = start + 1;
+    let from = start + opener[0].length;
+    if (openToGt) {
+      const gt = nextGt(from);
+      if (!gt) {
+        break;
+      }
+      from = gt.index + 1;
+    }
+    const closer = nextClose(from);
+    if (!closer) {
+      break;
+    }
+    const lineEnd = nextLineEnd(from);
+    if (lineEnd && lineEnd.index < closer.index) {
+      continue;
+    }
+    let end = closer.index + closer[0].length;
+    if (closeToGt) {
+      const gt = nextGt(end);
+      if (!gt) {
+        break;
+      }
+      end = gt.index + 1;
+    }
+    parts.push(str.slice(copied, start), replacement);
+    copied = searchFrom = end;
+  }
+  parts.push(str.slice(copied));
+  return parts.join("");
+}
+__name(replaceBlocks, "replaceBlocks");
+function stripThroughLastTag(str, prefix) {
+  const lineEnd = str.search(LINE_TERMINATOR);
+  const limit = Math.min(lineEnd < 0 ? str.length : lineEnd, str.lastIndexOf(">"));
+  let last = -1;
+  prefix.lastIndex = 0;
+  let match;
+  while ((match = prefix.exec(str)) && match.index < limit) {
+    last = match.index;
+  }
+  return last < 0 ? str : str.slice(str.indexOf(">", last) + 1);
+}
+__name(stripThroughLastTag, "stripThroughLastTag");
+function stripFromFirstTag(str, prefix) {
+  const lineEnd = lastLineTerminator(str);
+  prefix.lastIndex = lineEnd < 0 ? 0 : str.lastIndexOf(">", lineEnd) + 1;
+  const match = prefix.exec(str);
+  return match && match.index < str.lastIndexOf(">") ? str.slice(0, match.index) : str;
+}
+__name(stripFromFirstTag, "stripFromFirstTag");
+function htmlToText(str) {
+  str = str.replace(/\r?\n/g, "");
+  str = replaceBlocks(str, /<!--/g, false, /-->/g, false, " ");
+  str = replaceClosedTags(str, /<br\b[^>]*>/gi, "\n");
+  str = replaceClosedTags(str, /<\/?(p|div|table|tr|td|th)\b[^>]*>/gi, "\n\n");
+  str = replaceBlocks(str, /<script\b/gi, true, /<\/script\b/gi, true, " ");
+  str = stripThroughLastTag(str, /<body\b/gi);
+  str = stripThroughLastTag(str, /<\/head\b/gi);
+  str = stripThroughLastTag(str, /<!doctype\b/gi);
+  str = stripFromFirstTag(str, /<\/body\b/gi);
+  str = stripFromFirstTag(str, /<\/html\b/gi);
+  str = replaceTags(str, /<a\b/gi, /<a\b[^>]*href\s*=\s*["']?([^\s"']+)[^>]*>/iy, (match, href) => ` (${href}) `);
+  str = replaceClosedTags(str, /<\/?(span|em|i|strong|b|u|a)\b[^>]*>/gi, "");
+  str = replaceTags(str, /<li\b/gi, /<li\b[^>]*>[\n\u0001\s]*/iy, () => "* ");
+  str = replaceClosedTags(str, /<hr\b[^>]*>/g, "\n-------------\n");
+  str = replaceClosedTags(str, /<[^>]*>/g, " ");
+  str = str.replace(/\u0001/g, "\n").replace(/[ \t]+/g, " ").replace(/^\s+$/gm, "").replace(/\n\n+/g, "\n\n").replace(/^\n+/, "\n").replace(/\n+$/, "\n");
+  str = decodeHTMLEntities(str);
+  return str;
+}
+__name(htmlToText, "htmlToText");
+function formatDate(date) {
+  if (typeof Intl === "undefined") {
+    return date;
+  }
+  const parsed = new Date(date);
+  if (isNaN(parsed.getTime())) {
+    return date;
+  }
+  return new Intl.DateTimeFormat("default", {
+    year: "numeric",
+    month: "numeric",
+    day: "numeric",
+    hour: "numeric",
+    minute: "numeric",
+    second: "numeric",
+    hour12: false
+  }).format(parsed);
+}
+__name(formatDate, "formatDate");
+function formatTextAddress(address) {
+  return [].concat(address.name || []).concat(address.name ? `<${address.address}>` : address.address).join(" ");
+}
+__name(formatTextAddress, "formatTextAddress");
+function formatTextAddresses(addresses) {
+  let parts = [];
+  let processAddress = /* @__PURE__ */ __name((address, partCounter) => {
+    if (partCounter) {
+      parts.push(", ");
+    }
+    if (address.group) {
+      let groupStart = `${address.name}:`;
+      let groupEnd3 = `;`;
+      parts.push(groupStart);
+      address.group.forEach(processAddress);
+      parts.push(groupEnd3);
+    } else {
+      parts.push(formatTextAddress(address));
+    }
+  }, "processAddress");
+  addresses.forEach(processAddress);
+  return parts.join("");
+}
+__name(formatTextAddresses, "formatTextAddresses");
+function formatHtmlAddress(address) {
+  return `<a href="mailto:${escapeHtml(address.address)}" class="postal-email-address">${escapeHtml(address.name || `<${address.address}>`)}</a>`;
+}
+__name(formatHtmlAddress, "formatHtmlAddress");
+function formatHtmlAddresses(addresses) {
+  let parts = [];
+  let processAddress = /* @__PURE__ */ __name((address, partCounter) => {
+    if (partCounter) {
+      parts.push('<span class="postal-email-address-separator">, </span>');
+    }
+    if (address.group) {
+      let groupStart = `<span class="postal-email-address-group">${escapeHtml(address.name)}:</span>`;
+      let groupEnd3 = `<span class="postal-email-address-group">;</span>`;
+      parts.push(groupStart);
+      address.group.forEach(processAddress);
+      parts.push(groupEnd3);
+    } else {
+      parts.push(formatHtmlAddress(address));
+    }
+  }, "processAddress");
+  addresses.forEach(processAddress);
+  return parts.join(" ");
+}
+__name(formatHtmlAddresses, "formatHtmlAddresses");
+function foldLines(str, lineLength, afterSpace) {
+  str = (str || "").toString();
+  lineLength = lineLength || 76;
+  let pos = 0, len = str.length, result = "", line, match;
+  while (pos < len) {
+    line = str.substr(pos, lineLength);
+    if (line.length < lineLength) {
+      result += line;
+      break;
+    }
+    if (match = line.match(/^[^\n\r]*(\r?\n|\r)/)) {
+      line = match[0];
+      result += line;
+      pos += line.length;
+      continue;
+    } else if ((match = line.match(/(\s+)[^\s]*$/)) && match[0].length - (afterSpace ? (match[1] || "").length : 0) < line.length) {
+      line = line.substr(0, line.length - (match[0].length - (afterSpace ? (match[1] || "").length : 0)));
+    } else if (match = str.substr(pos + line.length).match(/^[^\s]+(\s*)/)) {
+      line = line + match[0].substr(0, match[0].length - (!afterSpace ? (match[1] || "").length : 0));
+    }
+    result += line;
+    pos += line.length;
+    if (pos < len) {
+      result += "\r\n";
+    }
+  }
+  return result;
+}
+__name(foldLines, "foldLines");
+function formatTextHeader(message) {
+  let rows = [];
+  if (message.from) {
+    rows.push({ key: "From", val: formatTextAddresses([message.from]) });
+  }
+  if (message.subject) {
+    rows.push({ key: "Subject", val: message.subject });
+  }
+  if (message.date) {
+    rows.push({ key: "Date", val: formatDate(message.date) });
+  }
+  if (message.to && message.to.length) {
+    rows.push({ key: "To", val: formatTextAddresses(message.to) });
+  }
+  if (message.cc && message.cc.length) {
+    rows.push({ key: "Cc", val: formatTextAddresses(message.cc) });
+  }
+  if (message.bcc && message.bcc.length) {
+    rows.push({ key: "Bcc", val: formatTextAddresses(message.bcc) });
+  }
+  let maxKeyLength = rows.map((r) => r.key.length).reduce((acc, cur) => {
+    return cur > acc ? cur : acc;
+  }, 0);
+  rows = rows.flatMap((row) => {
+    let sepLen = maxKeyLength - row.key.length;
+    let prefix = `${row.key}: ${" ".repeat(sepLen)}`;
+    let emptyPrefix = `${" ".repeat(row.key.length + 1)} ${" ".repeat(sepLen)}`;
+    let foldedLines = foldLines(row.val, 80, true).split(/\r?\n/).map((line) => line.trim());
+    return foldedLines.map((line, i) => `${i ? emptyPrefix : prefix}${line}`);
+  });
+  let maxLineLength = rows.map((r) => r.length).reduce((acc, cur) => {
+    return cur > acc ? cur : acc;
+  }, 0);
+  let lineMarker = "-".repeat(maxLineLength);
+  let template = `
+${lineMarker}
+${rows.join("\n")}
+${lineMarker}
+`;
+  return template;
+}
+__name(formatTextHeader, "formatTextHeader");
+function formatHtmlHeader(message) {
+  let rows = [];
+  if (message.from) {
+    rows.push(
+      // through the plural formatter, because `From:` may hold RFC 5322 group syntax
+      // and a group has no address of its own
+      `<div class="postal-email-header-key">From</div><div class="postal-email-header-value">${formatHtmlAddresses([message.from])}</div>`
+    );
+  }
+  if (message.subject) {
+    rows.push(
+      `<div class="postal-email-header-key">Subject</div><div class="postal-email-header-value postal-email-header-subject">${escapeHtml(
+        message.subject
+      )}</div>`
+    );
+  }
+  if (message.date) {
+    rows.push(
+      `<div class="postal-email-header-key">Date</div><div class="postal-email-header-value postal-email-header-date" data-date="${escapeHtml(
+        message.date
+      )}">${escapeHtml(formatDate(message.date))}</div>`
+    );
+  }
+  if (message.to && message.to.length) {
+    rows.push(
+      `<div class="postal-email-header-key">To</div><div class="postal-email-header-value">${formatHtmlAddresses(message.to)}</div>`
+    );
+  }
+  if (message.cc && message.cc.length) {
+    rows.push(
+      `<div class="postal-email-header-key">Cc</div><div class="postal-email-header-value">${formatHtmlAddresses(message.cc)}</div>`
+    );
+  }
+  if (message.bcc && message.bcc.length) {
+    rows.push(
+      `<div class="postal-email-header-key">Bcc</div><div class="postal-email-header-value">${formatHtmlAddresses(message.bcc)}</div>`
+    );
+  }
+  let template = `<div class="postal-email-header">${rows.length ? '<div class="postal-email-header-row">' : ""}${rows.join(
+    '</div>\n<div class="postal-email-header-row">'
+  )}${rows.length ? "</div>" : ""}</div>`;
+  return template;
+}
+__name(formatHtmlHeader, "formatHtmlHeader");
+
+// node_modules/postal-mime/src/address-parser.js
+var WORD_CHAR_REGEX = /\w/;
+var NON_SPACE_TOKEN_REGEX = /[^\s]+/g;
+function findAddressInText(text) {
+  NON_SPACE_TOKEN_REGEX.lastIndex = 0;
+  let match;
+  while (match = NON_SPACE_TOKEN_REGEX.exec(text)) {
+    const token = match[0];
+    const at = token.indexOf("@");
+    let start = 0;
+    while (start < at && !WORD_CHAR_REGEX.test(token.charAt(start))) {
+      start++;
+    }
+    if (start >= at) {
+      continue;
+    }
+    let end = token.length;
+    while (end > at + 1 && !WORD_CHAR_REGEX.test(token.charAt(end - 1))) {
+      end--;
+    }
+    if (end <= at + 1) {
+      continue;
+    }
+    return { index: match.index + start, length: end - start, value: token.substring(start, end) };
+  }
+  return null;
+}
+__name(findAddressInText, "findAddressInText");
+function hasAngleAddress(text) {
+  let start = -1;
+  let at = -1;
+  for (let i = 0; i < text.length; i++) {
+    const chr = text.charAt(i);
+    if (chr === "<") {
+      start = i + 1;
+      at = -1;
+    } else if (chr === ">") {
+      if (at >= 0 && at < i - 1) {
+        return true;
+      }
+      start = -1;
+      at = -1;
+    } else if (chr === "@" && start >= 0 && at < 0 && i > start) {
+      at = i;
+    }
+  }
+  return false;
+}
+__name(hasAngleAddress, "hasAngleAddress");
+function _handleAddress(tokens, depth) {
+  let isGroup = false;
+  let state = "text";
+  let address;
+  let addresses = [];
+  let data = {
+    address: [],
+    comment: [],
+    group: [],
+    text: [],
+    textWasQuoted: []
+    // Track which text tokens came from inside quotes
+  };
+  let i;
+  let len;
+  let insideQuotes = false;
+  for (i = 0, len = tokens.length; i < len; i++) {
+    let token = tokens[i];
+    let prevToken = i ? tokens[i - 1] : null;
+    if (token.type === "operator") {
+      switch (token.value) {
+        case "<":
+          state = "address";
+          insideQuotes = false;
+          break;
+        case "(":
+          state = "comment";
+          insideQuotes = false;
+          break;
+        case ":":
+          state = "group";
+          isGroup = true;
+          insideQuotes = false;
+          break;
+        case '"':
+          insideQuotes = !insideQuotes;
+          state = "text";
+          break;
+        default:
+          state = "text";
+          insideQuotes = false;
+          break;
+      }
+    } else if (token.value) {
+      if (state === "address") {
+        token.value = token.value.replace(/^[^<]*<\s*/, "");
+      }
+      if (prevToken && prevToken.noBreak && data[state].length) {
+        data[state][data[state].length - 1] += token.value;
+        if (state === "text" && insideQuotes) {
+          data.textWasQuoted[data.textWasQuoted.length - 1] = true;
+        }
+      } else {
+        data[state].push(token.value);
+        if (state === "text") {
+          data.textWasQuoted.push(insideQuotes);
+        }
+      }
+    }
+  }
+  if (!data.text.length && data.comment.length) {
+    data.text = data.comment;
+    data.comment = [];
+  }
+  if (isGroup) {
+    data.text = data.text.join(" ");
+    let groupMembers = [];
+    if (data.group.length) {
+      let parsedGroup = addressParser(data.group.join(","), { _depth: depth + 1 });
+      parsedGroup.forEach((member) => {
+        if (member.group) {
+          for (const nestedMember of member.group) {
+            groupMembers.push(nestedMember);
+          }
+        } else {
+          groupMembers.push(member);
+        }
+      });
+    }
+    addresses.push({
+      name: decodeWords(data.text || address && address.name),
+      group: groupMembers
+    });
+  } else {
+    if (!data.address.length && data.text.length) {
+      for (i = data.text.length - 1; i >= 0; i--) {
+        if (!data.textWasQuoted[i] && data.text[i].match(/^[^@\s]+@[^@\s]+$/)) {
+          data.address = data.text.splice(i, 1);
+          data.textWasQuoted.splice(i, 1);
+          break;
+        }
+      }
+      if (!data.address.length) {
+        for (i = data.text.length - 1; i >= 0; i--) {
+          if (!data.textWasQuoted[i]) {
+            const found = findAddressInText(data.text[i]);
+            if (found) {
+              data.address = [found.value];
+              data.text[i] = (data.text[i].substring(0, found.index).trimEnd() + " " + data.text[i].substring(found.index + found.length).trimStart()).trim();
+              break;
+            }
+            data.text[i] = data.text[i].trim();
+          }
+        }
+      }
+    }
+    if (!data.text.length && data.comment.length) {
+      data.text = data.comment;
+      data.comment = [];
+    }
+    if (data.address.length > 1) {
+      data.text = data.text.concat(data.address.splice(1));
+    }
+    data.text = data.text.join(" ");
+    data.address = data.address.join(" ");
+    if (!data.address && isEncodedWordsOnly(data.text.trim())) {
+      const decodedText = decodeWords(data.text);
+      if (hasAngleAddress(decodedText)) {
+        const parsedSubAddresses = addressParser(decodedText);
+        if (parsedSubAddresses && parsedSubAddresses.length) {
+          return parsedSubAddresses;
+        }
+      }
+      return [{ address: "", name: decodedText }];
+    }
+    address = {
+      address: data.address || data.text || "",
+      name: decodeWords(data.text || data.address || "")
+    };
+    if (address.address === address.name) {
+      if ((address.address || "").match(/@/)) {
+        address.name = "";
+      } else {
+        address.address = "";
+      }
+    }
+    addresses.push(address);
+  }
+  return addresses;
+}
+__name(_handleAddress, "_handleAddress");
+var Tokenizer = class {
+  static {
+    __name(this, "Tokenizer");
+  }
+  constructor(str) {
+    this.str = (str || "").toString();
+    this.operatorCurrent = "";
+    this.operatorExpecting = "";
+    this.node = null;
+    this.escaped = false;
+    this.list = [];
+    this.operators = {
+      '"': '"',
+      "(": ")",
+      "<": ">",
+      ",": "",
+      ":": ";",
+      // Semicolons are not a legal delimiter per the RFC2822 grammar other
+      // than for terminating a group, but they are also not valid for any
+      // other use in this context.  Given that some mail clients have
+      // historically allowed the semicolon as a delimiter equivalent to the
+      // comma in their UI, it makes sense to treat them the same as a comma
+      // when used outside of a group.
+      ";": ""
+    };
+  }
+  /**
+   * Tokenizes the original input string
+   *
+   * @return {Array} An array of operator|text tokens
+   */
+  tokenize() {
+    let list = [];
+    for (let i = 0, len = this.str.length; i < len; i++) {
+      let chr = this.str.charAt(i);
+      let nextChr = i < len - 1 ? this.str.charAt(i + 1) : null;
+      this.checkChar(chr, nextChr);
+    }
+    this.list.forEach((node) => {
+      node.value = (node.value || "").toString().trim();
+      if (node.value) {
+        list.push(node);
+      }
+    });
+    return list;
+  }
+  /**
+   * Checks if a character is an operator or text and acts accordingly
+   *
+   * @param {String} chr Character from the address field
+   */
+  checkChar(chr, nextChr) {
+    if (this.escaped) {
+    } else if (chr === this.operatorExpecting) {
+      this.node = {
+        type: "operator",
+        value: chr
+      };
+      if (nextChr && ![" ", "	", "\r", "\n", ",", ";"].includes(nextChr)) {
+        this.node.noBreak = true;
+      }
+      this.list.push(this.node);
+      this.node = null;
+      this.operatorExpecting = "";
+      this.escaped = false;
+      return;
+    } else if (!this.operatorExpecting && chr in this.operators) {
+      this.node = {
+        type: "operator",
+        value: chr
+      };
+      this.list.push(this.node);
+      this.node = null;
+      this.operatorExpecting = this.operators[chr];
+      this.escaped = false;
+      return;
+    } else if (this.operatorExpecting === '"' && chr === "\\") {
+      this.escaped = true;
+      return;
+    }
+    if (!this.node) {
+      this.node = {
+        type: "text",
+        value: ""
+      };
+      this.list.push(this.node);
+    }
+    if (chr === "\n") {
+      chr = " ";
+    }
+    if (chr.charCodeAt(0) >= 33 || [" ", "	"].includes(chr)) {
+      this.node.value += chr;
+    }
+    this.escaped = false;
+  }
+};
+var MAX_NESTED_GROUP_DEPTH = 50;
+function addressParser(str, options) {
+  options = options || {};
+  let depth = options._depth || 0;
+  if (depth > MAX_NESTED_GROUP_DEPTH) {
+    return [];
+  }
+  let tokenizer = new Tokenizer(str);
+  let tokens = tokenizer.tokenize();
+  let addresses = [];
+  let address = [];
+  const parsedAddresses = [];
+  tokens.forEach((token) => {
+    if (token.type === "operator" && (token.value === "," || token.value === ";")) {
+      if (address.length) {
+        addresses.push(address);
+      }
+      address = [];
+    } else {
+      address.push(token);
+    }
+  });
+  if (address.length) {
+    addresses.push(address);
+  }
+  for (const tokens2 of addresses) {
+    for (const address2 of _handleAddress(tokens2, depth)) {
+      parsedAddresses.push(address2);
+    }
+  }
+  if (options.flatten) {
+    let addresses2 = [];
+    let walkAddressList = /* @__PURE__ */ __name((list) => {
+      list.forEach((address2) => {
+        if (address2.group) {
+          return walkAddressList(address2.group);
+        } else {
+          addresses2.push(address2);
+        }
+      });
+    }, "walkAddressList");
+    walkAddressList(parsedAddresses);
+    return addresses2;
+  }
+  return parsedAddresses;
+}
+__name(addressParser, "addressParser");
+var address_parser_default = addressParser;
+
+// node_modules/postal-mime/src/base64-encoder.js
+function base64ArrayBuffer(arrayBuffer) {
+  var base64 = "";
+  var encodings = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
+  var bytes = new Uint8Array(arrayBuffer);
+  var byteLength = bytes.byteLength;
+  var byteRemainder = byteLength % 3;
+  var mainLength = byteLength - byteRemainder;
+  var a, b, c, d;
+  var chunk;
+  for (var i = 0; i < mainLength; i = i + 3) {
+    chunk = bytes[i] << 16 | bytes[i + 1] << 8 | bytes[i + 2];
+    a = (chunk & 16515072) >> 18;
+    b = (chunk & 258048) >> 12;
+    c = (chunk & 4032) >> 6;
+    d = chunk & 63;
+    base64 += encodings[a] + encodings[b] + encodings[c] + encodings[d];
+  }
+  if (byteRemainder == 1) {
+    chunk = bytes[mainLength];
+    a = (chunk & 252) >> 2;
+    b = (chunk & 3) << 4;
+    base64 += encodings[a] + encodings[b] + "==";
+  } else if (byteRemainder == 2) {
+    chunk = bytes[mainLength] << 8 | bytes[mainLength + 1];
+    a = (chunk & 64512) >> 10;
+    b = (chunk & 1008) >> 4;
+    c = (chunk & 15) << 2;
+    base64 += encodings[a] + encodings[b] + encodings[c] + "=";
+  }
+  return base64;
+}
+__name(base64ArrayBuffer, "base64ArrayBuffer");
+
+// node_modules/postal-mime/src/postal-mime.js
+var MAX_NESTING_DEPTH = 256;
+var MAX_HEADERS_SIZE = 2 * 1024 * 1024;
+var MAX_RFC822_NESTING_DEPTH = 10;
+function toCamelCase(key) {
+  return key.replace(/-(.)/g, (o, c) => c.toUpperCase());
+}
+__name(toCamelCase, "toCamelCase");
+function parseLimitOption(value, defaultValue, name) {
+  if (value === void 0 || value === null) {
+    return defaultValue;
+  }
+  if (typeof value !== "number" || !Number.isInteger(value) || value < 0) {
+    throw new TypeError(`${name} must be a non-negative integer`);
+  }
+  return value;
+}
+__name(parseLimitOption, "parseLimitOption");
+var PostalMime = class _PostalMime {
+  static {
+    __name(this, "PostalMime");
+  }
+  // async so that an invalid option rejects the returned promise instead of throwing
+  // synchronously, which would escape a `.catch()` chain
+  static async parse(buf, options) {
+    const parser = new _PostalMime(options);
+    return parser.parse(buf);
+  }
+  // rfc822NestingDepth is internal state that nested parsers receive from their parent.
+  // It is deliberately a separate argument rather than an option, so that forwarding a
+  // caller supplied options object can not seed it and switch the recursion limit off.
+  constructor(options, rfc822NestingDepth = 0) {
+    this.options = options || {};
+    this.mimeOptions = {
+      maxNestingDepth: parseLimitOption(this.options.maxNestingDepth, MAX_NESTING_DEPTH, "maxNestingDepth"),
+      maxHeadersSize: parseLimitOption(this.options.maxHeadersSize, MAX_HEADERS_SIZE, "maxHeadersSize")
+    };
+    this.maxRfc822NestingDepth = parseLimitOption(
+      this.options.maxRfc822NestingDepth,
+      MAX_RFC822_NESTING_DEPTH,
+      "maxRfc822NestingDepth"
+    );
+    this.rfc822NestingDepth = rfc822NestingDepth;
+    this.root = this.currentNode = new MimeNode({
+      postalMime: this,
+      ...this.mimeOptions
+    });
+    this.boundaries = [];
+    this.headerSize = 0;
+    this.textContent = {};
+    this.attachments = [];
+    this.attachmentEncoding = (this.options.attachmentEncoding || "").toString().replace(/[-_\s]/g, "").trim().toLowerCase() || "arraybuffer";
+    this.started = false;
+  }
+  async finalize() {
+    await this.root.finalize();
+  }
+  async processLine(line, isFinal) {
+    let boundaries = this.boundaries;
+    if (boundaries.length && line.length > 2 && line[0] === 45 && line[1] === 45) {
+      for (let i = boundaries.length - 1; i >= 0; i--) {
+        let boundary = boundaries[i];
+        if (line.length < boundary.value.length + 2) {
+          continue;
+        }
+        let boundaryMatches = true;
+        for (let j = 0; j < boundary.value.length; j++) {
+          if (line[j + 2] !== boundary.value[j]) {
+            boundaryMatches = false;
+            break;
+          }
+        }
+        if (!boundaryMatches) {
+          continue;
+        }
+        let boundaryEnd = boundary.value.length + 2;
+        let isTerminator = false;
+        if (line.length >= boundary.value.length + 4 && line[boundary.value.length + 2] === 45 && line[boundary.value.length + 3] === 45) {
+          isTerminator = true;
+          boundaryEnd = boundary.value.length + 4;
+        }
+        let hasValidTrailing = true;
+        for (let j = boundaryEnd; j < line.length; j++) {
+          if (line[j] !== 32 && line[j] !== 9) {
+            hasValidTrailing = false;
+            break;
+          }
+        }
+        if (!hasValidTrailing) {
+          continue;
+        }
+        if (isTerminator) {
+          await boundary.node.finalize();
+          this.currentNode = boundary.node.parentNode || this.root;
+        } else {
+          await boundary.node.finalizeChildNodes();
+          this.currentNode = new MimeNode({
+            postalMime: this,
+            parentNode: boundary.node,
+            parentMultipartType: boundary.node.contentType.multipart,
+            ...this.mimeOptions
+          });
+        }
+        if (isFinal) {
+          return this.finalize();
+        }
+        return;
+      }
+    }
+    this.currentNode.feed(line);
+    if (isFinal) {
+      return this.finalize();
+    }
+  }
+  readLine() {
+    let startPos = this.readPos;
+    let endPos = this.readPos;
+    while (this.readPos < this.av.length) {
+      const c = this.av[this.readPos++];
+      if (c !== 13 && c !== 10) {
+        endPos = this.readPos;
+      }
+      if (c === 10) {
+        return {
+          bytes: new Uint8Array(this.buf, startPos, endPos - startPos),
+          done: this.readPos >= this.av.length
+        };
+      }
+    }
+    return {
+      bytes: new Uint8Array(this.buf, startPos, endPos - startPos),
+      done: this.readPos >= this.av.length
+    };
+  }
+  async processNodeTree() {
+    let textContent = {};
+    let textTypes = /* @__PURE__ */ new Set();
+    let textMap = this.textMap = /* @__PURE__ */ new Map();
+    let forceRfc822Attachments = this.forceRfc822Attachments();
+    let walk = /* @__PURE__ */ __name(async (node, alternative, related) => {
+      alternative = alternative || false;
+      related = related || false;
+      if (!node.contentType.multipart) {
+        const inlineRfc822 = this.isInlineMessageRfc822(node) && !forceRfc822Attachments;
+        const rfc822DepthExceeded = inlineRfc822 && this.rfc822NestingDepth >= this.maxRfc822NestingDepth;
+        if (inlineRfc822 && !rfc822DepthExceeded) {
+          const subParser = new _PostalMime(
+            {
+              // Only the limits are inherited. Options that decide how a part
+              // is classified stay with the parser that was configured.
+              ...this.mimeOptions,
+              maxRfc822NestingDepth: this.maxRfc822NestingDepth,
+              // attachments are encoded by the parent parser, keep raw buffers here
+              attachmentEncoding: "arraybuffer"
+            },
+            this.rfc822NestingDepth + 1
+          );
+          node.subMessage = await subParser.parse(node.content);
+          if (!textMap.has(node)) {
+            textMap.set(node, {});
+          }
+          let textEntry = textMap.get(node);
+          if (node.subMessage.text || !node.subMessage.html) {
+            textEntry.plain = textEntry.plain || [];
+            textEntry.plain.push({ type: "subMessage", value: node.subMessage });
+            textTypes.add("plain");
+          }
+          if (node.subMessage.html) {
+            textEntry.html = textEntry.html || [];
+            textEntry.html.push({ type: "subMessage", value: node.subMessage });
+            textTypes.add("html");
+          }
+          if (subParser.textMap) {
+            subParser.textMap.forEach((subTextEntry, subTextNode) => {
+              textMap.set(subTextNode, subTextEntry);
+            });
+          }
+          for (let attachment of node.subMessage.attachments || []) {
+            this.attachments.push(attachment);
+          }
+        } else if (this.isInlineTextNode(node)) {
+          let textType = node.contentType.parsed.value.substr(node.contentType.parsed.value.indexOf("/") + 1);
+          let selectorNode = alternative || node;
+          if (!textMap.has(selectorNode)) {
+            textMap.set(selectorNode, {});
+          }
+          let textEntry = textMap.get(selectorNode);
+          textEntry[textType] = textEntry[textType] || [];
+          textEntry[textType].push({ type: "text", value: node.getTextContent() });
+          textTypes.add(textType);
+        } else if (node.content) {
+          const filename = node.contentDisposition?.parsed?.params?.filename || node.contentType.parsed.params.name || null;
+          const attachment = {
+            filename: filename ? decodeWords(filename) : null,
+            mimeType: node.contentType.parsed.value,
+            disposition: node.contentDisposition?.parsed?.value || null
+          };
+          if (related && node.contentId && !rfc822DepthExceeded) {
+            attachment.related = true;
+          }
+          if (rfc822DepthExceeded) {
+            attachment.rfc822DepthExceeded = true;
+          }
+          if (node.contentDescription) {
+            attachment.description = decodeWords(node.contentDescription);
+          }
+          if (node.contentId) {
+            attachment.contentId = node.contentId;
+          }
+          switch (node.contentType.parsed.value) {
+            // Special handling for calendar events
+            case "text/calendar":
+            case "application/ics": {
+              if (node.contentType.parsed.params.method) {
+                attachment.method = node.contentType.parsed.params.method.toString().toUpperCase().trim();
+              }
+              const decodedText = node.getTextContent().replace(/\r?\n/g, "\n");
+              let end = decodedText.length;
+              while (end > 0 && decodedText.charCodeAt(end - 1) === 10) {
+                end--;
+              }
+              attachment.content = textEncoder.encode(decodedText.slice(0, end) + "\n");
+              break;
+            }
+            // Regular attachments
+            default:
+              attachment.content = node.content;
+          }
+          this.attachments.push(attachment);
+        }
+      } else if (node.contentType.multipart === "alternative") {
+        alternative = node;
+      } else if (node.contentType.multipart === "related") {
+        related = node;
+      }
+      for (let childNode of node.childNodes) {
+        await walk(childNode, alternative, related);
+      }
+    }, "walk");
+    await walk(this.root, false, false);
+    textMap.forEach((mapEntry) => {
+      textTypes.forEach((textType) => {
+        if (!textContent[textType]) {
+          textContent[textType] = [];
+        }
+        if (mapEntry[textType]) {
+          mapEntry[textType].forEach((textEntry) => {
+            switch (textEntry.type) {
+              case "text":
+                textContent[textType].push(textEntry.value);
+                break;
+              case "subMessage":
+                {
+                  switch (textType) {
+                    case "html":
+                      textContent[textType].push(formatHtmlHeader(textEntry.value));
+                      break;
+                    case "plain":
+                      textContent[textType].push(formatTextHeader(textEntry.value));
+                      break;
+                  }
+                }
+                break;
+            }
+          });
+        } else {
+          let alternativeType;
+          switch (textType) {
+            case "html":
+              alternativeType = "plain";
+              break;
+            case "plain":
+              alternativeType = "html";
+              break;
+          }
+          (mapEntry[alternativeType] || []).forEach((textEntry) => {
+            switch (textEntry.type) {
+              case "text":
+                switch (textType) {
+                  case "html":
+                    textContent[textType].push(textToHtml(textEntry.value));
+                    break;
+                  case "plain":
+                    textContent[textType].push(htmlToText(textEntry.value));
+                    break;
+                }
+                break;
+              case "subMessage":
+                {
+                  switch (textType) {
+                    case "html":
+                      textContent[textType].push(formatHtmlHeader(textEntry.value));
+                      break;
+                    case "plain":
+                      textContent[textType].push(formatTextHeader(textEntry.value));
+                      break;
+                  }
+                }
+                break;
+            }
+          });
+        }
+      });
+    });
+    Object.keys(textContent).forEach((textType) => {
+      textContent[textType] = textContent[textType].join("\n");
+    });
+    this.textContent = textContent;
+  }
+  isInlineTextNode(node) {
+    if (node.contentDisposition?.parsed?.value === "attachment") {
+      return false;
+    }
+    switch (node.contentType.parsed?.value) {
+      case "text/html":
+      case "text/plain":
+        return true;
+      case "text/calendar":
+      case "text/csv":
+      default:
+        return false;
+    }
+  }
+  isInlineMessageRfc822(node) {
+    if (node.contentType.parsed?.value !== "message/rfc822") {
+      return false;
+    }
+    let disposition = node.contentDisposition?.parsed?.value || (this.options.rfc822Attachments ? "attachment" : "inline");
+    return disposition === "inline";
+  }
+  // Check if this is a specially crafted report email where message/rfc822 content should not be inlined
+  forceRfc822Attachments() {
+    if (this.options.forceRfc822Attachments) {
+      return true;
+    }
+    let forceRfc822Attachments = false;
+    let walk = /* @__PURE__ */ __name((node) => {
+      if (!node.contentType.multipart) {
+        if (node.contentType.parsed && ["message/delivery-status", "message/feedback-report"].includes(node.contentType.parsed.value)) {
+          forceRfc822Attachments = true;
+        }
+      }
+      for (let childNode of node.childNodes) {
+        walk(childNode);
+      }
+    }, "walk");
+    walk(this.root);
+    return forceRfc822Attachments;
+  }
+  async resolveStream(stream) {
+    let chunkLen = 0;
+    let chunks = [];
+    const reader = stream.getReader();
+    while (true) {
+      const { done, value } = await reader.read();
+      if (done) {
+        break;
+      }
+      chunks.push(value);
+      chunkLen += value.length;
+    }
+    const result = new Uint8Array(chunkLen);
+    let chunkPointer = 0;
+    for (let chunk of chunks) {
+      result.set(chunk, chunkPointer);
+      chunkPointer += chunk.length;
+    }
+    return result;
+  }
+  async parse(buf) {
+    if (this.started) {
+      throw new Error("Can not reuse parser, create a new PostalMime object");
+    }
+    this.started = true;
+    if (buf && typeof buf.getReader === "function") {
+      buf = await this.resolveStream(buf);
+    }
+    buf = buf || new ArrayBuffer(0);
+    if (typeof buf === "string") {
+      buf = textEncoder.encode(buf);
+    }
+    if (buf instanceof Blob || Object.prototype.toString.call(buf) === "[object Blob]") {
+      buf = await blobToArrayBuffer(buf);
+    }
+    if (ArrayBuffer.isView(buf)) {
+      buf = buf.buffer.slice(buf.byteOffset, buf.byteOffset + buf.byteLength);
+    }
+    this.buf = buf;
+    this.av = new Uint8Array(buf);
+    this.readPos = 0;
+    while (this.readPos < this.av.length) {
+      const line = this.readLine();
+      await this.processLine(line.bytes, line.done);
+    }
+    await this.processNodeTree();
+    const message = {
+      headers: this.root.headers.map((entry) => ({
+        key: entry.key,
+        originalKey: entry.originalKey,
+        value: entry.value
+      }))
+    };
+    for (const key of ["from", "sender"]) {
+      const addressHeader = this.root.headers.find((line) => line.key === key);
+      if (addressHeader && addressHeader.value) {
+        const addresses = address_parser_default(addressHeader.value);
+        if (addresses && addresses.length) {
+          message[key] = addresses[0];
+        }
+      }
+    }
+    for (const key of ["delivered-to", "return-path"]) {
+      const addressHeader = this.root.headers.find((line) => line.key === key);
+      if (addressHeader && addressHeader.value) {
+        const addresses = address_parser_default(addressHeader.value);
+        if (addresses && addresses.length && addresses[0].address) {
+          const camelKey = toCamelCase(key);
+          message[camelKey] = addresses[0].address;
+        }
+      }
+    }
+    for (const key of ["to", "cc", "bcc", "reply-to"]) {
+      const addresses = [];
+      for (const entry of this.root.headers) {
+        if (entry.key === key && entry.value) {
+          for (const address of address_parser_default(entry.value)) {
+            addresses.push(address);
+          }
+        }
+      }
+      if (addresses.length) {
+        const camelKey = toCamelCase(key);
+        message[camelKey] = addresses;
+      }
+    }
+    for (const key of ["subject", "message-id", "in-reply-to", "references"]) {
+      const header = this.root.headers.find((line) => line.key === key);
+      if (header && header.value) {
+        const camelKey = toCamelCase(key);
+        message[camelKey] = decodeWords(header.value);
+      }
+    }
+    let dateHeader = this.root.headers.find((line) => line.key === "date");
+    if (dateHeader) {
+      let date = new Date(dateHeader.value);
+      if (date.toString() === "Invalid Date") {
+        date = dateHeader.value;
+      } else {
+        date = date.toISOString();
+      }
+      message.date = date;
+    }
+    if (this.textContent?.html) {
+      message.html = this.textContent.html;
+    }
+    if (this.textContent?.plain) {
+      message.text = this.textContent.plain;
+    }
+    message.attachments = this.attachments;
+    message.headerLines = (this.root.rawHeaderLines || []).slice();
+    switch (this.attachmentEncoding) {
+      case "arraybuffer":
+        break;
+      case "base64":
+        for (let attachment of message.attachments || []) {
+          if (attachment?.content) {
+            attachment.content = base64ArrayBuffer(attachment.content);
+            attachment.encoding = "base64";
+          }
+        }
+        break;
+      case "utf8":
+        let attachmentDecoder = new TextDecoder("utf8");
+        for (let attachment of message.attachments || []) {
+          if (attachment?.content) {
+            attachment.content = attachmentDecoder.decode(attachment.content);
+            attachment.encoding = "utf8";
+          }
+        }
+        break;
+      default:
+        throw new Error("Unknown attachment encoding");
+    }
+    return message;
+  }
+};
+
+// worker/src/parser.ts
+var MAX_SCAN_LENGTH = 100 * 1024;
+var OTP_BASE_KEYWORDS = "(?:code|otp|verification(?:\\s+code)?|verify(?:\\s+code)?|security\\s+code|confirmation(?:\\s+code)?|passcode|pin|token|access\\s+code|auth\\s+code|two-factor(?:\\s+code)?|2fa(?:\\s+code)?|one-time\\s+(?:password|code|passcode)|steam\\s+guard(?:\\s+code)?|login\\s+code|temporary\\s+password|\u0631\u0645\u0632(?:\\s+\u0627\u0644\u062A\u062D\u0642\u0642|\\s+\u0627\u0644\u062A\u0623\u0643\u064A\u062F|\\s+\u0627\u0644\u0623\u0645\u0627\u0646|\\s+\u0627\u0644\u062F\u062E\u0648\u0644)?|\u0643\u0648\u062F(?:\\s+\u0627\u0644\u062A\u062D\u0642\u0642|\\s+\u0627\u0644\u062A\u0623\u0643\u064A\u062F|\\s+\u0627\u0644\u0623\u0645\u0627\u0646|\\s+\u0627\u0644\u062F\u062E\u0648\u0644)?|\u0643\u0644\u0645\u0629\\s+\u0627\u0644\u0645\u0631\u0648\u0631\\s+\u0627\u0644\u0645\u0624\u0642\u062A\u0629|\u062A\u062D\u0642\u0642|\u062A\u0623\u0643\u064A\u062F|\u062A\u0641\u0639\u064A\u0644)";
+var CONNECTING_PHRASES = "(?:[\\s:=-]*(?:is|\u0647\u0648|is\\s+your|\u0627\u0644\u062E\u0627\u0635\\s+\u0628\u0643\\s+\u0647\u0648|\u0627\u0644\u062E\u0627\u0635\\s+\u0628\u0643|\u0643\u0627\u0644\u062A\u0627\u0644\u064A)?[\\s:=-]*)";
+var STOP_WORDS = /* @__PURE__ */ new Set([
+  "THIS",
+  "THAT",
+  "CODE",
+  "HERE",
+  "FROM",
+  "WITH",
+  "YOUR",
+  "USER",
+  "HTML",
+  "HTTP",
+  "HTTPS",
+  "EMAIL",
+  "MAILS",
+  "RESET",
+  "CLICK",
+  "CHECK",
+  "VALID",
+  "LOGIN",
+  "LOGON",
+  "ENTER",
+  "PHONE",
+  "ALERT",
+  "ABOUT",
+  "TERMS",
+  "COUNT",
+  "TOTAL",
+  "STATE",
+  "LINKS",
+  "PLEASE",
+  "THANKS",
+  "SECURE",
+  "VERIFY",
+  "UPDATE",
+  "NUMBER",
+  "ACTIVE",
+  "ONLINE"
+]);
+var COMMON_YEARS = /* @__PURE__ */ new Set([
+  "2018",
+  "2019",
+  "2020",
+  "2021",
+  "2022",
+  "2023",
+  "2024",
+  "2025",
+  "2026",
+  "2027",
+  "2028",
+  "2029",
+  "2030"
+]);
+function cleanHtmlContent(rawHtml) {
+  if (!rawHtml) return "";
+  const trimmed = rawHtml.length > MAX_SCAN_LENGTH ? rawHtml.slice(0, MAX_SCAN_LENGTH) : rawHtml;
+  return trimmed.replace(/<style[^>]*>[\s\S]*?<\/style>/gi, " ").replace(/<script[^>]*>[\s\S]*?<\/script>/gi, " ").replace(/<!--[\s\S]*?-->/g, " ").replace(/<[^>]+>/g, " ");
+}
+__name(cleanHtmlContent, "cleanHtmlContent");
+function isValidOtpCandidate(code) {
+  if (!code) return false;
+  const clean = code.trim();
+  if (/^G-[0-9]{4,8}$/i.test(clean)) return true;
+  if (/^[0-9]{3}[- ][0-9]{3,4}$/.test(clean)) {
+    const digitsOnly2 = clean.replace(/[^0-9]/g, "");
+    return digitsOnly2.length >= 6 && digitsOnly2.length <= 8;
+  }
+  const digitsOnly = clean.replace(/[^0-9]/g, "");
+  if (digitsOnly === clean) {
+    if (clean.length === 4 && COMMON_YEARS.has(clean)) {
+      return false;
+    }
+    return clean.length >= 4 && clean.length <= 8;
+  }
+  if (/^[A-Za-z0-9]{4,8}$/.test(clean)) {
+    const upper = clean.toUpperCase();
+    if (STOP_WORDS.has(upper)) return false;
+    const hasDigit = /[0-9]/.test(clean);
+    const hasLetter = /[A-Za-z]/.test(clean);
+    if (!hasDigit && !hasLetter) return false;
+    if (/^(.)\1+$/.test(clean)) return false;
+    return true;
+  }
+  return false;
+}
+__name(isValidOtpCandidate, "isValidOtpCandidate");
+function extractOtp(text, html) {
+  const safeText = text ? text.length > MAX_SCAN_LENGTH ? text.slice(0, MAX_SCAN_LENGTH) : text : "";
+  const cleanedHtml = html ? cleanHtmlContent(html) : "";
+  const combined = `${safeText}
+${cleanedHtml}`;
+  if (!combined.trim()) return null;
+  const googleRegex = /\b(G-[0-9]{4,8})\b/i;
+  const googleMatch = combined.match(googleRegex);
+  if (googleMatch && googleMatch[1]) {
+    return googleMatch[1].toUpperCase().trim();
+  }
+  const forwardRegex = new RegExp(
+    `${OTP_BASE_KEYWORDS}${CONNECTING_PHRASES}([A-Za-z0-9]{3}[- ][A-Za-z0-9]{3,4}|[A-Za-z0-9]{4,8})\\b`,
+    "iu"
+  );
+  const forwardMatch = combined.match(forwardRegex);
+  if (forwardMatch && forwardMatch[1]) {
+    const candidate = forwardMatch[1].trim();
+    if (isValidOtpCandidate(candidate)) {
+      return candidate;
+    }
+  }
+  const backwardRegex = new RegExp(
+    `\\b([A-Za-z0-9]{3}[- ][A-Za-z0-9]{3,4}|[A-Za-z0-9]{4,8})[\\s:=-]+(?:is your (?:code|otp|verification|pin|security code|passcode)|\u0647\u0648 (?:\u0631\u0645\u0632|\u0643\u0648\u062F))`,
+    "iu"
+  );
+  const backwardMatch = combined.match(backwardRegex);
+  if (backwardMatch && backwardMatch[1]) {
+    const candidate = backwardMatch[1].trim();
+    if (isValidOtpCandidate(candidate)) {
+      return candidate;
+    }
+  }
+  const dividedRegex = /\b([0-9]{3}-[0-9]{3,4})\b/g;
+  let divMatch;
+  while ((divMatch = dividedRegex.exec(combined)) !== null) {
+    const cand = divMatch[1];
+    if (isValidOtpCandidate(cand)) {
+      return cand;
+    }
+  }
+  const noColorsCombined = combined.replace(/#[0-9a-fA-F]{3,8}\b/g, " ");
+  const noTimesCombined = noColorsCombined.replace(/\b[0-9]{1,2}:[0-9]{2}(?::[0-9]{2})?\b/g, " ");
+  const noUnitsCombined = noTimesCombined.replace(/\b[0-9]+(?:px|kb|mb|gb|%|ms|s)\b/gi, " ");
+  const standaloneRegex = /(?:^|\s|\(|\[|"|')([0-9]{4,8})(?:\s|\)|\]|"|'|$)/gm;
+  let match;
+  while ((match = standaloneRegex.exec(noUnitsCombined)) !== null) {
+    const num = match[1].trim();
+    if (isValidOtpCandidate(num)) {
+      return num;
+    }
+  }
+  return null;
+}
+__name(extractOtp, "extractOtp");
+function decodeHtmlEntities(url) {
+  if (!url) return "";
+  return url.replace(/&amp;/gi, "&").replace(/&#39;/gi, "'").replace(/&apos;/gi, "'").replace(/&quot;/gi, '"').replace(/&lt;/gi, "<").replace(/&gt;/gi, ">").replace(/&#x2F;/gi, "/").replace(/&#47;/gi, "/").replace(/&nbsp;/gi, " ").trim();
+}
+__name(decodeHtmlEntities, "decodeHtmlEntities");
+function sanitizeUrl(rawUrl) {
+  if (!rawUrl) return null;
+  let url = decodeHtmlEntities(rawUrl).trim();
+  let prev = "";
+  while (prev !== url) {
+    prev = url;
+    url = url.replace(/^[("'«“‘<]+|[)"'»”’>]+$/g, "");
+    url = url.replace(/[.,:;!?]+$/, "");
+    if (url.endsWith(")") && !url.includes("(")) {
+      url = url.slice(0, -1);
+    }
+    if (url.endsWith("]") && !url.includes("[")) {
+      url = url.slice(0, -1);
+    }
+    if (url.endsWith("}") && !url.includes("{")) {
+      url = url.slice(0, -1);
+    }
+  }
+  if (!/^https?:\/\/[a-z0-9.-]+\.[a-z]{2,}/i.test(url)) {
+    return null;
+  }
+  return url;
+}
+__name(sanitizeUrl, "sanitizeUrl");
+function getLinkPriority(url, anchorText = "") {
+  const lowerUrl = url.toLowerCase();
+  const lowerAnchor = anchorText.toLowerCase();
+  if (lowerUrl.includes("unsubscribe") || lowerUrl.includes("optout") || lowerUrl.includes("opt-out") || lowerUrl.includes("list-unsubscribe") || lowerUrl.includes("privacy") || lowerUrl.includes("terms") || lowerUrl.includes("cookie") || lowerAnchor.includes("unsubscribe") || lowerAnchor.includes("\u0625\u0644\u063A\u0627\u0621 \u0627\u0644\u0627\u0634\u062A\u0631\u0627\u0643")) {
+    return -1;
+  }
+  let score = 0;
+  if (/verify|verification|activate|activation|confirm|confirmation|complete registration|validate/i.test(lowerAnchor) || /تأكيد|تفعيل|تأكيد الحساب|تفعيل البريد|إتمام التسجيل/i.test(lowerAnchor)) {
+    score += 15;
+  } else if (/login|sign in|signin|magic link|log in|reset password/i.test(lowerAnchor) || /تسجيل الدخول|دخول|رابط الدخول|إعادة تعيين كلمة المرور/i.test(lowerAnchor)) {
+    score += 10;
+  } else if (/click here|اضغط هنا|open link/i.test(lowerAnchor)) {
+    score += 5;
+  }
+  if (/verify|verification|activate|activation|confirm|confirmation|auth|validate|token=|code=/i.test(lowerUrl)) {
+    score += 10;
+  }
+  if (/login|signin|magic-link|password|reset/i.test(lowerUrl)) {
+    score += 5;
+  }
+  return score;
+}
+__name(getLinkPriority, "getLinkPriority");
+function extractLinks(html, text) {
+  const foundSet = /* @__PURE__ */ new Set();
+  const priorityMap = /* @__PURE__ */ new Map();
+  if (html && typeof html === "string") {
+    const safeHtml = html.length > MAX_SCAN_LENGTH ? html.slice(0, MAX_SCAN_LENGTH) : html;
+    const anchorRegex = /<a\s+[^>]*href=["']([^"'>]+)["'][^>]*>([\s\S]*?)<\/a>/gi;
+    let aMatch;
+    while ((aMatch = anchorRegex.exec(safeHtml)) !== null) {
+      const cleanedUrl = sanitizeUrl(aMatch[1]);
+      if (cleanedUrl) {
+        foundSet.add(cleanedUrl);
+        const anchorText = aMatch[2].replace(/<[^>]+>/g, " ").trim();
+        const prio = getLinkPriority(cleanedUrl, anchorText);
+        const currentPrio = priorityMap.get(cleanedUrl) || 0;
+        if (prio > currentPrio || !priorityMap.has(cleanedUrl)) {
+          priorityMap.set(cleanedUrl, prio);
+        }
+      }
+    }
+    const hrefRegex = /href\s*=\s*["']([^"'>]+)["']/gi;
+    let match;
+    while ((match = hrefRegex.exec(safeHtml)) !== null) {
+      const cleaned = sanitizeUrl(match[1]);
+      if (cleaned && !foundSet.has(cleaned)) {
+        foundSet.add(cleaned);
+        priorityMap.set(cleaned, getLinkPriority(cleaned, ""));
+      }
+    }
+  }
+  const textSource = text || (html ? html.replace(/<[^>]+>/g, " ") : "");
+  if (textSource && typeof textSource === "string") {
+    const safeText = textSource.length > MAX_SCAN_LENGTH ? textSource.slice(0, MAX_SCAN_LENGTH) : textSource;
+    const plainUrlRegex = /(https?:\/\/[^\s<>"'{}|\\^`[\]]+)/gi;
+    let textMatch;
+    while ((textMatch = plainUrlRegex.exec(safeText)) !== null) {
+      const cleaned = sanitizeUrl(textMatch[1]);
+      if (cleaned && !foundSet.has(cleaned)) {
+        foundSet.add(cleaned);
+        priorityMap.set(cleaned, getLinkPriority(cleaned, ""));
+      }
+    }
+  }
+  const allUrls = Array.from(foundSet);
+  for (const u of allUrls) {
+    if (!priorityMap.has(u)) {
+      priorityMap.set(u, getLinkPriority(u, ""));
+    }
+  }
+  const validActionLinks = allUrls.filter((u) => (priorityMap.get(u) || 0) > 0);
+  const neutralLinks = allUrls.filter((u) => (priorityMap.get(u) || 0) === 0);
+  const lowPriorityLinks = allUrls.filter((u) => (priorityMap.get(u) || 0) < 0);
+  if (validActionLinks.length > 0) {
+    validActionLinks.sort((a, b) => (priorityMap.get(b) || 0) - (priorityMap.get(a) || 0));
+    return [...validActionLinks, ...neutralLinks];
+  }
+  return [...neutralLinks, ...lowPriorityLinks];
+}
+__name(extractLinks, "extractLinks");
+
+// worker/src/mailbox-do.ts
+var MailboxDO = class {
+  static {
+    __name(this, "MailboxDO");
+  }
+  constructor(state, env2) {
+    this.state = state;
+    this.env = env2;
+    const minutes = parseInt(env2.EXPIRY_MINUTES || "20", 10);
+    this.expiryMs = (isNaN(minutes) ? 20 : minutes) * 60 * 1e3;
+  }
+  /**
+   * استخراج رمز الأمان (Token) من الترويسات أو من المعاملات في الرابط
+   */
+  extractToken(request, url) {
+    const authHeader = request.headers.get("Authorization") || request.headers.get("authorization");
+    if (authHeader) {
+      const match = authHeader.match(/^Bearer\s+(.+)$/i);
+      if (match) return match[1].trim();
+      return authHeader.trim();
+    }
+    const customHeader = request.headers.get("X-Access-Token") || request.headers.get("x-access-token");
+    if (customHeader) return customHeader.trim();
+    const queryToken = url.searchParams.get("token");
+    if (queryToken) return queryToken.trim();
+    const wsProtocol = request.headers.get("Sec-WebSocket-Protocol");
+    if (wsProtocol && !wsProtocol.includes(",")) {
+      return wsProtocol.trim();
+    }
+    return null;
+  }
+  /**
+   * التحقق من مطابقة الرمز السري المخزن للصندوق
+   */
+  async verifyToken(providedToken) {
+    if (!providedToken) return false;
+    const storedToken = await this.state.storage.get("secret_token");
+    if (!storedToken) {
+      return false;
+    }
+    return storedToken === providedToken.trim();
+  }
+  /**
+   * ضمان جدولة الـ Alarm وتخزين expiresAt
+   */
+  async ensureAlarmScheduled() {
+    let expiresAt = await this.state.storage.get("expiresAt");
+    const now = Date.now();
+    if (!expiresAt || expiresAt <= now) {
+      expiresAt = now + this.expiryMs;
+      await this.state.storage.put("expiresAt", expiresAt);
+      await this.state.storage.setAlarm(expiresAt);
+    } else {
+      const existingAlarm = await this.state.storage.getAlarm();
+      if (existingAlarm === null) {
+        await this.state.storage.setAlarm(expiresAt);
+      }
+    }
+    return expiresAt;
+  }
+  /**
+   * معالج الطلبات الموجهة لهذا الـ Durable Object
+   */
+  async fetch(request) {
+    const url = new URL(request.url);
+    if (url.pathname === "/internal/init" && request.method === "POST") {
+      try {
+        const body = await request.json();
+        const incomingToken = body.token;
+        if (incomingToken) {
+          const currentToken = await this.state.storage.get("secret_token");
+          if (!currentToken) {
+            await this.state.storage.put("secret_token", incomingToken.trim());
+          }
+        }
+        const expiresAt = await this.ensureAlarmScheduled();
+        return new Response(
+          JSON.stringify({
+            success: true,
+            expiresAt,
+            remainingSeconds: Math.max(0, Math.floor((expiresAt - Date.now()) / 1e3))
+          }),
+          { headers: { "Content-Type": "application/json" }, status: 200 }
+        );
+      } catch (err) {
+        return new Response(JSON.stringify({ success: false, error: err.message }), {
+          status: 500,
+          headers: { "Content-Type": "application/json" }
+        });
+      }
+    }
+    if (request.headers.get("Upgrade")?.toLowerCase() === "websocket") {
+      const clientToken = this.extractToken(request, url);
+      const isAuthorized = await this.verifyToken(clientToken);
+      if (!isAuthorized) {
+        return new Response("403 Forbidden: Invalid or missing secret access token.", {
+          status: 403,
+          headers: { "Content-Type": "text/plain" }
+        });
+      }
+      const currentSockets = this.state.getWebSockets();
+      if (currentSockets.length >= 5) {
+        return new Response(
+          JSON.stringify({
+            error: "429 Too Many Requests",
+            message: "\u062A\u0645 \u062A\u062C\u0627\u0648\u0632 \u0627\u0644\u062D\u062F \u0627\u0644\u0623\u0642\u0635\u0649 \u0644\u0627\u062A\u0635\u0627\u0644\u0627\u062A WebSocket \u0627\u0644\u0645\u062A\u0632\u0627\u0645\u0646\u0629 \u0644\u0647\u0630\u0627 \u0627\u0644\u0635\u0646\u062F\u0648\u0642 (\u062D\u062F \u0623\u0642\u0635\u0649 5 \u0627\u062A\u0635\u0627\u0644\u0627\u062A)."
+          }),
+          {
+            status: 429,
+            headers: { "Content-Type": "application/json" }
+          }
+        );
+      }
+      const expiresAt = await this.ensureAlarmScheduled();
+      const pair = new WebSocketPair();
+      const [client, server] = Object.values(pair);
+      this.state.acceptWebSocket(server);
+      const stored = await this.getAllStoredMessages();
+      server.send(
+        JSON.stringify({
+          type: "init",
+          emails: stored,
+          count: stored.length,
+          expiresAt,
+          remainingSeconds: Math.max(0, Math.floor((expiresAt - Date.now()) / 1e3)),
+          timestamp: (/* @__PURE__ */ new Date()).toISOString()
+        })
+      );
+      return new Response(null, {
+        status: 101,
+        webSocket: client
+      });
+    }
+    if (url.pathname === "/internal/deliver" && request.method === "POST") {
+      try {
+        const payload = await request.json();
+        const fromAddress = payload.from || "\u0645\u062C\u0647\u0648\u0644";
+        const toAddress = payload.to || "";
+        const currentMessages = await this.getAllStoredMessages();
+        if (currentMessages.length >= 50) {
+          console.warn(`Mailbox ${toAddress} reached maximum capacity of 50 emails. Rejecting.`);
+          return new Response(
+            JSON.stringify({
+              success: false,
+              error: "Mailbox capacity reached (maximum 50 emails allowed)"
+            }),
+            {
+              status: 429,
+              headers: { "Content-Type": "application/json" }
+            }
+          );
+        }
+        const subject = payload.subject || "(\u0628\u062F\u0648\u0646 \u0645\u0648\u0636\u0648\u0639)";
+        const textContent = payload.text || "";
+        const htmlContent = payload.html || "";
+        const rawDate = payload.date || (/* @__PURE__ */ new Date()).toISOString();
+        const otpCode = extractOtp(textContent, htmlContent);
+        const links = extractLinks(htmlContent, textContent);
+        const emailRecord = {
+          id: payload.id || crypto.randomUUID(),
+          from: fromAddress,
+          to: toAddress,
+          subject,
+          date: rawDate,
+          text: textContent,
+          html: htmlContent,
+          otpCode,
+          links,
+          receivedAt: (/* @__PURE__ */ new Date()).toISOString(),
+          rawSize: payload.rawSize
+        };
+        const storageKey = `msg:${Date.now()}_${emailRecord.id}`;
+        await this.state.storage.put(storageKey, emailRecord);
+        const expiresAt = await this.ensureAlarmScheduled();
+        const broadcastPayload = JSON.stringify({
+          type: "new_email",
+          email: emailRecord,
+          expiresAt,
+          remainingSeconds: Math.max(0, Math.floor((expiresAt - Date.now()) / 1e3))
+        });
+        const activeSockets = this.state.getWebSockets();
+        for (const ws of activeSockets) {
+          try {
+            ws.send(broadcastPayload);
+          } catch (e) {
+          }
+        }
+        return new Response(
+          JSON.stringify({ success: true, id: emailRecord.id, otpCode }),
+          {
+            headers: { "Content-Type": "application/json" },
+            status: 200
+          }
+        );
+      } catch (err) {
+        return new Response(
+          JSON.stringify({ success: false, error: err.message }),
+          {
+            headers: { "Content-Type": "application/json" },
+            status: 500
+          }
+        );
+      }
+    }
+    if (url.pathname.endsWith("/extend") && request.method === "POST") {
+      if (!url.pathname.startsWith("/internal")) {
+        const token = this.extractToken(request, url);
+        if (!await this.verifyToken(token)) {
+          return new Response(
+            JSON.stringify({ error: "403 Forbidden: Invalid access token" }),
+            { status: 403, headers: { "Content-Type": "application/json" } }
+          );
+        }
+      }
+      const currentExpiresAt = await this.state.storage.get("expiresAt") || Date.now();
+      const tenMinutesMs = 10 * 60 * 1e3;
+      const newExpiresAt = Math.max(Date.now(), currentExpiresAt) + tenMinutesMs;
+      await this.state.storage.put("expiresAt", newExpiresAt);
+      await this.state.storage.setAlarm(newExpiresAt);
+      const remainingSeconds = Math.max(0, Math.floor((newExpiresAt - Date.now()) / 1e3));
+      const broadcastPayload = JSON.stringify({
+        type: "extended",
+        expiresAt: newExpiresAt,
+        remainingSeconds
+      });
+      for (const ws of this.state.getWebSockets()) {
+        try {
+          ws.send(broadcastPayload);
+        } catch {
+        }
+      }
+      return new Response(
+        JSON.stringify({
+          success: true,
+          expiresAt: newExpiresAt,
+          remainingSeconds,
+          message: "\u062A\u0645 \u062A\u0645\u062F\u064A\u062F \u0635\u0644\u0627\u062D\u064A\u0629 \u0627\u0644\u0635\u0646\u062F\u0648\u0642 10 \u062F\u0642\u0627\u0626\u0642 \u0625\u0636\u0627\u0641\u064A\u0629 \u0628\u0646\u062C\u0627\u062D."
+        }),
+        { headers: { "Content-Type": "application/json" }, status: 200 }
+      );
+    }
+    if (url.pathname.endsWith("/burn") && (request.method === "POST" || request.method === "DELETE")) {
+      if (!url.pathname.startsWith("/internal")) {
+        const token = this.extractToken(request, url);
+        if (!await this.verifyToken(token)) {
+          return new Response(
+            JSON.stringify({ error: "403 Forbidden: Invalid access token" }),
+            { status: 403, headers: { "Content-Type": "application/json" } }
+          );
+        }
+      }
+      await this.burnAndDestroy();
+      return new Response(
+        JSON.stringify({
+          success: true,
+          message: "\u062A\u0645 \u062D\u0631\u0642 \u0648\u0625\u062A\u0644\u0627\u0641 \u0643\u0627\u0641\u0629 \u0628\u064A\u0627\u0646\u0627\u062A \u0627\u0644\u0635\u0646\u062F\u0648\u0642 \u0648\u0625\u063A\u0644\u0627\u0642 \u0627\u0644\u0627\u062A\u0635\u0627\u0644\u0627\u062A \u0641\u0648\u0631\u064A\u0627."
+        }),
+        { headers: { "Content-Type": "application/json" }, status: 200 }
+      );
+    }
+    if (url.pathname.endsWith("/messages") || url.pathname.endsWith("/emails")) {
+      const clientToken = this.extractToken(request, url);
+      const isAuthorized = await this.verifyToken(clientToken);
+      if (!isAuthorized) {
+        return new Response(
+          JSON.stringify({
+            error: "403 Forbidden",
+            message: "\u0645\u0645\u0646\u0648\u0639 \u0627\u0644\u0648\u0635\u0648\u0644: \u0631\u0645\u0632 \u0627\u0644\u0623\u0645\u0627\u0646 \u063A\u064A\u0631 \u0635\u062D\u064A\u062D \u0623\u0648 \u0645\u0641\u0642\u0648\u062F. \u0644\u0627 \u064A\u0645\u0643\u0646 \u0627\u0644\u0627\u0637\u0644\u0627\u0639 \u0639\u0644\u0649 \u0627\u0644\u0631\u0633\u0627\u0626\u0644 \u0628\u062F\u0648\u0646 \u062A\u0635\u0631\u064A\u062D."
+          }),
+          { status: 403, headers: { "Content-Type": "application/json" } }
+        );
+      }
+      const expiresAt = await this.ensureAlarmScheduled();
+      const messages = await this.getAllStoredMessages();
+      return new Response(
+        JSON.stringify({
+          emails: messages,
+          count: messages.length,
+          expiresAt,
+          remainingSeconds: Math.max(0, Math.floor((expiresAt - Date.now()) / 1e3))
+        }),
+        {
+          headers: { "Content-Type": "application/json" },
+          status: 200
+        }
+      );
+    }
+    return new Response("Not Found", { status: 404 });
+  }
+  /**
+   * جلب أحدث الرسائل المخزنة بحماية الذاكرة ومنع الانهيار
+   * استخدام limit: 50 و reverse: true لمنع تحميل آلاف الرسائل دفعة واحدة
+   */
+  async getAllStoredMessages() {
+    const list = await this.state.storage.list({
+      prefix: "msg:",
+      limit: 50,
+      reverse: true
+    });
+    const records = Array.from(list.values());
+    records.sort(
+      (a, b) => new Date(b.receivedAt).getTime() - new Date(a.receivedAt).getTime()
+    );
+    return records;
+  }
+  /**
+   * إتلاف وحرق الصندوق فوريا ومسح الذاكرة بالكامل
+   */
+  async burnAndDestroy() {
+    const sockets = this.state.getWebSockets();
+    const burnedPayload = JSON.stringify({
+      type: "burned",
+      message: "\u062A\u0645 \u0625\u062A\u0644\u0627\u0641 \u0648\u0645\u0633\u062D \u0635\u0646\u062F\u0648\u0642 \u0627\u0644\u0628\u0631\u064A\u062F \u0627\u0644\u0645\u0624\u0642\u062A \u0628\u0646\u0627\u0621 \u0639\u0644\u0649 \u0637\u0644\u0628\u0643."
+    });
+    for (const ws of sockets) {
+      try {
+        ws.send(burnedPayload);
+        ws.close(1e3, "Mailbox burned by user");
+      } catch {
+      }
+    }
+    try {
+      await this.state.storage.deleteAlarm();
+    } catch {
+    }
+    await this.state.storage.deleteAll();
+  }
+  /**
+   * معالج رسائل الـ WebSocket الواردة من العميل (Hibernation API)
+   */
+  async webSocketMessage(ws, message) {
+    try {
+      const parsed = typeof message === "string" ? JSON.parse(message) : {};
+      if (parsed.type === "ping") {
+        ws.send(JSON.stringify({ type: "pong", time: Date.now() }));
+        return;
+      }
+      if (parsed.type === "burn") {
+        await this.burnAndDestroy();
+        return;
+      }
+      if (parsed.type === "extend") {
+        const currentExpiresAt = await this.state.storage.get("expiresAt") || Date.now();
+        const newExpiresAt = Math.max(Date.now(), currentExpiresAt) + 10 * 60 * 1e3;
+        await this.state.storage.put("expiresAt", newExpiresAt);
+        await this.state.storage.setAlarm(newExpiresAt);
+        const remainingSeconds = Math.max(0, Math.floor((newExpiresAt - Date.now()) / 1e3));
+        const payload = JSON.stringify({
+          type: "extended",
+          expiresAt: newExpiresAt,
+          remainingSeconds
+        });
+        for (const sock of this.state.getWebSockets()) {
+          try {
+            sock.send(payload);
+          } catch {
+          }
+        }
+        return;
+      }
+    } catch {
+    }
+  }
+  /**
+   * معالج إغلاق اتصال WebSocket (Hibernation API)
+   */
+  async webSocketClose(_ws, _code, _reason, _wasClean) {
+  }
+  /**
+   * دالة الـ Alarm: تستدعى تلقائيا بواسطة Cloudflare عند انتهاء الصلاحية
+   * تمسح كل البيانات وتغلق اتصالات الـ WebSocket
+   */
+  async alarm() {
+    const sockets = this.state.getWebSockets();
+    const expiredPayload = JSON.stringify({
+      type: "expired",
+      message: "\u0627\u0646\u062A\u0647\u062A \u0635\u0644\u0627\u062D\u064A\u0629 \u0635\u0646\u062F\u0648\u0642 \u0627\u0644\u0628\u0631\u064A\u062F \u0627\u0644\u0645\u0624\u0642\u062A \u0648\u062A\u0645 \u0625\u062A\u0644\u0627\u0641 \u0627\u0644\u0628\u064A\u0627\u0646\u0627\u062A \u0628\u0627\u0644\u0643\u0627\u0645\u0644 \u0628\u0646\u062C\u0627\u062D."
+    });
+    for (const ws of sockets) {
+      try {
+        ws.send(expiredPayload);
+        ws.close(1e3, "Session expired");
+      } catch {
+      }
+    }
+    await this.state.storage.deleteAll();
+  }
+};
+
+// worker/src/address.ts
+function generateSecretToken() {
+  return crypto.randomUUID();
+}
+__name(generateSecretToken, "generateSecretToken");
+function generateRandomAddress(domain2 = "freetemp.email") {
+  const cleanHex = crypto.randomUUID().replace(/-/g, "");
+  const localPart = cleanHex.slice(0, 10).toLowerCase();
+  const cleanDomain = domain2.trim().replace(/^@/, "").toLowerCase();
+  const token = generateSecretToken();
+  return {
+    address: `${localPart}@${cleanDomain}`,
+    localPart,
+    domain: cleanDomain,
+    token
+  };
+}
+__name(generateRandomAddress, "generateRandomAddress");
+
+// worker/src/index.ts
+var ALLOWED_ORIGIN_PATTERNS = [
+  /^https?:\/\/localhost(:\d+)?$/,
+  /^https?:\/\/127\.0\.0\.1(:\d+)?$/,
+  /^https:\/\/freetemp\.email$/,
+  /^https:\/\/www\.freetemp\.email$/,
+  /^https:\/\/[a-z0-9-]+\.europe-west2\.run\.app$/,
+  /^https:\/\/[a-z0-9-]+\.run\.app$/
+];
+function getCorsHeaders(request, env2) {
+  const origin = request.headers.get("Origin") || "";
+  let matchedOrigin = "https://freetemp.email";
+  if (origin) {
+    const isAllowed = ALLOWED_ORIGIN_PATTERNS.some((pattern) => pattern.test(origin));
+    if (isAllowed) {
+      matchedOrigin = origin;
+    }
+  }
+  return {
+    "Access-Control-Allow-Origin": matchedOrigin,
+    "Access-Control-Allow-Methods": "GET, POST, OPTIONS, DELETE",
+    "Access-Control-Allow-Headers": "Content-Type, Authorization, Upgrade, X-Access-Token, cf-turnstile-response",
+    "Access-Control-Allow-Credentials": "true",
+    "Vary": "Origin",
+    // ركائز الأمان القياسية (Security Headers)
+    "X-Content-Type-Options": "nosniff",
+    "Referrer-Policy": "strict-origin-when-cross-origin",
+    "X-Frame-Options": "DENY",
+    "Content-Security-Policy": "default-src 'self' https://freetemp.email; connect-src 'self' https://freetemp.email wss://freetemp.email https://challenges.cloudflare.com; script-src 'self' 'unsafe-inline' https://cdn.tailwindcss.com https://challenges.cloudflare.com; style-src 'self' 'unsafe-inline'; font-src 'self' data:; img-src 'self' data: https:; frame-src 'self' https://challenges.cloudflare.com;"
+  };
+}
+__name(getCorsHeaders, "getCorsHeaders");
+var ipRateLimitMap = /* @__PURE__ */ new Map();
+function checkRateLimit(ip) {
+  if (!ip) return true;
+  const now = Date.now();
+  const record = ipRateLimitMap.get(ip);
+  if (!record || record.resetAt <= now) {
+    ipRateLimitMap.set(ip, { count: 1, resetAt: now + 10 * 60 * 1e3 });
+    return true;
+  }
+  if (record.count >= 10) {
+    return false;
+  }
+  record.count += 1;
+  return true;
+}
+__name(checkRateLimit, "checkRateLimit");
+function extractTokenFromRequest(request, url) {
+  const authHeader = request.headers.get("Authorization") || request.headers.get("authorization");
+  if (authHeader) {
+    const match = authHeader.match(/^Bearer\s+(.+)$/i);
+    if (match) return match[1].trim();
+    return authHeader.trim();
+  }
+  const customHeader = request.headers.get("X-Access-Token") || request.headers.get("x-access-token");
+  if (customHeader) return customHeader.trim();
+  const queryToken = url.searchParams.get("token");
+  if (queryToken) return queryToken.trim();
+  return null;
+}
+__name(extractTokenFromRequest, "extractTokenFromRequest");
+var src_default = {
+  /**
+   * 1) معالج طلبات HTTP و WebSocket
+   */
+  async fetch(request, env2, _ctx) {
+    const url = new URL(request.url);
+    const corsHeaders = getCorsHeaders(request, env2);
+    if (request.method === "OPTIONS") {
+      return new Response(null, { headers: corsHeaders, status: 204 });
+    }
+    if (url.pathname === "/api/new-address") {
+      const clientIp = request.headers.get("CF-Connecting-IP") || request.headers.get("x-real-ip") || "";
+      if (clientIp && !checkRateLimit(clientIp)) {
+        return new Response(
+          JSON.stringify({
+            error: "429 Too Many Requests",
+            message: "\u062A\u0645 \u062A\u062C\u0627\u0648\u0632 \u0627\u0644\u062D\u062F \u0627\u0644\u0645\u0633\u0645\u0648\u062D \u0644\u062A\u0648\u0644\u064A\u062F \u0627\u0644\u0639\u0646\u0627\u0648\u064A\u0646 (\u062D\u062F \u0623\u0642\u0635\u0649 10 \u0639\u0646\u0627\u0648\u064A\u0646 \u0643\u0644 10 \u062F\u0642\u0627\u0626\u0642). \u064A\u0631\u062C\u0649 \u0627\u0644\u0627\u0646\u062A\u0638\u0627\u0631 \u0642\u0644\u064A\u0644\u0627."
+          }),
+          {
+            status: 429,
+            headers: { "Content-Type": "application/json", ...corsHeaders }
+          }
+        );
+      }
+      if (env2.TURNSTILE_SECRET_KEY) {
+        let turnstileToken = request.headers.get("cf-turnstile-response") || url.searchParams.get("turnstileToken");
+        if (!turnstileToken && request.method === "POST") {
+          try {
+            const body = await request.clone().json();
+            turnstileToken = body?.turnstileToken || body?.["cf-turnstile-response"];
+          } catch {
+          }
+        }
+        if (!turnstileToken) {
+          return new Response(
+            JSON.stringify({
+              error: "403 Forbidden",
+              message: "\u0641\u0634\u0644 \u0627\u0644\u062A\u062D\u0642\u0642 \u0627\u0644\u0623\u0645\u0646\u064A: \u0631\u0645\u0632 Turnstile \u0645\u0637\u0644\u0648\u0628 \u0644\u062A\u0648\u0644\u064A\u062F \u0639\u0646\u0648\u0627\u0646 \u0628\u0631\u064A\u062F."
+            }),
+            {
+              status: 403,
+              headers: { "Content-Type": "application/json", ...corsHeaders }
+            }
+          );
+        }
+        try {
+          const verifyData = new FormData();
+          verifyData.append("secret", env2.TURNSTILE_SECRET_KEY);
+          verifyData.append("response", turnstileToken);
+          if (clientIp) verifyData.append("remoteip", clientIp);
+          const turnstileRes = await fetch("https://challenges.cloudflare.com/turnstile/v0/siteverify", {
+            method: "POST",
+            body: verifyData
+          });
+          const turnstileResult = await turnstileRes.json();
+          if (!turnstileResult.success) {
+            return new Response(
+              JSON.stringify({
+                error: "403 Forbidden",
+                message: "\u0641\u0634\u0644 \u0627\u0644\u062A\u062D\u0642\u0642 \u0627\u0644\u0623\u0645\u0646\u064A \u0645\u0646 \u0643\u0648\u062F Turnstile."
+              }),
+              {
+                status: 403,
+                headers: { "Content-Type": "application/json", ...corsHeaders }
+              }
+            );
+          }
+        } catch (e) {
+          console.error("Turnstile verification request failed:", e);
+        }
+      }
+      const targetDomain = env2.DOMAIN || "freetemp.email";
+      const addressData = generateRandomAddress(targetDomain);
+      const expiryMinutes = parseInt(env2.EXPIRY_MINUTES || "20", 10);
+      const doId = env2.MAILBOX.idFromName(addressData.address);
+      const stub = env2.MAILBOX.get(doId);
+      let expiresAt = Date.now() + expiryMinutes * 60 * 1e3;
+      try {
+        const initRes = await stub.fetch(
+          new Request("https://mailbox/internal/init", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              token: addressData.token,
+              expiryMinutes
+            })
+          })
+        );
+        if (initRes.ok) {
+          const initData = await initRes.json();
+          if (initData.expiresAt) {
+            expiresAt = initData.expiresAt;
+          }
+        }
+      } catch (err) {
+        console.error("Failed to initialize Durable Object on address generation:", err);
+      }
+      return new Response(
+        JSON.stringify({
+          address: addressData.address,
+          localPart: addressData.localPart,
+          domain: addressData.domain,
+          token: addressData.token,
+          expiresAt,
+          expiryMinutes,
+          message: "\u062A\u0645 \u062A\u0648\u0644\u064A\u062F \u0627\u0644\u0639\u0646\u0648\u0627\u0646 \u0648\u062A\u062D\u0635\u064A\u0646 \u0627\u0644\u0635\u0646\u062F\u0648\u0642 \u0628\u0646\u062C\u0627\u062D"
+        }),
+        {
+          headers: {
+            "Content-Type": "application/json",
+            ...corsHeaders
+          }
+        }
+      );
+    }
+    if (url.pathname.startsWith("/api/ws")) {
+      const pathParts = url.pathname.split("/").filter(Boolean);
+      let targetAddress = pathParts[2] || url.searchParams.get("address");
+      if (!targetAddress) {
+        return new Response("\u064A\u062C\u0628 \u062A\u062D\u062F\u064A\u062F \u0639\u0646\u0648\u0627\u0646 \u0627\u0644\u0628\u0631\u064A\u062F \u0627\u0644\u0645\u0637\u0644\u0648\u0628 \u0644\u0644\u0627\u062A\u0635\u0627\u0644", {
+          status: 400,
+          headers: { "Content-Type": "text/plain", ...corsHeaders }
+        });
+      }
+      targetAddress = targetAddress.trim().toLowerCase();
+      const token = extractTokenFromRequest(request, url);
+      if (!token) {
+        return new Response(
+          JSON.stringify({
+            error: "403 Forbidden",
+            message: "\u0645\u0645\u0646\u0648\u0639 \u0627\u0644\u0648\u0635\u0648\u0644: \u0631\u0645\u0632 \u0627\u0644\u0623\u0645\u0627\u0646 \u063A\u064A\u0631 \u0645\u0631\u0641\u0642 \u0644\u0641\u062A\u062D \u0642\u0646\u0627\u0629 WebSocket."
+          }),
+          {
+            status: 403,
+            headers: { "Content-Type": "application/json", ...corsHeaders }
+          }
+        );
+      }
+      const doId = env2.MAILBOX.idFromName(targetAddress);
+      const stub = env2.MAILBOX.get(doId);
+      return stub.fetch(request);
+    }
+    if (url.pathname.startsWith("/api/emails")) {
+      const pathParts = url.pathname.split("/").filter(Boolean);
+      let targetAddress = pathParts[2] || url.searchParams.get("address");
+      if (!targetAddress) {
+        return new Response("\u0639\u0646\u0648\u0627\u0646 \u0627\u0644\u0628\u0631\u064A\u062F \u0645\u0641\u0642\u0648\u062F", {
+          status: 400,
+          headers: { "Content-Type": "text/plain", ...corsHeaders }
+        });
+      }
+      targetAddress = targetAddress.trim().toLowerCase();
+      const token = extractTokenFromRequest(request, url);
+      if (!token) {
+        return new Response(
+          JSON.stringify({
+            error: "403 Forbidden",
+            message: "\u0645\u0645\u0646\u0648\u0639 \u0627\u0644\u0648\u0635\u0648\u0644: \u0631\u0645\u0632 \u0627\u0644\u0623\u0645\u0627\u0646 (Token) \u0645\u0641\u0642\u0648\u062F. \u064A\u0631\u062C\u0649 \u062A\u0648\u0641\u064A\u0631 \u0627\u0644\u062A\u0648\u0643\u0646 \u0641\u064A \u062A\u0631\u0648\u064A\u0633\u0629 Authorization \u0623\u0648 \u0639\u0628\u0631 ?token=."
+          }),
+          {
+            status: 403,
+            headers: { "Content-Type": "application/json", ...corsHeaders }
+          }
+        );
+      }
+      const doId = env2.MAILBOX.idFromName(targetAddress);
+      const stub = env2.MAILBOX.get(doId);
+      const fetchUrl = `https://mailbox/api/messages?token=${encodeURIComponent(token)}`;
+      const response = await stub.fetch(
+        new Request(fetchUrl, {
+          method: "GET",
+          headers: request.headers
+        })
+      );
+      const body = await response.text();
+      return new Response(body, {
+        status: response.status,
+        headers: {
+          "Content-Type": "application/json",
+          ...corsHeaders
+        }
+      });
+    }
+    if (url.pathname.startsWith("/api/extend")) {
+      const pathParts = url.pathname.split("/").filter(Boolean);
+      let targetAddress = pathParts[2] || url.searchParams.get("address");
+      let token = extractTokenFromRequest(request, url);
+      if (!targetAddress && request.method === "POST") {
+        try {
+          const body = await request.clone().json();
+          targetAddress = body.address;
+          if (!token && body.token) token = body.token;
+        } catch {
+        }
+      }
+      if (!targetAddress) {
+        return new Response(JSON.stringify({ error: "Missing address" }), {
+          status: 400,
+          headers: { "Content-Type": "application/json", ...corsHeaders }
+        });
+      }
+      targetAddress = targetAddress.trim().toLowerCase();
+      if (!token) {
+        return new Response(JSON.stringify({ error: "403 Forbidden: Missing token" }), {
+          status: 403,
+          headers: { "Content-Type": "application/json", ...corsHeaders }
+        });
+      }
+      const doId = env2.MAILBOX.idFromName(targetAddress);
+      const stub = env2.MAILBOX.get(doId);
+      const extendRes = await stub.fetch(
+        new Request(`https://mailbox/internal/extend?token=${encodeURIComponent(token)}`, {
+          method: "POST",
+          headers: request.headers
+        })
+      );
+      const resBody = await extendRes.text();
+      return new Response(resBody, {
+        status: extendRes.status,
+        headers: { "Content-Type": "application/json", ...corsHeaders }
+      });
+    }
+    if (url.pathname.startsWith("/api/burn")) {
+      const pathParts = url.pathname.split("/").filter(Boolean);
+      let targetAddress = pathParts[2] || url.searchParams.get("address");
+      let token = extractTokenFromRequest(request, url);
+      if (!targetAddress && (request.method === "POST" || request.method === "DELETE")) {
+        try {
+          const body = await request.clone().json();
+          targetAddress = body.address;
+          if (!token && body.token) token = body.token;
+        } catch {
+        }
+      }
+      if (!targetAddress) {
+        return new Response(JSON.stringify({ error: "Missing address" }), {
+          status: 400,
+          headers: { "Content-Type": "application/json", ...corsHeaders }
+        });
+      }
+      targetAddress = targetAddress.trim().toLowerCase();
+      if (!token) {
+        return new Response(JSON.stringify({ error: "403 Forbidden: Missing token" }), {
+          status: 403,
+          headers: { "Content-Type": "application/json", ...corsHeaders }
+        });
+      }
+      const doId = env2.MAILBOX.idFromName(targetAddress);
+      const stub = env2.MAILBOX.get(doId);
+      const burnRes = await stub.fetch(
+        new Request(`https://mailbox/internal/burn?token=${encodeURIComponent(token)}`, {
+          method: "POST",
+          headers: request.headers
+        })
+      );
+      const resBody = await burnRes.text();
+      return new Response(resBody, {
+        status: burnRes.status,
+        headers: { "Content-Type": "application/json", ...corsHeaders }
+      });
+    }
+    if (url.pathname === "/health" || url.pathname === "/api/health") {
+      return new Response(
+        JSON.stringify({
+          status: "ok",
+          service: "temp-mail-worker",
+          domain: env2.DOMAIN || "freetemp.email",
+          timestamp: (/* @__PURE__ */ new Date()).toISOString()
+        }),
+        { headers: { "Content-Type": "application/json", ...corsHeaders } }
+      );
+    }
+    return new Response("Temp Mail Cloudflare Worker is running.", {
+      status: 200,
+      headers: { "Content-Type": "text/plain", ...corsHeaders }
+    });
+  },
+  /**
+   * 2) معالج Cloudflare Email Routing لاستقبال الرسائل الحقيقية الواردة
+   * مع حماية OOM Crash وتقييد الحجم الأقصى إلى 5 ميجابايت
+   * وTimeout صريح مدته 5 ثوان على التحليل بـ postal-mime
+   * ومنع الفقدان الصامت للرسائل عبر message.setReject
+   */
+  async email(message, env2, ctx) {
+    const MAX_EMAIL_SIZE_BYTES = 5 * 1024 * 1024;
+    try {
+      const toAddress = (message.to || "").trim().toLowerCase();
+      const fromAddress = message.from || "sender@unknown.com";
+      if (!toAddress) {
+        console.error("Email rejected: Missing recipient address.");
+        message.setReject("Missing recipient address");
+        return;
+      }
+      if (typeof message.rawSize === "number" && message.rawSize > MAX_EMAIL_SIZE_BYTES) {
+        console.warn(
+          `Email to ${toAddress} exceeded size limit (${message.rawSize} bytes > ${MAX_EMAIL_SIZE_BYTES} bytes). Rejecting.`
+        );
+        message.setReject("Email exceeds size limit (5MB)");
+        return;
+      }
+      const rawStream = message.raw;
+      const rawResponse = new Response(rawStream);
+      const rawArrayBuffer = await rawResponse.arrayBuffer();
+      if (rawArrayBuffer.byteLength > MAX_EMAIL_SIZE_BYTES) {
+        console.warn(`Buffer size (${rawArrayBuffer.byteLength} bytes) exceeds limit. Rejecting.`);
+        message.setReject("Email exceeds size limit (5MB)");
+        return;
+      }
+      const parser = new PostalMime();
+      const parseTimeout = new Promise(
+        (_, reject) => setTimeout(() => reject(new Error("Postal-mime parsing timeout exceeded (5s)")), 5e3)
+      );
+      let parsedEmail;
+      try {
+        parsedEmail = await Promise.race([parser.parse(rawArrayBuffer), parseTimeout]);
+      } catch (parseErr) {
+        console.warn("Parsing timed out or hit an error. Falling back to safe summary:", parseErr);
+        parsedEmail = {
+          subject: "(\u062A\u0639\u0630\u0631 \u0625\u062A\u0645\u0627\u0645 \u0627\u0644\u062A\u062D\u0644\u064A\u0644 \u0627\u0644\u0643\u0627\u0645\u0644 \u0644\u0644\u0631\u0633\u0627\u0644\u0629 - \u062A\u062C\u0627\u0648\u0632 \u0627\u0644\u0648\u0642\u062A)",
+          text: "\u062A\u0645 \u0627\u0633\u062A\u0644\u0627\u0645 \u0627\u0644\u0631\u0633\u0627\u0644\u0629 \u0648\u0644\u0643\u0646\u0647\u0627 \u0627\u0633\u062A\u063A\u0631\u0642\u062A \u0648\u0642\u062A\u0627 \u0637\u0648\u064A\u0644\u0627 \u0641\u064A \u0627\u0644\u062A\u062D\u0644\u064A\u0644 \u0623\u0648 \u0627\u062D\u062A\u0648\u062A \u0639\u0644\u0649 \u0645\u0631\u0641\u0642\u0627\u062A \u0645\u0639\u0642\u062F\u0629.",
+          html: "<p>\u062A\u0645 \u0627\u0633\u062A\u0644\u0627\u0645 \u0627\u0644\u0631\u0633\u0627\u0644\u0629 \u0648\u0644\u0643\u0646\u0647\u0627 \u0627\u0633\u062A\u063A\u0631\u0642\u062A \u0648\u0642\u062A\u0627 \u0637\u0648\u064A\u0644\u0627 \u0641\u064A \u0627\u0644\u062A\u062D\u0644\u064A\u0644 \u0623\u0648 \u0627\u062D\u062A\u0648\u062A \u0639\u0644\u0649 \u0645\u0631\u0641\u0642\u0627\u062A \u0645\u0639\u0642\u062F\u0629.</p>",
+          date: (/* @__PURE__ */ new Date()).toISOString()
+        };
+      }
+      const subject = parsedEmail.subject || "(\u0628\u062F\u0648\u0646 \u0639\u0646\u0648\u0627\u0646)";
+      const textContent = parsedEmail.text || "";
+      const htmlContent = parsedEmail.html || "";
+      const date = parsedEmail.date || (/* @__PURE__ */ new Date()).toISOString();
+      const doId = env2.MAILBOX.idFromName(toAddress);
+      const stub = env2.MAILBOX.get(doId);
+      const deliverPayload = {
+        id: crypto.randomUUID(),
+        to: toAddress,
+        from: fromAddress,
+        subject,
+        text: textContent,
+        html: htmlContent,
+        date,
+        rawSize: rawArrayBuffer.byteLength
+      };
+      const deliverRequest = new Request("https://mailbox/internal/deliver", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(deliverPayload)
+      });
+      ctx.waitUntil(stub.fetch(deliverRequest));
+    } catch (error3) {
+      console.error("Error handling incoming email in Worker:", error3);
+      try {
+        message.setReject("Internal temporary delivery failure");
+      } catch (rejectErr) {
+        console.error("Failed to invoke message.setReject:", rejectErr);
+      }
+    }
+  }
+};
+
+// node_modules/wrangler/templates/middleware/middleware-ensure-req-body-drained.ts
+var drainBody = /* @__PURE__ */ __name(async (request, env2, _ctx, middlewareCtx) => {
+  try {
+    return await middlewareCtx.next(request, env2);
+  } finally {
+    try {
+      if (request.body !== null && !request.bodyUsed) {
+        const reader = request.body.getReader();
+        while (!(await reader.read()).done) {
+        }
+      }
+    } catch (e) {
+      console.error("Failed to drain the unused request body.", e);
+    }
+  }
+}, "drainBody");
+var middleware_ensure_req_body_drained_default = drainBody;
+
+// node_modules/wrangler/templates/middleware/middleware-miniflare3-json-error.ts
+function reduceError(e) {
+  return {
+    name: e?.name,
+    message: e?.message ?? String(e),
+    stack: e?.stack,
+    cause: e?.cause === void 0 ? void 0 : reduceError(e.cause)
+  };
+}
+__name(reduceError, "reduceError");
+var jsonError = /* @__PURE__ */ __name(async (request, env2, _ctx, middlewareCtx) => {
+  try {
+    return await middlewareCtx.next(request, env2);
+  } catch (e) {
+    const error3 = reduceError(e);
+    const body = JSON.stringify(error3);
+    const headers = {
+      "Content-Type": "application/json",
+      "MF-Experimental-Error-Stack": "true"
+    };
+    const encoded = encodeURIComponent(body);
+    if (encoded.length <= 8192) {
+      headers["MF-Experimental-Error-Stack-Payload"] = encoded;
+    }
+    return new Response(body, { status: 500, headers });
+  }
+}, "jsonError");
+var middleware_miniflare3_json_error_default = jsonError;
+
+// .wrangler/tmp/bundle-NuyKGN/middleware-insertion-facade.js
+var __INTERNAL_WRANGLER_MIDDLEWARE__ = [
+  middleware_ensure_req_body_drained_default,
+  middleware_miniflare3_json_error_default
+];
+var middleware_insertion_facade_default = src_default;
+
+// node_modules/wrangler/templates/middleware/common.ts
+var __facade_middleware__ = [];
+function __facade_register__(...args) {
+  __facade_middleware__.push(...args.flat());
+}
+__name(__facade_register__, "__facade_register__");
+function __facade_invokeChain__(request, env2, ctx, dispatch, middlewareChain) {
+  const [head, ...tail] = middlewareChain;
+  const middlewareCtx = {
+    dispatch,
+    next(newRequest, newEnv) {
+      return __facade_invokeChain__(newRequest, newEnv, ctx, dispatch, tail);
+    }
+  };
+  return head(request, env2, ctx, middlewareCtx);
+}
+__name(__facade_invokeChain__, "__facade_invokeChain__");
+function __facade_invoke__(request, env2, ctx, dispatch, finalMiddleware) {
+  return __facade_invokeChain__(request, env2, ctx, dispatch, [
+    ...__facade_middleware__,
+    finalMiddleware
+  ]);
+}
+__name(__facade_invoke__, "__facade_invoke__");
+
+// .wrangler/tmp/bundle-NuyKGN/middleware-loader.entry.ts
+var __Facade_ScheduledController__ = class ___Facade_ScheduledController__ {
+  constructor(scheduledTime, cron, noRetry) {
+    this.scheduledTime = scheduledTime;
+    this.cron = cron;
+    this.#noRetry = noRetry;
+  }
+  static {
+    __name(this, "__Facade_ScheduledController__");
+  }
+  #noRetry;
+  noRetry() {
+    if (!(this instanceof ___Facade_ScheduledController__)) {
+      throw new TypeError("Illegal invocation");
+    }
+    this.#noRetry();
+  }
+};
+function wrapExportedHandler(worker) {
+  if (__INTERNAL_WRANGLER_MIDDLEWARE__ === void 0 || __INTERNAL_WRANGLER_MIDDLEWARE__.length === 0) {
+    return worker;
+  }
+  for (const middleware of __INTERNAL_WRANGLER_MIDDLEWARE__) {
+    __facade_register__(middleware);
+  }
+  const fetchDispatcher = /* @__PURE__ */ __name(function(request, env2, ctx) {
+    if (worker.fetch === void 0) {
+      throw new Error("Handler does not export a fetch() function.");
+    }
+    return worker.fetch(request, env2, ctx);
+  }, "fetchDispatcher");
+  return {
+    ...worker,
+    fetch(request, env2, ctx) {
+      const dispatcher = /* @__PURE__ */ __name(function(type, init) {
+        if (type === "scheduled" && worker.scheduled !== void 0) {
+          const controller = new __Facade_ScheduledController__(
+            Date.now(),
+            init.cron ?? "",
+            () => {
+            }
+          );
+          return worker.scheduled(controller, env2, ctx);
+        }
+      }, "dispatcher");
+      return __facade_invoke__(request, env2, ctx, dispatcher, fetchDispatcher);
+    }
+  };
+}
+__name(wrapExportedHandler, "wrapExportedHandler");
+function wrapWorkerEntrypoint(klass) {
+  if (__INTERNAL_WRANGLER_MIDDLEWARE__ === void 0 || __INTERNAL_WRANGLER_MIDDLEWARE__.length === 0) {
+    return klass;
+  }
+  for (const middleware of __INTERNAL_WRANGLER_MIDDLEWARE__) {
+    __facade_register__(middleware);
+  }
+  return class extends klass {
+    #fetchDispatcher = /* @__PURE__ */ __name((request, env2, ctx) => {
+      this.env = env2;
+      this.ctx = ctx;
+      if (super.fetch === void 0) {
+        throw new Error("Entrypoint class does not define a fetch() function.");
+      }
+      return super.fetch(request);
+    }, "#fetchDispatcher");
+    #dispatcher = /* @__PURE__ */ __name((type, init) => {
+      if (type === "scheduled" && super.scheduled !== void 0) {
+        const controller = new __Facade_ScheduledController__(
+          Date.now(),
+          init.cron ?? "",
+          () => {
+          }
+        );
+        return super.scheduled(controller);
+      }
+    }, "#dispatcher");
+    fetch(request) {
+      return __facade_invoke__(
+        request,
+        this.env,
+        this.ctx,
+        this.#dispatcher,
+        this.#fetchDispatcher
+      );
+    }
+  };
+}
+__name(wrapWorkerEntrypoint, "wrapWorkerEntrypoint");
+var WRAPPED_ENTRY;
+if (typeof middleware_insertion_facade_default === "object") {
+  WRAPPED_ENTRY = wrapExportedHandler(middleware_insertion_facade_default);
+} else if (typeof middleware_insertion_facade_default === "function") {
+  WRAPPED_ENTRY = wrapWorkerEntrypoint(middleware_insertion_facade_default);
+}
+var middleware_loader_entry_default = WRAPPED_ENTRY;
+export {
+  MailboxDO,
+  __INTERNAL_WRANGLER_MIDDLEWARE__,
+  middleware_loader_entry_default as default,
+  getCorsHeaders
+};
+//# sourceMappingURL=index.js.map

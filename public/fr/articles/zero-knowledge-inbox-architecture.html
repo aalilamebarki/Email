@@ -1,0 +1,651 @@
+<!doctype html>
+<html lang="fr" dir="ltr">
+  <head>
+    <meta charset="UTF-8" />
+    <script>
+      (function () {
+        try {
+          var t = localStorage.getItem('theme') || (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+          document.documentElement.setAttribute('data-theme', t);
+          if (t === 'dark') document.documentElement.classList.add('dark');
+          else document.documentElement.classList.remove('dark');
+        } catch (e) {}
+      })();
+    </script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- SEO Meta Tags -->
+    <title>Zero-Knowledge In-Memory Architecture: Pure Volatile Email Processing Without Disk Writes — FreeTemp.email</title>
+    <meta name="description" content="In-depth engineering review of our zero-knowledge, volatile in-memory processing pipeline that eliminates persistent storage of ephemeral email payloads." id="meta-description" />
+    <meta name="keywords" content="" />
+    <link rel="canonical" href="https://freetemp.email/fr/articles/zero-knowledge-inbox-architecture.html" />
+
+    <!-- Multilingual Alternates -->
+    <link rel="alternate" hreflang="ar" href="https://freetemp.email/ar/articles/zero-knowledge-inbox-architecture.html" />
+    <link rel="alternate" hreflang="en" href="https://freetemp.email/en/articles/zero-knowledge-inbox-architecture.html" />
+    <link rel="alternate" hreflang="es" href="https://freetemp.email/es/articles/zero-knowledge-inbox-architecture.html" />
+    <link rel="alternate" hreflang="fr" href="https://freetemp.email/fr/articles/zero-knowledge-inbox-architecture.html" />
+    <link rel="alternate" hreflang="de" href="https://freetemp.email/de/articles/zero-knowledge-inbox-architecture.html" />
+    <link rel="alternate" hreflang="pt" href="https://freetemp.email/pt/articles/zero-knowledge-inbox-architecture.html" />
+    <link rel="alternate" hreflang="it" href="https://freetemp.email/it/articles/zero-knowledge-inbox-architecture.html" />
+    <link rel="alternate" hreflang="ru" href="https://freetemp.email/ru/articles/zero-knowledge-inbox-architecture.html" />
+    <link rel="alternate" hreflang="tr" href="https://freetemp.email/tr/articles/zero-knowledge-inbox-architecture.html" />
+    <link rel="alternate" hreflang="zh" href="https://freetemp.email/zh/articles/zero-knowledge-inbox-architecture.html" />
+    <link rel="alternate" hreflang="ja" href="https://freetemp.email/ja/articles/zero-knowledge-inbox-architecture.html" />
+    <link rel="alternate" hreflang="ko" href="https://freetemp.email/ko/articles/zero-knowledge-inbox-architecture.html" />
+    <link rel="alternate" hreflang="nl" href="https://freetemp.email/nl/articles/zero-knowledge-inbox-architecture.html" />
+    <link rel="alternate" hreflang="pl" href="https://freetemp.email/pl/articles/zero-knowledge-inbox-architecture.html" />
+    <link rel="alternate" hreflang="id" href="https://freetemp.email/id/articles/zero-knowledge-inbox-architecture.html" />
+    <link rel="alternate" hreflang="vi" href="https://freetemp.email/vi/articles/zero-knowledge-inbox-architecture.html" />
+    <link rel="alternate" hreflang="hi" href="https://freetemp.email/hi/articles/zero-knowledge-inbox-architecture.html" />
+    <link rel="alternate" hreflang="fa" href="https://freetemp.email/fa/articles/zero-knowledge-inbox-architecture.html" />
+    <link rel="alternate" hreflang="ur" href="https://freetemp.email/ur/articles/zero-knowledge-inbox-architecture.html" />
+    <link rel="alternate" hreflang="uk" href="https://freetemp.email/uk/articles/zero-knowledge-inbox-architecture.html" />
+    <link rel="alternate" hreflang="bn" href="https://freetemp.email/bn/articles/zero-knowledge-inbox-architecture.html" />
+    <link rel="alternate" hreflang="ms" href="https://freetemp.email/ms/articles/zero-knowledge-inbox-architecture.html" />
+    <link rel="alternate" hreflang="x-default" href="https://freetemp.email/en/articles/zero-knowledge-inbox-architecture.html" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="article" />
+    <meta property="og:site_name" content="FreeTemp.email" />
+    <meta property="og:title" content="Zero-Knowledge In-Memory Architecture: Pure Volatile Email Processing Without Disk Writes — FreeTemp.email" />
+    <meta property="og:description" content="In-depth engineering review of our zero-knowledge, volatile in-memory processing pipeline that eliminates persistent storage of ephemeral email payloads." />
+    <meta property="og:url" content="https://freetemp.email/fr/articles/zero-knowledge-inbox-architecture.html" />
+    <meta property="og:image" content="https://freetemp.email/og-image.png" />
+    <meta property="article:published_time" content="2026-09-25T00:00:00Z" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Zero-Knowledge In-Memory Architecture: Pure Volatile Email Processing Without Disk Writes — FreeTemp.email" />
+    <meta name="twitter:description" content="In-depth engineering review of our zero-knowledge, volatile in-memory processing pipeline that eliminates persistent storage of ephemeral email payloads." />
+    <meta name="twitter:image" content="https://freetemp.email/og-image.png" />
+
+    <meta name="theme-color" content="#ffffff" id="meta-theme-color" />
+    <link rel="icon" type="image/svg+xml" href="/logo.svg" />
+    <link rel="apple-touch-icon" href="/logo.svg" />
+
+    <!-- Stylesheets & Fonts -->
+    <link rel="stylesheet" href="/fonts/fonts.css" />
+    <link rel="stylesheet" href="/shared/style.css" />
+
+    <!-- Structured Data (JSON-LD) -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "TechArticle",
+        "headline": "Zero-Knowledge In-Memory Architecture: Pure Volatile Email Processing Without Disk Writes",
+        "description": "In-depth engineering review of our zero-knowledge, volatile in-memory processing pipeline that eliminates persistent storage of ephemeral email payloads.",
+        "inLanguage": "fr",
+        "author": {
+          "@type": "Organization",
+          "name": "FreeTemp.email Security Engineering Team",
+          "url": "https://freetemp.email"
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "FreeTemp.email",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://freetemp.email/logo.svg"
+          }
+        },
+        "datePublished": "2026-09-25",
+        "dateModified": "2026-09-25",
+        "mainEntityOfPage": {
+          "@type": "WebPage",
+          "@id": "https://freetemp.email/fr/articles/zero-knowledge-inbox-architecture.html"
+        }
+      }
+    </script>
+
+    <!-- Scripts -->
+    <script src="/shared/theme.js" defer></script>
+    <script src="/shared/i18n.js" defer></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        darkMode: 'class',
+      };
+    </script>
+  </head>
+  <body class="min-h-screen bg-white text-black dark:bg-[#0D0D0D] dark:text-[#F5F5F5] flex flex-col transition-colors duration-200 font-sans">
+    <!-- Reading Progress Bar -->
+    <div
+      id="reading-progress"
+      class="fixed top-0 left-0 right-0 h-[2px] bg-black dark:bg-white z-50 origin-left scale-x-0 transition-transform duration-75 pointer-events-none"
+    ></div>
+
+    <!-- Master Header -->
+    <header class="border-b border-neutral-200 dark:border-neutral-800 bg-white/95 dark:bg-[#0D0D0D]/95 backdrop-blur-md sticky top-0 z-30 transition-colors">
+      <div class="max-w-4xl mx-auto px-4 h-16 flex items-center justify-between gap-4">
+        <div class="flex items-center gap-6">
+          <a href="/fr/" dir="ltr" class="flex items-center gap-2.5 transition-opacity hover:opacity-90">
+            <img src="/logo.svg" alt="freetemp.email" class="w-8 h-8 rounded-lg shadow-sm shrink-0" width="32" height="32" />
+            <span class="flex items-baseline font-sans tracking-tight">
+              <span class="text-xl font-extrabold text-black dark:text-white">freetemp</span>
+              <span class="text-sm font-semibold text-neutral-500 dark:text-neutral-400">.email</span>
+            </span>
+          </a>
+
+          <nav class="hidden md:flex items-center gap-4 text-xs font-medium">
+            
+            <a href="/fr/" data-i18n="home" class="text-neutral-600 dark:text-neutral-400 hover:text-black dark:hover:text-white transition-colors">Home</a>
+            <a href="/fr/blog.html" data-i18n="blog" class="text-neutral-600 dark:text-neutral-400 hover:text-black dark:hover:text-white transition-colors">Blog</a>
+            <a href="/fr/articles/index.html" class="text-black dark:text-white font-bold transition-colors">Articles</a>
+            <a href="/fr/guide.html" data-i18n="guide" class="text-neutral-600 dark:text-neutral-400 hover:text-black dark:hover:text-white transition-colors">Guide</a>
+            <a href="/fr/faq.html" data-i18n="faq" class="text-neutral-600 dark:text-neutral-400 hover:text-black dark:hover:text-white transition-colors">FAQ</a>
+          </nav>
+        </div>
+
+        <div class="flex items-center gap-2 sm:gap-3">
+          <!-- Language Selector Button (22 Languages) -->
+          <button
+            type="button"
+            id="open-lang-picker"
+            class="open-lang-picker min-h-[38px] px-3 py-1.5 bg-white hover:bg-neutral-50 dark:bg-neutral-900 dark:hover:bg-neutral-800 border border-neutral-200 hover:border-black dark:border-neutral-800 dark:hover:border-neutral-600 rounded-lg text-xs font-semibold text-black dark:text-white transition-all flex items-center gap-1.5 cursor-pointer shadow-sm active:scale-95"
+            aria-label="Change Language"
+          >
+            <svg class="w-3.5 h-3.5 stroke-current fill-none stroke-[2]" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+            <span id="current-lang-label">Français</span>
+            <svg class="w-3 h-3 stroke-current fill-none stroke-[2] opacity-60" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          </button>
+
+          <!-- Dark/Light Theme Toggle -->
+          <button
+            type="button"
+            id="theme-toggle-btn"
+            class="theme-toggle-btn min-h-[38px] min-w-[38px] p-2 bg-white hover:bg-neutral-50 dark:bg-neutral-900 dark:hover:bg-neutral-800 border border-neutral-200 hover:border-black dark:border-neutral-800 dark:hover:border-neutral-600 rounded-lg text-black dark:text-white transition-all flex items-center justify-center cursor-pointer active:scale-95"
+            aria-label="Toggle theme"
+          >
+            <svg class="theme-toggle-icon w-4 h-4 stroke-current fill-none stroke-[2]" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Container -->
+    <main class="flex-1 max-w-3xl w-full mx-auto px-4 py-8 sm:py-12">
+      
+      <!-- Breadcrumbs -->
+      <nav class="flex items-center gap-2 text-xs text-neutral-500 dark:text-neutral-400 mb-6 font-mono" id="article-breadcrumbs" aria-label="Breadcrumb">
+        <a href="/fr/" class="hover:text-black dark:hover:text-white transition-colors" data-i18n="artNavHome">Home</a>
+        <span class="opacity-40">/</span>
+        <a href="/fr/blog.html" class="hover:text-black dark:hover:text-white transition-colors" data-i18n="artNavBlog">Blog</a>
+        <span class="opacity-40">/</span>
+        <a href="/fr/articles/index.html" class="hover:text-black dark:hover:text-white transition-colors">Articles</a>
+        <span class="opacity-40">/</span>
+        <span class="text-black dark:text-white font-medium truncate max-w-[220px]">Zero-Knowledge In-Memory Architecture: Pure Volatile Email Processing Without Disk Writes</span>
+      </nav>
+
+      <!-- Article Header -->
+      <header class="mb-8">
+        <div class="flex flex-wrap items-center gap-2 mb-3">
+          <span class="px-2.5 py-0.5 rounded-full text-[11px] font-mono font-bold bg-neutral-100 dark:bg-neutral-800 text-neutral-800 dark:text-neutral-200 border border-neutral-200 dark:border-neutral-700">
+            Core Architecture
+          </span>
+          <span class="text-xs font-mono text-neutral-400">|</span>
+          <span class="text-xs font-mono text-neutral-500 dark:text-neutral-400">Systems Architecture</span>
+        </div>
+
+        <h1 class="text-2xl sm:text-4xl font-extrabold text-black dark:text-white tracking-tight leading-[1.25] mb-4">
+          Zero-Knowledge In-Memory Architecture: Pure Volatile Email Processing Without Disk Writes
+        </h1>
+
+        <div class="flex flex-wrap items-center gap-y-2 gap-x-4 text-xs font-mono text-neutral-500 dark:text-neutral-400 pb-6 border-b border-neutral-200 dark:border-neutral-800">
+          <div class="flex items-center gap-1.5">
+            <svg class="w-3.5 h-3.5 stroke-current fill-none stroke-[2]" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+            <span>12 min read</span>
+          </div>
+          <span>•</span>
+          <div class="flex items-center gap-1.5">
+            <svg class="w-3.5 h-3.5 stroke-current fill-none stroke-[2]" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+            <time datetime="2026-09-25">2026-09-25</time>
+          </div>
+          <span>•</span>
+          <span class="text-emerald-600 dark:text-emerald-400 font-medium">Updated for 2026 Standards</span>
+        </div>
+      </header>
+
+      <!-- Lead Summary Paragraph -->
+      <div class="mb-8 p-5 sm:p-6 bg-neutral-50 dark:bg-neutral-900/60 border border-neutral-200 dark:border-neutral-800 rounded-xl text-sm sm:text-base leading-relaxed text-neutral-800 dark:text-neutral-200 font-medium">
+        In conventional storage architectures, data written to persistent solid-state drives remains vulnerable to forensic recovery, database exfiltration, and administrative compromise long after logical deletion. To eliminate this vulnerability at the physical layer, we engineered a zero-knowledge, in-memory processing pipeline where message ingestion, parsing, and real-time streaming occur strictly within volatile RAM buffers, with zero persistent disk write cycles.
+      </div>
+
+      
+        <!-- Modern Quick Technical Specs Strip -->
+        <div class="my-6 grid grid-cols-2 sm:grid-cols-4 gap-3 p-3.5 bg-neutral-50 dark:bg-neutral-900/70 border border-neutral-200 dark:border-neutral-800 rounded-xl text-xs font-mono">
+          <div class="p-2 bg-white dark:bg-neutral-800/60 rounded-lg border border-neutral-100 dark:border-neutral-800 flex flex-col">
+            <span class="text-neutral-400 text-[10px] uppercase">Storage Tier</span>
+            <span class="font-bold text-black dark:text-white truncate">In-Memory RAM</span>
+          </div>
+          <div class="p-2 bg-white dark:bg-neutral-800/60 rounded-lg border border-neutral-100 dark:border-neutral-800 flex flex-col">
+            <span class="text-neutral-400 text-[10px] uppercase">Protocol</span>
+            <span class="font-bold text-black dark:text-white truncate">TLS 1.3 / RFC 5322</span>
+          </div>
+          <div class="p-2 bg-white dark:bg-neutral-800/60 rounded-lg border border-neutral-100 dark:border-neutral-800 flex flex-col">
+            <span class="text-neutral-400 text-[10px] uppercase">Latency</span>
+            <span class="font-bold text-emerald-600 dark:text-emerald-400">&lt; 500ms Instant</span>
+          </div>
+          <div class="p-2 bg-white dark:bg-neutral-800/60 rounded-lg border border-neutral-100 dark:border-neutral-800 flex flex-col">
+            <span class="text-neutral-400 text-[10px] uppercase">Data Policy</span>
+            <span class="font-bold text-blue-600 dark:text-blue-400">Zero Retention</span>
+          </div>
+        </div>
+      
+        <!-- Table of Contents -->
+        <div class="mb-10 p-5 bg-neutral-50/80 dark:bg-neutral-900/60 border border-neutral-200 dark:border-neutral-800 rounded-xl">
+          <div class="flex items-center justify-between mb-3 text-xs font-bold text-neutral-500 dark:text-neutral-400 uppercase tracking-wider font-mono">
+            <span class="flex items-center gap-1.5">
+              <svg class="w-3.5 h-3.5 stroke-current fill-none stroke-[2]" viewBox="0 0 24 24"><line x1="8" y1="6" x2="21" y2="6"></line><line x1="8" y1="12" x2="21" y2="12"></line><line x1="8" y1="18" x2="21" y2="18"></line><line x1="3" y1="6" x2="3.01" y2="6"></line><line x1="3" y1="12" x2="3.01" y2="12"></line><line x1="3" y1="18" x2="3.01" y2="18"></line></svg>
+              <span>Table of Contents</span>
+            </span>
+            <span class="text-[11px] text-neutral-400">4 sections</span>
+          </div>
+          <ul class="space-y-2.5">
+            
+          <li>
+            <a href="#the-vulnerability-of-disk-storage" class="group flex items-start gap-2 text-neutral-600 dark:text-neutral-400 hover:text-black dark:hover:text-white transition-colors text-xs sm:text-sm">
+              <span class="font-mono text-neutral-400 dark:text-neutral-500 shrink-0 font-medium">1.0</span>
+              <span class="group-hover:underline">The Inherent Vulnerability of Persistent Disk Storage in Email Systems</span>
+            </a>
+          </li>
+          <li>
+            <a href="#in-memory-pipeline-design" class="group flex items-start gap-2 text-neutral-600 dark:text-neutral-400 hover:text-black dark:hover:text-white transition-colors text-xs sm:text-sm">
+              <span class="font-mono text-neutral-400 dark:text-neutral-500 shrink-0 font-medium">2.0</span>
+              <span class="group-hover:underline">Our Pure Volatile In-Memory Processing Pipeline</span>
+            </a>
+          </li>
+          <li>
+            <a href="#zero-logging-ip-sanitization" class="group flex items-start gap-2 text-neutral-600 dark:text-neutral-400 hover:text-black dark:hover:text-white transition-colors text-xs sm:text-sm">
+              <span class="font-mono text-neutral-400 dark:text-neutral-500 shrink-0 font-medium">3.0</span>
+              <span class="group-hover:underline">Zero-Logging & Ingress IP Masking Architecture</span>
+            </a>
+          </li>
+          <li>
+            <a href="#cryptographic-session-hygiene" class="group flex items-start gap-2 text-neutral-600 dark:text-neutral-400 hover:text-black dark:hover:text-white transition-colors text-xs sm:text-sm">
+              <span class="font-mono text-neutral-400 dark:text-neutral-500 shrink-0 font-medium">4.0</span>
+              <span class="group-hover:underline">Client-Side Cryptographic Session Hygiene</span>
+            </a>
+          </li>
+          </ul>
+        </div>
+      
+        <!-- Key Takeaways Box -->
+        <div class="mb-10 p-5 sm:p-6 bg-neutral-50 dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 rounded-xl shadow-sm" id="article-takeaways-box">
+          <h2 class="text-xs sm:text-sm font-bold text-black dark:text-white uppercase tracking-wider mb-4 flex items-center gap-2 font-mono">
+            <svg class="w-4 h-4 text-emerald-500 stroke-current fill-none stroke-[2.5]" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>
+            <span>Key Takeaways & Core Concepts</span>
+          </h2>
+          <ul class="space-y-3 text-xs sm:text-sm text-neutral-700 dark:text-neutral-300">
+            
+              <li class="flex items-start gap-3">
+                <span class="text-black dark:text-white font-bold shrink-0 mt-0.5 text-xs">✓</span>
+                <span class="leading-relaxed">100% volatile in-memory execution with zero persistent disk logging.</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <span class="text-black dark:text-white font-bold shrink-0 mt-0.5 text-xs">✓</span>
+                <span class="leading-relaxed">Immediate cryptographic zeroization upon session termination or mailbox destruction.</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <span class="text-black dark:text-white font-bold shrink-0 mt-0.5 text-xs">✓</span>
+                <span class="leading-relaxed">Strict anti-recycling namespace isolation preventing future users from accessing historical data.</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <span class="text-black dark:text-white font-bold shrink-0 mt-0.5 text-xs">✓</span>
+                <span class="leading-relaxed">Zero-logging architecture stripping IP and metadata traces across edge nodes.</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <span class="text-black dark:text-white font-bold shrink-0 mt-0.5 text-xs">✓</span>
+                <span class="leading-relaxed">Instant one-click session renewal when additional verification messages are required.</span>
+              </li>
+          </ul>
+        </div>
+      
+              <div class="my-6 p-4 rounded-xl border border-blue-200 dark:border-blue-900/60 bg-blue-50/40 dark:bg-blue-950/20 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs">
+                <div class="flex items-center gap-2.5">
+                  <span class="px-2 py-0.5 rounded bg-blue-600 text-white font-mono text-[10px] font-bold shrink-0">DEEP DIVE</span>
+                  <div class="text-neutral-700 dark:text-neutral-300">
+                    <span class="font-bold text-black dark:text-white">Recommended Deep Dive:</span>
+                    <span class="font-medium text-neutral-600 dark:text-neutral-300">The Ephemeral Lifecycle: What Happens When a Disposable Email Address Expires?</span>
+                  </div>
+                </div>
+                <a href="/fr/articles/what-happens-when-address-expires.html" class="inline-flex items-center gap-1 text-blue-600 dark:text-blue-400 font-bold hover:underline shrink-0">
+                  <span>Read Guide</span>
+                  <span>→</span>
+                </a>
+              </div>
+
+      <!-- Article Body Sections -->
+      <article class="prose prose-neutral dark:prose-invert max-w-none text-neutral-800 dark:text-neutral-200" id="article-main-content">
+        
+          <section class="mb-10 pt-2" id="the-vulnerability-of-disk-storage">
+            <h2 class="text-xl sm:text-2xl font-bold text-black dark:text-white mb-4 leading-snug flex items-baseline gap-2.5">
+              <span class="font-mono text-xs sm:text-sm px-2 py-0.5 rounded bg-neutral-100 dark:bg-neutral-800 text-neutral-600 dark:text-neutral-400 font-semibold shrink-0">1.0</span>
+              <span>The Inherent Vulnerability of Persistent Disk Storage in Email Systems</span>
+            </h2>
+            <div class="text-[15px] sm:text-[16px] text-neutral-700 dark:text-neutral-300 leading-[1.9] space-y-4">
+              <p>When conventional mail transfer agents commit messages to magnetic disks or enterprise SSD arrays, the underlying operating system file systems distribute payloads across physical storage blocks. Standard logical deletions merely un-link directory pointers, leaving raw message strings magnetically intact and forensically recoverable for extended durations.</p>
+<p>Furthermore, cloud operating systems routinely generate swap files, automated storage snapshots, and crash dump telemetry containing unencrypted message fragments.</p>
+<p>Our ephemeral infrastructure eliminates this threat surface entirely by strictly prohibiting disk-write operations for message payloads, executing all parsing and delivery operations exclusively within transient RAM allocations.</p><p>Our volatile processing architecture incorporates authenticated in-memory encryption (AES-256-GCM) protecting transient RAM buffers against cold-boot attacks and hypervisor-level memory scraping exploits on multi-tenant edge nodes.</p>
+            </div>
+            
+            
+          </section>
+          <section class="mb-10 pt-2" id="in-memory-pipeline-design">
+            <h2 class="text-xl sm:text-2xl font-bold text-black dark:text-white mb-4 leading-snug flex items-baseline gap-2.5">
+              <span class="font-mono text-xs sm:text-sm px-2 py-0.5 rounded bg-neutral-100 dark:bg-neutral-800 text-neutral-600 dark:text-neutral-400 font-semibold shrink-0">2.0</span>
+              <span>Our Pure Volatile In-Memory Processing Pipeline</span>
+            </h2>
+            <div class="text-[15px] sm:text-[16px] text-neutral-700 dark:text-neutral-300 leading-[1.9] space-y-4">
+              <p>Our edge processing pipeline executes the following low-latency, zero-persistence sequence:</p>
+<ol class="list-decimal pl-6 space-y-2 my-3 text-neutral-700 dark:text-neutral-300">
+  <li><strong><a href="/fr/articles/temp-mail-vs-spam-filters.html" class="text-blue-600 dark:text-blue-400 font-medium underline decoration-blue-300 dark:decoration-blue-700 underline-offset-4 hover:decoration-blue-600 hover:text-blue-800 dark:hover:text-blue-200 transition-colors" title="SMTP">SMTP</a> Ingress:</strong> The edge node terminates the inbound TLS handshake and streams the raw MIME payload directly into volatile RAM memory buffers.</li>
+  <li><strong>In-Memory Token Extraction:</strong> The <a href="/fr/articles/universal-verification-coverage.html" class="text-blue-600 dark:text-blue-400 font-medium underline decoration-blue-300 dark:decoration-blue-700 underline-offset-4 hover:decoration-blue-600 hover:text-blue-800 dark:hover:text-blue-200 transition-colors" title="UVC engine">UVC engine</a> parses HTML AST trees and extracts <a href="/fr/articles/how-to-receive-otp.html" class="text-blue-600 dark:text-blue-400 font-medium underline decoration-blue-300 dark:decoration-blue-700 underline-offset-4 hover:decoration-blue-600 hover:text-blue-800 dark:hover:text-blue-200 transition-colors" title="passcodes">passcodes</a> without touching disk subsystems.</li>
+  <li><strong>WebSocket Event Push:</strong> The payload is serialized into JSON and streamed over the client WebSocket connection.</li>
+  <li><strong>Immediate Buffer Zeroization:</strong> Following delivery confirmation, the allocated buffer is overwritten with cryptographic zeroes and reclaimed.</li>
+</ol>
+<p>This architecture guarantees zero forensic residue remains on server infrastructure after delivery.</p><p>Every processing transaction is a self-contained execution loop that terminates in immediate cryptographic memory scrubbing, establishing our infrastructure as the gold standard for zero-trust ephemeral computing.</p>
+            </div>
+            
+            
+          </section>
+          <section class="mb-10 pt-2" id="zero-logging-ip-sanitization">
+            <h2 class="text-xl sm:text-2xl font-bold text-black dark:text-white mb-4 leading-snug flex items-baseline gap-2.5">
+              <span class="font-mono text-xs sm:text-sm px-2 py-0.5 rounded bg-neutral-100 dark:bg-neutral-800 text-neutral-600 dark:text-neutral-400 font-semibold shrink-0">3.0</span>
+              <span>Zero-Logging & Ingress IP Masking Architecture</span>
+            </h2>
+            <div class="text-[15px] sm:text-[16px] text-neutral-700 dark:text-neutral-300 leading-[1.9] space-y-4">
+              <p>Our platform strictly enforces a zero-logs policy: client IP addresses are scrubbed at ingestion, session tokens decouple from physical hardware IDs, and historical access logs are permanently disabled across edge clusters.</p><p>Our distributed edge clusters undergo continuous automated security audits to verify strict thread sandboxing and prevent memory bleed across concurrent sessions, delivering uncompromising confidentiality for all users.</p>
+            </div>
+            
+            
+          </section>
+          <section class="mb-10 pt-2" id="cryptographic-session-hygiene">
+            <h2 class="text-xl sm:text-2xl font-bold text-black dark:text-white mb-4 leading-snug flex items-baseline gap-2.5">
+              <span class="font-mono text-xs sm:text-sm px-2 py-0.5 rounded bg-neutral-100 dark:bg-neutral-800 text-neutral-600 dark:text-neutral-400 font-semibold shrink-0">4.0</span>
+              <span>Client-Side Cryptographic Session Hygiene</span>
+            </h2>
+            <div class="text-[15px] sm:text-[16px] text-neutral-700 dark:text-neutral-300 leading-[1.9] space-y-4">
+              <p>Within the client browser, message payloads reside solely in active DOM state. Closing the tab or triggering <a href="/fr/articles/what-happens-when-address-expires.html" class="text-blue-600 dark:text-blue-400 font-medium underline decoration-blue-300 dark:decoration-blue-700 underline-offset-4 hover:decoration-blue-600 hover:text-blue-800 dark:hover:text-blue-200 transition-colors" title="mailbox destruction">mailbox destruction</a> purges local state instantly without persistent caching residue.</p><p>Zero-knowledge architecture is an absolute mathematical and physical commitment: it renders it impossible for anyone—including our own infrastructure engineers—to access your messages once your session concludes.</p>
+            </div>
+            
+            
+          </section>
+      </article>
+
+      
+      
+        <!-- Verified Sources & Citations -->
+        <section class="mb-10 p-5 bg-neutral-50 dark:bg-neutral-900/50 border border-neutral-200 dark:border-neutral-800 rounded-xl" id="article-sources-section">
+          <h3 class="text-xs font-bold uppercase tracking-wider text-neutral-500 dark:text-neutral-400 mb-3 flex items-center gap-1.5 font-mono">
+            <svg class="w-3.5 h-3.5 stroke-current fill-none stroke-[2]" viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
+            <span>Verified Standards & Citations</span>
+          </h3>
+          <ul class="space-y-2 text-xs text-neutral-600 dark:text-neutral-400">
+            
+            <li class="flex items-center gap-2">
+              <span class="text-neutral-400">•</span>
+              <a href="https://csrc.nist.gov/publications/detail/sp/800-88/rev-1/final" target="_blank" rel="noopener noreferrer" class="hover:underline text-black dark:text-white font-medium flex items-center gap-1.5">
+                <span>NIST Special Publication 800-88 Rev. 1 — Media Sanitization Guidelines</span>
+                <svg class="w-3 h-3 opacity-60 stroke-current fill-none stroke-[2]" viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+              </a>
+            </li>
+            <li class="flex items-center gap-2">
+              <span class="text-neutral-400">•</span>
+              <a href="https://datatracker.ietf.org/doc/html/rfc7516" target="_blank" rel="noopener noreferrer" class="hover:underline text-black dark:text-white font-medium flex items-center gap-1.5">
+                <span>RFC 7516 — JSON Web Encryption (JWE) Specification</span>
+                <svg class="w-3 h-3 opacity-60 stroke-current fill-none stroke-[2]" viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+              </a>
+            </li>
+            <li class="flex items-center gap-2">
+              <span class="text-neutral-400">•</span>
+              <a href="https://www.cncf.io/" target="_blank" rel="noopener noreferrer" class="hover:underline text-black dark:text-white font-medium flex items-center gap-1.5">
+                <span>Cloud Native Computing Foundation (CNCF) — Edge Computing Zero-Trust Patterns</span>
+                <svg class="w-3 h-3 opacity-60 stroke-current fill-none stroke-[2]" viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+              </a>
+            </li>
+          </ul>
+        </section>
+      
+        <!-- FAQ Accordion -->
+        <section class="mb-12 pt-6 border-t border-neutral-200 dark:border-neutral-800" id="article-faqs-section">
+          <h2 class="text-xl sm:text-2xl font-bold text-black dark:text-white mb-6">
+            Frequently Asked Questions
+          </h2>
+          <div class="space-y-3">
+            
+            <div class="faq-item rounded-xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-[#121212] overflow-hidden">
+              <button
+                type="button"
+                class="faq-toggle w-full p-4 text-left font-semibold text-sm sm:text-base text-black dark:text-white flex items-center justify-between gap-4 cursor-pointer hover:bg-neutral-50 dark:hover:bg-neutral-900/50 transition-colors"
+                aria-expanded="true"
+              >
+                <span>Can messages be recovered after a server reboot?</span>
+                <svg class="faq-chevron w-4 h-4 stroke-current fill-none stroke-[2] text-neutral-400 transition-transform duration-200 rotate-180" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg>
+              </button>
+              <div class="faq-content p-4 pt-0 text-xs sm:text-sm text-neutral-600 dark:text-neutral-400 leading-relaxed border-t border-neutral-100 dark:border-neutral-800/60 ">
+                <p class="mt-3">Physically impossible. Memory contents dissolve immediately upon power loss or process restart.</p>
+              </div>
+            </div>
+            <div class="faq-item rounded-xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-[#121212] overflow-hidden">
+              <button
+                type="button"
+                class="faq-toggle w-full p-4 text-left font-semibold text-sm sm:text-base text-black dark:text-white flex items-center justify-between gap-4 cursor-pointer hover:bg-neutral-50 dark:hover:bg-neutral-900/50 transition-colors"
+                aria-expanded="true"
+              >
+                <span>Are emails backed up to the cloud for archiving?</span>
+                <svg class="faq-chevron w-4 h-4 stroke-current fill-none stroke-[2] text-neutral-400 transition-transform duration-200 rotate-180" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg>
+              </button>
+              <div class="faq-content p-4 pt-0 text-xs sm:text-sm text-neutral-600 dark:text-neutral-400 leading-relaxed border-t border-neutral-100 dark:border-neutral-800/60 ">
+                <p class="mt-3">No. Cloud backups and persistent archiving are disabled by design to preserve total user privacy.</p>
+              </div>
+            </div>
+            <div class="faq-item rounded-xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-[#121212] overflow-hidden">
+              <button
+                type="button"
+                class="faq-toggle w-full p-4 text-left font-semibold text-sm sm:text-base text-black dark:text-white flex items-center justify-between gap-4 cursor-pointer hover:bg-neutral-50 dark:hover:bg-neutral-900/50 transition-colors"
+                aria-expanded="true"
+              >
+                <span>Can anyone inspect my active emails while in volatile RAM?</span>
+                <svg class="faq-chevron w-4 h-4 stroke-current fill-none stroke-[2] text-neutral-400 transition-transform duration-200 rotate-180" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg>
+              </button>
+              <div class="faq-content p-4 pt-0 text-xs sm:text-sm text-neutral-600 dark:text-neutral-400 leading-relaxed border-t border-neutral-100 dark:border-neutral-800/60 ">
+                <p class="mt-3">No. Memory partitions are isolated per session with strict process sandboxing preventing cross-session inspection.</p>
+              </div>
+            </div>
+          </div>
+        </section>
+      
+        <!-- Previous & Next Article Navigation (Google Tech Blog Style) -->
+        <nav class="my-10 pt-6 border-t border-neutral-200 dark:border-neutral-800 grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs font-mono" aria-label="Articles Navigation">
+          
+            <a href="/fr/articles/temporary-email-for-software-testing.html" class="p-4 rounded-xl border border-neutral-200 dark:border-neutral-800 hover:border-black dark:hover:border-white bg-neutral-50/50 dark:bg-neutral-900/40 transition-all flex flex-col group text-start">
+              <span class="text-neutral-400 dark:text-neutral-500 mb-1 flex items-center gap-1 font-semibold">
+                <span>← Previous Guide</span>
+              </span>
+              <span class="font-bold text-sm text-black dark:text-white group-hover:underline line-clamp-1 font-sans">Automating User Verification in CI/CD & QA Testing with Temporary Inboxes</span>
+            </a>
+          
+            <a href="/fr/articles/bypass-email-verification-paywalls.html" class="p-4 rounded-xl border border-neutral-200 dark:border-neutral-800 hover:border-black dark:hover:border-white bg-neutral-50/50 dark:bg-neutral-900/40 transition-all flex flex-col group text-start">
+              <span class="text-neutral-400 dark:text-neutral-500 mb-1 flex items-center gap-1 font-semibold">
+                <span>Next Guide →</span>
+              </span>
+              <span class="font-bold text-sm text-black dark:text-white group-hover:underline line-clamp-1 font-sans">Safely Accessing Email-Gated Content and Whitepapers Without Spam Clutter</span>
+            </a>
+        </nav>
+      
+        <!-- Related Articles -->
+        <section class="mb-12 pt-8 border-t border-neutral-200 dark:border-neutral-800">
+          <div class="flex items-center justify-between mb-6">
+            <h2 class="text-lg sm:text-xl font-bold text-black dark:text-white">
+              Related Architecture Guides
+            </h2>
+            <a href="/fr/articles/index.html" class="text-xs font-bold text-neutral-500 hover:text-black dark:hover:text-white flex items-center gap-1">
+              <span>View All Articles</span>
+              <span>→</span>
+            </a>
+          </div>
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            
+              <article class="p-4 bg-white dark:bg-[#121212] border border-neutral-200 dark:border-neutral-800 rounded-xl hover:border-black dark:hover:border-white transition-all flex flex-col justify-between shadow-sm">
+                <div>
+                  <span class="text-[10px] font-mono uppercase px-2 py-0.5 bg-neutral-100 dark:bg-neutral-800 rounded text-neutral-600 dark:text-neutral-400 font-bold mb-2 inline-block">
+                    Privacy & Data
+                  </span>
+                  <h3 class="font-bold text-sm text-black dark:text-white mb-1.5 line-clamp-2">
+                    <a href="/fr/articles/what-happens-when-address-expires.html" class="hover:underline">
+                      The Ephemeral Lifecycle: What Happens When a Disposable Email Address Expires?
+                    </a>
+                  </h3>
+                  <p class="text-xs text-neutral-600 dark:text-neutral-400 leading-relaxed mb-4 line-clamp-2">
+                    Detailed architectural breakdown of ephemeral mailbox lifecycles, in-memory cryptographic zeroization, and strict anti-recycling policies preventing unauthorized access.
+                  </p>
+                </div>
+                <a href="/fr/articles/what-happens-when-address-expires.html" class="text-xs font-bold text-black dark:text-white hover:underline flex items-center gap-1 pt-2 border-t border-neutral-100 dark:border-neutral-800">
+                  <span>Read Guide</span>
+                  <span>→</span>
+                </a>
+              </article>
+              <article class="p-4 bg-white dark:bg-[#121212] border border-neutral-200 dark:border-neutral-800 rounded-xl hover:border-black dark:hover:border-white transition-all flex flex-col justify-between shadow-sm">
+                <div>
+                  <span class="text-[10px] font-mono uppercase px-2 py-0.5 bg-neutral-100 dark:bg-neutral-800 rounded text-neutral-600 dark:text-neutral-400 font-bold mb-2 inline-block">
+                    Infrastructure & Networking
+                  </span>
+                  <h3 class="font-bold text-sm text-black dark:text-white mb-1.5 line-clamp-2">
+                    <a href="/fr/articles/real-time-websocket-streaming.html" class="hover:underline">
+                      Real-Time WebSocket Streaming: How Inboxes Receive Messages in Milliseconds
+                    </a>
+                  </h3>
+                  <p class="text-xs text-neutral-600 dark:text-neutral-400 leading-relaxed mb-4 line-clamp-2">
+                    In-depth architectural breakdown of real-time WebSocket communication and edge routing that delivers incoming emails to your inbox without page refreshes.
+                  </p>
+                </div>
+                <a href="/fr/articles/real-time-websocket-streaming.html" class="text-xs font-bold text-black dark:text-white hover:underline flex items-center gap-1 pt-2 border-t border-neutral-100 dark:border-neutral-800">
+                  <span>Read Guide</span>
+                  <span>→</span>
+                </a>
+              </article>
+              <article class="p-4 bg-white dark:bg-[#121212] border border-neutral-200 dark:border-neutral-800 rounded-xl hover:border-black dark:hover:border-white transition-all flex flex-col justify-between shadow-sm">
+                <div>
+                  <span class="text-[10px] font-mono uppercase px-2 py-0.5 bg-neutral-100 dark:bg-neutral-800 rounded text-neutral-600 dark:text-neutral-400 font-bold mb-2 inline-block">
+                    Privacy & Compliance
+                  </span>
+                  <h3 class="font-bold text-sm text-black dark:text-white mb-1.5 line-clamp-2">
+                    <a href="/fr/articles/gdpr-ccpa-compliance-ephemeral-data.html" class="hover:underline">
+                      Disposable Email & Global Privacy Regulations: GDPR, CCPA, and the Right to Erasure
+                    </a>
+                  </h3>
+                  <p class="text-xs text-neutral-600 dark:text-neutral-400 leading-relaxed mb-4 line-clamp-2">
+                    Legal and architectural analysis of how ephemeral inboxes natively fulfill GDPR Article 17 (Right to Erasure) and CCPA through zero-PII storage.
+                  </p>
+                </div>
+                <a href="/fr/articles/gdpr-ccpa-compliance-ephemeral-data.html" class="text-xs font-bold text-black dark:text-white hover:underline flex items-center gap-1 pt-2 border-t border-neutral-100 dark:border-neutral-800">
+                  <span>Read Guide</span>
+                  <span>→</span>
+                </a>
+              </article>
+          </div>
+        </section>
+    </main>
+
+    <!-- Master Footer -->
+    <footer class="border-t border-neutral-200 dark:border-neutral-800 bg-white dark:bg-[#0D0D0D] py-12 text-xs transition-colors mt-auto">
+      <div class="max-w-4xl mx-auto px-4">
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 mb-12">
+          <div class="sm:col-span-2 md:col-span-1">
+            <a href="/fr/" dir="ltr" class="inline-flex items-center gap-2.5 transition-opacity hover:opacity-90 mb-3">
+              <img src="/logo.svg" alt="freetemp.email" class="w-7 h-7 rounded-lg shadow-sm shrink-0" width="28" height="28" />
+              <span class="flex items-baseline font-sans tracking-tight">
+                <span class="text-lg font-extrabold text-black dark:text-white">freetemp</span>
+                <span class="text-xs font-semibold text-neutral-500 dark:text-neutral-400">.email</span>
+              </span>
+            </a>
+            <p class="text-neutral-500 leading-relaxed text-[11px] mb-4">
+              Free ephemeral email service with isolated containers and universal verification coverage.
+            </p>
+          </div>
+
+          <div>
+            <div class="font-bold text-black dark:text-white mb-3 uppercase tracking-wider text-[11px]">
+              Navigation
+            </div>
+            <ul class="space-y-2">
+              <li><a href="/fr/" class="text-neutral-600 dark:text-neutral-400 hover:text-black dark:hover:text-white transition-colors">Home</a></li>
+              <li><a href="/fr/blog.html" class="text-neutral-600 dark:text-neutral-400 hover:text-black dark:hover:text-white transition-colors">Blog</a></li>
+              <li><a href="/fr/guide.html" class="text-neutral-600 dark:text-neutral-400 hover:text-black dark:hover:text-white transition-colors">Guide</a></li>
+              <li><a href="/fr/faq.html" class="text-neutral-600 dark:text-neutral-400 hover:text-black dark:hover:text-white transition-colors">FAQ</a></li>
+              <li><a href="/fr/articles/index.html" class="text-neutral-600 dark:text-neutral-400 hover:text-black dark:hover:text-white transition-colors">Articles</a></li>
+            </ul>
+          </div>
+
+          <div>
+            <div class="font-bold text-black dark:text-white mb-3 uppercase tracking-wider text-[11px]">
+              Transparency
+            </div>
+            <ul class="space-y-2">
+              <li><a href="/fr/about.html" class="text-neutral-600 dark:text-neutral-400 hover:text-black dark:hover:text-white transition-colors">About</a></li>
+              <li><a href="/fr/privacy.html" class="text-neutral-600 dark:text-neutral-400 hover:text-black dark:hover:text-white transition-colors">Privacy Policy</a></li>
+              <li><a href="/fr/privacy.html#terms" class="text-neutral-600 dark:text-neutral-400 hover:text-black dark:hover:text-white transition-colors">Terms</a></li>
+            </ul>
+          </div>
+
+          <div>
+            <div class="font-bold text-black dark:text-white mb-3 uppercase tracking-wider text-[11px]">
+              Security Standards
+            </div>
+            <ul class="space-y-2 text-neutral-600 dark:text-neutral-400">
+              <li class="flex items-center gap-1.5"><span class="text-black dark:text-white font-bold">✓</span><span>Auto-purge after 20 mins</span></li>
+              <li class="flex items-center gap-1.5"><span class="text-black dark:text-white font-bold">✓</span><span>Encrypted O(1) isolation</span></li>
+              <li class="flex items-center gap-1.5"><span class="text-black dark:text-white font-bold">✓</span><span>Zero-logs policy</span></li>
+              <li class="flex items-center gap-1.5"><span class="text-black dark:text-white font-bold">✓</span><span>TLS 1.3 256-Bit</span></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="pt-8 border-t border-neutral-100 dark:border-neutral-800/80 flex flex-col sm:flex-row items-center justify-between gap-4 text-[11px] text-neutral-500">
+          <p>© 2026 FreeTemp.email. All rights reserved.</p>
+          <div class="flex items-center gap-4">
+            <a href="/fr/articles/index.html" class="hover:underline">Articles Index</a>
+            <span>•</span>
+            <a href="/fr/privacy.html" class="hover:underline">Privacy Policy</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Interactive FAQ Script -->
+    <script>
+      document.addEventListener('DOMContentLoaded', function () {
+        var faqToggles = document.querySelectorAll('.faq-toggle');
+        faqToggles.forEach(function (btn) {
+          btn.addEventListener('click', function () {
+            var content = btn.nextElementSibling;
+            var chevron = btn.querySelector('.faq-chevron');
+            var isExpanded = btn.getAttribute('aria-expanded') === 'true';
+
+            if (isExpanded) {
+              btn.setAttribute('aria-expanded', 'false');
+              content.style.display = 'none';
+              if (chevron) chevron.classList.remove('rotate-180');
+            } else {
+              btn.setAttribute('aria-expanded', 'true');
+              content.style.display = 'block';
+              if (chevron) chevron.classList.add('rotate-180');
+            }
+          });
+        });
+
+        // Reading progress calculation
+        var progressBar = document.getElementById('reading-progress');
+        if (progressBar) {
+          window.addEventListener('scroll', function () {
+            var winScroll = document.documentElement.scrollTop || document.body.scrollTop;
+            var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            var scrolled = height > 0 ? (winScroll / height) : 0;
+            progressBar.style.transform = 'scaleX(' + scrolled + ')';
+          }, { passive: true });
+        }
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Technical Guide — Temp Mail</title>
+    <script>
+      (function() {
+        var params = new URLSearchParams(window.location.search);
+        var slug = params.get('slug') || 'universal-verification-coverage';
+        window.location.replace('/article-template.html?slug=' + slug + '&lang=en' + window.location.hash);
+      })();
+    </script>
+      <!-- Favicon & Web Browser Icons -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/manifest.json" />
+      <!-- Local Fonts and Shared Stylesheet -->
+    <link rel="stylesheet" href="/fonts/fonts.css" />
+    <link rel="stylesheet" href="/shared/style.css" />
+  </head>
+  <body>    <!-- Master English 4-Column Footer — Unified across all pages -->
+    <footer class="border-t border-[#EAEAEA] dark:border-[#222222] bg-white dark:bg-[#0A0A0A] py-12 transition-colors mt-auto text-xs">
+      <div class="max-w-4xl mx-auto px-4">
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 mb-10 text-left">
+          <!-- Column 1: Brand & Status -->
+          <div>
+            <a href="/en/" dir="ltr" class="inline-flex items-center gap-2.5 transition-opacity hover:opacity-90 mb-3">
+              <img src="/logo.svg" alt="freetemp.email" class="w-7 h-7 rounded-lg shadow-sm shrink-0" width="28" height="28" />
+              <span class="flex items-baseline font-sans tracking-tight">
+                <span class="text-lg font-extrabold text-black dark:text-white">freetemp</span>
+                <span class="text-xs font-semibold text-neutral-500 dark:text-neutral-400">.email</span>
+              </span>
+            </a>
+            <p class="text-[#666666] dark:text-[#888888] leading-relaxed mb-3">
+              Free and technically isolated temporary email service protecting your inbox against spam and trackers without any registration.
+            </p>
+            <div class="inline-flex items-center gap-2 font-mono text-[11px] text-black dark:text-[#A0A0A0] border border-[#EAEAEA] dark:border-[#222222] rounded-md px-2 py-1 bg-[#FAFAFA] dark:bg-[#141414]">
+              <span class="w-1.5 h-1.5 rounded-full bg-black dark:bg-[#00FF66]"></span>
+              <span>All edge nodes operational</span>
+            </div>
+          </div>
+
+          <!-- Column 2: Quick Navigation -->
+          <div>
+            <div class="font-bold text-black dark:text-white mb-3 uppercase tracking-wider text-[11px]">
+              Quick Navigation
+            </div>
+            <ul class="space-y-2">
+              <li><a href="/en/" class="text-[#666666] dark:text-[#888888] hover:text-black dark:hover:text-white transition-colors">Home</a></li>
+              <li><a href="/en/guide.html" class="text-[#666666] dark:text-[#888888] hover:text-black dark:hover:text-white transition-colors">User Guide</a></li>
+              <li><a href="/en/faq.html" class="text-[#666666] dark:text-[#888888] hover:text-black dark:hover:text-white transition-colors">FAQ</a></li>
+              <li><a href="/en/articles/index.html" class="text-[#666666] dark:text-[#888888] hover:text-black dark:hover:text-white transition-colors">Articles & Guides</a></li>
+            </ul>
+          </div>
+
+          <!-- Column 3: Transparency & Legal -->
+          <div>
+            <div class="font-bold text-black dark:text-white mb-3 uppercase tracking-wider text-[11px]">
+              Transparency & Legal
+            </div>
+            <ul class="space-y-2">
+              <li><a href="/en/about.html" class="text-[#666666] dark:text-[#888888] hover:text-black dark:hover:text-white transition-colors">About Us</a></li>
+              <li><a href="/en/privacy.html" class="text-[#666666] dark:text-[#888888] hover:text-black dark:hover:text-white transition-colors">Privacy Policy</a></li>
+              <li><a href="/en/privacy.html#terms" class="text-[#666666] dark:text-[#888888] hover:text-black dark:hover:text-white transition-colors">Terms of Service</a></li>
+            </ul>
+          </div>
+
+          <!-- Column 4: Security Standards -->
+          <div>
+            <div class="font-bold text-black dark:text-white mb-3 uppercase tracking-wider text-[11px]">
+              Security & Compliance
+            </div>
+            <ul class="space-y-2 text-[#666666] dark:text-[#888888]">
+              <li class="flex items-center gap-1.5">
+                <span class="text-black dark:text-white font-bold">✓</span>
+                <span>Auto-purge after 20 minutes</span>
+              </li>
+              <li class="flex items-center gap-1.5">
+                <span class="text-black dark:text-white font-bold">✓</span>
+                <span>Encrypted O(1) isolation</span>
+              </li>
+              <li class="flex items-center gap-1.5">
+                <span class="text-black dark:text-white font-bold">✓</span>
+                <span>Zero personal logs & cookies</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="border-t border-[#EAEAEA] dark:border-[#222222] pt-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-[#666666] dark:text-[#888888]">
+          <div>© 2026 Temp Mail. All rights reserved.</div>
+          <div class="flex items-center gap-4">
+            <span>TLS 1.3 256-Bit</span>
+            <span>•</span>
+            <span>Cloudflare Edge</span>
+            <span>•</span>
+            <span>Zero-Logs Verified</span>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

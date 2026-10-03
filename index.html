@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html class="dark" lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <meta content="web_standard" name="shell-type"/>
+  <title>FreeTemp.email — بريد مؤقت فوري ومشفر لاستقبال رسائل التفعيل وأكواد OTP</title>
+  <meta name="description" content="خدمة بريد مؤقت مجانية وفورية لحماية خصوصيتك واستقبال رسائل التحقق وأكواد 2FA في الوقت الفعلي عبر تقنية WebSocket مع إتلاف ذاتي وتشفير كامل." />
+  
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=JetBrains+Mono:wght@100..900&family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet"/>
+  
+  <style>
+    @layer base {
+      html, body { margin: 0; padding: 0; font-family: 'Cairo', 'Inter', system-ui, sans-serif; }
+      body { overscroll-behavior: none; }
+    }
+    ::-webkit-scrollbar { display: none; }
+  </style>
+  
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "surface-bright": "#393939",
+            "surface-container-lowest": "#0e0e0e",
+            "on-background": "#e4e2e1",
+            "on-surface-variant": "#bbcabf",
+            "on-tertiary-container": "#79000e",
+            "inverse-surface": "#e4e2e1",
+            "secondary-fixed": "#ffddb8",
+            "tertiary": "#ffb3ad",
+            "error-container": "#93000a",
+            "surface-container-low": "#1b1c1c",
+            "surface-dim": "#131313",
+            "surface": "#131313",
+            "on-tertiary": "#68000a",
+            "error": "#ffb4ab",
+            "on-error-container": "#ffdad6",
+            "surface-container": "#1f2020",
+            "surface-variant": "#353535",
+            "on-secondary-fixed": "#2a1700",
+            "inverse-primary": "#006c49",
+            "background": "#131313",
+            "on-secondary-container": "#5b3800",
+            "on-primary-container": "#00422b",
+            "secondary": "#ffb95f",
+            "on-primary-fixed-variant": "#005236",
+            "on-tertiary-fixed-variant": "#930013",
+            "on-primary-fixed": "#002113",
+            "surface-tint": "#4edea3",
+            "on-primary": "#003824",
+            "secondary-fixed-dim": "#ffb95f",
+            "on-surface": "#e4e2e1",
+            "on-secondary": "#472a00",
+            "secondary-container": "#ee9800",
+            "primary-fixed-dim": "#4edea3",
+            "outline": "#86948a",
+            "surface-container-high": "#2a2a2a",
+            "tertiary-container": "#ff7a73",
+            "surface-container-highest": "#353535",
+            "on-tertiary-fixed": "#410004",
+            "on-error": "#690005",
+            "tertiary-fixed-dim": "#ffb3ad",
+            "outline-variant": "#3c4a42",
+            "tertiary-fixed": "#ffdad7",
+            "on-secondary-fixed-variant": "#653e00",
+            "primary-container": "#10b981",
+            "primary-fixed": "#6ffbbe",
+            "primary": "#4edea3",
+            "inverse-on-surface": "#303030"
+          },
+          borderRadius: { "DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem" },
+          spacing: { "space-lg": "1.5rem", "margin": "1.5rem", "gutter": "1rem", "space-md": "1rem", "space-xs": "0.25rem", "space-xl": "2rem", "space-sm": "0.5rem" },
+          fontFamily: {
+            "code-sm": ["JetBrains Mono", "monospace"],
+            "body-md": ["Inter", "Cairo", "sans-serif"],
+            "body-sm": ["Inter", "Cairo", "sans-serif"],
+            "headline-md": ["Inter", "Cairo", "sans-serif"],
+            "body-lg": ["Inter", "Cairo", "sans-serif"],
+            "label-caps": ["JetBrains Mono", "monospace"],
+            "code-address": ["JetBrains Mono", "monospace"],
+            "code-otp": ["JetBrains Mono", "monospace"],
+            "display-lg": ["Inter", "Cairo", "sans-serif"],
+            "headline-sm": ["Inter", "Cairo", "sans-serif"]
+          },
+          fontSize: {
+            "code-sm": ["12px", { lineHeight: "16px", letterSpacing: "0.02em", fontWeight: "500" }],
+            "body-md": ["14px", { lineHeight: "20px", fontWeight: "400" }],
+            "body-sm": ["12px", { lineHeight: "16px", fontWeight: "400" }],
+            "headline-md": ["24px", { lineHeight: "32px", letterSpacing: "-0.02em", fontWeight: "600" }],
+            "body-lg": ["16px", { lineHeight: "24px", fontWeight: "400" }],
+            "label-caps": ["11px", { lineHeight: "14px", letterSpacing: "0.08em", fontWeight: "600" }],
+            "code-address": ["16px", { lineHeight: "24px", letterSpacing: "-0.01em", fontWeight: "500" }],
+            "code-otp": ["28px", { lineHeight: "32px", letterSpacing: "0.18em", fontWeight: "700" }],
+            "display-lg": ["32px", { lineHeight: "40px", letterSpacing: "-0.03em", fontWeight: "600" }],
+            "headline-sm": ["18px", { lineHeight: "24px", letterSpacing: "-0.01em", fontWeight: "600" }]
+          }
+        }
+      }
+    };
+  </script>
+
+  <!-- Scripts -->
+  <script src="/shared/theme.js" defer></script>
+  <script src="/shared/purify.min.js"></script>
+  <script src="/shared/i18n.js" defer></script>
+  <script src="/shared/app.js" defer></script>
+</head>
+<body class="bg-surface-container-lowest text-on-surface antialiased selection:bg-primary-container selection:text-on-primary-container">
+
+  <!-- Header -->
+  <header class="fixed top-0 left-0 right-0 z-50 bg-surface-container-lowest border-b border-surface-variant">
+    <div class="h-16 max-w-[1440px] mx-auto px-margin flex items-center justify-between gap-space-md">
+      <div class="flex items-center gap-space-md">
+        <a href="/" class="flex items-center gap-space-sm">
+          <img alt="FreeTemp.email Logo" class="h-8 w-auto object-contain" src="/logo.svg"/>
+        </a>
+        <div class="flex items-center gap-space-xs px-space-xs py-0.5 rounded bg-surface-container-low border border-outline-variant">
+          <span class="relative flex h-2 w-2">
+            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
+            <span id="status-dot" class="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
+          </span>
+          <span id="status-text" class="font-label-caps text-label-caps text-primary uppercase" data-i18n="statusLive">Live Node</span>
+        </div>
+      </div>
+
+      <!-- Navigation -->
+      <nav class="hidden lg:flex items-center gap-space-xs">
+        <a aria-current="page" class="px-space-sm py-1.5 rounded transition-colors text-on-surface font-semibold bg-surface-container-high" data-path="mailbox" href="/" data-i18n="home">صندوق الوارد</a>
+        <a class="px-space-sm py-1.5 rounded text-on-surface-variant hover:text-on-surface hover:bg-surface-container font-body-md text-body-md transition-colors" data-path="guides-and-articles" href="/blog.html" data-i18n="blog">المقالات والأدلة</a>
+        <a class="px-space-sm py-1.5 rounded text-on-surface-variant hover:text-on-surface hover:bg-surface-container font-body-md text-body-md transition-colors" data-path="security-architecture" href="/security.html" data-i18n="footerSecurity">بنية الأمان والتشفير</a>
+        <a class="px-space-sm py-1.5 rounded text-on-surface-variant hover:text-on-surface hover:bg-surface-container font-body-md text-body-md transition-colors" data-path="faq" href="/faq.html" data-i18n="faq">الأسئلة الشائعة</a>
+        <a class="px-space-sm py-1.5 rounded text-on-surface-variant hover:text-on-surface hover:bg-surface-container font-body-md text-body-md transition-colors" data-path="guide" href="/guide.html" data-i18n="guide">دليل الاستخدام</a>
+      </nav>
+
+      <!-- Action Controls -->
+      <div class="flex items-center gap-space-sm">
+        <div class="hidden sm:flex items-center gap-space-xs px-space-sm py-1 rounded bg-surface-container border border-outline-variant font-code-sm text-code-sm text-primary">
+          <span class="material-symbols-outlined text-[14px]">wifi_tethering</span>
+          <span>WebSocket 100ms</span>
+        </div>
+
+        <!-- Language Selector Button -->
+        <button id="open-lang-picker" class="open-lang-picker flex items-center gap-space-xs px-space-sm py-1 rounded bg-surface-container border border-outline-variant font-code-sm text-code-sm text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors cursor-pointer" type="button">
+          <span class="material-symbols-outlined text-[16px]">language</span>
+          <span id="current-lang-label" class="font-semibold uppercase">AR</span>
+          <span class="material-symbols-outlined text-[14px]">expand_more</span>
+        </button>
+
+        <!-- Theme Toggle -->
+        <button id="theme-toggle-btn" aria-label="Toggle Theme" class="theme-toggle-btn h-8 w-8 rounded flex items-center justify-center bg-surface-container border border-outline-variant text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors cursor-pointer" type="button">
+          <span class="material-symbols-outlined text-[18px]">dark_mode</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="w-full pt-16 bg-surface-container-lowest min-h-screen">
+    <div class="flex flex-col w-full">
+      <div class="relative w-full max-w-[1440px] mx-auto px-margin pt-space-xl pb-space-lg">
+        
+        <!-- Hero Header -->
+        <div class="flex flex-col items-start gap-space-sm mb-space-xl">
+          <div class="inline-flex items-center gap-space-xs px-space-sm py-1 bg-surface-container-low rounded-lg shadow-sm border border-outline-variant">
+            <span class="relative flex h-2 w-2">
+              <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-80"></span>
+              <span class="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
+            </span>
+            <span class="font-label-caps text-label-caps text-primary tracking-widest uppercase">RAM-ONLY EPHEMERAL RELAY • ZERO TRACKING • MIL-SPEC CIPHER</span>
+          </div>
+
+          <h1 data-i18n="heroTitle" class="font-display-lg text-display-lg text-on-surface max-w-4xl tracking-tight mt-1">
+            بريد مؤقت فوري لحماية خصوصيتك واستقبال رسائل وأكواد التحقق
+          </h1>
+          <p data-i18n="heroSubtitle" class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl mt-1 leading-relaxed">
+            أنشئ عنوان بريد إلكتروني مؤقت مشفر في أجزاء من الثانية. استقبل رموز 2FA وOTP ورسائل التفعيل في صندوق وارد مباشر دون تخزين دائم على الأقراص أو تتبع لهويتك.
+          </p>
+        </div>
+
+        <!-- Interactive Mailbox Generator (Master Card) -->
+        <div class="w-full bg-surface-container-low rounded-xl shadow-xl p-space-lg mb-space-xl relative overflow-hidden border border-surface-variant">
+          <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-primary to-transparent opacity-75"></div>
+
+          <!-- Upper Row: Address Display + Quick Actions -->
+          <div class="flex flex-col lg:flex-row items-stretch lg:items-center justify-between gap-space-md mb-space-lg">
+            
+            <!-- Address Container -->
+            <div class="flex-1 flex flex-col sm:flex-row items-start sm:items-center justify-between bg-surface-container px-space-md py-space-sm rounded-lg gap-space-sm border border-outline-variant">
+              <div class="flex items-center gap-space-sm min-w-0">
+                <span class="material-symbols-outlined text-primary text-[20px] shrink-0">mark_email_unread</span>
+                <span class="font-code-address text-code-address text-on-surface font-semibold tracking-tight truncate select-all" id="active-email-text">
+                  جاري توليد العنوان...
+                </span>
+              </div>
+              <div class="flex items-center gap-space-xs self-end sm:self-auto shrink-0">
+                <button class="flex items-center gap-1.5 bg-primary text-on-primary px-space-md py-1.5 rounded font-label-caps text-label-caps font-bold hover:bg-primary-fixed-dim transition-all active:scale-95 shadow-sm cursor-pointer" id="copy-address-btn">
+                  <span class="material-symbols-outlined text-[16px]">content_copy</span>
+                  <span id="copy-address-label" data-i18n="copyAddress">نسخ العنوان</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- Controls: Regenerate & Actions -->
+            <div class="flex items-center gap-space-sm shrink-0">
+              <button class="flex items-center gap-space-xs bg-surface-container hover:bg-surface-container-high text-on-surface px-space-md py-2.5 rounded font-body-md text-body-md transition-colors shadow-sm border border-outline-variant cursor-pointer" id="randomize-btn">
+                <span class="material-symbols-outlined text-primary text-[18px]">casino</span>
+                <span data-i18n="newAddress">عنوان جديد</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Status & Telemetry Bar -->
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-space-md pt-space-md bg-surface-container-lowest rounded-lg p-space-md border border-surface-variant">
+            <!-- Socket Indicator -->
+            <div class="flex items-center gap-space-sm">
+              <span class="relative flex h-2.5 w-2.5 shrink-0">
+                <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
+                <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-primary"></span>
+              </span>
+              <div class="flex flex-col min-w-0">
+                <span class="font-label-caps text-label-caps text-on-surface-variant uppercase">بروتوكول البث المباشر</span>
+                <span class="font-code-sm text-code-sm text-primary flex items-center gap-1 truncate">
+                  WebSocket: متصل <span class="text-on-surface-variant">(18ms RTT)</span>
+                </span>
+              </div>
+            </div>
+
+            <!-- Expiration Timer Counter -->
+            <div class="flex items-center gap-space-md">
+              <div class="relative w-8 h-8 shrink-0">
+                <svg class="w-full h-full transform -rotate-90" viewBox="0 0 36 36">
+                  <path class="text-surface-variant" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="currentColor" stroke-width="3"></path>
+                  <path class="text-secondary" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="currentColor" stroke-dasharray="82, 100" stroke-linecap="round" stroke-width="3"></path>
+                </svg>
+              </div>
+              <div class="flex flex-col">
+                <span class="font-label-caps text-label-caps text-on-surface-variant uppercase" data-i18n="expiresIn">صلاحية الذاكرة المؤقتة</span>
+                <span class="font-code-address text-code-address text-secondary font-bold" id="countdown-timer">ينتهي خلال: 20:00</span>
+              </div>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="flex items-center justify-start md:justify-end gap-space-xs flex-wrap">
+              <button class="flex items-center gap-1 bg-surface-container hover:bg-surface-container-high text-on-surface px-space-sm py-1.5 rounded font-code-sm text-code-sm transition-colors shadow-sm border border-outline-variant cursor-pointer" id="extend-timer-btn">
+                <span class="material-symbols-outlined text-[16px] text-primary">add_alarm</span>
+                <span data-i18n="extendTime">+10 دقائق</span>
+              </button>
+              <button class="flex items-center gap-1 bg-error-container text-on-error-container hover:bg-error hover:text-on-error px-space-sm py-1.5 rounded font-code-sm text-code-sm font-semibold transition-colors shadow-sm cursor-pointer" id="burn-btn">
+                <span class="material-symbols-outlined text-[16px]">local_fire_department</span>
+                <span data-i18n="burnMailbox">إتلاف الصندوق</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Live Split-Panel Inbox (Desktop 2-Column Responsive Workspace) -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-space-lg items-start mb-space-xl">
+          <!-- Left Column: Incoming Feed (5 cols) -->
+          <div class="lg:col-span-5 flex flex-col gap-space-sm bg-surface-container-low p-space-md rounded-xl shadow-lg border border-surface-variant">
+            <div class="flex items-center justify-between pb-space-sm border-b border-surface-variant">
+              <div class="flex items-center gap-space-xs">
+                <span class="material-symbols-outlined text-primary text-[18px]">inbox</span>
+                <span class="font-headline-sm text-headline-sm text-on-surface font-semibold" data-i18n="inboxTitle">الرسائل المستلمة</span>
+                <span id="stream-count-badge" class="bg-surface-container text-primary font-code-sm text-code-sm px-2 py-0.5 rounded-full font-bold">0</span>
+              </div>
+              <div class="flex items-center gap-space-xs">
+                <span class="font-label-caps text-label-caps text-on-surface-variant">LIVE STREAM</span>
+                <span class="w-2 h-2 rounded-full bg-primary inline-block animate-pulse"></span>
+              </div>
+            </div>
+
+            <!-- List Items Container -->
+            <div id="emails-list" class="flex flex-col gap-space-xs min-h-[280px] max-h-[480px] overflow-y-auto">
+              <div class="p-8 text-center text-on-surface-variant text-xs leading-relaxed flex flex-col items-center justify-center gap-3">
+                <div class="w-12 h-12 rounded-xl bg-surface-container flex items-center justify-center text-on-surface-variant mb-1">
+                  <span class="material-symbols-outlined text-[24px]">mark_email_unread</span>
+                </div>
+                <p data-i18n="waitingEmails">في انتظار الرسائل الواردة... ستظهر هنا فور إرسالها دون الحاجة لتحديث الصفحة.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right Column: Detail & OTP Inspection Card (7 cols) -->
+          <div id="email-detail" class="lg:col-span-7 flex flex-col gap-space-md bg-surface-container-low p-space-lg rounded-xl shadow-lg border border-surface-variant min-h-[380px]">
+            <div data-i18n="selectEmail" class="h-full min-h-[320px] flex flex-col items-center justify-center p-8 text-center text-on-surface-variant text-xs gap-3">
+              <span class="material-symbols-outlined text-[32px] text-outline">drafts</span>
+              <span>اختر رسالة من القائمة الجانبية لقراءة محتواها واستخراج كود التحقق ورابط التفعيل.</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Technical Hardened Architecture Bento Cards -->
+        <div class="mb-space-xl">
+          <div class="flex flex-col gap-1 mb-space-lg">
+            <span class="font-label-caps text-label-caps text-primary uppercase">Hardened System Guarantees</span>
+            <h2 data-i18n="feat1Title" class="font-headline-md text-headline-md text-on-surface font-semibold">بنية برمجية خالية تماماً من الآثار الرقمية</h2>
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-space-lg">
+            <!-- Card 1 -->
+            <div class="bg-surface-container-low p-space-lg rounded-xl shadow-md flex flex-col justify-between border border-surface-variant">
+              <div>
+                <div class="w-10 h-10 rounded-lg bg-surface-container flex items-center justify-center text-primary mb-space-md border border-outline-variant">
+                  <span class="material-symbols-outlined text-[24px]">memory</span>
+                </div>
+                <h3 class="font-headline-sm text-headline-sm text-on-surface font-semibold mb-space-xs">
+                  عزل مشفر في الذاكرة O(1)
+                </h3>
+                <p data-i18n="feat1Desc" class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+                  تتواجد الصناديق حصرياً في ذاكرة التخزين المؤقت RAM المتطايرة. بدون كتابة على الأقراص الصلبة وبدون قواعد بيانات مستمرة.
+                </p>
+              </div>
+              <div class="mt-space-md pt-space-sm font-code-sm text-code-sm text-primary flex items-center gap-1">
+                <span>Kernel Level tmpfs</span>
+                <span class="material-symbols-outlined text-[14px]">arrow_forward</span>
+              </div>
+            </div>
+
+            <!-- Card 2 -->
+            <div class="bg-surface-container-low p-space-lg rounded-xl shadow-md flex flex-col justify-between border border-surface-variant">
+              <div>
+                <div class="w-10 h-10 rounded-lg bg-surface-container flex items-center justify-center text-secondary mb-space-md border border-outline-variant">
+                  <span class="material-symbols-outlined text-[24px]">troubleshoot</span>
+                </div>
+                <h3 class="font-headline-sm text-headline-sm text-on-surface font-semibold mb-space-xs">
+                  محرك RegEx الذكي لاستخراج OTP
+                </h3>
+                <p data-i18n="feat3Desc" class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+                  استخراج فوري دقيق لرموز التحقق المكونة من 4 إلى 8 خانات من كافة قوالب البريد الإلكتروني في أقل من 5 مللي ثانية مع زر نسخ سريع.
+                </p>
+              </div>
+              <div class="mt-space-md pt-space-sm font-code-sm text-code-sm text-secondary flex items-center gap-1">
+                <span>&lt; 5ms Token Extraction</span>
+                <span class="material-symbols-outlined text-[14px]">arrow_forward</span>
+              </div>
+            </div>
+
+            <!-- Card 3 -->
+            <div class="bg-surface-container-low p-space-lg rounded-xl shadow-md flex flex-col justify-between border border-surface-variant">
+              <div>
+                <div class="w-10 h-10 rounded-lg bg-surface-container flex items-center justify-center text-primary mb-space-md border border-outline-variant">
+                  <span class="material-symbols-outlined text-[24px]">shield_person</span>
+                </div>
+                <h3 class="font-headline-sm text-headline-sm text-on-surface font-semibold mb-space-xs">
+                  انعدام تام للتتبع وحجب البكسلات
+                </h3>
+                <p data-i18n="feat2Desc" class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+                  حظر كامل لبكسلات التتبع وعناوين IP، بدون ملفات تعريف ارتباط (Cookies) أو بصمات رقمية. متوافق مع شبكات Tor وVPN.
+                </p>
+              </div>
+              <div class="mt-space-md pt-space-sm font-code-sm text-code-sm text-primary flex items-center gap-1">
+                <span>Tor / Proxy Friendly</span>
+                <span class="material-symbols-outlined text-[14px]">arrow_forward</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- How It Works: 3 Steps -->
+        <div class="bg-surface-container-low p-space-xl rounded-xl shadow-lg mb-space-xl border border-surface-variant">
+          <div class="flex flex-col gap-1 mb-space-xl text-center items-center">
+            <span class="font-label-caps text-label-caps text-primary uppercase">Deterministic Lifecycle</span>
+            <h2 data-i18n="howItWorksTitle" class="font-headline-md text-headline-md text-on-surface font-semibold">كيف يعمل البريد المؤقت؟ (3 خطوات بسيطة)</h2>
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-space-lg">
+            <!-- Step 1 -->
+            <div class="flex flex-col items-start gap-space-sm bg-surface-container p-space-lg rounded-lg border border-outline-variant">
+              <span class="font-code-otp text-code-otp text-primary/40 font-black">01</span>
+              <h4 data-i18n="step1Title" class="font-headline-sm text-headline-sm text-on-surface font-semibold">توليد العنوان المؤقت فوراً</h4>
+              <p data-i18n="step1Desc" class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+                بمجرد دخولك إلى الصفحة، يتم توليد عنوان بريد عشوائي مشفر فوراً بدون تسجيل أو إدخال أي بيانات شخصية.
+              </p>
+            </div>
+            <!-- Step 2 -->
+            <div class="flex flex-col items-start gap-space-sm bg-surface-container p-space-lg rounded-lg border border-outline-variant">
+              <span class="font-code-otp text-code-otp text-primary/40 font-black">02</span>
+              <h4 data-i18n="step2Title" class="font-headline-sm text-headline-sm text-on-surface font-semibold">استخدام العنوان في أي موقع أو تطبيق</h4>
+              <p data-i18n="step2Desc" class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+                انسخ العنوان بضغطة زر واستخدمه في نماذج التسجيل، وستصلك الرسائل في صندوق الوارد المباشر خلال 20 مللي ثانية.
+              </p>
+            </div>
+            <!-- Step 3 -->
+            <div class="flex flex-col items-start gap-space-sm bg-surface-container p-space-lg rounded-lg border border-outline-variant">
+              <span class="font-code-otp text-code-otp text-secondary/50 font-black">03</span>
+              <h4 data-i18n="step3Title" class="font-headline-sm text-headline-sm text-on-surface font-semibold">استخراج رمز OTP والإتلاف الذاتي</h4>
+              <p data-i18n="step3Desc" class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+                يتم استخراج رمز التحقق تلقائياً لنسخه مباشرة، مع تمديد الصلاحية (+10 دقائق) أو الإتلاف الفوري بضغطة زر.
+              </p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="w-full bg-surface border-t border-surface-variant">
+    <div class="max-w-[1440px] mx-auto px-margin py-space-md border-b border-surface-container">
+      <div class="flex flex-wrap items-center justify-between gap-space-sm font-code-sm text-code-sm">
+        <div class="flex flex-wrap items-center gap-space-md text-on-surface-variant">
+          <div class="flex items-center gap-space-xs">
+            <span class="h-2 w-2 rounded-full bg-primary"></span>
+            <span class="text-on-surface">خوادم نشطة:</span> 14 عقدة سحابية عالمية
+          </div>
+          <span class="text-outline-variant">|</span>
+          <div class="flex items-center gap-space-xs">
+            <span class="material-symbols-outlined text-[16px] text-primary">memory</span>
+            <span>تخزين مشفر في ذاكرة RAM المؤقتة (Zero-Disk)</span>
+          </div>
+          <span class="text-outline-variant">|</span>
+          <div class="flex items-center gap-space-xs text-secondary-fixed">
+            <span class="material-symbols-outlined text-[16px]">verified_user</span>
+            <span>مطابق لمعايير SOC2 Type II و GDPR</span>
+          </div>
+        </div>
+        <div class="flex items-center gap-space-xs text-on-surface-variant">
+          <span class="text-outline">FINGERPRINT:</span>
+          <span class="font-code-sm text-on-surface bg-surface-container px-1.5 py-0.5 rounded border border-outline-variant">8E24 3F11 B670 9A2E E90D</span>
+        </div>
+      </div>
+    </div>
+    
+    <div class="max-w-[1440px] mx-auto px-margin py-space-lg flex flex-col md:flex-row items-center justify-between gap-space-md">
+      <div class="flex items-center gap-space-md font-body-sm text-body-sm text-on-surface-variant">
+        <span class="font-code-sm text-code-sm text-on-surface">© 2026 FreeTemp.email</span>
+        <span data-i18n="footerDesc">خدمة بريد مؤقت فوري لحماية الخصوصية واستقبال رموز التحقق.</span>
+      </div>
+      <div class="flex flex-wrap items-center gap-space-lg font-body-sm text-body-sm">
+        <a class="text-on-surface-variant hover:text-on-surface transition-colors" href="/privacy.html" data-i18n="footerPrivacy">سياسة الخصوصية</a>
+        <a class="text-on-surface-variant hover:text-on-surface transition-colors" href="/security.html" data-i18n="footerSecurity">بنية الأمان والتشفير</a>
+        <a class="text-on-surface-variant hover:text-on-surface transition-colors" href="/faq.html" data-i18n="faq">الأسئلة الشائعة</a>
+        <a class="text-on-surface-variant hover:text-on-surface transition-colors" href="/blog.html" data-i18n="blog">المقالات والأدلة</a>
+        <a class="text-on-surface-variant hover:text-on-surface transition-colors" href="/guide.html" data-i18n="guide">دليل الاستخدام</a>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>

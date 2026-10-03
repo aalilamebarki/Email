@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html class="dark" lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <meta content="web_standard" name="shell-type"/>
+  <title>تعزيز الخصوصية الرقمية: الدليل الشامل للبريد المؤقت وتخطي جدران التحقق — FreeTemp.email</title>
+  <meta name="description" content="دليل تقني مفصل يشرح كيفية عمل البريد المؤقت المعزول في الذاكرة لتفادي التتبع الإعلاني واستخراج أكواد OTP وتأمين الحسابات."/>
+  
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=JetBrains+Mono:wght@100..900&family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet"/>
+  
+  <style>
+    @layer base {
+      html, body { margin: 0; padding: 0; font-family: 'Cairo', 'Inter', system-ui, sans-serif; }
+      body { overscroll-behavior: none; }
+    }
+    ::-webkit-scrollbar { display: none; }
+  </style>
+  
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "surface-bright": "#393939",
+            "surface-container-lowest": "#0e0e0e",
+            "on-background": "#e4e2e1",
+            "on-surface-variant": "#bbcabf",
+            "on-tertiary-container": "#79000e",
+            "inverse-surface": "#e4e2e1",
+            "secondary-fixed": "#ffddb8",
+            "tertiary": "#ffb3ad",
+            "error-container": "#93000a",
+            "surface-container-low": "#1b1c1c",
+            "surface-dim": "#131313",
+            "surface": "#131313",
+            "on-tertiary": "#68000a",
+            "error": "#ffb4ab",
+            "on-error-container": "#ffdad6",
+            "surface-container": "#1f2020",
+            "surface-variant": "#353535",
+            "on-secondary-fixed": "#2a1700",
+            "inverse-primary": "#006c49",
+            "background": "#131313",
+            "on-secondary-container": "#5b3800",
+            "on-primary-container": "#00422b",
+            "secondary": "#ffb95f",
+            "on-primary-fixed-variant": "#005236",
+            "on-tertiary-fixed-variant": "#930013",
+            "on-primary-fixed": "#002113",
+            "surface-tint": "#4edea3",
+            "on-primary": "#003824",
+            "secondary-fixed-dim": "#ffb95f",
+            "on-surface": "#e4e2e1",
+            "on-secondary": "#472a00",
+            "secondary-container": "#ee9800",
+            "primary-fixed-dim": "#4edea3",
+            "outline": "#86948a",
+            "surface-container-high": "#2a2a2a",
+            "tertiary-container": "#ff7a73",
+            "surface-container-highest": "#353535",
+            "on-tertiary-fixed": "#410004",
+            "on-error": "#690005",
+            "tertiary-fixed-dim": "#ffb3ad",
+            "outline-variant": "#3c4a42",
+            "tertiary-fixed": "#ffdad7",
+            "on-secondary-fixed-variant": "#653e00",
+            "primary-container": "#10b981",
+            "primary-fixed": "#6ffbbe",
+            "primary": "#4edea3",
+            "inverse-on-surface": "#303030"
+          },
+          borderRadius: { "DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem" },
+          spacing: { "space-lg": "1.5rem", "margin": "1.5rem", "gutter": "1rem", "space-md": "1rem", "space-xs": "0.25rem", "space-xl": "2rem", "space-sm": "0.5rem" },
+          fontFamily: {
+            "code-sm": ["JetBrains Mono", "monospace"],
+            "body-md": ["Inter", "Cairo", "sans-serif"],
+            "body-sm": ["Inter", "Cairo", "sans-serif"],
+            "headline-md": ["Inter", "Cairo", "sans-serif"],
+            "body-lg": ["Inter", "Cairo", "sans-serif"],
+            "label-caps": ["JetBrains Mono", "monospace"],
+            "code-address": ["JetBrains Mono", "monospace"],
+            "code-otp": ["JetBrains Mono", "monospace"],
+            "display-lg": ["Inter", "Cairo", "sans-serif"],
+            "headline-sm": ["Inter", "Cairo", "sans-serif"]
+          }
+        }
+      }
+    };
+  </script>
+
+  <!-- Scripts -->
+  <script src="/shared/theme.js" defer></script>
+  <script src="/shared/purify.min.js"></script>
+  <script src="/shared/i18n.js" defer></script>
+  <script src="/shared/app.js" defer></script>
+</head>
+<body class="bg-surface-container-lowest text-on-surface antialiased selection:bg-primary-container selection:text-on-primary-container">
+
+  <!-- Header -->
+  <header class="fixed top-0 left-0 right-0 z-50 bg-surface-container-lowest border-b border-surface-variant">
+    <div class="h-16 max-w-[1440px] mx-auto px-margin flex items-center justify-between gap-space-md">
+      <div class="flex items-center gap-space-md">
+        <a href="/" class="flex items-center gap-space-sm">
+          <img alt="FreeTemp.email Logo" class="h-8 w-auto object-contain" src="/logo.svg"/>
+        </a>
+        <div class="flex items-center gap-space-xs px-space-xs py-0.5 rounded bg-surface-container-low border border-outline-variant">
+          <span class="relative flex h-2 w-2">
+            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
+            <span class="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
+          </span>
+          <span class="font-label-caps text-label-caps text-primary uppercase">Live Node</span>
+        </div>
+      </div>
+
+      <!-- Navigation -->
+      <nav class="hidden lg:flex items-center gap-space-xs">
+        <a class="px-space-sm py-1.5 rounded text-on-surface-variant hover:text-on-surface hover:bg-surface-container font-body-md text-body-md transition-colors" data-path="mailbox" href="/" data-i18n="home">صندوق الوارد</a>
+        <a class="px-space-sm py-1.5 rounded transition-colors text-on-surface font-semibold bg-surface-container-high" data-path="guides-and-articles" href="/blog.html" data-i18n="blog">المقالات والأدلة</a>
+        <a class="px-space-sm py-1.5 rounded text-on-surface-variant hover:text-on-surface hover:bg-surface-container font-body-md text-body-md transition-colors" data-path="security-architecture" href="/security.html" data-i18n="footerSecurity">بنية الأمان والتشفير</a>
+        <a class="px-space-sm py-1.5 rounded text-on-surface-variant hover:text-on-surface hover:bg-surface-container font-body-md text-body-md transition-colors" data-path="faq" href="/faq.html" data-i18n="faq">الأسئلة الشائعة</a>
+        <a class="px-space-sm py-1.5 rounded text-on-surface-variant hover:text-on-surface hover:bg-surface-container font-body-md text-body-md transition-colors" data-path="guide" href="/guide.html" data-i18n="guide">دليل الاستخدام</a>
+      </nav>
+
+      <!-- Action Controls -->
+      <div class="flex items-center gap-space-sm">
+        <button id="open-lang-picker" class="open-lang-picker flex items-center gap-space-xs px-space-sm py-1 rounded bg-surface-container border border-outline-variant font-code-sm text-code-sm text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors cursor-pointer" type="button">
+          <span class="material-symbols-outlined text-[16px]">language</span>
+          <span id="current-lang-label" class="font-semibold uppercase">AR</span>
+          <span class="material-symbols-outlined text-[14px]">expand_more</span>
+        </button>
+
+        <button id="theme-toggle-btn" aria-label="Toggle Theme" class="theme-toggle-btn h-8 w-8 rounded flex items-center justify-center bg-surface-container border border-outline-variant text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors cursor-pointer" type="button">
+          <span class="material-symbols-outlined text-[18px]">dark_mode</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="w-full pt-16 bg-surface-container-lowest min-h-screen">
+    <div class="flex flex-col w-full">
+      
+      <!-- Article Header Section -->
+      <section class="w-full bg-surface-container-lowest py-space-xl border-b border-surface-variant">
+        <div class="max-w-[1440px] mx-auto px-margin">
+          
+          <!-- Breadcrumb & Badge -->
+          <div class="flex flex-wrap items-center justify-between gap-space-md mb-space-lg">
+            <nav aria-label="Breadcrumb" class="flex items-center gap-space-xs font-code-sm text-code-sm">
+              <a class="text-on-surface-variant hover:text-on-surface transition-colors" href="/">الرئيسية</a>
+              <span class="text-outline-variant">/</span>
+              <a class="text-on-surface-variant hover:text-on-surface transition-colors" href="/blog.html">المقالات والأدلة</a>
+              <span class="text-outline-variant">/</span>
+              <span class="text-primary truncate max-w-[240px] sm:max-w-none">دليل-حماية-الخصوصية-وتخطي-التحقق</span>
+            </nav>
+            <div class="inline-flex items-center gap-space-xs px-space-sm py-1 rounded bg-surface-container-low text-primary font-label-caps text-label-caps border border-outline-variant">
+              <span class="inline-block w-1.5 h-1.5 rounded-full bg-primary animate-pulse"></span>
+              <span>VERIFIED RFC-822 / SOC2 COMPLIANT • PGP SIGNED</span>
+            </div>
+          </div>
+
+          <!-- Metadata -->
+          <div class="flex flex-wrap items-center gap-space-sm mb-space-md font-code-sm text-code-sm">
+            <span class="px-space-sm py-0.5 rounded bg-secondary-container/20 text-secondary font-label-caps text-label-caps uppercase font-bold">
+              [دليل أمان OTP & 2FA]
+            </span>
+            <span class="text-on-surface-variant">قراءة 4 دقائق • محدث • 2026</span>
+          </div>
+
+          <!-- Headline -->
+          <h1 class="font-display-lg text-display-lg font-bold text-on-surface tracking-tight mb-space-md max-w-5xl">
+            تعزيز الخصوصية الرقمية: الدليل الشامل للبريد المؤقت وتخطي جدران التحقق بدون أثر
+          </h1>
+          <p class="font-body-lg text-body-lg text-on-surface-variant max-w-4xl mb-space-xl leading-relaxed">
+            كيف تعزل خوادم البريد المؤقتة في الذاكرة (RAM) بكسلات التتبع الإعلانية، وتفصل رسائل التفعيل وأكواد 2FA عن هويتك الحقيقية لحمايتك من التسريب.
+          </p>
+
+          <!-- Author Info -->
+          <div class="flex flex-wrap items-center justify-between gap-space-lg p-space-md rounded bg-surface-container-low border border-surface-variant">
+            <div class="flex items-center gap-space-md">
+              <div class="w-12 h-12 rounded-full bg-surface-container-high flex items-center justify-center font-code-address text-primary font-bold">
+                FT
+              </div>
+              <div class="flex flex-col">
+                <div class="flex items-center gap-space-xs">
+                  <span class="font-headline-sm text-headline-sm font-semibold text-on-surface">فريق الأمان الرقمي — FreeTemp</span>
+                  <span class="font-label-caps text-label-caps text-primary px-1.5 py-0.2 rounded bg-primary/10">VERIFIED</span>
+                </div>
+                <span class="font-body-sm text-body-sm text-on-surface-variant">مهندسو تشفير وبنية تحتية سحابية معزولة</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 2-Column Content Area -->
+      <section class="w-full bg-surface-container-lowest">
+        <div class="max-w-[1440px] mx-auto px-margin py-space-xl">
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-space-xl">
+            
+            <!-- Sticky Sidebar (4 Cols) -->
+            <aside class="lg:col-span-4 flex flex-col gap-space-lg">
+              <div class="sticky top-20 flex flex-col gap-space-lg">
+                
+                <!-- Table of Contents -->
+                <div class="p-space-md rounded bg-surface-container-low border border-surface-variant">
+                  <div class="flex items-center justify-between pb-space-sm mb-space-sm border-b border-surface-variant">
+                    <span class="font-label-caps text-label-caps text-on-surface-variant tracking-wider uppercase flex items-center gap-space-xs">
+                      <span class="material-symbols-outlined text-[14px] text-primary">list</span>
+                      فهرس المحتويات
+                    </span>
+                    <span class="font-code-sm text-code-sm text-outline">5 أقسام</span>
+                  </div>
+                  <ul class="flex flex-col gap-1 font-body-sm text-body-sm">
+                    <li><a class="flex items-center justify-between p-2 rounded text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-colors" href="#trap-of-identity"><span>01. فخ الهوية الثابتة والتتبع الرقمي</span></a></li>
+                    <li><a class="flex items-center justify-between p-2 rounded text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-colors" href="#sms-vs-ram"><span>02. مقارنة: بوابات SMS العامة vs البريد المؤقت المعزول</span></a></li>
+                    <li><a class="flex items-center justify-between p-2 rounded text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-colors" href="#inbound-pipeline"><span>03. البنية المعمارية لمعالجة البريد الوارد</span></a></li>
+                    <li><a class="flex items-center justify-between p-2 rounded text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-colors" href="#automating-playwright"><span>04. أتمتة اختبارات التسجيل بـ Playwright و cURL</span></a></li>
+                    <li><a class="flex items-center justify-between p-2 rounded text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-colors" href="#best-practices"><span>05. أفضل الممارسات الأمنية اليومية</span></a></li>
+                  </ul>
+                </div>
+
+                <!-- Mini Live Mailbox Widget -->
+                <div class="p-space-md rounded bg-surface-container-low shadow-sm border border-surface-variant">
+                  <div class="flex items-center justify-between mb-space-sm">
+                    <span class="font-label-caps text-label-caps text-primary tracking-wider uppercase flex items-center gap-1">
+                      <span class="w-2 h-2 rounded-full bg-primary animate-ping"></span>
+                      صندوق مؤقت سريع للتجربة
+                    </span>
+                  </div>
+                  <p class="font-body-sm text-body-sm text-on-surface-variant mb-space-sm">
+                    أنشئ بريداً مؤقتاً للتجربة الآن مباشرة:
+                  </p>
+                  <div class="flex items-center justify-between p-2 rounded bg-surface-container-lowest font-code-address text-code-address text-primary mb-space-sm border border-surface-variant">
+                    <span class="truncate" id="demo-address">quick-guide@freetemp.email</span>
+                    <button class="text-on-surface-variant hover:text-on-surface transition-colors cursor-pointer" id="copy-demo-btn" title="نسخ العنوان">
+                      <span class="material-symbols-outlined text-[18px]">content_copy</span>
+                    </button>
+                  </div>
+                  <a href="/" class="py-1.5 px-space-sm rounded bg-primary text-on-primary font-code-sm text-code-sm font-semibold hover:bg-primary-fixed-dim transition-all flex items-center justify-center gap-1">
+                    <span class="material-symbols-outlined text-[16px]">bolt</span>
+                    <span>فتح صندوق الوارد المباشر</span>
+                  </a>
+                </div>
+
+              </div>
+            </aside>
+
+            <!-- Main Editorial Content (8 Cols) -->
+            <article class="lg:col-span-8 flex flex-col gap-space-xl">
+              
+              <!-- Section 01 -->
+              <section class="flex flex-col gap-space-md" id="trap-of-identity">
+                <div class="flex items-center gap-space-sm">
+                  <span class="font-code-sm text-code-sm text-primary font-bold">01 //</span>
+                  <h2 class="font-headline-md text-headline-md font-bold text-on-surface">فخ الهوية الثابتة والتتبع الرقمي</h2>
+                </div>
+                <p class="font-body-lg text-body-lg text-on-surface-variant leading-relaxed">
+                  تفرض معظم الخدمات الرقمية والتطبيقات الحديثة جدار تحقق إلزامي عبر البريد الإلكتروني. في كثير من الأحيان، لا يحتاج المستخدم إلى تقديم بريده الشخصي أو المهني الأساسي لمجرد تجربة خدمة أو تحميل ملف، حيث يؤدي ذلك إلى ربط نشاطك الرقمي ببياناتك الشخصية وبدء تدفق الرسائل المزعجة (Spam).
+                </p>
+                <p class="font-body-lg text-body-lg text-on-surface-variant leading-relaxed">
+                  يقوم وسطاء البيانات وسماسرة الإعلانات بمطابقة تجزئات البريد الإلكتروني (Hashes) عبر مجموعات بيانات متعددة لتتبع سلوكك الرقمي. لذلك يُعد استخدام البريد المؤقت خط الدفاع الأول لفصل هويتك الأساسية عن الحسابات العابرة.
+                </p>
+              </section>
+
+              <!-- Warning Box -->
+              <div class="p-space-lg rounded bg-surface-container-low shadow-sm border border-error-container">
+                <div class="flex items-start gap-space-md">
+                  <div class="p-2 rounded bg-error-container text-on-error-container shrink-0 mt-0.5">
+                    <span class="material-symbols-outlined text-[20px] text-error">gpp_maybe</span>
+                  </div>
+                  <div class="flex flex-col gap-space-xs">
+                    <span class="font-label-caps text-label-caps text-error tracking-wider uppercase font-bold">
+                      تحذير أمني: خطورة استخدام أرقام SMS العامة والمكشوفة
+                    </span>
+                    <p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+                      يقع الكثيرون في خطأ استخدام مواقع "استقبال الرسائل النصية القصيرة SMS العامة مجاناً". نظراً لأن تلك الصناديق مفتوحة للعامة دون توكن أمان سري، يمكن لأي طرف مراقبة أكواد التحقق وإعادة تعيين كلمات المرور والوصول غير المصرح به لحساباتك. يُعد البريد المؤقت المحمي برمز سري معزول بديلاً أكثر أماناً وخصوصية.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Section 02 -->
+              <section class="flex flex-col gap-space-md" id="sms-vs-ram">
+                <div class="flex items-center gap-space-sm">
+                  <span class="font-code-sm text-code-sm text-primary font-bold">02 //</span>
+                  <h2 class="font-headline-md text-headline-md font-bold text-on-surface">مقارنة: بوابات SMS العامة vs البريد المؤقت المعزول</h2>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-space-md my-space-sm">
+                  <div class="p-space-md rounded bg-surface-container-low flex flex-col gap-space-xs border border-surface-variant">
+                    <span class="font-label-caps text-label-caps text-error uppercase font-bold">الخدمات التقليدية والمكشوفة</span>
+                    <ul class="font-body-sm text-body-sm text-on-surface-variant flex flex-col gap-2 mt-2">
+                      <li class="flex items-center gap-2"><span class="material-symbols-outlined text-[16px] text-error">close</span><span>تخزين دائم للرسائل على أقراص SSD</span></li>
+                      <li class="flex items-center gap-2"><span class="material-symbols-outlined text-[16px] text-error">close</span><span>عرض الـ HTML يتيح تحميل بكسلات التتبع</span></li>
+                      <li class="flex items-center gap-2"><span class="material-symbols-outlined text-[16px] text-error">close</span><span>صناديق عامة قابلة للمسح والتجسس</span></li>
+                    </ul>
+                  </div>
+
+                  <div class="p-space-md rounded bg-surface-container-low flex flex-col gap-space-xs border border-primary/30">
+                    <span class="font-label-caps text-label-caps text-primary uppercase font-bold">منصة FreeTemp المعزولة O(1)</span>
+                    <ul class="font-body-sm text-body-sm text-on-surface flex flex-col gap-2 mt-2">
+                      <li class="flex items-center gap-2"><span class="material-symbols-outlined text-[16px] text-primary">check_circle</span><span>تخزين متطاير في ذاكرة RAM بدون كتابة للأقراص</span></li>
+                      <li class="flex items-center gap-2"><span class="material-symbols-outlined text-[16px] text-primary">check_circle</span><span>استخراج فوري لأكواد OTP وحظر البكسلات</span></li>
+                      <li class="flex items-center gap-2"><span class="material-symbols-outlined text-[16px] text-primary">check_circle</span><span>حماية برمز سري (Secret Token) معزول</span></li>
+                    </ul>
+                  </div>
+                </div>
+              </section>
+
+              <!-- Section 03 -->
+              <section class="flex flex-col gap-space-md" id="inbound-pipeline">
+                <div class="flex items-center gap-space-sm">
+                  <span class="font-code-sm text-code-sm text-primary font-bold">03 //</span>
+                  <h2 class="font-headline-md text-headline-md font-bold text-on-surface">البنية المعمارية لمعالجة البريد الوارد</h2>
+                </div>
+                <p class="font-body-lg text-body-lg text-on-surface-variant leading-relaxed">
+                  عند إرسال بريد إلكتروني، يمر بمسار متعدد المستويات فائق السرعة عبر العقد السحابية المعزولة لضمان الاستلام اللحظي عبر WebSocket واستخراج أكواد التفعيل دون تحميل صور التتبع الخارجية.
+                </p>
+              </section>
+
+              <!-- Section 04: Playwright Code Sample -->
+              <section class="flex flex-col gap-space-md" id="automating-playwright">
+                <div class="flex items-center gap-space-sm">
+                  <span class="font-code-sm text-code-sm text-primary font-bold">04 //</span>
+                  <h2 class="font-headline-md text-headline-md font-bold text-on-surface">أتمتة اختبارات التسجيل بـ Playwright و cURL</h2>
+                </div>
+                <p class="font-body-lg text-body-lg text-on-surface-variant leading-relaxed">
+                  يمكن لمطوري البرمجيات وفرق الجودة أتمتة عمليات التسجيل واستقبال أكواد التحقق برمجياً عبر واجهة برمجة التطبيقات (REST & WebSocket APIs):
+                </p>
+                <div class="rounded bg-surface-container-lowest shadow-md overflow-hidden font-code-sm text-code-sm border border-surface-variant" dir="ltr">
+                  <div class="flex items-center justify-between px-space-md py-2.5 bg-surface-container-low border-b border-surface-variant">
+                    <div class="flex items-center gap-2">
+                      <span class="w-3 h-3 rounded-full bg-error/70 inline-block"></span>
+                      <span class="w-3 h-3 rounded-full bg-secondary/70 inline-block"></span>
+                      <span class="w-3 h-3 rounded-full bg-primary/70 inline-block"></span>
+                      <span class="text-xs text-on-surface-variant ml-2 font-mono">automate-signup.py</span>
+                    </div>
+                  </div>
+                  <pre class="p-space-md overflow-x-auto text-on-surface leading-relaxed font-mono"><code>import asyncio, requests
+from playwright.async_api import async_playwright
+
+async def test_disposable_signup():
+    # 1. Request temporary address from FreeTemp API
+    res = requests.post("https://api.freetemp.email/api/new-address").json()
+    temp_email = res["address"]
+    token = res["token"]
+
+    async with async_playwright() as p:
+        browser = await p.chromium.launch()
+        page = await browser.new_page()
+        await page.goto("https://example.com/signup")
+        await page.fill('input[name="email"]', temp_email)
+        await page.click('button[type="submit"]')
+
+        # 2. Fetch OTP automatically from inbox
+        emails = requests.get(f"https://api.freetemp.email/api/emails?address={temp_email}&token={token}").json()
+        print("[+] Extracted OTP:", emails["emails"][0]["otpCode"])
+
+asyncio.run(test_disposable_signup())</code></pre>
+                </div>
+              </section>
+
+              <!-- Section 05 -->
+              <section class="flex flex-col gap-space-md" id="best-practices">
+                <div class="flex items-center gap-space-sm">
+                  <span class="font-code-sm text-code-sm text-primary font-bold">05 //</span>
+                  <h2 class="font-headline-md text-headline-md font-bold text-on-surface">أفضل الممارسات الأمنية اليومية</h2>
+                </div>
+                <div class="p-space-lg rounded bg-surface-container-low shadow-sm flex flex-col gap-space-sm border border-surface-variant">
+                  <div class="flex items-start gap-space-sm p-space-sm rounded bg-surface-container-lowest border border-surface-variant">
+                    <span class="material-symbols-outlined text-primary text-[20px] shrink-0 mt-0.5">check_circle</span>
+                    <div>
+                      <strong class="text-on-surface block font-semibold">استخدم البريد المؤقت للخدمات العابرة:</strong>
+                      <span class="text-on-surface-variant">احتفظ ببريدك الأساسي للمعاملات المصرفية والحسابات الحساسة فقط، واستخدم البريد المؤقت للمنتديات وتجارب البرمجيات.</span>
+                    </div>
+                  </div>
+                  <div class="flex items-start gap-space-sm p-space-sm rounded bg-surface-container-lowest border border-surface-variant">
+                    <span class="material-symbols-outlined text-primary text-[20px] shrink-0 mt-0.5">check_circle</span>
+                    <div>
+                      <strong class="text-on-surface block font-semibold">إتلاف الصندوق بعد اكتمال التفعيل:</strong>
+                      <span class="text-on-surface-variant">بمجرد الانتهاء من استخراج كود التفعيل، اضغط على زر "إتلاف الصندوق" لمسح كافة السجلات من الذاكرة فورياً.</span>
+                    </div>
+                  </div>
+                </div>
+              </section>
+
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- CTA Banner -->
+      <section class="w-full bg-surface-container-lowest pb-space-xl">
+        <div class="max-w-[1440px] mx-auto px-margin">
+          <div class="p-space-xl rounded bg-surface-container-low relative overflow-hidden flex flex-col lg:flex-row items-center justify-between gap-space-lg shadow-md border border-surface-variant">
+            <div class="flex flex-col gap-space-xs max-w-2xl">
+              <h3 class="font-headline-md text-headline-md font-bold text-on-surface">
+                هل تحتاج إلى صندوق بريد مؤقت فوري الآن؟
+              </h3>
+              <p class="font-body-md text-body-md text-on-surface-variant">
+                أنشئ صندوق بريد مؤقت مشفر مجاناً في جزء من الثانية دون أي تسجيل.
+              </p>
+            </div>
+            <a href="/" class="px-space-lg py-3 rounded bg-primary text-on-primary font-code-sm text-code-sm font-bold hover:bg-primary-fixed-dim transition-all flex items-center gap-2 shadow-sm">
+              <span class="material-symbols-outlined text-[18px]">bolt</span>
+              <span>إنشاء بريد مؤقت الآن</span>
+            </a>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="w-full bg-surface border-t border-surface-variant">
+    <div class="max-w-[1440px] mx-auto px-margin py-space-lg flex flex-col md:flex-row items-center justify-between gap-space-md">
+      <div class="flex items-center gap-space-md font-body-sm text-body-sm text-on-surface-variant">
+        <span class="font-code-sm text-code-sm text-on-surface">© 2026 FreeTemp.email</span>
+        <span>خدمة بريد مؤقت مشفرة وفورية لحماية الخصوصية.</span>
+      </div>
+      <div class="flex flex-wrap items-center gap-space-lg font-body-sm text-body-sm">
+        <a class="text-on-surface-variant hover:text-on-surface transition-colors" href="/privacy.html">سياسة الخصوصية</a>
+        <a class="text-on-surface-variant hover:text-on-surface transition-colors" href="/security.html">بنية الأمان والتشفير</a>
+        <a class="text-on-surface-variant hover:text-on-surface transition-colors" href="/faq.html">الأسئلة الشائعة</a>
+        <a class="text-on-surface-variant hover:text-on-surface transition-colors" href="/blog.html">المقالات والأدلة</a>
+        <a class="text-on-surface-variant hover:text-on-surface transition-colors" href="/guide.html">دليل الاستخدام</a>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>

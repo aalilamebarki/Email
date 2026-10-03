@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>الدليل التقني — Temp Mail</title>
+    <script>
+      (function() {
+        var params = new URLSearchParams(window.location.search);
+        var slug = params.get('slug') || 'universal-verification-coverage';
+        window.location.replace('/article-template.html?slug=' + slug + '&lang=ar' + window.location.hash);
+      })();
+    </script>
+      <!-- Favicon & Web Browser Icons -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/manifest.json" />
+      <!-- Local Fonts and Shared Stylesheet -->
+    <link rel="stylesheet" href="/fonts/fonts.css" />
+    <link rel="stylesheet" href="/shared/style.css" />
+  </head>
+  <body>    <!-- Master Arabic 4-Column Footer — الموحد في جميع الصفحات -->
+    <footer class="border-t border-[#EAEAEA] dark:border-[#222222] bg-white dark:bg-[#0A0A0A] py-12 transition-colors mt-auto text-xs">
+      <div class="max-w-4xl mx-auto px-4">
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 mb-10 text-right">
+          <!-- العمود 1: المنصة والرسالة -->
+          <div>
+            <a href="/ar/" dir="ltr" class="inline-flex items-center gap-2.5 transition-opacity hover:opacity-90 mb-3">
+              <img src="/logo.svg" alt="freetemp.email" class="w-7 h-7 rounded-lg shadow-sm shrink-0" width="28" height="28" />
+              <span class="flex items-baseline font-sans tracking-tight">
+                <span class="text-lg font-extrabold text-black dark:text-white">freetemp</span>
+                <span class="text-xs font-semibold text-neutral-500 dark:text-neutral-400">.email</span>
+              </span>
+            </a>
+            <p data-i18n="footerDesc" class="text-[#666666] dark:text-[#888888] leading-relaxed mb-3">
+              خدمة بريد مؤقت مجانية ومعزولة تقنياً لحماية خصوصيتك من التتبع والرسائل المزعجة (Spam) دون الحاجة لتسجيل أي بيانات شخصية.
+            </p>
+            <div class="inline-flex items-center gap-2 font-mono text-[11px] text-black dark:text-[#A0A0A0] border border-[#EAEAEA] dark:border-[#222222] rounded-md px-2 py-1 bg-[#FAFAFA] dark:bg-[#141414]">
+              <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 dark:bg-[#00FF66]"></span>
+              <span data-i18n="footerNodesStatus">جميع خوادم الحافة تعمل بكفاءة</span>
+            </div>
+          </div>
+
+          <!-- العمود 2: التنقل السريع -->
+          <div>
+            <div data-i18n="footerNav" class="font-bold text-black dark:text-white mb-3 uppercase tracking-wider text-[11px]">
+              التنقل السريع
+            </div>
+            <ul class="space-y-2">
+              <li><a href="/ar/" data-i18n="home" class="text-[#666666] dark:text-[#888888] hover:text-black dark:hover:text-white transition-colors">الرئيسية</a></li>
+              <li><a href="/ar/blog.html" data-i18n="blog" class="text-[#666666] dark:text-[#888888] hover:text-black dark:hover:text-white transition-colors font-semibold">المدونة</a></li>
+              <li><a href="/ar/guide.html" data-i18n="guide" class="text-[#666666] dark:text-[#888888] hover:text-black dark:hover:text-white transition-colors">دليل الاستخدام</a></li>
+              <li><a href="/ar/faq.html" data-i18n="faq" class="text-[#666666] dark:text-[#888888] hover:text-black dark:hover:text-white transition-colors">الأسئلة الشائعة</a></li>
+              <li><a href="/ar/articles/index.html" data-i18n="footerArticles" class="text-[#666666] dark:text-[#888888] hover:text-black dark:hover:text-white transition-colors">المقالات والأدلة</a></li>
+            </ul>
+          </div>
+
+          <!-- العمود 3: الشفافية والامتثال -->
+          <div>
+            <div data-i18n="footerTransparency" class="font-bold text-black dark:text-white mb-3 uppercase tracking-wider text-[11px]">
+              الشفافية والامتثال
+            </div>
+            <ul class="space-y-2">
+              <li><a href="/ar/about.html" data-i18n="footerAbout" class="text-[#666666] dark:text-[#888888] hover:text-black dark:hover:text-white transition-colors">من نحن</a></li>
+              <li><a href="/ar/privacy.html" data-i18n="footerPrivacy" class="text-[#666666] dark:text-[#888888] hover:text-black dark:hover:text-white transition-colors">سياسة الخصوصية</a></li>
+              <li><a href="/ar/privacy.html#terms" data-i18n="footerTerms" class="text-[#666666] dark:text-[#888888] hover:text-black dark:hover:text-white transition-colors">شروط الاستخدام</a></li>
+            </ul>
+          </div>
+
+          <!-- العمود 4: معايير الأمان -->
+          <div>
+            <div data-i18n="footerSecurity" class="font-bold text-black dark:text-white mb-3 uppercase tracking-wider text-[11px]">
+              معايير الأمان والتشفير
+            </div>
+            <ul class="space-y-2 text-[#666666] dark:text-[#888888]">
+              <li class="flex items-center gap-1.5">
+                <span class="text-black dark:text-white font-bold">✓</span>
+                <span data-i18n="footerSec1">إتلاف ذاتي فوري بعد 20 دقيقة</span>
+              </li>
+              <li class="flex items-center gap-1.5">
+                <span class="text-black dark:text-white font-bold">✓</span>
+                <span data-i18n="footerSec2">عزل مشفر بحاويات O(1)</span>
+              </li>
+              <li class="flex items-center gap-1.5">
+                <span class="text-black dark:text-white font-bold">✓</span>
+                <span data-i18n="footerSec3">بدون تسجيل بيانات شخصية أو كوكيز</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="border-t border-[#EAEAEA] dark:border-[#222222] pt-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-[#666666] dark:text-[#888888]">
+          <div data-i18n="footerCopyright">© 2026 FreeTemp.email — خدمة البريد المؤقت الآمن. جميع الحقوق محفوظة.</div>
+          <div class="flex items-center gap-4">
+            <span data-i18n="footerTls">تشفير TLS 1.3 256-Bit</span>
+            <span>•</span>
+            <span data-i18n="footerEdge">سحابي فائق السرعة Cloudflare Edge</span>
+            <span>•</span>
+            <span data-i18n="footerLogs">خالٍ تماماً من السجلات (Zero-Logs)</span>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
